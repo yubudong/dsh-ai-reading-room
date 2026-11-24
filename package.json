@@ -1,0 +1,71 @@
+{
+  "name": "dsh-ai-reading-room",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A personal reading room to explore books, reflect on ideas, and learn with AI.",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "git+https://github.com/yubudong/dsh-ai-reading-room.git" },
+  "homepage": "https://github.com/yubudong/dsh-ai-reading-room#readme",
+  "bugs": { "url": "https://github.com/yubudong/dsh-ai-reading-room/issues" },
+  "keywords": ["dsh-plugin", "deepseek-harness", "reading", "ebooks", "epub", "ai-reading", "notes"],
+  "exports": {
+    ".": "./index.js",
+    "./host": "./host.js",
+    "./host/locale/*.json": "./locale/*.json",
+    "./host/icon": "./icon.svg",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "host.js",
+    "client.js",
+    "assets",
+    "locale",
+    "icon.svg",
+    "cordis.patch.yml",
+    "README.md",
+    "README.en.md",
+    "docs",
+    "examples",
+    "LICENSE",
+    "THIRD_PARTY.md"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-sidebar",
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-locale"
+      ]
+    }
+  },
+  "engines": {
+    "node": ">=22.13.0",
+    "dsh": ">=0.2.2-rc.2 <0.3.0"
+  },
+  "dependencies": {
+    "@thednp/dommatrix": "3.1.4",
+    "entities": "9.0.0",
+    "fast-xml-parser": "5.12.1",
+    "fflate": "0.8.3",
+    "marked": "17.0.6",
+    "pdfjs-dist": "5.7.284",
+    "sanitize-html": "2.18.2",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "prettier": "^3.10.1"
+  }
+}
