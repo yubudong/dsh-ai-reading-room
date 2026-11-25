@@ -1,6 +1,6 @@
 # AI Reading Room user guide
 
-Version 0.5.2
+Version 0.5.3
 
 ## Start reading in three minutes
 

@@ -234,7 +234,7 @@ test("Bookworm help and both-language guide share current implemented operations
   assert.ok(
     MANUAL.every((x) => x.title.zh && x.title.en && x.body.zh && x.body.en),
   );
-  assert.equal(manualContext("导入", "zh").version, "0.5.2");
+  assert.equal(manualContext("导入", "zh").version, "0.5.3");
   assert.ok(isUsageQuestion("怎么导入目录？"));
   const custom = manualContext("快捷键", "zh", { find: ["KeyS"] });
   assert.deepEqual(custom.shortcuts.find((x) => x.action === "搜索本书").keys, [

@@ -317,7 +317,7 @@ test("usage-help mode uses the current manual without sending the selected book 
     });
     const c = f.exercise.contexts["help-request"];
     assert.equal(c.source, null);
-    assert.equal(c.usageHelp.version, "0.5.2");
+    assert.equal(c.usageHelp.version, "0.5.3");
     assert.equal(c.methodSnapshot.variables.chapter, "");
     assert.match(c.usageHelp.rule, /directly/);
   } finally {

@@ -4,22 +4,36 @@
 
 [English](README.en.md)
 
-DSH 桌面插件，侧栏入口「AI 书房」，内置阅读伙伴「书虫」。包名 `dsh-ai-reading-room`，当前版本为 0.5.2，预构建发行包见 Releases 页面，使用 MIT 许可证开源。
+DSH 桌面插件，侧栏入口「AI 书房」，内置阅读伙伴「书虫」。包名 `dsh-ai-reading-room`，当前版本为 0.5.3，通过 npm 与 GitHub Releases 分发预构建安装包，使用 MIT 许可证开源。
 
 ## 安装
 
 要求 DSH 0.2.2-rc.2 或兼容的 0.2.x 版本、Node.js 22.13.0 及以上。当前实际验证基线为 DSH Desktop 0.2.2-rc.2。
 
-推荐使用预构建发行包。在 DSH 的「插件 → 添加插件」中输入：
+推荐在 DSH 的「插件 → 添加插件」中输入包名 `dsh-ai-reading-room`，或使用 CLI：
+
+```sh
+dsh plugin --profile <profile> add dsh-ai-reading-room@0.5.3
+```
+
+也可以用 npm 将包安装到当前 Node 项目：
+
+```sh
+npm install dsh-ai-reading-room@0.5.3
+```
+
+单独执行 npm install 会下载包；要在 DSH 中启用，仍需通过 DSH 的添加插件入口或上面的 CLI 命令。
+
+GitHub 预构建发行包地址：
 
 ```text
-https://github.com/yubudong/dsh-ai-reading-room/releases/download/v0.5.2/dsh-ai-reading-room-0.5.2.tgz
+https://github.com/yubudong/dsh-ai-reading-room/releases/download/v0.5.3/dsh-ai-reading-room-0.5.3.tgz
 ```
 
 也可以使用 CLI，将 `<profile>` 替换为你的配置名称：
 
 ```sh
-dsh plugin --profile <profile> add https://github.com/yubudong/dsh-ai-reading-room/releases/download/v0.5.2/dsh-ai-reading-room-0.5.2.tgz
+dsh plugin --profile <profile> add https://github.com/yubudong/dsh-ai-reading-room/releases/download/v0.5.3/dsh-ai-reading-room-0.5.3.tgz
 ```
 
 从 GitHub 源码安装也可用，仓库已包含构建产物，不要求安装时执行构建脚本：
@@ -28,7 +42,7 @@ dsh plugin --profile <profile> add https://github.com/yubudong/dsh-ai-reading-ro
 dsh plugin --profile <profile> add github:yubudong/dsh-ai-reading-room
 ```
 
-安装后刷新 DSH 页面；若仍保留旧界面，重启 DSH。插件尚未发布 npm；市场收录以维护者合并后的实际状态为准。
+安装后刷新 DSH 页面；若仍保留旧界面，重启 DSH。npm 包名为 `dsh-ai-reading-room`；市场收录以维护者合并后的实际状态为准。
 
 ## 使用
 
@@ -41,6 +55,10 @@ dsh plugin --profile <profile> add github:yubudong/dsh-ai-reading-room
 书虫通过 DSH 原生会话使用已配置的模型；相关选段或章节摘录会发送给对应服务。笔记与阅读无需模型在线。书虫形象采用青绿小书虫、圆眼镜与打开的书，资源随插件离线加载。
 
 设置中可以选择回复语言、模型和阅读字号，导出学习资产或含原书的 ZIP 备份。恢复会替换当前书房记录，预先展示数量并在本地自动保存旧数据快照。模型凭据不在备份中。导入的原生会话 ID 会清除，历史文字保留，下一次发送建立新会话。
+
+## 0.5.3 分发更新
+
+增加 npm 安装渠道与明确的发布配置，业务功能沿用 0.5.2。0.5.2 的 GitHub 包与校验和保持不变。
 
 ## 0.5.2 功能
 

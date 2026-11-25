@@ -27102,7 +27102,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
   }
 
   // src/shared/manual.js
-  var MANUAL_VERSION = "0.5.2";
+  var MANUAL_VERSION = "0.5.3";
   var MANUAL = [
     {
       id: "start",

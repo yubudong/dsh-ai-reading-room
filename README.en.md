@@ -4,22 +4,36 @@ A personal reading room to explore books, reflect on ideas, and learn with AI.
 
 [简体中文](README.md)
 
-This DSH desktop plugin adds **AI reading room** to the left sidebar. Its companion, **Bookworm** (书虫), uses native DSH sessions and your configured model. Version 0.5.2 provides reading-first conversations and a prebuilt GitHub Release package. The project is MIT licensed.
+This DSH desktop plugin adds **AI reading room** to the left sidebar. Its companion, **Bookworm** (书虫), uses native DSH sessions and your configured model. Version 0.5.3 distributes the prebuilt reading workspace through npm and GitHub Releases. The project is MIT licensed.
 
 ## Install
 
 Requires DSH 0.2.2-rc.2 or a compatible 0.2.x release and Node.js 22.13.0+. The tested baseline is DSH Desktop 0.2.2-rc.2.
 
-In **Plugins → Add plugin**, use the prebuilt release URL:
+In **Plugins → Add plugin**, enter `dsh-ai-reading-room`, or use:
+
+```sh
+dsh plugin --profile <profile> add dsh-ai-reading-room@0.5.3
+```
+
+To download the package into a Node project:
+
+```sh
+npm install dsh-ai-reading-room@0.5.3
+```
+
+A plain npm install downloads the package; activating it in DSH still requires its plugin manager or the DSH command above.
+
+GitHub prebuilt release URL:
 
 ```text
-https://github.com/yubudong/dsh-ai-reading-room/releases/download/v0.5.2/dsh-ai-reading-room-0.5.2.tgz
+https://github.com/yubudong/dsh-ai-reading-room/releases/download/v0.5.3/dsh-ai-reading-room-0.5.3.tgz
 ```
 
 Or install with the CLI, replacing `<profile>` with your profile name:
 
 ```sh
-dsh plugin --profile <profile> add https://github.com/yubudong/dsh-ai-reading-room/releases/download/v0.5.2/dsh-ai-reading-room-0.5.2.tgz
+dsh plugin --profile <profile> add https://github.com/yubudong/dsh-ai-reading-room/releases/download/v0.5.3/dsh-ai-reading-room-0.5.3.tgz
 ```
 
 The repository also includes built artifacts, so installation from GitHub does not require build scripts:
@@ -28,7 +42,7 @@ The repository also includes built artifacts, so installation from GitHub does n
 dsh plugin --profile <profile> add github:yubudong/dsh-ai-reading-room
 ```
 
-Refresh the DSH page after installation; restart DSH if an old build remains loaded. The package is not published on npm. Market listing depends on maintainer acceptance.
+Refresh the DSH page after installation; restart DSH if an old build remains loaded. The npm package name is `dsh-ai-reading-room`. Market listing depends on maintainer acceptance.
 
 ## Use
 
@@ -41,6 +55,10 @@ Drag the panel’s left edge to resize it; arrow keys adjust the focused separat
 Context is limited to a source passage or chapter excerpt and tools that read the current book. Your selected content is sent to the configured model service. The original Bookworm mascot—a teal bookworm with round glasses peeking out of an open book—is bundled for offline display.
 
 Settings provide reply-language and model preferences, reading typography, Markdown export and ZIP backups. Restore replaces current reading-room records after a preview and a local snapshot. Imported native-session identities are cleared: the visible history remains, while the next message starts a fresh native session.
+
+## Distribution update 0.5.3
+
+Adds npm distribution and explicit publish configuration, with the same application behavior as 0.5.2. The existing 0.5.2 GitHub package and checksums remain unchanged.
 
 ## Version 0.5.2
 
@@ -89,4 +107,4 @@ pnpm test
 
 Host and Client source live under `src/host` and `src/client`. The package ships built artifacts and a PDF.js worker. No DSH implementation files are modified. Never commit personal books, credentials or user data.
 
-MIT license. Third-party notices are listed in THIRD_PARTY.md. The public repository includes source, tests and prebuilt artifacts. This early preview is distributed through GitHub Releases; npm publication and market acceptance are separate steps.
+MIT license. Third-party notices are listed in THIRD_PARTY.md. The public repository includes source, tests and prebuilt artifacts. This preview is distributed through npm and GitHub Releases; market acceptance remains a separate step.

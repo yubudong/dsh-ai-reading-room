@@ -1,5 +1,5 @@
 import { SHORTCUTS, shortcutConfig, keyLabel } from "./shortcuts.js";
-export const MANUAL_VERSION = "0.5.2";
+export const MANUAL_VERSION = "0.5.3";
 export const MANUAL = [
   {
     id: "start",

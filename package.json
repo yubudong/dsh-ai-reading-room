@@ -1,6 +1,6 @@
 {
   "name": "dsh-ai-reading-room",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "type": "module",
   "description": "A personal reading room to explore books, reflect on ideas, and learn with AI.",
   "license": "MIT",
@@ -23,19 +23,22 @@
   ],
   "exports": {
     ".": "./index.js",
-    "./host": "./host-0.5.2.js",
-    "./host-0.5.2": "./host-0.5.2.js",
-    "./host-0.5.2/locale/*.json": "./locale/*.json",
-    "./host-0.5.2/icon": "./icon.svg",
+    "./host": "./host-0.5.3.js",
+    "./host-0.5.3": "./host-0.5.3.js",
+    "./host-0.5.3/locale/*.json": "./locale/*.json",
+    "./host-0.5.3/icon": "./icon.svg",
     "./host/locale/*.json": "./locale/*.json",
     "./host/icon": "./icon.svg",
     "./client": "./client.js",
     "./locale/*.json": "./locale/*.json",
-    "./icon": "./icon.svg"
+    "./icon": "./icon.svg",
+    "./host-0.5.2": "./host-0.5.3.js",
+    "./host-0.5.2/locale/*.json": "./locale/*.json",
+    "./host-0.5.2/icon": "./icon.svg"
   },
   "files": [
     "index.js",
-    "host-0.5.2.js",
+    "host-0.5.3.js",
     "client.js",
     "assets",
     "locale",
@@ -83,5 +86,9 @@
   "devDependencies": {
     "esbuild": "^0.25.0",
     "prettier": "^3.10.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
