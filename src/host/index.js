@@ -4,8 +4,13 @@ import os from "node:os";
 import { fileURLToPath } from "node:url";
 import { randomUUID } from "node:crypto";
 import { createStore } from "./store.js";
-import { parseBook, MAX_FILE } from "./parse.js";
+import { parseBook, MAX_FILE, hash } from "./parse.js";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
+import { realDirectory } from "./library-files.js";
 import { createSpirit, METHODS } from "./spirit.js";
+import { scanDirectory } from "./library-files.js";
+import { MANUAL, MANUAL_VERSION, manualSearch } from "../shared/manual.js";
 export const inject = [
   "storage",
   "storage.backend.json",
@@ -42,7 +47,63 @@ export async function apply(ctx) {
   const service = {
     async dispatch(a, signal, user = false) {
       if (!a || typeof a !== "object") throw new Error("INVALID_REQUEST");
-      if (a.action === "methods") return { methods: METHODS };
+      if (a.action === "methods")
+        return {
+          methods: METHODS,
+          ...(await store.action({ action: "methods" })),
+        };
+      if (a.action === "sample") {
+        const bytes = await fs.readFile(
+          path.join(
+            path.dirname(fileURLToPath(import.meta.url)),
+            "examples",
+            "开始使用AI书房.md",
+          ),
+        );
+        return store.importBytes(bytes, "开始使用AI书房.md", a.requestId);
+      }
+      if (a.action === "manual")
+        return {
+          version: MANUAL_VERSION,
+          items: manualSearch(a.query || "", a.language === "en" ? "en" : "zh"),
+        };
+      if (a.action === "revealLibrary") {
+        if (!user) throw new Error("USER_ONLY");
+        const info = await store.action({ action: "libraryInfo" }),
+          directory = await realDirectory(info.path, true);
+        const command =
+          process.platform === "darwin"
+            ? "open"
+            : process.platform === "win32"
+              ? "explorer.exe"
+              : "xdg-open";
+        await promisify(execFile)(command, [directory], {
+          timeout: 5000,
+          windowsHide: true,
+        });
+        return { opened: true };
+      }
+      if (a.action === "pickDirectory") {
+        if (!user) throw new Error("USER_ONLY");
+        const picker = ctx.get?.("directoryPickerController");
+        if (!picker) throw new Error("DIRECTORY_PICKER_UNAVAILABLE");
+        return {
+          path: await picker.pick(signal || new AbortController().signal),
+        };
+      }
+      if (
+        [
+          "migrateLibrary",
+          "addDirectory",
+          "removeDirectory",
+          "refreshDirectory",
+          "relinkBook",
+          "preferences",
+          "importMethods",
+        ].includes(a.action) &&
+        !user
+      )
+        throw new Error("USER_ONLY");
       if (a.action === "exercise" && a.item?.open === true) {
         if (!spirit) throw new Error("SPIRIT_UNAVAILABLE");
         return spirit.operate({ id: a.id, command: "open" }, signal);
@@ -64,27 +125,17 @@ export async function apply(ctx) {
           path.basename(target.displayPath),
           a.requestId,
           a.encoding,
+          {
+            link: !!a.link,
+            sourcePath: target.displayPath,
+            directoryId: a.directoryId || "",
+          },
         );
       }
-      if (a.action === "scan") {
-        const target = await ctx.fs.resolve(String(a.path || "")),
-          items = await ctx.fs.listDir(target, signal);
-        return {
-          items: items
-            .filter(
-              (x) =>
-                x.type === "file" &&
-                /\.(epub|pdf|txt|md|markdown)$/i.test(x.name),
-            )
-            .slice(0, 1000)
-            .map((x) => ({
-              name: x.name,
-              path: x.target.displayPath,
-              bytes: x.size,
-            })),
-          truncated: items.length > 1000,
-        };
-      }
+      if (a.action === "scan")
+        return scanDirectory(String(a.path || ""), {
+          recursive: a.recursive !== false,
+        });
       if (a.action === "restorePreview" || a.action === "restore") {
         if (!user) throw new Error("USER_ONLY");
         const bytes = Buffer.from(String(a.data || ""), "base64");
@@ -161,7 +212,9 @@ export async function apply(ctx) {
   register("/original", ["GET"], async (req) => {
     try {
       const b = store.book(new URL(req.url).searchParams.get("id"));
-      return new Response(await fs.readFile(store.asset(b, ".original")), {
+      const bytes = await fs.readFile(store.asset(b, ".original"));
+      if (hash(bytes) !== b.hash) throw new Error("ORIGINAL_HASH_MISMATCH");
+      return new Response(bytes, {
         headers: {
           "Content-Type":
             b.format === "pdf" ? "application/pdf" : "application/octet-stream",
@@ -253,7 +306,7 @@ export async function apply(ctx) {
     ctx.tools.register({
       name: "reading_room",
       description:
-        "管理 AI 书房：read 书库，open 单书与记录，chapter 原文，search 检索；saveRecord 保存学习记录，saveBook 修改标签/状态，trashRecord/trashBook 可恢复删除；methods 读三种方法，createExercise/saveExercise 记录练习。写入带 requestId，更新带最新 revision。书灵发送消息与恢复备份由用户在界面操作。",
+        "管理 AI 书房：read 书库，open 单书与记录，chapter 原文，search 检索；saveRecord 保存学习记录，saveBook 修改标签/状态，trashRecord/trashBook 可恢复删除；methods 读取内置及个人方法，manual 查询当前说明书，methodPreview 展示实际提示词，repairNavigation 修复旧 EPUB 目录。createExercise/saveExercise 保留讨论历史。写入带 requestId，更新带最新 revision。书虫发送消息、目录授权、文件迁移与备份恢复由用户在界面操作。",
       parameters: {
         type: "object",
         properties: {
@@ -265,6 +318,9 @@ export async function apply(ctx) {
               "chapter",
               "search",
               "records",
+              "questionState",
+              "exportRecords",
+              "reviewPreview",
               "saveRecord",
               "saveBook",
               "trashRecord",
@@ -278,18 +334,42 @@ export async function apply(ctx) {
               "importPath",
               "scan",
               "settings",
+              "manual",
+              "libraryInfo",
+              "saveMethod",
+              "resetMethod",
+              "annotateRecord",
+              "annotationState",
+              "annotationAction",
+              "annotationReplay",
+              "removeMethod",
+              "moveMethod",
+              "exportMethods",
+              "methodPreview",
+              "repairNavigation",
+              "exerciseList",
             ],
           },
           id: { type: "string" },
           bookId: { type: "string" },
           chapterId: { type: "string" },
           query: { type: "string" },
+          since: { type: "string" },
+          until: { type: "string" },
+          discussionId: { type: "string" },
+          location: { type: "object", additionalProperties: true },
+          language: { type: "string", enum: ["zh", "en"] },
+          recursive: { type: "boolean" },
+          anchor: { type: "object", additionalProperties: true },
+          override: { type: "string" },
+          includeNotes: { type: "boolean" },
           path: { type: "string" },
           requestId: { type: "string" },
           revision: { type: "integer" },
           method: {
             type: "string",
-            enum: ["free", "hunt", "feynman", "debate"],
+            description:
+              "内置方法 free/hunt/feynman/debate 或方法库中的自定义 ID",
           },
           goal: { type: "string" },
           restore: { type: "boolean" },

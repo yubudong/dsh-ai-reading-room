@@ -1,4 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
+import { ImportWizard } from "./import-wizard.jsx";
+import { LibrarySettings } from "./library-settings.jsx";
+import { HelpCenter } from "./help-center.jsx";
+import { GoTo } from "./go-to.jsx";
+import { ReadingReview } from "./reading-review.jsx";
+import { LearningTraces } from "./learning-traces.jsx";
+import { AnnotationLabels } from "./annotation-labels.jsx";
+import { SpiritMessage } from "./spirit-message.jsx";
+import { MethodologyDialog } from "./methodology-dialog.jsx";
+import { AnnotationSwatches, AnnotationBadge } from "./annotation-menu.jsx";
+import { annotationAppearance } from "../shared/annotations.js";
 import {
   rpc,
   API,
@@ -7,15 +18,64 @@ import {
   base64File,
   localizeError,
 } from "./api.js";
-export function RecordCard({ r, t, date, onEdit, onTrash, onSource }) {
+export function RecordCard({
+  r,
+  t,
+  date,
+  onEdit,
+  onTrash,
+  onSource,
+  onQuestionState,
+  labels = {},
+}) {
   return (
     <article className="card">
       <div className="row spread">
-        <span className="pill">{t(r.kind)}</span>
+        <span className="pill">
+          {t(r.kind)}
+          <AnnotationBadge
+            value={
+              r.annotation ||
+              (r.anchor && !r.anchor.pageOnly ? annotationAppearance(r) : null)
+            }
+            t={t}
+            labels={labels}
+          />
+        </span>
         <span className="muted small">{date(r.createdAt)}</span>
       </div>
       {r.anchor?.quote && <blockquote>{r.anchor.quote}</blockquote>}
-      <p className="recordBody">{r.body}</p>
+      {r.kind === "review" ? (
+        <SpiritMessage text={r.body} />
+      ) : (
+        <p className="recordBody">{r.body}</p>
+      )}
+      {r.kind === "question" && (
+        <div className="row">
+          <span className="pill">
+            {t(
+              r.questionState === "understood"
+                ? "questionUnderstood"
+                : "questionOpen",
+            )}
+          </span>
+          {onQuestionState && !r.deletedAt && (
+            <button
+              onClick={() =>
+                onQuestionState(
+                  r.questionState === "understood" ? "open" : "understood",
+                )
+              }
+            >
+              {t(
+                r.questionState === "understood"
+                  ? "reopenQuestion"
+                  : "markUnderstood",
+              )}
+            </button>
+          )}
+        </div>
+      )}
       <div className="muted small">
         {r.origin === "user" ? t("myRecord") : t("aiRecord")}
       </div>
@@ -37,8 +97,14 @@ export function RecordCard({ r, t, date, onEdit, onTrash, onSource }) {
           </summary>
           {r.history.map((v, i) => (
             <div className="card small" key={i}>
-              <div>{date(v.at)}</div>
-              <p className="recordBody">{v.body}</p>
+              <div>
+                {date(v.at)} <AnnotationBadge value={v.annotation} t={t} />
+              </div>
+              {v.visualOnly ? (
+                <small className="muted">{t("visualOnlyVersion")}</small>
+              ) : (
+                <p className="recordBody">{v.body}</p>
+              )}
             </div>
           ))}
         </details>
@@ -46,76 +112,8 @@ export function RecordCard({ r, t, date, onEdit, onTrash, onSource }) {
     </article>
   );
 }
-export function Traces({
-  items,
-  data,
-  query,
-  setQuery,
-  t,
-  date,
-  open,
-  run,
-  refresh,
-  setModal,
-}) {
-  const [trash, setTrash] = useState(false);
-  return (
-    <div className="scroll page">
-      <div className="toolbar">
-        <input
-          placeholder={t("noteFilter")}
-          aria-label={t("noteFilter")}
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <button aria-selected={trash} onClick={() => setTrash(!trash)}>
-          {t("trash")}
-        </button>
-      </div>
-      {items
-        .filter(
-          (r) =>
-            !!r.deletedAt === trash &&
-            (r.body + " " + (r.anchor?.quote || "")).includes(query),
-        )
-        .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
-        .map((r) => (
-          <div key={r.id} style={{ maxWidth: 850, margin: "auto" }}>
-            <button className="link" onClick={() => open(r.bookId)}>
-              {data.books.find((b) => b.id === r.bookId)?.title || r.bookId}
-            </button>
-            <RecordCard
-              r={r}
-              t={t}
-              date={date}
-              onEdit={(r) =>
-                setModal({
-                  kind: "note",
-                  bookId: r.bookId,
-                  record: r,
-                  type: r.kind,
-                  body: r.body,
-                  anchor: r.anchor,
-                  origin: r.origin,
-                })
-              }
-              onTrash={(r) =>
-                run(async () => {
-                  await rpc({
-                    action: "trashRecord",
-                    id: r.id,
-                    revision: r.revision,
-                    restore: !!r.deletedAt,
-                    requestId: request(),
-                  });
-                  await refresh();
-                })
-              }
-            />
-          </div>
-        ))}
-    </div>
-  );
+export function Traces(props) {
+  return <LearningTraces {...props} RecordCard={RecordCard} />;
 }
 export function Settings({ data, refresh, t, run, setModal }) {
   const [s, setS] = useState(data.settings),
@@ -189,9 +187,10 @@ export function Settings({ data, refresh, t, run, setModal }) {
               className="primary"
               onClick={() =>
                 run(async () => {
+                  const { replyLength, ...settingsToSave } = s;
                   await rpc({
                     action: "settings",
-                    item: s,
+                    item: settingsToSave,
                     revision: data.revision,
                     requestId: request(),
                   });
@@ -249,11 +248,53 @@ export function Settings({ data, refresh, t, run, setModal }) {
                 }}
               />
             </label>
+            <button
+              onClick={() =>
+                run(async () => {
+                  await rpc({
+                    action: "preferences",
+                    item: { methodIntro: {} },
+                    requestId: request(),
+                  });
+                  await refresh();
+                })
+              }
+            >
+              {t("resetMethodIntros")}
+            </button>
+            <label>
+              {t("showTips")}
+              <select
+                value={data.preferences?.tips || "all"}
+                onChange={(e) =>
+                  run(async () => {
+                    await rpc({
+                      action: "preferences",
+                      item: { tips: e.target.value },
+                      requestId: request(),
+                    });
+                    await refresh();
+                  })
+                }
+              >
+                <option value="all">{t("allTips")}</option>
+                <option value="necessary">{t("necessaryTips")}</option>
+                <option value="off">{t("offTips")}</option>
+              </select>
+            </label>
             <h3>{t("localRoot")}</h3>
             <code style={{ overflowWrap: "anywhere" }}>{data.root}</code>
             <p className="muted small">{t("privacy")}</p>
           </section>
         </div>
+        <AnnotationLabels data={data} t={t} run={run} refresh={refresh} />
+        <LibrarySettings
+          data={data}
+          t={t}
+          run={run}
+          refresh={refresh}
+          setModal={setModal}
+        />
       </div>
     </div>
   );
@@ -272,7 +313,36 @@ export function ModalContent({
   setInfo,
   data,
 }) {
-  if (m.kind === "help") return <p>{t("helpText")}</p>;
+  if (m.kind === "help")
+    return (
+      <HelpCenter
+        t={t}
+        lang={lang}
+        run={run}
+        initialTopic={m.topic || "start"}
+        initialQuestion={m.question || ""}
+        onSample={async () => {
+          const x = await rpc({ action: "sample", requestId: request() });
+          await refresh();
+          close();
+          setTimeout(() => open(x.book.id), 0);
+        }}
+      />
+    );
+  if (m.kind === "goto") return <GoTo t={t} m={m} close={close} />;
+  if (m.kind === "readingReview")
+    return (
+      <ReadingReview
+        m={m}
+        t={t}
+        lang={lang}
+        close={close}
+        saveNote={saveNote}
+        labels={data.preferences?.annotationLabels}
+      />
+    );
+  if (m.kind === "methodology")
+    return <MethodologyDialog m={m} t={t} lang={lang} close={close} />;
   if (m.kind === "note")
     return (
       <NoteForm
@@ -281,11 +351,26 @@ export function ModalContent({
         t={t}
         run={run}
         busy={busy}
+        labels={data.preferences?.annotationLabels}
         saveNote={saveNote}
       />
     );
   if (m.kind === "import")
-    return <ImportForm t={t} run={run} busy={busy} refresh={refresh} />;
+    return (
+      <ImportWizard
+        t={t}
+        run={run}
+        busy={busy}
+        refresh={refresh}
+        close={() => {
+          setInfo(null);
+          close();
+        }}
+        open={open}
+        initialPath={m.initialPath || ""}
+        libraryPath={data?.libraryPath || ""}
+      />
+    );
   if (m.kind === "search")
     return <SearchForm t={t} m={m} run={run} open={open} close={close} />;
   if (m.kind === "restore")
@@ -323,7 +408,7 @@ export function ModalContent({
     );
   return null;
 }
-function NoteForm({ m, t, run, busy, saveNote }) {
+function NoteForm({ m, t, run, busy, saveNote, labels }) {
   const key = "arr-draft:" + m.bookId + ":" + (m.record?.id || "new");
   const [body, setBody] = useState(() => {
       try {
@@ -332,23 +417,38 @@ function NoteForm({ m, t, run, busy, saveNote }) {
         return m.body || "";
       }
     }),
-    [kind, setKind] = useState(m.type || "reflection");
+    [kind, setKind] = useState(m.type || "reflection"),
+    [annotation, setAnnotation] = useState(
+      m.record
+        ? annotationAppearance(m.record)
+        : m.annotation || { style: "highlight", color: "yellow" },
+    );
   const rid = useRef(request());
   return (
     <div className="form">
       {m.anchor && <blockquote>{m.anchor.quote}</blockquote>}
+      {m.anchor && !m.anchor.pageOnly && (
+        <AnnotationSwatches
+          value={annotation}
+          onChange={setAnnotation}
+          t={t}
+          labels={labels}
+        />
+      )}
       <label>
         {t("notes")}
         <select
           value={kind}
           onChange={(e) => setKind(e.target.value)}
-          disabled={!!m.record}
+          disabled={m.record?.kind === "review"}
         >
-          {["reflection", "question", "highlight", "note", "ai"].map((k) => (
-            <option key={k} value={k}>
-              {t(k)}
-            </option>
-          ))}
+          {["reflection", "question", "highlight", "note", "ai", "review"].map(
+            (k) => (
+              <option key={k} value={k}>
+                {t(k)}
+              </option>
+            ),
+          )}
         </select>
       </label>
       <textarea
@@ -377,6 +477,8 @@ function NoteForm({ m, t, run, busy, saveNote }) {
                 kind,
                 body,
                 anchor: m.anchor || null,
+                annotation:
+                  m.anchor && !m.anchor.pageOnly ? annotation : undefined,
                 origin: m.origin || "user",
                 discussionId: m.discussionId || "",
               },
@@ -392,225 +494,15 @@ function NoteForm({ m, t, run, busy, saveNote }) {
     </div>
   );
 }
-function ImportForm({ t, run, busy, refresh }) {
-  const [path, setPath] = useState(""),
-    [files, setFiles] = useState([]),
-    [result, setResult] = useState([]),
-    [encoding, setEncoding] = useState("utf-8");
-  const stopped = useRef(false);
-  async function upload(list) {
-    stopped.current = false;
-    for (const f of list) {
-      if (stopped.current) break;
-      const id = request();
-      try {
-        const res = await fetch(
-          API +
-            "/upload?name=" +
-            encodeURIComponent(f.name) +
-            "&encoding=" +
-            encoding +
-            "&requestId=" +
-            id,
-          { method: "POST", body: f },
-        );
-        const v = await res.json();
-        if (!v.ok) throw new Error(v.error);
-        setResult((old) => [
-          ...old,
-          {
-            name: f.name,
-            state: v.value.duplicate ? t("duplicate") : t("saved"),
-          },
-        ]);
-      } catch (e) {
-        setResult((old) => [
-          ...old,
-          { name: f.name, state: localizeError(e.message, t) },
-        ]);
-      }
-    }
-    await refresh();
-  }
-  return (
-    <div
-      className="form"
-      onDragOver={(e) => e.preventDefault()}
-      onDrop={(e) => {
-        e.preventDefault();
-        run(() => upload([...e.dataTransfer.files]));
-      }}
-    >
-      <p>{t("hint")}</p>
-      <div className="row">
-        <label>
-          {t("chooseFiles")}
-          <input
-            disabled={busy}
-            type="file"
-            accept=".epub,.pdf,.txt,.md,.markdown"
-            multiple
-            onChange={(e) => run(() => upload([...e.target.files]))}
-          />
-        </label>
-        <label>
-          {t("chooseFolder")}
-          <input
-            disabled={busy}
-            type="file"
-            webkitdirectory=""
-            multiple
-            onChange={(e) =>
-              run(() =>
-                upload(
-                  [...e.target.files].filter((f) =>
-                    /\.(epub|pdf|txt|md|markdown)$/i.test(f.name),
-                  ),
-                ),
-              )
-            }
-          />
-        </label>
-      </div>
-      <label>
-        {t("encoding")}
-        <select value={encoding} onChange={(e) => setEncoding(e.target.value)}>
-          <option value="utf-8">UTF-8 / Auto</option>
-          <option value="gb18030">GB18030 / GBK</option>
-          <option value="big5">Big5</option>
-        </select>
-      </label>
-      <label>
-        {t("path")}
-        <input value={path} onChange={(e) => setPath(e.target.value)} />
-      </label>
-      <div className="row">
-        <button
-          disabled={busy || !path.trim()}
-          onClick={() =>
-            run(async () =>
-              setFiles((await rpc({ action: "scan", path })).items),
-            )
-          }
-        >
-          {t("scan")}
-        </button>
-        <button
-          disabled={busy || !path.trim()}
-          onClick={() =>
-            run(async () => {
-              const v = await rpc({
-                action: "importPath",
-                path,
-                encoding,
-                requestId: request(),
-              });
-              setResult((old) => [
-                ...old,
-                {
-                  name: v.book.title,
-                  state: v.duplicate ? t("duplicate") : t("saved"),
-                },
-              ]);
-              await refresh();
-            })
-          }
-        >
-          {t("importPath")}
-        </button>
-      </div>
-      {!!files.length && (
-        <>
-          <p className="muted">{t("directoryHint")}</p>
-          <div className="card" style={{ maxHeight: 180, overflow: "auto" }}>
-            {files.map((f) => (
-              <div key={f.path}>
-                <input
-                  type="checkbox"
-                  checked={f.selected !== false}
-                  onChange={(e) =>
-                    setFiles((old) =>
-                      old.map((x) =>
-                        x.path === f.path
-                          ? { ...x, selected: e.target.checked }
-                          : x,
-                      ),
-                    )
-                  }
-                />{" "}
-                {f.name}
-              </div>
-            ))}
-          </div>
-          <button
-            disabled={busy}
-            onClick={() =>
-              run(async () => {
-                stopped.current = false;
-                for (const f of files.filter((f) => f.selected !== false)) {
-                  if (stopped.current) break;
-                  try {
-                    const v = await rpc({
-                      action: "importPath",
-                      path: f.path,
-                      encoding,
-                      requestId: request(),
-                    });
-                    setResult((old) => [
-                      ...old,
-                      {
-                        name: f.name,
-                        state: v.duplicate ? t("duplicate") : t("saved"),
-                      },
-                    ]);
-                  } catch (e) {
-                    setResult((old) => [
-                      ...old,
-                      { name: f.name, state: localizeError(e.message, t) },
-                    ]);
-                  }
-                }
-                await refresh();
-              })
-            }
-          >
-            {t("importSelected")}
-          </button>
-        </>
-      )}
-      {busy && (
-        <button
-          onClick={() => {
-            stopped.current = true;
-          }}
-        >
-          {t("cancel")}
-        </button>
-      )}
-      {result.length > 0 && (
-        <div
-          className="card"
-          style={{ maxHeight: 240, overflow: "auto" }}
-          role="status"
-        >
-          {result.map((r, i) => (
-            <p key={i}>
-              {r.name} · {r.state}
-            </p>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
 function SearchForm({ t, m, run, open, close }) {
-  const [q, setQ] = useState(""),
+  const [q, setQ] = useState(m.query || ""),
     [items, setItems] = useState([]);
   return (
     <div className="form">
       <div className="row">
         <input
           className="grow"
+          data-autofocus
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder={t("searchText")}
@@ -669,7 +561,9 @@ function MetaForm({ t, book: b, run, close, setInfo }) {
   const [title, setTitle] = useState(b.title),
     [author, setAuthor] = useState(b.author),
     [tags, setTags] = useState(b.tags.join(", ")),
-    [status, setStatus] = useState(b.status);
+    [status, setStatus] = useState(b.status),
+    [sourcePath, setSourcePath] = useState(b.sourcePath || ""),
+    [notice, setNotice] = useState("");
   return (
     <div className="form">
       <label>
@@ -725,6 +619,45 @@ function MetaForm({ t, book: b, run, close, setInfo }) {
         <br />
         {b.hash}
       </div>
+      {b.format === "epub" && (
+        <button
+          onClick={() =>
+            run(async () => {
+              const x = await rpc({ action: "repairNavigation", id: b.id });
+              setNotice(t(x.repaired ? "repaired" : "navigationWarning"));
+              setInfo(await rpc({ action: "open", id: b.id }));
+            })
+          }
+        >
+          {t("repairContents")}
+        </button>
+      )}
+      <label>
+        {t("relink")}
+        <input
+          value={sourcePath}
+          onChange={(e) => setSourcePath(e.target.value)}
+          placeholder={t("path")}
+        />
+      </label>
+      <button
+        disabled={!sourcePath.trim()}
+        onClick={() =>
+          run(async () => {
+            await rpc({
+              action: "relinkBook",
+              id: b.id,
+              path: sourcePath,
+              requestId: request(),
+            });
+            setInfo(await rpc({ action: "open", id: b.id }));
+            setNotice(t("saved"));
+          })
+        }
+      >
+        {t("relink")}
+      </button>
+      {notice && <p role="status">{notice}</p>}
       <button
         onClick={() =>
           run(async () => {

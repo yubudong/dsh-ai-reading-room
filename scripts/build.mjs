@@ -1,8 +1,12 @@
 import { build } from "esbuild";
-import { mkdir, copyFile, cp, writeFile } from "node:fs/promises";
+import { mkdir, copyFile, cp, writeFile, readFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import path from "node:path";
+import { MANUAL, MANUAL_VERSION } from "../src/shared/manual.js";
+import { SHORTCUTS, keyLabel } from "../src/shared/shortcuts.js";
 const require = createRequire(import.meta.url);
+const pkg = JSON.parse(await readFile("package.json", "utf8"));
+const hostFile = `host-${pkg.version}.js`;
 await mkdir("assets", { recursive: true });
 await copyFile(
   require.resolve("pdfjs-dist/build/pdf.worker.mjs"),
@@ -23,7 +27,7 @@ for (const dir of ["cmaps", "standard_fonts", "wasm"])
   );
 await build({
   entryPoints: ["src/host/index.js"],
-  outfile: "host.js",
+  outfile: hostFile,
   bundle: true,
   platform: "node",
   format: "esm",
@@ -38,6 +42,7 @@ await build({
   format: "iife",
   target: "chrome120",
   external: ["react"],
+  loader: { ".css": "text", ".webp": "dataurl" },
   jsxFactory: "React.createElement",
   jsxFragment: "React.Fragment",
   banner: {
@@ -47,5 +52,47 @@ await build({
   globalName: "ReadingRoomPlugin",
   define: { "process.env.NODE_ENV": '"production"' },
 });
-await writeFile("index.js", "export {apply, inject} from './host.js';\n");
-console.log("Built Host, Client and PDF worker");
+await writeFile("index.js", `export {apply, inject} from './${hostFile}';\n`);
+await mkdir("docs", { recursive: true });
+for (const lang of ["zh", "en"]) {
+  const title =
+    lang === "zh" ? "AI 书房使用说明书" : "AI Reading Room user guide";
+  const sections = MANUAL.map(
+    (x) => "## " + x.title[lang] + "\n\n" + x.body[lang],
+  ).join("\n\n");
+  const table = [
+    "| " +
+      (lang === "zh"
+        ? "操作 | Windows/Linux 默认 | macOS 默认"
+        : "Action | Windows/Linux defaults | macOS defaults") +
+      " |",
+    "|---|---|---|",
+    ...SHORTCUTS.map(
+      (s) =>
+        "| " +
+        s[lang] +
+        " | " +
+        s.keys.map((k) => keyLabel(k, false)).join(" / ") +
+        " | " +
+        s.keys.map((k) => keyLabel(k, true)).join(" / ") +
+        " |",
+    ),
+  ].join("\n");
+  await writeFile(
+    "docs/USER_GUIDE." + lang + ".md",
+    "# " +
+      title +
+      "\n\nVersion " +
+      MANUAL_VERSION +
+      "\n\n" +
+      sections +
+      "\n\n" +
+      table +
+      "\n\n" +
+      (lang === "zh"
+        ? "以上是默认键位；帮助中心显示当前设备自定义后的实际配置。"
+        : "These are defaults; the in-app guide shows your effective device-local bindings.") +
+      "\n",
+  );
+}
+console.log("Built Host, Client, PDF resources and bilingual user guides");

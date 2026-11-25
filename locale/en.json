@@ -1,6 +1,6 @@
 {
   "meta": {
     "title": "AI reading room",
-    "description": "A personal reading room to explore books, reflect on ideas, and learn with AI. Import EPUB, PDF, TXT and Markdown, keep highlights and reflections, and discuss with Book Spirit through question-led reading, teach-back or perspective debate. Bilingual interface, Markdown export and local backups. Scanned PDFs are view-only; OCR, MOBI/AZW3 conversion and cross-book topics are planned for later versions."
+    "description": "Read and reflect with AI. Enable the plugin and open AI reading room in the sidebar to import EPUB, PDF, TXT or Markdown. Right-click passages for five-color highlights or underlines, with undo/redo, source-linked notes, filters and Markdown export. Bookworm offers chat, question-led reading, teach-back, perspective debate and editable personal methods, alongside focus reading and explicitly requested reviews. Model calls occur only when you send or generate; relevant excerpts and selected notes/discussion material go to your configured service. Includes a bilingual guide and local backups. Disabling preserves the local library and records. OCR, MOBI/AZW3, cross-book topics and automatic reminders are not included."
   }
 }

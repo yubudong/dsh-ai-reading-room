@@ -1,16 +1,32 @@
 {
   "name": "dsh-ai-reading-room",
-  "version": "0.1.0",
+  "version": "0.5.2",
   "type": "module",
   "description": "A personal reading room to explore books, reflect on ideas, and learn with AI.",
   "license": "MIT",
-  "repository": { "type": "git", "url": "git+https://github.com/yubudong/dsh-ai-reading-room.git" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yubudong/dsh-ai-reading-room.git"
+  },
   "homepage": "https://github.com/yubudong/dsh-ai-reading-room#readme",
-  "bugs": { "url": "https://github.com/yubudong/dsh-ai-reading-room/issues" },
-  "keywords": ["dsh-plugin", "deepseek-harness", "reading", "ebooks", "epub", "ai-reading", "notes"],
+  "bugs": {
+    "url": "https://github.com/yubudong/dsh-ai-reading-room/issues"
+  },
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "reading",
+    "ebooks",
+    "epub",
+    "ai-reading",
+    "notes"
+  ],
   "exports": {
     ".": "./index.js",
-    "./host": "./host.js",
+    "./host": "./host-0.5.2.js",
+    "./host-0.5.2": "./host-0.5.2.js",
+    "./host-0.5.2/locale/*.json": "./locale/*.json",
+    "./host-0.5.2/icon": "./icon.svg",
     "./host/locale/*.json": "./locale/*.json",
     "./host/icon": "./icon.svg",
     "./client": "./client.js",
@@ -19,7 +35,7 @@
   },
   "files": [
     "index.js",
-    "host.js",
+    "host-0.5.2.js",
     "client.js",
     "assets",
     "locale",

@@ -1,4 +1,65 @@
 export const errors = {
+  ANNOTATION_HISTORY_EMPTY: [
+    "当前没有可以撤销或重做的标注操作。",
+    "No annotation action is available to undo or redo.",
+  ],
+  ANNOTATION_HISTORY_CONFLICT: [
+    "这条标注已被其他操作修改，未执行撤销。请核对当前标注。",
+    "This annotation was changed elsewhere. Undo was not applied; review its current state.",
+  ],
+  REVIEW_RANGE_INVALID: [
+    "回顾起始时间不能晚于结束时间，请检查取材范围。",
+    "The review start must not follow its end. Check the source range.",
+  ],
+  CITATION_NOT_READ: [
+    "这段原文尚未核对，暂不能作为精确引用。",
+    "This passage has not been verified for an exact citation.",
+  ],
+  CITATION_AMBIGUOUS: [
+    "原文有多处相同内容，需要进一步确认引用位置。",
+    "The quote occurs more than once; its position needs confirmation.",
+  ],
+  PROMPT_CHANGED: [
+    "方法或参考内容已变化，请查看更新后的提示词再发送。",
+    "Method or source changed. Review the updated prompt before sending.",
+  ],
+  PROMPT_TOO_LONG: [
+    "展开后的提示词太长，请减少模板重复或笔记内容。",
+    "The expanded prompt is too long. Reduce repeated variables or included notes.",
+  ],
+  METHOD_NOT_FOUND: [
+    "找不到该方法，请从方法库选择其他方法。",
+    "Method not found. Choose another method from the library.",
+  ],
+  METHOD_DISABLED: [
+    "这个方法已停用，请重新启用或切换方法。",
+    "This method is disabled. Enable it or choose another.",
+  ],
+  ABSOLUTE_DIRECTORY_REQUIRED: [
+    "请输入本机绝对目录或文件路径。",
+    "Enter an absolute local path.",
+  ],
+  DIRECTORY_REQUIRED: ["请选择一个目录。", "Choose a directory."],
+  DIRECTORY_NOT_FOUND: [
+    "关联目录不存在，请重新选择。",
+    "Linked folder not found. Select it again.",
+  ],
+  ORIGINAL_HASH_MISMATCH: [
+    "原书内容与记录不一致，请重新定位正确版本；笔记已保留。",
+    "The original differs from the recorded version. Locate the correct file; notes are preserved.",
+  ],
+  TARGET_FILE_CONFLICT: [
+    "目标位置已有不同内容的文件，请选择其他目录。",
+    "The destination contains a different file. Choose another location.",
+  ],
+  COPY_VERIFY_FAILED: [
+    "复制校验失败，书库位置未切换。",
+    "Copy verification failed. The library location was not changed.",
+  ],
+  METHOD_IMPORT_INVALID: [
+    "方法 JSON 格式不受支持。",
+    "Unsupported methods JSON format.",
+  ],
   BACKUP_SIZE_LIMIT: [
     "备份解压后超过首版 192 MiB 限制，请改用不含原书的备份，或先导出各书笔记。",
     "Backup exceeds the 192 MiB uncompressed limit. Exclude originals or export notes per book.",
@@ -81,8 +142,8 @@ export const errors = {
     "Configure an available model in DSH first.",
   ],
   SPIRIT_BUSY: [
-    "书灵正在回复，请等待或停止当前回复。",
-    "Book Spirit is replying. Wait or stop the current response.",
+    "书虫正在回复，请等待或停止当前回复。",
+    "Bookworm is replying. Wait or stop the current response.",
   ],
   EXERCISE_PAUSED: ["请先继续这次练习。", "Resume this exercise first."],
   MESSAGE_REQUIRED: [
@@ -94,12 +155,12 @@ export const errors = {
     "Enter a goal or question first.",
   ],
   SPIRIT_UNAVAILABLE: [
-    "书灵服务尚未就绪，请稍后重试。",
-    "Book Spirit is not ready. Try again shortly.",
+    "书虫服务尚未就绪，请稍后重试。",
+    "Bookworm is not ready. Try again shortly.",
   ],
   SPIRIT_CLOSED: [
-    "书灵正在重新加载，请重新打开讨论。",
-    "Book Spirit is reloading. Reopen the discussion.",
+    "书虫正在重新加载，请重新打开讨论。",
+    "Bookworm is reloading. Reopen the discussion.",
   ],
   STORE_CLOSED: [
     "书房正在重新加载，请刷新后重试。",

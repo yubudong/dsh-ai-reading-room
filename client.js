@@ -6,11 +6,11 @@ var ReadingRoomPlugin = (() => {
   var __getOwnPropNames = Object.getOwnPropertyNames;
   var __getProtoOf = Object.getPrototypeOf;
   var __hasOwnProp = Object.prototype.hasOwnProperty;
-  var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
-    get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
-  }) : x)(function(x) {
+  var __require = /* @__PURE__ */ ((x2) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x2, {
+    get: (a, b2) => (typeof require !== "undefined" ? require : a)[b2]
+  }) : x2)(function(x2) {
     if (typeof require !== "undefined") return require.apply(this, arguments);
-    throw Error('Dynamic require of "' + x + '" is not supported');
+    throw Error('Dynamic require of "' + x2 + '" is not supported');
   });
   var __export = (target, all) => {
     for (var name in all)
@@ -40,10 +40,10 @@ var ReadingRoomPlugin = (() => {
     apply: () => apply,
     inject: () => inject
   });
-  var import_react4 = __toESM(__require("react"), 1);
+  var import_react21 = __toESM(__require("react"), 1);
 
   // src/client/reader.jsx
-  var import_react3 = __toESM(__require("react"), 1);
+  var import_react20 = __toESM(__require("react"), 1);
 
   // node_modules/.pnpm/pdfjs-dist@5.7.284/node_modules/pdfjs-dist/build/pdf.mjs
   var import_meta = {};
@@ -492,8 +492,8 @@ var ReadingRoomPlugin = (() => {
     static get hexNums() {
       return shadow(this, "hexNums", Array.from(Array(256).keys(), (n) => n.toString(16).padStart(2, "0")));
     }
-    static makeHexColor(r, g, b) {
-      return `#${this.hexNums[r]}${this.hexNums[g]}${this.hexNums[b]}`;
+    static makeHexColor(r, g2, b2) {
+      return `#${this.hexNums[r]}${this.hexNums[g2]}${this.hexNums[b2]}`;
     }
     static domMatrixToTransform(dm) {
       return [dm.a, dm.b, dm.c, dm.d, dm.e, dm.f];
@@ -545,14 +545,14 @@ var ReadingRoomPlugin = (() => {
     static transform(m1, m2) {
       return [m1[0] * m2[0] + m1[2] * m2[1], m1[1] * m2[0] + m1[3] * m2[1], m1[0] * m2[2] + m1[2] * m2[3], m1[1] * m2[2] + m1[3] * m2[3], m1[0] * m2[4] + m1[2] * m2[5] + m1[4], m1[1] * m2[4] + m1[3] * m2[5] + m1[5]];
     }
-    static multiplyByDOMMatrix(m, md) {
-      return [m[0] * md.a + m[2] * md.b, m[1] * md.a + m[3] * md.b, m[0] * md.c + m[2] * md.d, m[1] * md.c + m[3] * md.d, m[0] * md.e + m[2] * md.f + m[4], m[1] * md.e + m[3] * md.f + m[5]];
+    static multiplyByDOMMatrix(m2, md) {
+      return [m2[0] * md.a + m2[2] * md.b, m2[1] * md.a + m2[3] * md.b, m2[0] * md.c + m2[2] * md.d, m2[1] * md.c + m2[3] * md.d, m2[0] * md.e + m2[2] * md.f + m2[4], m2[1] * md.e + m2[3] * md.f + m2[5]];
     }
-    static applyTransform(p, m, pos = 0) {
+    static applyTransform(p, m2, pos = 0) {
       const p0 = p[pos];
       const p1 = p[pos + 1];
-      p[pos] = p0 * m[0] + p1 * m[2] + m[4];
-      p[pos + 1] = p0 * m[1] + p1 * m[3] + m[5];
+      p[pos] = p0 * m2[0] + p1 * m2[2] + m2[4];
+      p[pos + 1] = p0 * m2[1] + p1 * m2[3] + m2[5];
     }
     static applyTransformToBezier(p, transform, pos = 0) {
       const m0 = transform[0];
@@ -568,12 +568,12 @@ var ReadingRoomPlugin = (() => {
         p[pos + i + 1] = pI * m1 + pI1 * m3 + m5;
       }
     }
-    static applyInverseTransform(p, m) {
+    static applyInverseTransform(p, m2) {
       const p0 = p[0];
       const p1 = p[1];
-      const d = m[0] * m[3] - m[1] * m[2];
-      p[0] = (p0 * m[3] - p1 * m[2] + m[2] * m[5] - m[4] * m[3]) / d;
-      p[1] = (-p0 * m[1] + p1 * m[0] + m[4] * m[1] - m[5] * m[0]) / d;
+      const d = m2[0] * m2[3] - m2[1] * m2[2];
+      p[0] = (p0 * m2[3] - p1 * m2[2] + m2[2] * m2[5] - m2[4] * m2[3]) / d;
+      p[1] = (-p0 * m2[1] + p1 * m2[0] + m2[4] * m2[1] - m2[5] * m2[0]) / d;
     }
     static axialAlignedBoundingBox(rect, transform, output) {
       const m0 = transform[0];
@@ -613,9 +613,9 @@ var ReadingRoomPlugin = (() => {
       output[2] = Math.max(output[2], a0, a1, a2, a3);
       output[3] = Math.max(output[3], b0, b1, b2, b3);
     }
-    static inverseTransform(m) {
-      const d = m[0] * m[3] - m[1] * m[2];
-      return [m[3] / d, -m[1] / d, -m[2] / d, m[0] / d, (m[2] * m[5] - m[4] * m[3]) / d, (m[4] * m[1] - m[5] * m[0]) / d];
+    static inverseTransform(m2) {
+      const d = m2[0] * m2[3] - m2[1] * m2[2];
+      return [m2[3] / d, -m2[1] / d, -m2[2] / d, m2[0] / d, (m2[2] * m2[5] - m2[4] * m2[3]) / d, (m2[4] * m2[1] - m2[5] * m2[0]) / d];
     }
     static singularValueDecompose2dScale(matrix, output) {
       const m0 = matrix[0];
@@ -623,10 +623,10 @@ var ReadingRoomPlugin = (() => {
       const m2 = matrix[2];
       const m3 = matrix[3];
       const a = m0 ** 2 + m1 ** 2;
-      const b = m0 * m2 + m1 * m3;
+      const b2 = m0 * m2 + m1 * m3;
       const c = m2 ** 2 + m3 ** 2;
       const first = (a + c) / 2;
-      const second = Math.sqrt(first ** 2 - (a * c - b ** 2));
+      const second = Math.sqrt(first ** 2 - (a * c - b2 ** 2));
       output[0] = Math.sqrt(first + second || 1);
       output[1] = Math.sqrt(first - second || 1);
     }
@@ -655,11 +655,11 @@ var ReadingRoomPlugin = (() => {
       }
       return [xLow, yLow, xHigh, yHigh];
     }
-    static pointBoundingBox(x, y, minMax) {
-      minMax[0] = Math.min(minMax[0], x);
-      minMax[1] = Math.min(minMax[1], y);
-      minMax[2] = Math.max(minMax[2], x);
-      minMax[3] = Math.max(minMax[3], y);
+    static pointBoundingBox(x2, y2, minMax) {
+      minMax[0] = Math.min(minMax[0], x2);
+      minMax[1] = Math.min(minMax[1], y2);
+      minMax[2] = Math.max(minMax[2], x2);
+      minMax[3] = Math.max(minMax[3], y2);
     }
     static rectBoundingBox(x0, y0, x1, y1, minMax) {
       minMax[0] = Math.min(minMax[0], x0, x1);
@@ -672,30 +672,30 @@ var ReadingRoomPlugin = (() => {
         return;
       }
       const mt = 1 - t;
-      const tt = t * t;
-      const ttt = tt * t;
-      const x = mt * (mt * (mt * x0 + 3 * t * x1) + 3 * tt * x2) + ttt * x3;
-      const y = mt * (mt * (mt * y0 + 3 * t * y1) + 3 * tt * y2) + ttt * y3;
-      minMax[0] = Math.min(minMax[0], x);
-      minMax[1] = Math.min(minMax[1], y);
-      minMax[2] = Math.max(minMax[2], x);
-      minMax[3] = Math.max(minMax[3], y);
+      const tt2 = t * t;
+      const ttt = tt2 * t;
+      const x4 = mt * (mt * (mt * x0 + 3 * t * x1) + 3 * tt2 * x2) + ttt * x3;
+      const y4 = mt * (mt * (mt * y0 + 3 * t * y1) + 3 * tt2 * y2) + ttt * y3;
+      minMax[0] = Math.min(minMax[0], x4);
+      minMax[1] = Math.min(minMax[1], y4);
+      minMax[2] = Math.max(minMax[2], x4);
+      minMax[3] = Math.max(minMax[3], y4);
     }
-    static #getExtremum(x0, x1, x2, x3, y0, y1, y2, y3, a, b, c, minMax) {
+    static #getExtremum(x0, x1, x2, x3, y0, y1, y2, y3, a, b2, c, minMax) {
       if (Math.abs(a) < 1e-12) {
-        if (Math.abs(b) >= 1e-12) {
-          this.#getExtremumOnCurve(x0, x1, x2, x3, y0, y1, y2, y3, -c / b, minMax);
+        if (Math.abs(b2) >= 1e-12) {
+          this.#getExtremumOnCurve(x0, x1, x2, x3, y0, y1, y2, y3, -c / b2, minMax);
         }
         return;
       }
-      const delta = b ** 2 - 4 * c * a;
+      const delta = b2 ** 2 - 4 * c * a;
       if (delta < 0) {
         return;
       }
       const sqrtDelta = Math.sqrt(delta);
       const a2 = 2 * a;
-      this.#getExtremumOnCurve(x0, x1, x2, x3, y0, y1, y2, y3, (-b + sqrtDelta) / a2, minMax);
-      this.#getExtremumOnCurve(x0, x1, x2, x3, y0, y1, y2, y3, (-b - sqrtDelta) / a2, minMax);
+      this.#getExtremumOnCurve(x0, x1, x2, x3, y0, y1, y2, y3, (-b2 + sqrtDelta) / a2, minMax);
+      this.#getExtremumOnCurve(x0, x1, x2, x3, y0, y1, y2, y3, (-b2 - sqrtDelta) / a2, minMax);
     }
     static bezierBoundingBox(x0, y0, x1, y1, x2, y2, x3, y3, minMax) {
       minMax[0] = Math.min(minMax[0], x0, x3);
@@ -716,7 +716,7 @@ var ReadingRoomPlugin = (() => {
       NormalizeRegex = /([\u00a0\u00b5\u037e\u0eb3\u2000-\u200a\u202f\u2126\ufb00-\ufb04\ufb06\ufb20-\ufb36\ufb38-\ufb3c\ufb3e\ufb40-\ufb41\ufb43-\ufb44\ufb46-\ufba1\ufba4-\ufba9\ufbae-\ufbb1\ufbd3-\ufbdc\ufbde-\ufbe7\ufbea-\ufbf8\ufbfc-\ufbfd\ufc00-\ufc5d\ufc64-\ufcf1\ufcf5-\ufd3d\ufd88\ufdf4\ufdfa-\ufdfb\ufe71\ufe77\ufe79\ufe7b\ufe7d]+)|(\ufb05+)/gu;
       NormalizationMap = /* @__PURE__ */ new Map([["\uFB05", "\u017Ft"]]);
     }
-    return str.replaceAll(NormalizeRegex, (_, p1, p2) => p1 ? p1.normalize("NFKC") : NormalizationMap.get(p2));
+    return str.replaceAll(NormalizeRegex, (_2, p1, p2) => p1 ? p1.normalize("NFKC") : NormalizationMap.get(p2));
   }
   function getUuid() {
     if (typeof crypto.randomUUID === "function") {
@@ -777,8 +777,8 @@ var ReadingRoomPlugin = (() => {
   var makeArr = () => [];
   var makeMap = () => /* @__PURE__ */ new Map();
   var makeObj = () => /* @__PURE__ */ Object.create(null);
-  function MathClamp(v, min, max) {
-    return Math.min(Math.max(v, min), max);
+  function MathClamp(v2, min, max) {
+    return Math.min(Math.max(v2, min), max);
   }
   var XfaText = class _XfaText {
     static textContent(xfa) {
@@ -1176,8 +1176,8 @@ var ReadingRoomPlugin = (() => {
         dontFlip
       });
     }
-    convertToViewportPoint(x, y) {
-      const p = [x, y];
+    convertToViewportPoint(x2, y2) {
+      const p = [x2, y2];
       Util.applyTransform(p, this.transform);
       return p;
     }
@@ -1188,8 +1188,8 @@ var ReadingRoomPlugin = (() => {
       Util.applyTransform(bottomRight, this.transform);
       return [topLeft[0], topLeft[1], bottomRight[0], bottomRight[1]];
     }
-    convertToPdfPoint(x, y) {
-      const p = [x, y];
+    convertToPdfPoint(x2, y2) {
+      const p = [x2, y2];
       Util.applyInverseTransform(p, this.transform);
       return p;
     }
@@ -1266,7 +1266,7 @@ var ReadingRoomPlugin = (() => {
       return decode(filename);
     }
     if (newURL.searchParams.size > 0) {
-      const getLast = (iterator) => [...iterator].findLast((v) => pdfRegex.test(v));
+      const getLast = (iterator) => [...iterator].findLast((v2) => pdfRegex.test(v2));
       const name = getLast(newURL.searchParams.values()) ?? getLast(newURL.searchParams.keys());
       if (name) {
         return decode(name);
@@ -1383,16 +1383,16 @@ var ReadingRoomPlugin = (() => {
       return [parseInt(hex.slice(0, 2), 16), parseInt(hex.slice(2, 4), 16), parseInt(hex.slice(4, 6), 16), hex.length >= 8 ? parseInt(hex.slice(6, 8), 16) / 255 : 1];
     }
     if (color.startsWith("rgb(")) {
-      const [r, g, b] = color.slice(4, -1).split(",").map((x) => parseInt(x, 10));
-      return [r, g, b, 1];
+      const [r, g2, b2] = color.slice(4, -1).split(",").map((x2) => parseInt(x2, 10));
+      return [r, g2, b2, 1];
     }
     if (color.startsWith("rgba(")) {
       const parts = color.slice(5, -1).split(",");
       return [parseInt(parts[0], 10), parseInt(parts[1], 10), parseInt(parts[2], 10), parseFloat(parts[3])];
     }
-    const m = color.match(/^color\(srgb\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)(?:\s*\/\s*([\d.]+|none))?\)$/);
-    if (m) {
-      return [Math.round(parseFloat(m[1]) * 255), Math.round(parseFloat(m[2]) * 255), Math.round(parseFloat(m[3]) * 255), m[4] !== void 0 && m[4] !== "none" ? parseFloat(m[4]) : 1];
+    const m2 = color.match(/^color\(srgb\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)(?:\s*\/\s*([\d.]+|none))?\)$/);
+    if (m2) {
+      return [Math.round(parseFloat(m2[1]) * 255), Math.round(parseFloat(m2[2]) * 255), Math.round(parseFloat(m2[3]) * 255), m2[4] !== void 0 && m2[4] !== "none" ? parseFloat(m2[4]) : 1];
     }
     return null;
   }
@@ -1419,24 +1419,24 @@ var ReadingRoomPlugin = (() => {
   function getCurrentTransform(ctx) {
     const {
       a,
-      b,
+      b: b2,
       c,
       d,
       e,
       f
     } = ctx.getTransform();
-    return [a, b, c, d, e, f];
+    return [a, b2, c, d, e, f];
   }
   function getCurrentTransformInverse(ctx) {
     const {
       a,
-      b,
+      b: b2,
       c,
       d,
       e,
       f
     } = ctx.getTransform().invertSelf();
-    return [a, b, c, d, e, f];
+    return [a, b2, c, d, e, f];
   }
   function setLayerDimensions(div, viewport, mustFlip = false, mustRotate = true) {
     if (viewport instanceof PageViewport) {
@@ -1448,8 +1448,8 @@ var ReadingRoomPlugin = (() => {
         style
       } = div;
       const useRound = FeatureTest.isCSSRoundSupported;
-      const w = `var(--total-scale-factor) * ${pageWidth}px`, h = `var(--total-scale-factor) * ${pageHeight}px`;
-      const widthStr = useRound ? `round(down, ${w}, var(--scale-round-x))` : `calc(${w})`, heightStr = useRound ? `round(down, ${h}, var(--scale-round-y))` : `calc(${h})`;
+      const w2 = `var(--total-scale-factor) * ${pageWidth}px`, h = `var(--total-scale-factor) * ${pageHeight}px`;
+      const widthStr = useRound ? `round(down, ${w2}, var(--scale-round-x))` : `calc(${w2})`, heightStr = useRound ? `round(down, ${h}, var(--scale-round-y))` : `calc(${h})`;
       if (!mustFlip || viewport.rotation % 180 === 0) {
         style.width = widthStr;
         style.height = heightStr;
@@ -1536,10 +1536,10 @@ var ReadingRoomPlugin = (() => {
   }
   function RGBToHSL(rgb, output) {
     const r = rgb[0] / 255;
-    const g = rgb[1] / 255;
-    const b = rgb[2] / 255;
-    const max = Math.max(r, g, b);
-    const min = Math.min(r, g, b);
+    const g2 = rgb[1] / 255;
+    const b2 = rgb[2] / 255;
+    const max = Math.max(r, g2, b2);
+    const min = Math.min(r, g2, b2);
     const l = (max + min) / 2;
     if (max === min) {
       output[0] = output[1] = 0;
@@ -1548,13 +1548,13 @@ var ReadingRoomPlugin = (() => {
       output[1] = l < 0.5 ? d / (max + min) : d / (2 - max - min);
       switch (max) {
         case r:
-          output[0] = ((g - b) / d + (g < b ? 6 : 0)) * 60;
+          output[0] = ((g2 - b2) / d + (g2 < b2 ? 6 : 0)) * 60;
           break;
-        case g:
-          output[0] = ((b - r) / d + 2) * 60;
+        case g2:
+          output[0] = ((b2 - r) / d + 2) * 60;
           break;
-        case b:
-          output[0] = ((r - g) / d + 4) * 60;
+        case b2:
+          output[0] = ((r - g2) / d + 4) * 60;
           break;
       }
     }
@@ -1565,44 +1565,44 @@ var ReadingRoomPlugin = (() => {
     const s = hsl[1];
     const l = hsl[2];
     const c = (1 - Math.abs(2 * l - 1)) * s;
-    const x = c * (1 - Math.abs(h / 60 % 2 - 1));
-    const m = l - c / 2;
+    const x2 = c * (1 - Math.abs(h / 60 % 2 - 1));
+    const m2 = l - c / 2;
     switch (Math.floor(h / 60)) {
       case 0:
-        output[0] = c + m;
-        output[1] = x + m;
-        output[2] = m;
+        output[0] = c + m2;
+        output[1] = x2 + m2;
+        output[2] = m2;
         break;
       case 1:
-        output[0] = x + m;
-        output[1] = c + m;
-        output[2] = m;
+        output[0] = x2 + m2;
+        output[1] = c + m2;
+        output[2] = m2;
         break;
       case 2:
-        output[0] = m;
-        output[1] = c + m;
-        output[2] = x + m;
+        output[0] = m2;
+        output[1] = c + m2;
+        output[2] = x2 + m2;
         break;
       case 3:
-        output[0] = m;
-        output[1] = x + m;
-        output[2] = c + m;
+        output[0] = m2;
+        output[1] = x2 + m2;
+        output[2] = c + m2;
         break;
       case 4:
-        output[0] = x + m;
-        output[1] = m;
-        output[2] = c + m;
+        output[0] = x2 + m2;
+        output[1] = m2;
+        output[2] = c + m2;
         break;
       case 5:
       case 6:
-        output[0] = c + m;
-        output[1] = m;
-        output[2] = x + m;
+        output[0] = c + m2;
+        output[1] = m2;
+        output[2] = x2 + m2;
         break;
     }
   }
-  function computeLuminance(x) {
-    return x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4;
+  function computeLuminance(x2) {
+    return x2 <= 0.03928 ? x2 / 12.92 : ((x2 + 0.055) / 1.055) ** 2.4;
   }
   function contrastRatio(hsl1, hsl2, output) {
     HSLToRGB(hsl1, output);
@@ -1752,8 +1752,8 @@ var ReadingRoomPlugin = (() => {
         const {
           style
         } = editToolbar;
-        const x = this.#editor._uiManager.direction === "ltr" ? 1 - position[0] : position[0];
-        style.insetInlineEnd = `${100 * x}%`;
+        const x2 = this.#editor._uiManager.direction === "ltr" ? 1 - position[0] : position[0];
+        style.insetInlineEnd = `${100 * x2}%`;
         style.top = `calc(${100 * position[1]}% + var(--editor-toolbar-vert-offset))`;
       }
       return editToolbar;
@@ -1955,34 +1955,34 @@ var ReadingRoomPlugin = (() => {
       let lastY = 0;
       let lastX = 0;
       for (const box of boxes) {
-        const y = box.y + box.height;
-        if (y < lastY) {
+        const y2 = box.y + box.height;
+        if (y2 < lastY) {
           continue;
         }
-        const x = box.x + (isLTR ? box.width : 0);
-        if (y > lastY) {
-          lastX = x;
-          lastY = y;
+        const x2 = box.x + (isLTR ? box.width : 0);
+        if (y2 > lastY) {
+          lastX = x2;
+          lastY = y2;
           continue;
         }
         if (isLTR) {
-          if (x > lastX) {
-            lastX = x;
+          if (x2 > lastX) {
+            lastX = x2;
           }
-        } else if (x < lastX) {
-          lastX = x;
+        } else if (x2 < lastX) {
+          lastX = x2;
         }
       }
       return [isLTR ? 1 - lastX : lastX, lastY];
     }
     show(parent, boxes, isLTR) {
-      const [x, y] = this.#getLastPoint(boxes, isLTR);
+      const [x2, y2] = this.#getLastPoint(boxes, isLTR);
       const {
         style
       } = this.#toolbar ||= this.#render();
       parent.append(this.#toolbar);
-      style.insetInlineEnd = `${100 * x}%`;
-      style.top = `calc(${100 * y}% + var(--editor-toolbar-vert-offset))`;
+      style.insetInlineEnd = `${100 * x2}%`;
+      style.top = `calc(${100 * y2}% + var(--editor-toolbar-vert-offset))`;
     }
     hide() {
       this.#toolbar.remove();
@@ -2423,7 +2423,7 @@ var ReadingRoomPlugin = (() => {
         return rgb;
       }
       for (const [name, RGB] of this._colors) {
-        if (RGB.every((x, i) => x === rgb[i])) {
+        if (RGB.every((x2, i) => x2 === rgb[i])) {
           return _ColorManager._colorsMapping.get(name);
         }
       }
@@ -2675,7 +2675,7 @@ var ReadingRoomPlugin = (() => {
     }
     get _highlightColors() {
       return shadow(this, "_highlightColors", this.#highlightColors ? new Map(this.#highlightColors.split(",").map((pair) => {
-        pair = pair.split("=").map((x) => x.trim());
+        pair = pair.split("=").map((x2) => x2.trim());
         pair[1] = pair[1].toUpperCase();
         return pair;
       })) : null);
@@ -2843,7 +2843,7 @@ var ReadingRoomPlugin = (() => {
     focusMainContainer() {
       this.#container.focus();
     }
-    findParent(x, y) {
+    findParent(x2, y2) {
       for (const layer of this.#allLayers.values()) {
         const {
           x: layerX,
@@ -2851,7 +2851,7 @@ var ReadingRoomPlugin = (() => {
           width,
           height
         } = layer.div.getBoundingClientRect();
-        if (x >= layerX && x <= layerX + width && y >= layerY && y <= layerY + height) {
+        if (x2 >= layerX && x2 <= layerX + width && y2 >= layerY && y2 <= layerY + height) {
           return layer;
         }
       }
@@ -3882,15 +3882,15 @@ var ReadingRoomPlugin = (() => {
         hasSelectedEditor: false
       });
     }
-    translateSelectedEditors(x, y, noCommit = false) {
+    translateSelectedEditors(x2, y2, noCommit = false) {
       if (!noCommit) {
         this.commitOrRemove();
       }
       if (!this.hasSelection) {
         return;
       }
-      this.#translation[0] += x;
-      this.#translation[1] += y;
+      this.#translation[0] += x2;
+      this.#translation[1] += y2;
       const [totalX, totalY] = this.#translation;
       const editors = [...this.#selectedEditors];
       const TIME_TO_WAIT = 1e3;
@@ -3921,7 +3921,7 @@ var ReadingRoomPlugin = (() => {
         });
       }, TIME_TO_WAIT);
       for (const editor of editors) {
-        editor.translateInPage(x, y);
+        editor.translateInPage(x2, y2);
         editor.translationDone();
       }
     }
@@ -3951,27 +3951,27 @@ var ReadingRoomPlugin = (() => {
       this.#draggingEditors = null;
       let mustBeAddedInUndoStack = false;
       for (const [{
-        x,
-        y,
+        x: x2,
+        y: y2,
         pageIndex
       }, value] of map) {
-        value.newX = x;
-        value.newY = y;
+        value.newX = x2;
+        value.newY = y2;
         value.newPageIndex = pageIndex;
-        mustBeAddedInUndoStack ||= x !== value.savedX || y !== value.savedY || pageIndex !== value.savedPageIndex;
+        mustBeAddedInUndoStack ||= x2 !== value.savedX || y2 !== value.savedY || pageIndex !== value.savedPageIndex;
       }
       if (!mustBeAddedInUndoStack) {
         return false;
       }
-      const move = (editor, x, y, pageIndex) => {
+      const move = (editor, x2, y2, pageIndex) => {
         if (this.#allEditors.has(editor.id)) {
           const parent = this.#allLayers.get(pageIndex);
           if (parent) {
-            editor._setParentAndPosition(parent, x, y);
+            editor._setParentAndPosition(parent, x2, y2);
           } else {
             editor.pageIndex = pageIndex;
-            editor.x = x;
-            editor.y = y;
+            editor.x = x2;
+            editor.y = y2;
           }
         }
       };
@@ -4058,34 +4058,34 @@ var ReadingRoomPlugin = (() => {
       let rotator;
       switch (textLayer.getAttribute("data-main-rotation")) {
         case "90":
-          rotator = (x, y, w, h) => ({
-            x: (y - layerY) / parentHeight,
-            y: 1 - (x + w - layerX) / parentWidth,
+          rotator = (x2, y2, w2, h) => ({
+            x: (y2 - layerY) / parentHeight,
+            y: 1 - (x2 + w2 - layerX) / parentWidth,
             width: h / parentHeight,
-            height: w / parentWidth
+            height: w2 / parentWidth
           });
           break;
         case "180":
-          rotator = (x, y, w, h) => ({
-            x: 1 - (x + w - layerX) / parentWidth,
-            y: 1 - (y + h - layerY) / parentHeight,
-            width: w / parentWidth,
+          rotator = (x2, y2, w2, h) => ({
+            x: 1 - (x2 + w2 - layerX) / parentWidth,
+            y: 1 - (y2 + h - layerY) / parentHeight,
+            width: w2 / parentWidth,
             height: h / parentHeight
           });
           break;
         case "270":
-          rotator = (x, y, w, h) => ({
-            x: 1 - (y + h - layerY) / parentHeight,
-            y: (x - layerX) / parentWidth,
+          rotator = (x2, y2, w2, h) => ({
+            x: 1 - (y2 + h - layerY) / parentHeight,
+            y: (x2 - layerX) / parentWidth,
             width: h / parentHeight,
-            height: w / parentWidth
+            height: w2 / parentWidth
           });
           break;
         default:
-          rotator = (x, y, w, h) => ({
-            x: (x - layerX) / parentWidth,
-            y: (y - layerY) / parentHeight,
-            width: w / parentWidth,
+          rotator = (x2, y2, w2, h) => ({
+            x: (x2 - layerX) / parentWidth,
+            y: (y2 - layerY) / parentHeight,
+            width: w2 / parentWidth,
             height: h / parentHeight
           });
           break;
@@ -4097,15 +4097,15 @@ var ReadingRoomPlugin = (() => {
           continue;
         }
         for (const {
-          x,
-          y,
+          x: x2,
+          y: y2,
           width,
           height
         } of range.getClientRects()) {
           if (width === 0 || height === 0) {
             continue;
           }
-          boxes.push(rotator(x, y, width, height));
+          boxes.push(rotator(x2, y2, width, height));
         }
       }
       return boxes.length === 0 ? null : boxes;
@@ -4471,8 +4471,8 @@ var ReadingRoomPlugin = (() => {
         return null;
       }
       const {
-        x,
-        y,
+        x: x2,
+        y: y2,
         height
       } = this.#commentStandaloneButton.getBoundingClientRect();
       const {
@@ -4481,7 +4481,7 @@ var ReadingRoomPlugin = (() => {
         width: parentWidth,
         height: parentHeight
       } = this.#editor.parent.boundingClientRect;
-      return [(x - parentX) / parentWidth, (y + height - parentY) / parentHeight];
+      return [(x2 - parentX) / parentWidth, (y2 + height - parentY) / parentHeight];
     }
     set commentPopupPositionInLayer(pos) {
       this.#popupPosition = pos;
@@ -4588,11 +4588,11 @@ var ReadingRoomPlugin = (() => {
         const {
           width,
           height,
-          x,
-          y
+          x: x2,
+          y: y2
         } = this.#editor;
-        posX = x + posX * width;
-        posY = y + posY * height;
+        posX = x2 + posX * width;
+        posY = y2 + posY * height;
       }
       const parentDimensions = this.#editor.parent.boundingClientRect;
       const {
@@ -5107,11 +5107,11 @@ var ReadingRoomPlugin = (() => {
     addToAnnotationStorage() {
       this._uiManager.addToAnnotationStorage(this);
     }
-    setAt(x, y, tx, ty) {
+    setAt(x2, y2, tx, ty) {
       const [width, height] = this.parentDimensions;
       [tx, ty] = this.screenToPageTranslation(tx, ty);
-      this.x = (x + tx) / width;
-      this.y = (y + ty) / height;
+      this.x = (x2 + tx) / width;
+      this.y = (y2 + ty) / height;
       this.fixAndSetPosition();
     }
     _moveAfterPaste(baseX, baseY) {
@@ -5123,19 +5123,19 @@ var ReadingRoomPlugin = (() => {
       this.setAt(baseX * parentWidth, baseY * parentHeight, this.width * parentWidth, this.height * parentHeight);
       this._onTranslated();
     }
-    #translate([width, height], x, y) {
-      [x, y] = this.screenToPageTranslation(x, y);
-      this.x += x / width;
-      this.y += y / height;
+    #translate([width, height], x2, y2) {
+      [x2, y2] = this.screenToPageTranslation(x2, y2);
+      this.x += x2 / width;
+      this.y += y2 / height;
       this._onTranslating(this.x, this.y);
       this.fixAndSetPosition();
     }
-    translate(x, y) {
-      this.#translate(this.parentDimensions, x, y);
+    translate(x2, y2) {
+      this.#translate(this.parentDimensions, x2, y2);
     }
-    translateInPage(x, y) {
+    translateInPage(x2, y2) {
       this.#initialRect ||= [this.x, this.y, this.width, this.height];
-      this.#translate(this.pageDimensions, x, y);
+      this.#translate(this.pageDimensions, x2, y2);
       this.div.scrollIntoView({
         block: "nearest"
       });
@@ -5153,34 +5153,34 @@ var ReadingRoomPlugin = (() => {
       this.y += ty / parentHeight;
       if (this.parent && (this.x < 0 || this.x > 1 || this.y < 0 || this.y > 1)) {
         const {
-          x: x2,
-          y: y2
+          x: x3,
+          y: y3
         } = this.div.getBoundingClientRect();
-        if (this.parent.findNewParent(this, x2, y2)) {
+        if (this.parent.findNewParent(this, x3, y3)) {
           this.x -= Math.floor(this.x);
           this.y -= Math.floor(this.y);
         }
       }
       let {
-        x,
-        y
+        x: x2,
+        y: y2
       } = this;
       const [bx, by] = this.getBaseTranslation();
-      x += bx;
-      y += by;
+      x2 += bx;
+      y2 += by;
       const {
         style
       } = div;
-      style.left = `${(100 * x).toFixed(2)}%`;
-      style.top = `${(100 * y).toFixed(2)}%`;
-      this._onTranslating(x, y);
+      style.left = `${(100 * x2).toFixed(2)}%`;
+      style.top = `${(100 * y2).toFixed(2)}%`;
+      this._onTranslating(x2, y2);
       div.scrollIntoView({
         block: "nearest"
       });
     }
-    _onTranslating(x, y) {
+    _onTranslating(x2, y2) {
     }
-    _onTranslated(x, y) {
+    _onTranslated(x2, y2) {
     }
     get _hasBeenMoved() {
       return !!this.#initialRect && (this.#initialRect[0] !== this.x || this.#initialRect[1] !== this.y);
@@ -5193,17 +5193,17 @@ var ReadingRoomPlugin = (() => {
       const {
         _borderLineWidth
       } = _AnnotationEditor;
-      const x = _borderLineWidth / parentWidth;
-      const y = _borderLineWidth / parentHeight;
+      const x2 = _borderLineWidth / parentWidth;
+      const y2 = _borderLineWidth / parentHeight;
       switch (this.rotation) {
         case 90:
-          return [-x, y];
+          return [-x2, y2];
         case 180:
-          return [x, y];
+          return [x2, y2];
         case 270:
-          return [x, -y];
+          return [x2, -y2];
         default:
-          return [-x, -y];
+          return [-x2, -y2];
       }
     }
     get _mustFixPosition() {
@@ -5217,61 +5217,61 @@ var ReadingRoomPlugin = (() => {
         pageDimensions: [pageWidth, pageHeight]
       } = this;
       let {
-        x,
-        y,
+        x: x2,
+        y: y2,
         width,
         height
       } = this;
       width *= pageWidth;
       height *= pageHeight;
-      x *= pageWidth;
-      y *= pageHeight;
+      x2 *= pageWidth;
+      y2 *= pageHeight;
       if (this._mustFixPosition) {
         switch (rotation) {
           case 0:
-            x = MathClamp(x, 0, pageWidth - width);
-            y = MathClamp(y, 0, pageHeight - height);
+            x2 = MathClamp(x2, 0, pageWidth - width);
+            y2 = MathClamp(y2, 0, pageHeight - height);
             break;
           case 90:
-            x = MathClamp(x, 0, pageWidth - height);
-            y = MathClamp(y, width, pageHeight);
+            x2 = MathClamp(x2, 0, pageWidth - height);
+            y2 = MathClamp(y2, width, pageHeight);
             break;
           case 180:
-            x = MathClamp(x, width, pageWidth);
-            y = MathClamp(y, height, pageHeight);
+            x2 = MathClamp(x2, width, pageWidth);
+            y2 = MathClamp(y2, height, pageHeight);
             break;
           case 270:
-            x = MathClamp(x, height, pageWidth);
-            y = MathClamp(y, 0, pageHeight - width);
+            x2 = MathClamp(x2, height, pageWidth);
+            y2 = MathClamp(y2, 0, pageHeight - width);
             break;
         }
       }
-      this.x = x /= pageWidth;
-      this.y = y /= pageHeight;
+      this.x = x2 /= pageWidth;
+      this.y = y2 /= pageHeight;
       const [bx, by] = this.getBaseTranslation();
-      x += bx;
-      y += by;
-      style.left = `${(100 * x).toFixed(2)}%`;
-      style.top = `${(100 * y).toFixed(2)}%`;
+      x2 += bx;
+      y2 += by;
+      style.left = `${(100 * x2).toFixed(2)}%`;
+      style.top = `${(100 * y2).toFixed(2)}%`;
       this.moveInDOM();
     }
-    static #rotatePoint(x, y, angle) {
+    static #rotatePoint(x2, y2, angle) {
       switch (angle) {
         case 90:
-          return [y, -x];
+          return [y2, -x2];
         case 180:
-          return [-x, -y];
+          return [-x2, -y2];
         case 270:
-          return [-y, x];
+          return [-y2, x2];
         default:
-          return [x, y];
+          return [x2, y2];
       }
     }
-    screenToPageTranslation(x, y) {
-      return _AnnotationEditor.#rotatePoint(x, y, this.parentRotation);
+    screenToPageTranslation(x2, y2) {
+      return _AnnotationEditor.#rotatePoint(x2, y2, this.parentRotation);
     }
-    pageTranslationToScreen(x, y) {
-      return _AnnotationEditor.#rotatePoint(x, y, 360 - this.parentRotation);
+    pageTranslationToScreen(x2, y2) {
+      return _AnnotationEditor.#rotatePoint(x2, y2, 360 - this.parentRotation);
     }
     #getRotationMatrix(rotation) {
       switch (rotation) {
@@ -5391,11 +5391,11 @@ var ReadingRoomPlugin = (() => {
         signal
       });
     }
-    #resize(x, y, width, height) {
+    #resize(x2, y2, width, height) {
       this.width = width;
       this.height = height;
-      this.x = x;
-      this.y = y;
+      this.x = x2;
+      this.y = y2;
       this.setDims();
       this.fixAndSetPosition();
       this._onResized();
@@ -5426,8 +5426,8 @@ var ReadingRoomPlugin = (() => {
         mustExec: true
       });
     }
-    static _round(x) {
-      return Math.round(x * 1e4) / 1e4;
+    static _round(x2) {
+      return Math.round(x2 * 1e4) / 1e4;
     }
     #resizerPointermove(name, event) {
       const [parentWidth, parentHeight] = this.parentDimensions;
@@ -5438,9 +5438,9 @@ var ReadingRoomPlugin = (() => {
       const minWidth = _AnnotationEditor.MIN_SIZE / parentWidth;
       const minHeight = _AnnotationEditor.MIN_SIZE / parentHeight;
       const rotationMatrix = this.#getRotationMatrix(this.rotation);
-      const transf = (x, y) => [rotationMatrix[0] * x + rotationMatrix[2] * y, rotationMatrix[1] * x + rotationMatrix[3] * y];
+      const transf = (x2, y2) => [rotationMatrix[0] * x2 + rotationMatrix[2] * y2, rotationMatrix[1] * x2 + rotationMatrix[3] * y2];
       const invRotationMatrix = this.#getRotationMatrix(360 - this.rotation);
-      const invTransf = (x, y) => [invRotationMatrix[0] * x + invRotationMatrix[2] * y, invRotationMatrix[1] * x + invRotationMatrix[3] * y];
+      const invTransf = (x2, y2) => [invRotationMatrix[0] * x2 + invRotationMatrix[2] * y2, invRotationMatrix[1] * x2 + invRotationMatrix[3] * y2];
       let getPoint;
       let getOpposite;
       let isDiagonal = false;
@@ -5448,41 +5448,41 @@ var ReadingRoomPlugin = (() => {
       switch (name) {
         case "topLeft":
           isDiagonal = true;
-          getPoint = (w, h) => [0, 0];
-          getOpposite = (w, h) => [w, h];
+          getPoint = (w2, h) => [0, 0];
+          getOpposite = (w2, h) => [w2, h];
           break;
         case "topMiddle":
-          getPoint = (w, h) => [w / 2, 0];
-          getOpposite = (w, h) => [w / 2, h];
+          getPoint = (w2, h) => [w2 / 2, 0];
+          getOpposite = (w2, h) => [w2 / 2, h];
           break;
         case "topRight":
           isDiagonal = true;
-          getPoint = (w, h) => [w, 0];
-          getOpposite = (w, h) => [0, h];
+          getPoint = (w2, h) => [w2, 0];
+          getOpposite = (w2, h) => [0, h];
           break;
         case "middleRight":
           isHorizontal = true;
-          getPoint = (w, h) => [w, h / 2];
-          getOpposite = (w, h) => [0, h / 2];
+          getPoint = (w2, h) => [w2, h / 2];
+          getOpposite = (w2, h) => [0, h / 2];
           break;
         case "bottomRight":
           isDiagonal = true;
-          getPoint = (w, h) => [w, h];
-          getOpposite = (w, h) => [0, 0];
+          getPoint = (w2, h) => [w2, h];
+          getOpposite = (w2, h) => [0, 0];
           break;
         case "bottomMiddle":
-          getPoint = (w, h) => [w / 2, h];
-          getOpposite = (w, h) => [w / 2, 0];
+          getPoint = (w2, h) => [w2 / 2, h];
+          getOpposite = (w2, h) => [w2 / 2, 0];
           break;
         case "bottomLeft":
           isDiagonal = true;
-          getPoint = (w, h) => [0, h];
-          getOpposite = (w, h) => [w, 0];
+          getPoint = (w2, h) => [0, h];
+          getOpposite = (w2, h) => [w2, 0];
           break;
         case "middleLeft":
           isHorizontal = true;
-          getPoint = (w, h) => [0, h / 2];
-          getOpposite = (w, h) => [w, h / 2];
+          getPoint = (w2, h) => [0, h / 2];
+          getOpposite = (w2, h) => [w2, h / 2];
           break;
       }
       const point = getPoint(savedWidth, savedHeight);
@@ -5804,7 +5804,7 @@ var ReadingRoomPlugin = (() => {
         return;
       }
       const rotationMatrix = this.#getRotationMatrix(this.rotation);
-      const transf = (x, y) => [rotationMatrix[0] * x + rotationMatrix[2] * y, rotationMatrix[1] * x + rotationMatrix[3] * y];
+      const transf = (x2, y2) => [rotationMatrix[0] * x2 + rotationMatrix[2] * y2, rotationMatrix[1] * x2 + rotationMatrix[3] * y2];
       const [parentWidth, parentHeight] = this.parentDimensions;
       const savedX = this.x;
       const savedY = this.y;
@@ -5897,17 +5897,17 @@ var ReadingRoomPlugin = (() => {
             this._onStartDragging();
           }
           const {
-            clientX: x,
-            clientY: y,
+            clientX: x2,
+            clientY: y2,
             pointerId
           } = e;
           if (pointerId !== this.#dragPointerId) {
             stopEvent(e);
             return;
           }
-          const [tx, ty] = this.screenToPageTranslation(x - this.#prevDragX, y - this.#prevDragY);
-          this.#prevDragX = x;
-          this.#prevDragY = y;
+          const [tx, ty] = this.screenToPageTranslation(x2 - this.#prevDragX, y2 - this.#prevDragY);
+          this.#prevDragX = x2;
+          this.#prevDragY = y2;
           this._uiManager.dragSelectedEditors(tx, ty);
         }, opts);
         window.addEventListener("touchmove", stopEvent, opts);
@@ -5947,10 +5947,10 @@ var ReadingRoomPlugin = (() => {
         this.parent?.moveEditorInDOM(this);
       }, 0);
     }
-    _setParentAndPosition(parent, x, y) {
+    _setParentAndPosition(parent, x2, y2) {
       parent.changeParent(this);
-      this.x = x;
-      this.y = y;
+      this.x = x2;
+      this.y = y2;
       this.fixAndSetPosition();
       this._onTranslated();
     }
@@ -5960,19 +5960,19 @@ var ReadingRoomPlugin = (() => {
       const [pageX, pageY] = this.pageTranslation;
       const shiftX = tx / scale;
       const shiftY = ty / scale;
-      const x = this.x * pageWidth;
-      const y = this.y * pageHeight;
+      const x2 = this.x * pageWidth;
+      const y2 = this.y * pageHeight;
       const width = this.width * pageWidth;
       const height = this.height * pageHeight;
       switch (rotation) {
         case 0:
-          return [x + shiftX + pageX, pageHeight - y - shiftY - height + pageY, x + shiftX + width + pageX, pageHeight - y - shiftY + pageY];
+          return [x2 + shiftX + pageX, pageHeight - y2 - shiftY - height + pageY, x2 + shiftX + width + pageX, pageHeight - y2 - shiftY + pageY];
         case 90:
-          return [x + shiftY + pageX, pageHeight - y + shiftX + pageY, x + shiftY + height + pageX, pageHeight - y + shiftX + width + pageY];
+          return [x2 + shiftY + pageX, pageHeight - y2 + shiftX + pageY, x2 + shiftY + height + pageX, pageHeight - y2 + shiftX + width + pageY];
         case 180:
-          return [x - shiftX - width + pageX, pageHeight - y + shiftY + pageY, x - shiftX + pageX, pageHeight - y + shiftY + height + pageY];
+          return [x2 - shiftX - width + pageX, pageHeight - y2 + shiftY + pageY, x2 - shiftX + pageX, pageHeight - y2 + shiftY + height + pageY];
         case 270:
-          return [x - shiftY - height + pageX, pageHeight - y - shiftX - width + pageY, x - shiftY + pageX, pageHeight - y - shiftX + pageY];
+          return [x2 - shiftY - height + pageX, pageHeight - y2 - shiftX - width + pageY, x2 - shiftY + pageX, pageHeight - y2 - shiftX + pageY];
         default:
           throw new Error("Invalid rotation");
       }
@@ -6127,9 +6127,9 @@ var ReadingRoomPlugin = (() => {
       editor.#accessibilityData = data.accessibilityData;
       editor._isCopy = data.isCopy || false;
       const [pageWidth, pageHeight] = editor.pageDimensions;
-      const [x, y, width, height] = editor.getRectInCurrentCoords(data.rect, pageHeight);
-      editor.x = x / pageWidth;
-      editor.y = y / pageHeight;
+      const [x2, y2, width, height] = editor.getRectInCurrentCoords(data.rect, pageHeight);
+      editor.x = x2 / pageWidth;
+      editor.y = y2 / pageHeight;
       editor.width = width / pageWidth;
       editor.height = height / pageHeight;
       return editor;
@@ -6295,13 +6295,13 @@ var ReadingRoomPlugin = (() => {
         div.tabIndex = value;
       }
     }
-    _resizeWithKeyboard(x, y) {
+    _resizeWithKeyboard(x2, y2) {
       if (!this.#isResizerEnabledForKeyboard) {
         return;
       }
       this.#resizerPointermove(this.#focusedResizerName, {
-        deltaX: x,
-        deltaY: y,
+        deltaX: x2,
+        deltaY: y2,
         fromKeyboard: true
       });
     }
@@ -6642,7 +6642,7 @@ var ReadingRoomPlugin = (() => {
       if (this.#storage.size === 0) {
         this.resetModified();
       }
-      if (this.#storage.values().some((v) => v instanceof AnnotationEditor)) {
+      if (this.#storage.values().some((v2) => v2 instanceof AnnotationEditor)) {
         return;
       }
       this.onAnnotationEditor?.(null);
@@ -7105,7 +7105,7 @@ var ReadingRoomPlugin = (() => {
     inheritPendingDependenciesAsFutureForcedDependencies() {
       return this;
     }
-    recordCharacterBBox(idx, ctx, font, scale = 1, x = 0, y = 0, getMeasure) {
+    recordCharacterBBox(idx, ctx, font, scale = 1, x2 = 0, y2 = 0, getMeasure) {
       return this;
     }
     getSimpleIndex(dependencyName) {
@@ -7261,7 +7261,7 @@ var ReadingRoomPlugin = (() => {
       this.#bboxTracker.recordBBox(idx, ctx, minX, maxX, minY, maxY);
       return this;
     }
-    recordCharacterBBox(idx, ctx, font, scale = 1, x = 0, y = 0, getMeasure) {
+    recordCharacterBBox(idx, ctx, font, scale = 1, x2 = 0, y2 = 0, getMeasure) {
       const fontBBox = font.bbox;
       let isBBoxTrustworthy;
       let computedBBox;
@@ -7270,8 +7270,8 @@ var ReadingRoomPlugin = (() => {
         if (isBBoxTrustworthy !== false) {
           computedBBox = [0, 0, 0, 0];
           Util.axialAlignedBoundingBox(fontBBox, font.fontMatrix, computedBBox);
-          if (scale !== 1 || x !== 0 || y !== 0) {
-            Util.scaleMinMax([scale, 0, 0, -scale, x, y], computedBBox);
+          if (scale !== 1 || x2 !== 0 || y2 !== 0) {
+            Util.scaleMinMax([scale, 0, 0, -scale, x2, y2], computedBBox);
           }
           if (isBBoxTrustworthy) {
             return this.recordBBox(idx, ctx, computedBBox[0], computedBBox[2], computedBBox[1], computedBBox[3]);
@@ -7283,13 +7283,13 @@ var ReadingRoomPlugin = (() => {
       }
       const measure = getMeasure();
       if (fontBBox && computedBBox && isBBoxTrustworthy === void 0) {
-        isBBoxTrustworthy = computedBBox[0] <= x - measure.actualBoundingBoxLeft && computedBBox[2] >= x + measure.actualBoundingBoxRight && computedBBox[1] <= y - measure.actualBoundingBoxAscent && computedBBox[3] >= y + measure.actualBoundingBoxDescent;
+        isBBoxTrustworthy = computedBBox[0] <= x2 - measure.actualBoundingBoxLeft && computedBBox[2] >= x2 + measure.actualBoundingBoxRight && computedBBox[1] <= y2 - measure.actualBoundingBoxAscent && computedBBox[3] >= y2 + measure.actualBoundingBoxDescent;
         this.#fontBBoxTrustworthy.set(font, isBBoxTrustworthy);
         if (isBBoxTrustworthy) {
           return this.recordBBox(idx, ctx, computedBBox[0], computedBBox[2], computedBBox[1], computedBBox[3]);
         }
       }
-      return this.recordBBox(idx, ctx, x - measure.actualBoundingBoxLeft, x + measure.actualBoundingBoxRight, y - measure.actualBoundingBoxAscent, y + measure.actualBoundingBoxDescent);
+      return this.recordBBox(idx, ctx, x2 - measure.actualBoundingBoxLeft, x2 + measure.actualBoundingBoxRight, y2 - measure.actualBoundingBoxAscent, y2 + measure.actualBoundingBoxDescent);
     }
     recordFullPageBBox(idx) {
       this.#bboxTracker.recordFullPageBBox(idx);
@@ -7468,9 +7468,9 @@ var ReadingRoomPlugin = (() => {
       }
       return this;
     }
-    recordCharacterBBox(idx, ctx, font, scale, x, y, getMeasure) {
+    recordCharacterBBox(idx, ctx, font, scale, x2, y2, getMeasure) {
       if (!this.#ignoreBBoxes) {
-        this.#dependencyTracker.recordCharacterBBox(this.#opIdx, ctx, font, scale, x, y, getMeasure);
+        this.#dependencyTracker.recordCharacterBBox(this.#opIdx, ctx, font, scale, x2, y2, getMeasure);
       }
       return this;
     }
@@ -7563,8 +7563,8 @@ var ReadingRoomPlugin = (() => {
             const cosSin = cos * sin;
             const denom = cos2 - sin2;
             const a = (finalBBoxHeight * cos2 - finalBBoxWidth * cosSin) / denom;
-            const b = (finalBBoxHeight * cosSin - finalBBoxWidth * sin2) / denom;
-            coords = [minX + b, minY, minX, minY + a, maxX, maxY - a];
+            const b2 = (finalBBoxHeight * cosSin - finalBBoxWidth * sin2) / denom;
+            coords = [minX + b2, minY, minX, minY + a, maxX, maxY - a];
           }
         }
       }
@@ -8314,8 +8314,8 @@ var ReadingRoomPlugin = (() => {
     }
     throw new Error(`Invalid factory url: "${val}" must include trailing slash.`);
   }
-  var isRefProxy = (v) => typeof v === "object" && Number.isInteger(v?.num) && v.num >= 0 && Number.isInteger(v?.gen) && v.gen >= 0;
-  var isNameProxy = (v) => typeof v === "object" && typeof v?.name === "string";
+  var isRefProxy = (v2) => typeof v2 === "object" && Number.isInteger(v2?.num) && v2.num >= 0 && Number.isInteger(v2?.gen) && v2.gen >= 0;
+  var isNameProxy = (v2) => typeof v2 === "object" && typeof v2?.name === "string";
   var isValidExplicitDest = _isValidExplicitDest.bind(null, isRefProxy, isNameProxy);
   var LoopbackPort = class {
     #listeners = /* @__PURE__ */ new Map();
@@ -9012,8 +9012,8 @@ var ReadingRoomPlugin = (() => {
       }
       const map = new Array(256);
       for (let i = 0; i <= 255; i++) {
-        const x = i / 255;
-        map[i] = x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4;
+        const x2 = i / 255;
+        map[i] = x2 <= 0.03928 ? x2 / 12.92 : ((x2 + 0.055) / 1.055) ** 2.4;
       }
       const table = map.join(",");
       const id = `g_${this.#docId}_hcm_filter`;
@@ -9118,12 +9118,12 @@ var ReadingRoomPlugin = (() => {
         const newStep = (bg - fg) / (255 * n);
         let prev = 0;
         for (let i = 0; i <= n; i++) {
-          const k = Math.round(fgGray + i * step);
+          const k2 = Math.round(fgGray + i * step);
           const value = newStart + i * newStep;
-          for (let j = prev; j <= k; j++) {
-            arr[j] = value;
+          for (let j2 = prev; j2 <= k2; j2++) {
+            arr[j2] = value;
           }
-          prev = k + 1;
+          prev = k2 + 1;
         }
         for (let i = prev; i < 256; i++) {
           arr[i] = arr[prev - 1];
@@ -9620,53 +9620,53 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     const minY = Math.round(y1), maxY = Math.round(y3);
     let xa, car, cag, cab;
     let xb, cbr, cbg, cbb;
-    for (let y = minY; y <= maxY; y++) {
-      if (y < y2) {
-        const k2 = y < y1 ? 0 : (y1 - y) / (y1 - y2);
-        xa = x1 - (x1 - x2) * k2;
-        car = c1r - (c1r - c2r) * k2;
-        cag = c1g - (c1g - c2g) * k2;
-        cab = c1b - (c1b - c2b) * k2;
+    for (let y4 = minY; y4 <= maxY; y4++) {
+      if (y4 < y2) {
+        const k3 = y4 < y1 ? 0 : (y1 - y4) / (y1 - y2);
+        xa = x1 - (x1 - x2) * k3;
+        car = c1r - (c1r - c2r) * k3;
+        cag = c1g - (c1g - c2g) * k3;
+        cab = c1b - (c1b - c2b) * k3;
       } else {
-        let k2;
-        if (y > y3) {
-          k2 = 1;
+        let k3;
+        if (y4 > y3) {
+          k3 = 1;
         } else if (y2 === y3) {
-          k2 = 0;
+          k3 = 0;
         } else {
-          k2 = (y2 - y) / (y2 - y3);
+          k3 = (y2 - y4) / (y2 - y3);
         }
-        xa = x2 - (x2 - x3) * k2;
-        car = c2r - (c2r - c3r) * k2;
-        cag = c2g - (c2g - c3g) * k2;
-        cab = c2b - (c2b - c3b) * k2;
+        xa = x2 - (x2 - x3) * k3;
+        car = c2r - (c2r - c3r) * k3;
+        cag = c2g - (c2g - c3g) * k3;
+        cab = c2b - (c2b - c3b) * k3;
       }
-      let k;
-      if (y < y1) {
-        k = 0;
-      } else if (y > y3) {
-        k = 1;
+      let k2;
+      if (y4 < y1) {
+        k2 = 0;
+      } else if (y4 > y3) {
+        k2 = 1;
       } else {
-        k = (y1 - y) / (y1 - y3);
+        k2 = (y1 - y4) / (y1 - y3);
       }
-      xb = x1 - (x1 - x3) * k;
-      cbr = c1r - (c1r - c3r) * k;
-      cbg = c1g - (c1g - c3g) * k;
-      cbb = c1b - (c1b - c3b) * k;
+      xb = x1 - (x1 - x3) * k2;
+      cbr = c1r - (c1r - c3r) * k2;
+      cbg = c1g - (c1g - c3g) * k2;
+      cbb = c1b - (c1b - c3b) * k2;
       const x1_ = Math.round(Math.min(xa, xb));
       const x2_ = Math.round(Math.max(xa, xb));
-      let j = rowSize * y + x1_ * 4;
-      for (let x = x1_; x <= x2_; x++) {
-        k = (xa - x) / (xa - xb);
-        if (k < 0) {
-          k = 0;
-        } else if (k > 1) {
-          k = 1;
+      let j2 = rowSize * y4 + x1_ * 4;
+      for (let x4 = x1_; x4 <= x2_; x4++) {
+        k2 = (xa - x4) / (xa - xb);
+        if (k2 < 0) {
+          k2 = 0;
+        } else if (k2 > 1) {
+          k2 = 1;
         }
-        bytes[j++] = car - (car - cbr) * k | 0;
-        bytes[j++] = cag - (cag - cbg) * k | 0;
-        bytes[j++] = cab - (cab - cbb) * k | 0;
-        bytes[j++] = 255;
+        bytes[j2++] = car - (car - cbr) * k2 | 0;
+        bytes[j2++] = cag - (cag - cbg) * k2 | 0;
+        bytes[j2++] = cab - (cab - cbb) * k2 | 0;
+        bytes[j2++] = 255;
       }
     }
   }
@@ -9849,7 +9849,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       Util.singularValueDecompose2dScale(this.baseTransform, scale);
       return [matrixScaleX * scale[0], matrixScaleY * scale[1]];
     }
-    drawPattern(owner, path, useEOFill = false, [n, m], opIdx) {
+    drawPattern(owner, path, useEOFill = false, [n, m2], opIdx) {
       const [x0, y0, x1, y1] = this.bbox;
       const dependencyTracker = owner.dependencyTracker;
       if (dependencyTracker) {
@@ -9862,7 +9862,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         owner.ctx.clip(path);
       }
       owner.ctx.setTransform(...this.patternBaseMatrix);
-      owner.ctx.translate(n * this.xstep, m * this.ystep);
+      owner.ctx.translate(n * this.xstep, m2 * this.ystep);
       if (this.needsIsolation || owner.ctx.globalAlpha !== 1 || owner.ctx.globalCompositeOperation !== "source-over" || owner.inSMaskMode) {
         const bboxWidth = x1 - x0;
         const bboxHeight = y1 - y0;
@@ -9928,8 +9928,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         const ii = redrawHorizontally ? Math.floor(width / xstep) : 0;
         const jj = redrawVertically ? Math.floor(height / ystep) : 0;
         for (let i = 0; i <= ii; i++) {
-          for (let j = 0; j <= jj; j++) {
-            tmpCtx2.drawImage(image, xSize * i, ySize * j, xSize, ySize, 0, 0, xSize, ySize);
+          for (let j2 = 0; j2 <= jj; j2++) {
+            tmpCtx2.drawImage(image, xSize * i, ySize * j2, xSize, ySize, 0, 0, xSize, ySize);
           }
         }
         owner.canvasFactory.destroy(tmpCanvas);
@@ -10041,8 +10041,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         continue;
       }
       const elem = srcPos < srcLength ? src[srcPos++] : 255;
-      for (let j = 0; j < widthRemainder; ++j, ++destPos) {
-        dest[destPos] = zeroMapping ^ -(elem >> 7 - j & 1) & xorMask;
+      for (let j2 = 0; j2 < widthRemainder; ++j2, ++destPos) {
+        dest[destPos] = zeroMapping ^ -(elem >> 7 - j2 & 1) & xorMask;
       }
     }
     return {
@@ -10102,25 +10102,25 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       destCtx.restore();
       this.__originalRestore();
     };
-    ctx.translate = function(x, y) {
-      destCtx.translate(x, y);
-      this.__originalTranslate(x, y);
+    ctx.translate = function(x2, y2) {
+      destCtx.translate(x2, y2);
+      this.__originalTranslate(x2, y2);
     };
-    ctx.scale = function(x, y) {
-      destCtx.scale(x, y);
-      this.__originalScale(x, y);
+    ctx.scale = function(x2, y2) {
+      destCtx.scale(x2, y2);
+      this.__originalScale(x2, y2);
     };
-    ctx.transform = function(a, b, c, d, e, f) {
-      destCtx.transform(a, b, c, d, e, f);
-      this.__originalTransform(a, b, c, d, e, f);
+    ctx.transform = function(a, b2, c, d, e, f) {
+      destCtx.transform(a, b2, c, d, e, f);
+      this.__originalTransform(a, b2, c, d, e, f);
     };
-    ctx.setTransform = function(a, b, c, d, e, f) {
-      if (b === void 0) {
+    ctx.setTransform = function(a, b2, c, d, e, f) {
+      if (b2 === void 0) {
         destCtx.setTransform(a);
         this.__originalSetTransform(a);
       } else {
-        destCtx.setTransform(a, b, c, d, e, f);
-        this.__originalSetTransform(a, b, c, d, e, f);
+        destCtx.setTransform(a, b2, c, d, e, f);
+        this.__originalSetTransform(a, b2, c, d, e, f);
       }
     };
     ctx.resetTransform = function() {
@@ -10135,21 +10135,21 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       destCtx.clip(rule);
       this.__originalClip(rule);
     };
-    ctx.moveTo = function(x, y) {
-      destCtx.moveTo(x, y);
-      this.__originalMoveTo(x, y);
+    ctx.moveTo = function(x2, y2) {
+      destCtx.moveTo(x2, y2);
+      this.__originalMoveTo(x2, y2);
     };
-    ctx.lineTo = function(x, y) {
-      destCtx.lineTo(x, y);
-      this.__originalLineTo(x, y);
+    ctx.lineTo = function(x2, y2) {
+      destCtx.lineTo(x2, y2);
+      this.__originalLineTo(x2, y2);
     };
-    ctx.bezierCurveTo = function(cp1x, cp1y, cp2x, cp2y, x, y) {
-      destCtx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
-      this.__originalBezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
+    ctx.bezierCurveTo = function(cp1x, cp1y, cp2x, cp2y, x2, y2) {
+      destCtx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x2, y2);
+      this.__originalBezierCurveTo(cp1x, cp1y, cp2x, cp2y, x2, y2);
     };
-    ctx.rect = function(x, y, width, height) {
-      destCtx.rect(x, y, width, height);
-      this.__originalRect(x, y, width, height);
+    ctx.rect = function(x2, y2, width, height) {
+      destCtx.rect(x2, y2, width, height);
+      this.__originalRect(x2, y2, width, height);
     };
     ctx.closePath = function() {
       destCtx.closePath();
@@ -10161,8 +10161,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     };
   }
   function drawImageAtIntegerCoords(ctx, srcImg, srcX, srcY, srcW, srcH, destX, destY, destW, destH) {
-    const [a, b, c, d, tx, ty] = getCurrentTransform(ctx);
-    if (b === 0 && c === 0) {
+    const [a, b2, c, d, tx, ty] = getCurrentTransform(ctx);
+    if (b2 === 0 && c === 0) {
       const tlX = destX * a + tx;
       const rTlX = Math.round(tlX);
       const tlY = destY * d + ty;
@@ -10173,25 +10173,25 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       const rHeight = Math.abs(Math.round(brY) - rTlY) || 1;
       ctx.setTransform(Math.sign(a), 0, 0, Math.sign(d), rTlX, rTlY);
       ctx.drawImage(srcImg, srcX, srcY, srcW, srcH, 0, 0, rWidth, rHeight);
-      ctx.setTransform(a, b, c, d, tx, ty);
+      ctx.setTransform(a, b2, c, d, tx, ty);
       return [rWidth, rHeight];
     }
     if (a === 0 && d === 0) {
       const tlX = destY * c + tx;
       const rTlX = Math.round(tlX);
-      const tlY = destX * b + ty;
+      const tlY = destX * b2 + ty;
       const rTlY = Math.round(tlY);
       const brX = (destY + destH) * c + tx;
       const rWidth = Math.abs(Math.round(brX) - rTlX) || 1;
-      const brY = (destX + destW) * b + ty;
+      const brY = (destX + destW) * b2 + ty;
       const rHeight = Math.abs(Math.round(brY) - rTlY) || 1;
-      ctx.setTransform(0, Math.sign(b), Math.sign(c), 0, rTlX, rTlY);
+      ctx.setTransform(0, Math.sign(b2), Math.sign(c), 0, rTlX, rTlY);
       ctx.drawImage(srcImg, srcX, srcY, srcW, srcH, 0, 0, rHeight, rWidth);
-      ctx.setTransform(a, b, c, d, tx, ty);
+      ctx.setTransform(a, b2, c, d, tx, ty);
       return [rHeight, rWidth];
     }
     ctx.drawImage(srcImg, srcX, srcY, srcW, srcH, destX, destY, destW, destH);
-    const scaleX = Math.hypot(a, b);
+    const scaleX = Math.hypot(a, b2);
     const scaleY = Math.hypot(c, d);
     return [scaleX * destW, scaleY * destH];
   }
@@ -10277,7 +10277,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     let srcPos = 0, destPos;
     const src = imgData.data;
     const dest = chunkImgData.data;
-    let i, j, thisChunkHeight, elemsInThisChunk;
+    let i, j2, thisChunkHeight, elemsInThisChunk;
     if (imgData.kind === ImageKind.GRAYSCALE_1BPP) {
       const srcLength = src.byteLength;
       const dest32 = new Uint32Array(dest.buffer, 0, dest.byteLength >> 2);
@@ -10288,14 +10288,14 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       for (i = 0; i < totalChunks; i++) {
         thisChunkHeight = i < fullChunks ? FULL_CHUNK_HEIGHT : partialChunkHeight;
         destPos = 0;
-        for (j = 0; j < thisChunkHeight; j++) {
+        for (j2 = 0; j2 < thisChunkHeight; j2++) {
           const srcDiff = srcLength - srcPos;
-          let k = 0;
+          let k2 = 0;
           const kEnd = srcDiff > fullSrcDiff ? width : srcDiff * 8 - 7;
           const kEndUnrolled = kEnd & ~7;
           let mask = 0;
           let srcByte = 0;
-          for (; k < kEndUnrolled; k += 8) {
+          for (; k2 < kEndUnrolled; k2 += 8) {
             srcByte = src[srcPos++];
             dest32[destPos++] = srcByte & 128 ? white : black;
             dest32[destPos++] = srcByte & 64 ? white : black;
@@ -10306,7 +10306,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             dest32[destPos++] = srcByte & 2 ? white : black;
             dest32[destPos++] = srcByte & 1 ? white : black;
           }
-          for (; k < kEnd; k++) {
+          for (; k2 < kEnd; k2++) {
             if (mask === 0) {
               srcByte = src[srcPos++];
               mask = 128;
@@ -10321,18 +10321,18 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         ctx.putImageData(chunkImgData, 0, i * FULL_CHUNK_HEIGHT);
       }
     } else if (imgData.kind === ImageKind.RGBA_32BPP) {
-      j = 0;
+      j2 = 0;
       elemsInThisChunk = width * FULL_CHUNK_HEIGHT * 4;
       for (i = 0; i < fullChunks; i++) {
         dest.set(src.subarray(srcPos, srcPos + elemsInThisChunk));
         srcPos += elemsInThisChunk;
-        ctx.putImageData(chunkImgData, 0, j);
-        j += FULL_CHUNK_HEIGHT;
+        ctx.putImageData(chunkImgData, 0, j2);
+        j2 += FULL_CHUNK_HEIGHT;
       }
       if (i < totalChunks) {
         elemsInThisChunk = width * partialChunkHeight * 4;
         dest.set(src.subarray(srcPos, srcPos + elemsInThisChunk));
-        ctx.putImageData(chunkImgData, 0, j);
+        ctx.putImageData(chunkImgData, 0, j2);
       }
     } else if (imgData.kind === ImageKind.RGB_24BPP) {
       thisChunkHeight = FULL_CHUNK_HEIGHT;
@@ -10343,7 +10343,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           elemsInThisChunk = width * thisChunkHeight;
         }
         destPos = 0;
-        for (j = elemsInThisChunk; j--; ) {
+        for (j2 = elemsInThisChunk; j2--; ) {
           dest[destPos++] = src[srcPos++];
           dest[destPos++] = src[srcPos++];
           dest[destPos++] = src[srcPos++];
@@ -11062,9 +11062,9 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       this._cachedScaleForStroking[0] = -1;
       this._cachedGetSinglePixelWidth = null;
     }
-    transform(opIdx, a, b, c, d, e, f) {
+    transform(opIdx, a, b2, c, d, e, f) {
       this.dependencyTracker?.recordIncrementalData("transform", opIdx);
-      this.ctx.transform(a, b, c, d, e, f);
+      this.ctx.transform(a, b2, c, d, e, f);
       this._cachedScaleForStroking[0] = -1;
       this._cachedGetSinglePixelWidth = null;
     }
@@ -11235,15 +11235,15 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         const invTransf = ctx.getTransform().invertSelf();
         for (const {
           transform,
-          x,
-          y,
+          x: x2,
+          y: y2,
           fontSize,
           path
         } of paths) {
           if (!path) {
             continue;
           }
-          newPath.addPath(path, new DOMMatrix(transform).preMultiplySelf(invTransf).translate(x, y).scale(fontSize, -fontSize));
+          newPath.addPath(path, new DOMMatrix(transform).preMultiplySelf(invTransf).translate(x2, y2).scale(fontSize, -fontSize));
         }
         ctx.clip(newPath);
       }
@@ -11313,14 +11313,14 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       this.dependencyTracker?.recordSimpleData("textRise", opIdx);
       this.current.textRise = rise;
     }
-    moveText(opIdx, x, y) {
+    moveText(opIdx, x2, y2) {
       this.dependencyTracker?.resetIncrementalData("sameLineText").recordIncrementalData("moveText", opIdx);
-      this.current.x = this.current.lineX += x;
-      this.current.y = this.current.lineY += y;
+      this.current.x = this.current.lineX += x2;
+      this.current.y = this.current.lineY += y2;
     }
-    setLeadingMoveText(opIdx, x, y) {
-      this.setLeading(opIdx, -y);
-      this.moveText(opIdx, x, y);
+    setLeadingMoveText(opIdx, x2, y2) {
+      this.setLeading(opIdx, -y2);
+      this.moveText(opIdx, x2, y2);
     }
     setTextMatrix(opIdx, matrix) {
       this.dependencyTracker?.resetIncrementalData("sameLineText").recordSimpleData("textMatrix", opIdx);
@@ -11341,7 +11341,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       newPath.addPath(path, new DOMMatrix(transform).invertSelf().multiplySelf(currentTransform));
       return newPath;
     }
-    paintChar(opIdx, character, x, y, patternFillTransform, patternStrokeTransform) {
+    paintChar(opIdx, character, x2, y2, patternFillTransform, patternStrokeTransform) {
       const ctx = this.ctx;
       const current = this.current;
       const font = current.font;
@@ -11357,7 +11357,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       }
       if (path && (font.disableFontFace || patternFill || patternStroke)) {
         ctx.save();
-        ctx.translate(x, y);
+        ctx.translate(x2, y2);
         ctx.scale(fontSize, -fontSize);
         this.dependencyTracker?.recordCharacterBBox(opIdx, ctx, font);
         let currentTransform;
@@ -11377,12 +11377,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             ctx.setTransform(...patternStrokeTransform);
             const {
               a,
-              b,
+              b: b2,
               c,
               d
             } = currentTransform;
             const invPatternTransform = Util.inverseTransform(patternStrokeTransform);
-            const transf = Util.transform([a, b, c, d, 0, 0], invPatternTransform);
+            const transf = Util.transform([a, b2, c, d, 0, 0], invPatternTransform);
             Util.singularValueDecompose2dScale(transf, XY);
             ctx.lineWidth *= Math.max(XY[0], XY[1]) / fontSize;
             ctx.stroke(this.#getScaledPath(path, currentTransform, patternStrokeTransform));
@@ -11394,26 +11394,26 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         ctx.restore();
       } else {
         if (fillStrokeMode === TextRenderingMode.FILL || fillStrokeMode === TextRenderingMode.FILL_STROKE) {
-          ctx.fillText(character, x, y);
-          this.dependencyTracker?.recordCharacterBBox(opIdx, ctx, font, fontSize, x, y, () => ctx.measureText(character));
+          ctx.fillText(character, x2, y2);
+          this.dependencyTracker?.recordCharacterBBox(opIdx, ctx, font, fontSize, x2, y2, () => ctx.measureText(character));
         }
         if (fillStrokeMode === TextRenderingMode.STROKE || fillStrokeMode === TextRenderingMode.FILL_STROKE) {
           if (this.dependencyTracker) {
-            this.dependencyTracker?.recordCharacterBBox(opIdx, ctx, font, fontSize, x, y, () => ctx.measureText(character)).recordDependencies(opIdx, Dependencies.stroke);
+            this.dependencyTracker?.recordCharacterBBox(opIdx, ctx, font, fontSize, x2, y2, () => ctx.measureText(character)).recordDependencies(opIdx, Dependencies.stroke);
           }
-          ctx.strokeText(character, x, y);
+          ctx.strokeText(character, x2, y2);
         }
       }
       if (isAddToPathSet) {
         const paths = this.pendingTextPaths ||= [];
         paths.push({
           transform: getCurrentTransform(ctx),
-          x,
-          y,
+          x: x2,
+          y: y2,
           fontSize,
           path
         });
-        this.dependencyTracker?.recordCharacterBBox(opIdx, ctx, font, fontSize, x, y);
+        this.dependencyTracker?.recordCharacterBBox(opIdx, ctx, font, fontSize, x2, y2);
       }
     }
     get isFontSubpixelAAEnabled() {
@@ -11523,11 +11523,11 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         this.compose();
         return void 0;
       }
-      let x = 0, i;
+      let x2 = 0, i;
       for (i = 0; i < glyphsLength; ++i) {
         const glyph = glyphs[i];
         if (typeof glyph === "number") {
-          x += spacingDir * glyph * fontSize / 1e3;
+          x2 += spacingDir * glyph * fontSize / 1e3;
           continue;
         }
         let restoreNeeded = false;
@@ -11542,9 +11542,9 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           const vy = vmetric[2] * widthAdvanceScale;
           width = vmetric ? -vmetric[0] : width;
           scaledX = vx / fontSizeScale;
-          scaledY = (x + vy) / fontSizeScale;
+          scaledY = (x2 + vy) / fontSizeScale;
         } else {
-          scaledX = x / fontSizeScale;
+          scaledX = x2 / fontSizeScale;
           scaledY = 0;
         }
         let measure;
@@ -11577,15 +11577,15 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           }
         }
         const charWidth = vertical ? width * widthAdvanceScale - spacing * fontDirection : width * widthAdvanceScale + spacing * fontDirection;
-        x += charWidth;
+        x2 += charWidth;
         if (restoreNeeded) {
           ctx.restore();
         }
       }
       if (vertical) {
-        current.y -= x;
+        current.y -= x2;
       } else {
-        current.x += x * textHScale;
+        current.x += x2 * textHScale;
       }
       ctx.restore();
       this.compose();
@@ -12176,9 +12176,9 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       if (imgData.bitmap) {
         imgToPaint = imgData.bitmap;
       } else {
-        const w = imgData.width;
+        const w2 = imgData.width;
         const h = imgData.height;
-        const tmpCanvas = this.canvasFactory.create(w, h);
+        const tmpCanvas = this.canvasFactory.create(w2, h);
         putBinaryImageData(tmpCanvas.context, imgData);
         imgToPaint = this.applyTransferMapsToCanvas(tmpCanvas.context);
         inlineImgCanvas = tmpCanvas;
@@ -12264,13 +12264,13 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     }
     getSinglePixelWidth() {
       if (!this._cachedGetSinglePixelWidth) {
-        const m = getCurrentTransform(this.ctx);
-        if (m[1] === 0 && m[2] === 0) {
-          this._cachedGetSinglePixelWidth = 1 / Math.min(Math.abs(m[0]), Math.abs(m[3]));
+        const m2 = getCurrentTransform(this.ctx);
+        if (m2[1] === 0 && m2[2] === 0) {
+          this._cachedGetSinglePixelWidth = 1 / Math.min(Math.abs(m2[0]), Math.abs(m2[3]));
         } else {
-          const absDet = Math.abs(m[0] * m[3] - m[2] * m[1]);
-          const normX = Math.hypot(m[0], m[2]);
-          const normY = Math.hypot(m[1], m[3]);
+          const absDet = Math.abs(m2[0] * m2[3] - m2[2] * m2[1]);
+          const normX = Math.hypot(m2[0], m2[2]);
+          const normY = Math.hypot(m2[1], m2[3]);
           this._cachedGetSinglePixelWidth = Math.max(normX, normY) / absDet;
         }
       }
@@ -12283,12 +12283,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         } = this.current;
         const {
           a,
-          b,
+          b: b2,
           c,
           d
         } = this.ctx.getTransform();
         let scaleX, scaleY;
-        if (b === 0 && c === 0) {
+        if (b2 === 0 && c === 0) {
           const normX = Math.abs(a);
           const normY = Math.abs(d);
           if (normX === normY) {
@@ -12308,8 +12308,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             scaleY = scaledYLineWidth < 1 ? 1 / scaledYLineWidth : 1;
           }
         } else {
-          const absDet = Math.abs(a * d - b * c);
-          const normX = Math.hypot(a, b);
+          const absDet = Math.abs(a * d - b2 * c);
+          const normX = Math.hypot(a, b2);
           const normY = Math.hypot(c, d);
           if (lineWidth === 0) {
             scaleX = normY / absDet;
@@ -12349,7 +12349,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       newPath.addPath(path, SCALE_MATRIX);
       if (dashes.length > 0) {
         const scale = Math.max(scaleX, scaleY);
-        ctx.setLineDash(dashes.map((x) => x / scale));
+        ctx.setLineDash(dashes.map((x2) => x2 / scale));
         ctx.lineDashOffset /= scale;
       }
       ctx.lineWidth = lineWidth || 1;
@@ -13133,8 +13133,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       const fullRequestXhr = this._fullRequestXhr;
       stream._responseOrigin = getResponseOrigin(fullRequestXhr.responseURL);
       const rawResponseHeaders = fullRequestXhr.getAllResponseHeaders();
-      const responseHeaders = new Headers(rawResponseHeaders ? rawResponseHeaders.trimStart().replace(/[^\S ]+$/, "").split(/[\r\n]+/).map((x) => {
-        const [key, ...val] = x.split(": ");
+      const responseHeaders = new Headers(rawResponseHeaders ? rawResponseHeaders.trimStart().replace(/[^\S ]+$/, "").split(/[\r\n]+/).map((x2) => {
+        const [key, ...val] = x2.split(": ");
         return [key, val.join(": ")];
       }) : []);
       const {
@@ -13857,14 +13857,14 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         }
         const id = newPageNumberToId[i];
         const oldPositions = prevIdToPageNumber.get(id);
-        let j = idsIndices.get(id) || 0;
+        let j2 = idsIndices.get(id) || 0;
         if (deletedPageNumbers && oldPositions) {
-          while (j < oldPositions.length && deletedPageNumbers.has(oldPositions[j])) {
-            j++;
+          while (j2 < oldPositions.length && deletedPageNumbers.has(oldPositions[j2])) {
+            j2++;
           }
         }
-        prevPageNumbers[i] = oldPositions?.[j];
-        idsIndices.set(id, j + 1);
+        prevPageNumbers[i] = oldPositions?.[j2];
+        idsIndices.set(id, j2 + 1);
       }
     }
     hasBeenAltered() {
@@ -13893,7 +13893,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         includePages,
         pageIndices
       } of extractParams) {
-        includePages.sort((a, b) => a[0] - b[0]);
+        includePages.sort((a, b2) => a[0] - b2[0]);
         for (let i = 0, ii = includePages.length; i < ii; i++) {
           pageIndices.push(includePages[i][1]);
           includePages[i] = includePages[i][0];
@@ -13902,7 +13902,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       return extractParams;
     }
     extractPages(extractedPageNumbers) {
-      extractedPageNumbers = Array.from(extractedPageNumbers).sort((a, b) => a - b);
+      extractedPageNumbers = Array.from(extractedPageNumbers).sort((a, b2) => a - b2);
       const usedIds = /* @__PURE__ */ new Map();
       for (let i = 0, ii = extractedPageNumbers.length; i < ii; i++) {
         const id = this.getPageId(extractedPageNumbers[i]);
@@ -16392,8 +16392,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           if (!rgba) {
             return;
           }
-          const [r, g, b, op] = rgba;
-          const hex = Util.makeHexColor(r, g, b);
+          const [r, g2, b2, op] = rgba;
+          const hex = Util.makeHexColor(r, g2, b2);
           if (colorAndOpacityType !== void 0) {
             this.#uiManager.updateParams(colorAndOpacityType, {
               color: hex,
@@ -16439,29 +16439,29 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
   function makeColorComp(n) {
     return Math.floor(MathClamp(n, 0, 1) * 255).toString(16).padStart(2, "0");
   }
-  function scaleAndClamp(x) {
-    return MathClamp(x, 0, 1) * 255;
+  function scaleAndClamp(x2) {
+    return MathClamp(x2, 0, 1) * 255;
   }
   var ColorConverters = class {
-    static CMYK_G([c, y, m, k]) {
-      return ["G", 1 - Math.min(1, 0.3 * c + 0.59 * m + 0.11 * y + k)];
+    static CMYK_G([c, y2, m2, k2]) {
+      return ["G", 1 - Math.min(1, 0.3 * c + 0.59 * m2 + 0.11 * y2 + k2)];
     }
-    static G_CMYK([g]) {
-      return ["CMYK", 0, 0, 0, 1 - g];
+    static G_CMYK([g2]) {
+      return ["CMYK", 0, 0, 0, 1 - g2];
     }
-    static G_RGB([g]) {
-      return ["RGB", g, g, g];
+    static G_RGB([g2]) {
+      return ["RGB", g2, g2, g2];
     }
-    static G_rgb([g]) {
-      g = scaleAndClamp(g);
-      return [g, g, g];
+    static G_rgb([g2]) {
+      g2 = scaleAndClamp(g2);
+      return [g2, g2, g2];
     }
-    static G_HTML([g]) {
-      const G = makeColorComp(g);
-      return `#${G}${G}${G}`;
+    static G_HTML([g2]) {
+      const G2 = makeColorComp(g2);
+      return `#${G2}${G2}${G2}`;
     }
-    static RGB_G([r, g, b]) {
-      return ["G", 0.3 * r + 0.59 * g + 0.11 * b];
+    static RGB_G([r, g2, b2]) {
+      return ["G", 0.3 * r + 0.59 * g2 + 0.11 * b2];
     }
     static RGB_rgb(color) {
       return color.map(scaleAndClamp);
@@ -16475,22 +16475,22 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     static T_rgb() {
       return [null];
     }
-    static CMYK_RGB([c, y, m, k]) {
-      return ["RGB", 1 - Math.min(1, c + k), 1 - Math.min(1, m + k), 1 - Math.min(1, y + k)];
+    static CMYK_RGB([c, y2, m2, k2]) {
+      return ["RGB", 1 - Math.min(1, c + k2), 1 - Math.min(1, m2 + k2), 1 - Math.min(1, y2 + k2)];
     }
-    static CMYK_rgb([c, y, m, k]) {
-      return [scaleAndClamp(1 - Math.min(1, c + k)), scaleAndClamp(1 - Math.min(1, m + k)), scaleAndClamp(1 - Math.min(1, y + k))];
+    static CMYK_rgb([c, y2, m2, k2]) {
+      return [scaleAndClamp(1 - Math.min(1, c + k2)), scaleAndClamp(1 - Math.min(1, m2 + k2)), scaleAndClamp(1 - Math.min(1, y2 + k2))];
     }
     static CMYK_HTML(components) {
       const rgb = this.CMYK_RGB(components).slice(1);
       return this.RGB_HTML(rgb);
     }
-    static RGB_CMYK([r, g, b]) {
+    static RGB_CMYK([r, g2, b2]) {
       const c = 1 - r;
-      const m = 1 - g;
-      const y = 1 - b;
-      const k = Math.min(c, m, y);
-      return ["CMYK", c, m, y, k];
+      const m2 = 1 - g2;
+      const y2 = 1 - b2;
+      const k2 = Math.min(c, m2, y2);
+      return ["CMYK", c, m2, y2, k2];
     }
   };
   var BaseSVGFactory = class {
@@ -17040,7 +17040,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       if (!quadPoints) {
         return;
       }
-      const [rectBlX, rectBlY, rectTrX, rectTrY] = this.data.rect.map((x) => Math.fround(x));
+      const [rectBlX, rectBlY, rectTrX, rectTrY] = this.data.rect.map((x2) => Math.fround(x2));
       if (quadPoints.length === 8) {
         const [trX, trY, blX, blY] = quadPoints.subarray(2, 6);
         if (rectTrX === trX && rectTrY === trY && rectBlX === blX && rectBlY === blY) {
@@ -17083,16 +17083,16 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         const blX = quadPoints[i + 2];
         const blY = quadPoints[i + 3];
         const rect = svgFactory.createElement("rect");
-        const x = (blX - rectBlX) / width;
-        const y = (rectTrY - trY) / height;
+        const x2 = (blX - rectBlX) / width;
+        const y2 = (rectTrY - trY) / height;
         const rectWidth = (trX - blX) / width;
         const rectHeight = (trY - blY) / height;
-        rect.setAttribute("x", x);
-        rect.setAttribute("y", y);
+        rect.setAttribute("x", x2);
+        rect.setAttribute("y", y2);
         rect.setAttribute("width", rectWidth);
         rect.setAttribute("height", rectHeight);
         clipPath.append(rect);
-        svgBuffer?.push(`<rect vector-effect="non-scaling-stroke" x="${x}" y="${y}" width="${rectWidth}" height="${rectHeight}"/>`);
+        svgBuffer?.push(`<rect vector-effect="non-scaling-stroke" x="${x2}" y="${y2}" width="${rectWidth}" height="${rectHeight}"/>`);
       }
       if (this.#hasBorder) {
         svgBuffer.push(`</g></svg>')`);
@@ -17629,7 +17629,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       const style = element.style;
       let computedFontSize;
       const BORDER_SIZE = 2;
-      const roundToOneDecimal = (x) => Math.round(10 * x) / 10;
+      const roundToOneDecimal = (x2) => Math.round(10 * x2) / 10;
       if (this.data.multiLine) {
         const height = Math.abs(this.data.rect[3] - this.data.rect[1] - BORDER_SIZE);
         const numberOfLines = Math.round(height / (LINE_FACTOR * fontSize)) || 1;
@@ -17776,7 +17776,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
                 if (datetimeType === "time") {
                   const date = new Date(value);
                   const parts = [date.getHours(), date.getMinutes(), date.getSeconds()];
-                  target.value = parts.map((v) => v.toString().padStart(2, "0")).join(":");
+                  target.value = parts.map((v2) => v2.toString().padStart(2, "0")).join(":");
                 } else {
                   target.value = new Date(value - TIMEZONE_OFFSET).toISOString().split(datetimeType === "date" ? "T" : ".", 1)[0];
                 }
@@ -17909,7 +17909,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             } = target;
             if (hasDateOrTime) {
               if (value && datetimeType === "time") {
-                const parts = value.split(":").map((v) => parseInt(v, 10));
+                const parts = value.split(":").map((v2) => parseInt(v2, 10));
                 value = new Date(2e3, 0, 1, parts[0], parts[1], parts[2] || 0).valueOf();
                 target.step = "";
               } else {
@@ -18659,12 +18659,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       if (!this.#commentButton) {
         this.renderCommentButton();
       }
-      const [x, y] = this.#commentButtonPosition;
+      const [x2, y2] = this.#commentButtonPosition;
       const {
         style
       } = this.#commentButton;
-      style.left = `calc(${x}%)`;
-      style.top = `calc(${y}% - var(--comment-button-dim))`;
+      style.left = `calc(${x2}%)`;
+      style.top = `calc(${y2}% - var(--comment-button-dim))`;
     }
     #updateColor() {
       if (this.#firstElement.extraPopupElement) {
@@ -18746,8 +18746,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         return this.#popupPosition;
       }
       const {
-        x,
-        y,
+        x: x2,
+        y: y2,
         height
       } = this.#commentButton.getBoundingClientRect();
       const {
@@ -18756,7 +18756,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         width: parentWidth,
         height: parentHeight
       } = this.#firstElement.layer.getBoundingClientRect();
-      return [(x - parentX) / parentWidth, (y + height - parentY) / parentHeight];
+      return [(x2 - parentX) / parentWidth, (y2 + height - parentY) / parentHeight];
     }
     set commentPopupPosition(pos) {
       this.#popupPosition = pos;
@@ -18771,7 +18771,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       return this.#commentButton.getBoundingClientRect().width / this.parentBoundingClientRect.width;
     }
     editComment(options) {
-      const [posX, posY] = this.#popupPosition || this.commentButtonPosition.map((x) => x / 100);
+      const [posX, posY] = this.#popupPosition || this.commentButtonPosition.map((x2) => x2 / 100);
       const parentDimensions = this.parentBoundingClientRect;
       const {
         x: parentX,
@@ -19227,9 +19227,9 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       const svg = this.svgFactory.create(width, height, true);
       let points = [];
       for (let i = 0, ii = vertices.length; i < ii; i += 2) {
-        const x = vertices[i] - rect[0];
-        const y = rect[3] - vertices[i + 1];
-        points.push(`${x},${y}`);
+        const x2 = vertices[i] - rect[0];
+        const y2 = rect[3] - vertices[i + 1];
+        points.push(`${x2},${y2}`);
       }
       points = points.join(" ");
       const polyline = this.#polyline = this.svgFactory.createElement(this.svgElementName);
@@ -19332,20 +19332,20 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         height
       } = this.#getTransform(rotation, rect);
       const svg = this.svgFactory.create(width, height, true);
-      const g = this.#polylinesGroupElement = this.svgFactory.createElement("svg:g");
-      svg.append(g);
-      g.setAttribute("stroke-width", borderStyle.width || 1);
-      g.setAttribute("stroke-linecap", "round");
-      g.setAttribute("stroke-linejoin", "round");
-      g.setAttribute("stroke-miterlimit", 10);
-      g.setAttribute("stroke", "transparent");
-      g.setAttribute("fill", "transparent");
-      g.setAttribute("transform", transform);
+      const g2 = this.#polylinesGroupElement = this.svgFactory.createElement("svg:g");
+      svg.append(g2);
+      g2.setAttribute("stroke-width", borderStyle.width || 1);
+      g2.setAttribute("stroke-linecap", "round");
+      g2.setAttribute("stroke-linejoin", "round");
+      g2.setAttribute("stroke-miterlimit", 10);
+      g2.setAttribute("stroke", "transparent");
+      g2.setAttribute("fill", "transparent");
+      g2.setAttribute("transform", transform);
       for (let i = 0, ii = inkLists.length; i < ii; i++) {
         const polyline = this.svgFactory.createElement(this.svgElementName);
         this.#polylines.push(polyline);
         polyline.setAttribute("points", inkLists[i].join(","));
-        g.append(polyline);
+        g2.append(polyline);
       }
       if (!popupRef && this.hasPopupData) {
         this.hasOwnCommentButton = true;
@@ -19362,9 +19362,9 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         points,
         rect
       } = params;
-      const g = this.#polylinesGroupElement;
+      const g2 = this.#polylinesGroupElement;
       if (thickness >= 0) {
-        g.setAttribute("stroke-width", thickness || 1);
+        g2.setAttribute("stroke-width", thickness || 1);
       }
       if (points) {
         for (let i = 0, ii = this.#polylines.length; i < ii; i++) {
@@ -19377,9 +19377,9 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           width,
           height
         } = this.#getTransform(this.data.rotation, rect);
-        const root = g.parentElement;
+        const root = g2.parentElement;
         root.setAttribute("viewBox", `0 0 ${width} ${height}`);
-        g.setAttribute("transform", transform);
+        g2.setAttribute("transform", transform);
       }
     }
     getElementsToTriggerPopup() {
@@ -20043,8 +20043,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         keepUndo: true
       });
     }
-    _translateEmpty(x, y) {
-      this._uiManager.translateSelectedEditors(x, y, true);
+    _translateEmpty(x2, y2) {
+      this._uiManager.translateSelectedEditors(x2, y2, true);
     }
     getInitialTranslation() {
       const scale = this.parentScale;
@@ -20578,31 +20578,31 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       }
       return dest;
     }
-    static svgRound(x) {
-      return Math.round(x * 1e4);
+    static svgRound(x2) {
+      return Math.round(x2 * 1e4);
     }
-    static _normalizePoint(x, y, parentWidth, parentHeight, rotation) {
+    static _normalizePoint(x2, y2, parentWidth, parentHeight, rotation) {
       switch (rotation) {
         case 90:
-          return [1 - y / parentWidth, x / parentHeight];
+          return [1 - y2 / parentWidth, x2 / parentHeight];
         case 180:
-          return [1 - x / parentWidth, 1 - y / parentHeight];
+          return [1 - x2 / parentWidth, 1 - y2 / parentHeight];
         case 270:
-          return [y / parentWidth, 1 - x / parentHeight];
+          return [y2 / parentWidth, 1 - x2 / parentHeight];
         default:
-          return [x / parentWidth, y / parentHeight];
+          return [x2 / parentWidth, y2 / parentHeight];
       }
     }
-    static _normalizePagePoint(x, y, rotation) {
+    static _normalizePagePoint(x2, y2, rotation) {
       switch (rotation) {
         case 90:
-          return [1 - y, x];
+          return [1 - y2, x2];
         case 180:
-          return [1 - x, 1 - y];
+          return [1 - x2, 1 - y2];
         case 270:
-          return [y, 1 - x];
+          return [y2, 1 - x2];
         default:
-          return [x, y];
+          return [x2, y2];
       }
     }
     static createBezierPoints(x1, y1, x2, y2, x3, y3) {
@@ -20627,18 +20627,18 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     static #MIN_DIFF = 2;
     static #MIN = _FreeDrawOutliner.#MIN_DIST + _FreeDrawOutliner.#MIN_DIFF;
     constructor({
-      x,
-      y
+      x: x2,
+      y: y2
     }, box, scaleFactor, thickness, isLTR, innerMargin = 0) {
       this.#box = box;
       this.#thickness = thickness * scaleFactor;
       this.#isLTR = isLTR;
-      this.#last.set([NaN, NaN, NaN, NaN, x, y], 6);
+      this.#last.set([NaN, NaN, NaN, NaN, x2, y2], 6);
       this.#innerMargin = innerMargin;
       this.#min_dist = _FreeDrawOutliner.#MIN_DIST * scaleFactor;
       this.#min = _FreeDrawOutliner.#MIN * scaleFactor;
       this.#scaleFactor = scaleFactor;
-      this.#points.push(x, y);
+      this.#points.push(x2, y2);
     }
     isEmpty() {
       return isNaN(this.#last[8]);
@@ -20646,42 +20646,42 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     #getLastCoords() {
       const lastTop = this.#last.subarray(4, 6);
       const lastBottom = this.#last.subarray(16, 18);
-      const [x, y, width, height] = this.#box;
-      return [(this.#lastX + (lastTop[0] - lastBottom[0]) / 2 - x) / width, (this.#lastY + (lastTop[1] - lastBottom[1]) / 2 - y) / height, (this.#lastX + (lastBottom[0] - lastTop[0]) / 2 - x) / width, (this.#lastY + (lastBottom[1] - lastTop[1]) / 2 - y) / height];
+      const [x2, y2, width, height] = this.#box;
+      return [(this.#lastX + (lastTop[0] - lastBottom[0]) / 2 - x2) / width, (this.#lastY + (lastTop[1] - lastBottom[1]) / 2 - y2) / height, (this.#lastX + (lastBottom[0] - lastTop[0]) / 2 - x2) / width, (this.#lastY + (lastBottom[1] - lastTop[1]) / 2 - y2) / height];
     }
     add({
-      x,
-      y
+      x: x2,
+      y: y2
     }) {
-      this.#lastX = x;
-      this.#lastY = y;
+      this.#lastX = x2;
+      this.#lastY = y2;
       const [layerX, layerY, layerWidth, layerHeight] = this.#box;
-      let [x1, y1, x2, y2] = this.#last.subarray(8, 12);
-      const diffX = x - x2;
-      const diffY = y - y2;
+      let [x1, y1, x22, y22] = this.#last.subarray(8, 12);
+      const diffX = x2 - x22;
+      const diffY = y2 - y22;
       const d = Math.hypot(diffX, diffY);
       if (d < this.#min) {
         return false;
       }
       const diffD = d - this.#min_dist;
-      const K = diffD / d;
-      const shiftX = K * diffX;
-      const shiftY = K * diffY;
+      const K2 = diffD / d;
+      const shiftX = K2 * diffX;
+      const shiftY = K2 * diffY;
       let x0 = x1;
       let y0 = y1;
-      x1 = x2;
-      y1 = y2;
-      x2 += shiftX;
-      y2 += shiftY;
-      this.#points?.push(x, y);
+      x1 = x22;
+      y1 = y22;
+      x22 += shiftX;
+      y22 += shiftY;
+      this.#points?.push(x2, y2);
       const nX = -shiftY / diffD;
       const nY = shiftX / diffD;
       const thX = nX * this.#thickness;
       const thY = nY * this.#thickness;
       this.#last.set(this.#last.subarray(2, 8), 0);
-      this.#last.set([x2 + thX, y2 + thY], 4);
+      this.#last.set([x22 + thX, y22 + thY], 4);
       this.#last.set(this.#last.subarray(14, 18), 12);
-      this.#last.set([x2 - thX, y2 - thY], 16);
+      this.#last.set([x22 - thX, y22 - thY], 16);
       if (isNaN(this.#last[6])) {
         if (this.#top.length === 0) {
           this.#last.set([x1 + thX, y1 + thY], 2);
@@ -20689,22 +20689,22 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           this.#last.set([x1 - thX, y1 - thY], 14);
           this.#bottom.push(NaN, NaN, NaN, NaN, (x1 - thX - layerX) / layerWidth, (y1 - thY - layerY) / layerHeight);
         }
-        this.#last.set([x0, y0, x1, y1, x2, y2], 6);
+        this.#last.set([x0, y0, x1, y1, x22, y22], 6);
         return !this.isEmpty();
       }
-      this.#last.set([x0, y0, x1, y1, x2, y2], 6);
+      this.#last.set([x0, y0, x1, y1, x22, y22], 6);
       const angle = Math.abs(Math.atan2(y0 - y1, x0 - x1) - Math.atan2(shiftY, shiftX));
       if (angle < Math.PI / 2) {
-        [x1, y1, x2, y2] = this.#last.subarray(2, 6);
-        this.#top.push(NaN, NaN, NaN, NaN, ((x1 + x2) / 2 - layerX) / layerWidth, ((y1 + y2) / 2 - layerY) / layerHeight);
+        [x1, y1, x22, y22] = this.#last.subarray(2, 6);
+        this.#top.push(NaN, NaN, NaN, NaN, ((x1 + x22) / 2 - layerX) / layerWidth, ((y1 + y22) / 2 - layerY) / layerHeight);
         [x1, y1, x0, y0] = this.#last.subarray(14, 18);
         this.#bottom.push(NaN, NaN, NaN, NaN, ((x0 + x1) / 2 - layerX) / layerWidth, ((y0 + y1) / 2 - layerY) / layerHeight);
         return true;
       }
-      [x0, y0, x1, y1, x2, y2] = this.#last.subarray(0, 6);
-      this.#top.push(((x0 + 5 * x1) / 6 - layerX) / layerWidth, ((y0 + 5 * y1) / 6 - layerY) / layerHeight, ((5 * x1 + x2) / 6 - layerX) / layerWidth, ((5 * y1 + y2) / 6 - layerY) / layerHeight, ((x1 + x2) / 2 - layerX) / layerWidth, ((y1 + y2) / 2 - layerY) / layerHeight);
-      [x2, y2, x1, y1, x0, y0] = this.#last.subarray(12, 18);
-      this.#bottom.push(((x0 + 5 * x1) / 6 - layerX) / layerWidth, ((y0 + 5 * y1) / 6 - layerY) / layerHeight, ((5 * x1 + x2) / 6 - layerX) / layerWidth, ((5 * y1 + y2) / 6 - layerY) / layerHeight, ((x1 + x2) / 2 - layerX) / layerWidth, ((y1 + y2) / 2 - layerY) / layerHeight);
+      [x0, y0, x1, y1, x22, y22] = this.#last.subarray(0, 6);
+      this.#top.push(((x0 + 5 * x1) / 6 - layerX) / layerWidth, ((y0 + 5 * y1) / 6 - layerY) / layerHeight, ((5 * x1 + x22) / 6 - layerX) / layerWidth, ((5 * y1 + y22) / 6 - layerY) / layerHeight, ((x1 + x22) / 2 - layerX) / layerWidth, ((y1 + y22) / 2 - layerY) / layerHeight);
+      [x22, y22, x1, y1, x0, y0] = this.#last.subarray(12, 18);
+      this.#bottom.push(((x0 + 5 * x1) / 6 - layerX) / layerWidth, ((y0 + 5 * y1) / 6 - layerY) / layerHeight, ((5 * x1 + x22) / 6 - layerX) / layerWidth, ((5 * y1 + y22) / 6 - layerY) / layerHeight, ((x1 + x22) / 2 - layerX) / layerWidth, ((y1 + y22) / 2 - layerY) / layerHeight);
       return true;
     }
     toSVGPath() {
@@ -20737,20 +20737,20 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       return buffer.join(" ");
     }
     #toSVGPathTwoPoints() {
-      const [x, y, width, height] = this.#box;
+      const [x2, y2, width, height] = this.#box;
       const [lastTopX, lastTopY, lastBottomX, lastBottomY] = this.#getLastCoords();
-      return `M${(this.#last[2] - x) / width} ${(this.#last[3] - y) / height} L${(this.#last[4] - x) / width} ${(this.#last[5] - y) / height} L${lastTopX} ${lastTopY} L${lastBottomX} ${lastBottomY} L${(this.#last[16] - x) / width} ${(this.#last[17] - y) / height} L${(this.#last[14] - x) / width} ${(this.#last[15] - y) / height} Z`;
+      return `M${(this.#last[2] - x2) / width} ${(this.#last[3] - y2) / height} L${(this.#last[4] - x2) / width} ${(this.#last[5] - y2) / height} L${lastTopX} ${lastTopY} L${lastBottomX} ${lastBottomY} L${(this.#last[16] - x2) / width} ${(this.#last[17] - y2) / height} L${(this.#last[14] - x2) / width} ${(this.#last[15] - y2) / height} Z`;
     }
     #toSVGPathStart(buffer) {
       const bottom = this.#bottom;
       buffer.push(`L${bottom[4]} ${bottom[5]} Z`);
     }
     #toSVGPathEnd(buffer) {
-      const [x, y, width, height] = this.#box;
+      const [x2, y2, width, height] = this.#box;
       const lastTop = this.#last.subarray(4, 6);
       const lastBottom = this.#last.subarray(16, 18);
       const [lastTopX, lastTopY, lastBottomX, lastBottomY] = this.#getLastCoords();
-      buffer.push(`L${(lastTop[0] - x) / width} ${(lastTop[1] - y) / height} L${lastTopX} ${lastTopY} L${lastBottomX} ${lastBottomY} L${(lastBottom[0] - x) / width} ${(lastBottom[1] - y) / height}`);
+      buffer.push(`L${(lastTop[0] - x2) / width} ${(lastTop[1] - y2) / height} L${lastTopX} ${lastTopY} L${lastBottomX} ${lastBottomY} L${(lastBottom[0] - x2) / width} ${(lastBottom[1] - y2) / height}`);
     }
     newFreeDrawOutline(outline, points, box, scaleFactor, innerMargin, isLTR) {
       return new FreeDrawOutline(outline, points, box, scaleFactor, innerMargin, isLTR);
@@ -20771,8 +20771,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         return this.#getOutlineTwoPoints(points);
       }
       const outline = new Float32Array(this.#top.length + 24 + this.#bottom.length);
-      let N = top.length;
-      for (let i = 0; i < N; i += 2) {
+      let N2 = top.length;
+      for (let i = 0; i < N2; i += 2) {
         if (isNaN(top[i])) {
           outline[i] = outline[i + 1] = NaN;
           continue;
@@ -20780,20 +20780,20 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         outline[i] = top[i];
         outline[i + 1] = top[i + 1];
       }
-      N = this.#getOutlineEnd(outline, N);
+      N2 = this.#getOutlineEnd(outline, N2);
       for (let i = bottom.length - 6; i >= 6; i -= 6) {
-        for (let j = 0; j < 6; j += 2) {
-          if (isNaN(bottom[i + j])) {
-            outline[N] = outline[N + 1] = NaN;
-            N += 2;
+        for (let j2 = 0; j2 < 6; j2 += 2) {
+          if (isNaN(bottom[i + j2])) {
+            outline[N2] = outline[N2 + 1] = NaN;
+            N2 += 2;
             continue;
           }
-          outline[N] = bottom[i + j];
-          outline[N + 1] = bottom[i + j + 1];
-          N += 2;
+          outline[N2] = bottom[i + j2];
+          outline[N2 + 1] = bottom[i + j2 + 1];
+          N2 += 2;
         }
       }
-      this.#getOutlineStart(outline, N);
+      this.#getOutlineStart(outline, N2);
       return this.newFreeDrawOutline(outline, points, this.#box, this.#scaleFactor, this.#innerMargin, this.#isLTR);
     }
     #getOutlineTwoPoints(points) {
@@ -20837,14 +20837,14 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       this.firstPoint = [NaN, NaN];
       this.lastPoint = [NaN, NaN];
       this.#computeMinMax(isLTR);
-      const [x, y, width, height] = this.#bbox;
+      const [x2, y2, width, height] = this.#bbox;
       for (let i = 0, ii = outline.length; i < ii; i += 2) {
-        outline[i] = (outline[i] - x) / width;
-        outline[i + 1] = (outline[i + 1] - y) / height;
+        outline[i] = (outline[i] - x2) / width;
+        outline[i + 1] = (outline[i + 1] - y2) / height;
       }
       for (let i = 0, ii = points.length; i < ii; i += 2) {
-        points[i] = (points[i] - x) / width;
-        points[i + 1] = (points[i + 1] - y) / height;
+        points[i] = (points[i] - x2) / width;
+        points[i + 1] = (points[i + 1] - y2) / height;
       }
     }
     toSVGPath() {
@@ -20899,20 +20899,20 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       const ltrCallback = isLTR ? Math.max : Math.min;
       const bezierBbox = new Float32Array(4);
       for (let i = 6, ii = outline.length; i < ii; i += 6) {
-        const x = outline[i + 4], y = outline[i + 5];
+        const x2 = outline[i + 4], y2 = outline[i + 5];
         if (isNaN(outline[i])) {
-          Util.pointBoundingBox(x, y, minMax);
-          if (firstPointY > y) {
-            firstPointX = x;
-            firstPointY = y;
-          } else if (firstPointY === y) {
-            firstPointX = ltrCallback(firstPointX, x);
+          Util.pointBoundingBox(x2, y2, minMax);
+          if (firstPointY > y2) {
+            firstPointX = x2;
+            firstPointY = y2;
+          } else if (firstPointY === y2) {
+            firstPointX = ltrCallback(firstPointX, x2);
           }
-          if (lastPointY < y) {
-            lastPointX = x;
-            lastPointY = y;
-          } else if (lastPointY === y) {
-            lastPointX = ltrCallback(lastPointX, x);
+          if (lastPointY < y2) {
+            lastPointX = x2;
+            lastPointY = y2;
+          } else if (lastPointY === y2) {
+            lastPointX = ltrCallback(lastPointX, x2);
           }
         } else {
           bezierBbox.set(BBOX_INIT, 0);
@@ -20931,8 +20931,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             lastPointX = ltrCallback(lastPointX, bezierBbox[2]);
           }
         }
-        lastX = x;
-        lastY = y;
+        lastX = x2;
+        lastY = y2;
       }
       const bbox = this.#bbox;
       bbox[0] = minMax[0] - this.#innerMargin;
@@ -20949,12 +20949,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       return new FreeDrawOutliner(point, box, scaleFactor, thickness, isLTR, innerMargin);
     }
     getNewOutline(thickness, innerMargin) {
-      const [x, y, width, height] = this.#bbox;
+      const [x2, y2, width, height] = this.#bbox;
       const [layerX, layerY, layerWidth, layerHeight] = this.#box;
       const sx = width * layerWidth;
       const sy = height * layerHeight;
-      const tx = x * layerWidth + layerX;
-      const ty = y * layerHeight + layerY;
+      const tx = x2 * layerWidth + layerX;
+      const ty = y2 * layerHeight + layerY;
       const outliner = this.newOutliner({
         x: this.#points[0] * sx + tx,
         y: this.#points[1] * sy + ty
@@ -20979,19 +20979,19 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       const NUMBER_OF_DIGITS = 4;
       const EPSILON = 10 ** -NUMBER_OF_DIGITS;
       for (const {
-        x,
-        y,
+        x: x2,
+        y: y2,
         width,
         height
       } of boxes) {
-        const x1 = Math.floor((x - borderWidth) / EPSILON) * EPSILON;
-        const x2 = Math.ceil((x + width + borderWidth) / EPSILON) * EPSILON;
-        const y1 = Math.floor((y - borderWidth) / EPSILON) * EPSILON;
-        const y2 = Math.ceil((y + height + borderWidth) / EPSILON) * EPSILON;
-        const left = [x1, y1, y2, true];
-        const right = [x2, y1, y2, false];
+        const x1 = Math.floor((x2 - borderWidth) / EPSILON) * EPSILON;
+        const x22 = Math.ceil((x2 + width + borderWidth) / EPSILON) * EPSILON;
+        const y1 = Math.floor((y2 - borderWidth) / EPSILON) * EPSILON;
+        const y22 = Math.ceil((y2 + height + borderWidth) / EPSILON) * EPSILON;
+        const left = [x1, y1, y22, true];
+        const right = [x22, y1, y22, false];
         this.#verticalEdges.push(left, right);
-        Util.rectBoundingBox(x1, y1, x2, y2, minMax);
+        Util.rectBoundingBox(x1, y1, x22, y22, minMax);
       }
       const bboxWidth = minMax[2] - minMax[0] + 2 * innerMargin;
       const bboxHeight = minMax[3] - minMax[1] + 2 * innerMargin;
@@ -21002,23 +21002,23 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       const lastEdge = this.#verticalEdges.at(isLTR ? -1 : -2);
       const lastPoint = [lastEdge[0], lastEdge[2]];
       for (const edge of this.#verticalEdges) {
-        const [x, y1, y2, left] = edge;
+        const [x2, y1, y2, left] = edge;
         if (!left && isLTR) {
           if (y1 < firstPointY) {
             firstPointY = y1;
-            firstPointX = x;
+            firstPointX = x2;
           } else if (y1 === firstPointY) {
-            firstPointX = Math.max(firstPointX, x);
+            firstPointX = Math.max(firstPointX, x2);
           }
         } else if (left && !isLTR) {
           if (y1 < firstPointY) {
             firstPointY = y1;
-            firstPointX = x;
+            firstPointX = x2;
           } else if (y1 === firstPointY) {
-            firstPointX = Math.min(firstPointX, x);
+            firstPointX = Math.min(firstPointX, x2);
           }
         }
-        edge[0] = (x - shiftedMinX) / bboxWidth;
+        edge[0] = (x2 - shiftedMinX) / bboxWidth;
         edge[1] = (y1 - shiftedMinY) / bboxHeight;
         edge[2] = (y2 - shiftedMinY) / bboxHeight;
       }
@@ -21027,7 +21027,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       this.#lastPoint = lastPoint;
     }
     getOutlines() {
-      this.#verticalEdges.sort((a, b) => a[0] - b[0] || a[1] - b[1] || a[2] - b[2]);
+      this.#verticalEdges.sort((a, b2) => a[0] - b2[0] || a[1] - b2[1] || a[2] - b2[2]);
       const outlineVerticalEdges = [];
       for (const edge of this.#verticalEdges) {
         if (edge[3]) {
@@ -21044,10 +21044,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       const edges = [];
       const allEdges = /* @__PURE__ */ new Set();
       for (const edge of outlineVerticalEdges) {
-        const [x, y1, y2] = edge;
-        edges.push([x, y1, edge], [x, y2, edge]);
+        const [x2, y1, y2] = edge;
+        edges.push([x2, y1, edge], [x2, y2, edge]);
       }
-      edges.sort((a, b) => a[1] - b[1] || a[0] - b[0]);
+      edges.sort((a, b2) => a[1] - b2[1] || a[0] - b2[0]);
       for (let i = 0, ii = edges.length; i < ii; i += 2) {
         const edge1 = edges[i][2];
         const edge2 = edges[i + 1][2];
@@ -21060,11 +21060,11 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       let outline;
       while (allEdges.size > 0) {
         const edge = allEdges.values().next().value;
-        let [x, y1, y2, edge1, edge2] = edge;
+        let [x2, y1, y2, edge1, edge2] = edge;
         allEdges.delete(edge);
-        let lastPointX = x;
+        let lastPointX = x2;
         let lastPointY = y1;
-        outline = [x, y2];
+        outline = [x2, y2];
         outlines.push(outline);
         while (true) {
           let e;
@@ -21076,10 +21076,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             break;
           }
           allEdges.delete(e);
-          [x, y1, y2, edge1, edge2] = e;
-          if (lastPointX !== x) {
-            outline.push(lastPointX, lastPointY, x, lastPointY === y1 ? y1 : y2);
-            lastPointX = x;
+          [x2, y1, y2, edge1, edge2] = e;
+          if (lastPointX !== x2) {
+            outline.push(lastPointX, lastPointY, x2, lastPointY === y1 ? y1 : y2);
+            lastPointX = x2;
           }
           lastPointY = lastPointY === y1 ? y2 : y1;
         }
@@ -21087,17 +21087,17 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       }
       return new HighlightOutline(outlines, this.#box, this.#firstPoint, this.#lastPoint);
     }
-    #binarySearch(y) {
+    #binarySearch(y2) {
       const array = this.#intervals;
       let start = 0;
       let end = array.length - 1;
       while (start <= end) {
         const middle = start + end >> 1;
         const y1 = array[middle][0];
-        if (y1 === y) {
+        if (y1 === y2) {
           return middle;
         }
-        if (y1 < y) {
+        if (y1 < y2) {
           start = middle + 1;
         } else {
           end = middle - 1;
@@ -21133,32 +21133,32 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       }
     }
     #breakEdge(edge) {
-      const [x, y1, y2] = edge;
-      const results = [[x, y1, y2]];
+      const [x2, y1, y2] = edge;
+      const results = [[x2, y1, y2]];
       const index = this.#binarySearch(y2);
       for (let i = 0; i < index; i++) {
         const [start, end] = this.#intervals[i];
-        for (let j = 0, jj = results.length; j < jj; j++) {
-          const [, y3, y4] = results[j];
+        for (let j2 = 0, jj = results.length; j2 < jj; j2++) {
+          const [, y3, y4] = results[j2];
           if (end <= y3 || y4 <= start) {
             continue;
           }
           if (y3 >= start) {
             if (y4 > end) {
-              results[j][1] = end;
+              results[j2][1] = end;
             } else {
               if (jj === 1) {
                 return [];
               }
-              results.splice(j, 1);
-              j--;
+              results.splice(j2, 1);
+              j2--;
               jj--;
             }
             continue;
           }
-          results[j][2] = start;
+          results[j2][2] = start;
           if (y4 > end) {
-            results.push([x, end, y4]);
+            results.push([x2, end, y4]);
           }
         }
       }
@@ -21181,14 +21181,14 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         let [prevX, prevY] = polygon;
         buffer.push(`M${prevX} ${prevY}`);
         for (let i = 2; i < polygon.length; i += 2) {
-          const x = polygon[i];
-          const y = polygon[i + 1];
-          if (x === prevX) {
-            buffer.push(`V${y}`);
-            prevY = y;
-          } else if (y === prevY) {
-            buffer.push(`H${x}`);
-            prevX = x;
+          const x2 = polygon[i];
+          const y2 = polygon[i + 1];
+          if (x2 === prevX) {
+            buffer.push(`V${y2}`);
+            prevY = y2;
+          } else if (y2 === prevY) {
+            buffer.push(`H${x2}`);
+            prevX = x2;
           }
         }
         buffer.push("Z");
@@ -21372,32 +21372,32 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           }
         });
       }
-      const [x, y, width, height] = highlightOutlines.box;
+      const [x2, y2, width, height] = highlightOutlines.box;
       switch (this.rotation) {
         case 0:
-          this.x = x;
-          this.y = y;
+          this.x = x2;
+          this.y = y2;
           this.width = width;
           this.height = height;
           break;
         case 90: {
           const [pageWidth, pageHeight] = this.parentDimensions;
-          this.x = y;
-          this.y = 1 - x;
+          this.x = y2;
+          this.y = 1 - x2;
           this.width = width * pageHeight / pageWidth;
           this.height = height * pageWidth / pageHeight;
           break;
         }
         case 180:
-          this.x = 1 - x;
-          this.y = 1 - y;
+          this.x = 1 - x2;
+          this.y = 1 - y2;
           this.width = width;
           this.height = height;
           break;
         case 270: {
           const [pageWidth, pageHeight] = this.parentDimensions;
-          this.x = 1 - y;
-          this.y = x;
+          this.x = 1 - y2;
+          this.y = x2;
           this.width = width * pageHeight / pageWidth;
           this.height = height * pageWidth / pageHeight;
           break;
@@ -21406,11 +21406,11 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       const {
         firstPoint
       } = highlightOutlines;
-      this.#firstPoint = [(firstPoint[0] - x) / width, (firstPoint[1] - y) / height];
+      this.#firstPoint = [(firstPoint[0] - x2) / width, (firstPoint[1] - y2) / height];
       const {
         lastPoint
       } = this.#focusOutlines;
-      this.#lastPoint = [(lastPoint[0] - x) / width, (lastPoint[1] - y) / height];
+      this.#lastPoint = [(lastPoint[0] - x2) / width, (lastPoint[1] - y2) / height];
     }
     static initialize(l10n, uiManager) {
       AnnotationEditor.initialize(l10n, uiManager);
@@ -21426,7 +21426,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           break;
       }
     }
-    translateInPage(x, y) {
+    translateInPage(x2, y2) {
     }
     get toolbarPosition() {
       return this.#lastPoint;
@@ -21625,16 +21625,16 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         this.#highlightDiv.style.clipPath = this.#clipPathId;
       }
     }
-    static #rotateBbox([x, y, width, height], angle) {
+    static #rotateBbox([x2, y2, width, height], angle) {
       switch (angle) {
         case 90:
-          return [1 - y - height, x, height, width];
+          return [1 - y2 - height, x2, height, width];
         case 180:
-          return [1 - x - width, 1 - y - height, width, height];
+          return [1 - x2 - width, 1 - y2 - height, width, height];
         case 270:
-          return [y, 1 - x - width, height, width];
+          return [y2, 1 - x2 - width, height, width];
       }
-      return [x, y, width, height];
+      return [x2, y2, width, height];
     }
     rotate(angle) {
       const {
@@ -21788,13 +21788,13 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       const quadPoints = new Float32Array(boxes.length * 8);
       let i = 0;
       for (const {
-        x,
-        y,
+        x: x2,
+        y: y2,
         width,
         height
       } of boxes) {
-        const sx = x * pageWidth + pageX;
-        const sy = (1 - y) * pageHeight + pageY;
+        const sx = x2 * pageWidth + pageX;
+        const sy = (1 - y2) * pageHeight + pageY;
         quadPoints[i] = quadPoints[i + 4] = sx;
         quadPoints[i + 1] = quadPoints[i + 3] = sy;
         quadPoints[i + 2] = quadPoints[i + 6] = sx + width * pageWidth;
@@ -21808,8 +21808,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     }
     static startHighlighting(parent, isLTR, {
       target: textLayer,
-      x,
-      y
+      x: x2,
+      y: y2
     }) {
       const {
         x: layerX,
@@ -21841,8 +21841,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         signal
       });
       this._freeHighlight = new FreeHighlightOutliner({
-        x,
-        y
+        x: x2,
+        y: y2
       }, [layerX, layerY, parentWidth, parentHeight], parent.scale, this._defaultThickness / 2, isLTR, 1e-3);
       ({
         id: this._freeHighlightId,
@@ -22403,26 +22403,26 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       this._drawingOptions.updateAll();
       this._drawId = this.#createDrawing(this.#drawOutlines, parent);
     }
-    #convertToParentSpace([x, y, width, height]) {
+    #convertToParentSpace([x2, y2, width, height]) {
       const {
         parentDimensions: [pW, pH],
         rotation
       } = this;
       switch (rotation) {
         case 90:
-          return [y, 1 - x, width * (pH / pW), height * (pW / pH)];
+          return [y2, 1 - x2, width * (pH / pW), height * (pW / pH)];
         case 180:
-          return [1 - x, 1 - y, width, height];
+          return [1 - x2, 1 - y2, width, height];
         case 270:
-          return [1 - y, x, width * (pH / pW), height * (pW / pH)];
+          return [1 - y2, x2, width * (pH / pW), height * (pW / pH)];
         default:
-          return [x, y, width, height];
+          return [x2, y2, width, height];
       }
     }
     #convertToDrawSpace() {
       const {
-        x,
-        y,
+        x: x2,
+        y: y2,
         width,
         height,
         parentDimensions: [pW, pH],
@@ -22430,13 +22430,13 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       } = this;
       switch (rotation) {
         case 90:
-          return [1 - y, x, width * (pW / pH), height * (pH / pW)];
+          return [1 - y2, x2, width * (pW / pH), height * (pH / pW)];
         case 180:
-          return [1 - x, 1 - y, width, height];
+          return [1 - x2, 1 - y2, width, height];
         case 270:
-          return [y, 1 - x, width * (pW / pH), height * (pH / pW)];
+          return [y2, 1 - x2, width * (pW / pH), height * (pH / pW)];
         default:
-          return [x, y, width, height];
+          return [x2, y2, width, height];
       }
     }
     #updateBbox(bbox) {
@@ -22449,8 +22449,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     }
     #rotateBox() {
       const {
-        x,
-        y,
+        x: x2,
+        y: y2,
         width,
         height,
         rotation,
@@ -22459,37 +22459,37 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       } = this;
       switch ((rotation * 4 + parentRotation) / 90) {
         case 1:
-          return [1 - y - height, x, height, width];
+          return [1 - y2 - height, x2, height, width];
         case 2:
-          return [1 - x - width, 1 - y - height, width, height];
+          return [1 - x2 - width, 1 - y2 - height, width, height];
         case 3:
-          return [y, 1 - x - width, height, width];
+          return [y2, 1 - x2 - width, height, width];
         case 4:
-          return [x, y - width * (pW / pH), height * (pH / pW), width * (pW / pH)];
+          return [x2, y2 - width * (pW / pH), height * (pH / pW), width * (pW / pH)];
         case 5:
-          return [1 - y, x, width * (pW / pH), height * (pH / pW)];
+          return [1 - y2, x2, width * (pW / pH), height * (pH / pW)];
         case 6:
-          return [1 - x - height * (pH / pW), 1 - y, height * (pH / pW), width * (pW / pH)];
+          return [1 - x2 - height * (pH / pW), 1 - y2, height * (pH / pW), width * (pW / pH)];
         case 7:
-          return [y - width * (pW / pH), 1 - x - height * (pH / pW), width * (pW / pH), height * (pH / pW)];
+          return [y2 - width * (pW / pH), 1 - x2 - height * (pH / pW), width * (pW / pH), height * (pH / pW)];
         case 8:
-          return [x - width, y - height, width, height];
+          return [x2 - width, y2 - height, width, height];
         case 9:
-          return [1 - y, x - width, height, width];
+          return [1 - y2, x2 - width, height, width];
         case 10:
-          return [1 - x, 1 - y, width, height];
+          return [1 - x2, 1 - y2, width, height];
         case 11:
-          return [y - height, 1 - x, height, width];
+          return [y2 - height, 1 - x2, height, width];
         case 12:
-          return [x - height * (pH / pW), y, height * (pH / pW), width * (pW / pH)];
+          return [x2 - height * (pH / pW), y2, height * (pH / pW), width * (pW / pH)];
         case 13:
-          return [1 - y - width * (pW / pH), x - height * (pH / pW), width * (pW / pH), height * (pH / pW)];
+          return [1 - y2 - width * (pW / pH), x2 - height * (pH / pW), width * (pW / pH), height * (pH / pW)];
         case 14:
-          return [1 - x, 1 - y - width * (pW / pH), height * (pH / pW), width * (pW / pH)];
+          return [1 - x2, 1 - y2 - width * (pW / pH), height * (pH / pW), width * (pW / pH)];
         case 15:
-          return [y, 1 - x, width * (pW / pH), height * (pH / pW)];
+          return [y2, 1 - x2, width * (pW / pH), height * (pH / pW)];
         default:
-          return [x, y, width, height];
+          return [x2, y2, width, height];
       }
     }
     rotate() {
@@ -22537,8 +22537,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     static startDrawing(parent, uiManager, _isLTR, event) {
       const {
         target,
-        offsetX: x,
-        offsetY: y,
+        offsetX: x2,
+        offsetY: y2,
         pointerId,
         pointerType
       } = event;
@@ -22605,11 +22605,11 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       parent.toggleDrawing();
       uiManager._editorUndoBar?.hide();
       if (_DrawingEditor.#currentDraw) {
-        parent.drawLayer.updateProperties(this._currentDrawId, _DrawingEditor.#currentDraw.startNew(x, y, parentWidth, parentHeight, rotation));
+        parent.drawLayer.updateProperties(this._currentDrawId, _DrawingEditor.#currentDraw.startNew(x2, y2, parentWidth, parentHeight, rotation));
         return;
       }
       uiManager.updateUIForDefaultProperties(this);
-      _DrawingEditor.#currentDraw = this.createDrawerInstance(x, y, parentWidth, parentHeight, rotation);
+      _DrawingEditor.#currentDraw = this.createDrawerInstance(x2, y2, parentWidth, parentHeight, rotation);
       _DrawingEditor.#currentDrawingOptions = this.getDefaultDrawingOptions();
       this._currentParent = parent;
       ({
@@ -22759,14 +22759,14 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     #outlines = new InkDrawOutline();
     #parentWidth;
     #parentHeight;
-    constructor(x, y, parentWidth, parentHeight, rotation, thickness) {
+    constructor(x2, y2, parentWidth, parentHeight, rotation, thickness) {
       this.#parentWidth = parentWidth;
       this.#parentHeight = parentHeight;
       this.#rotation = rotation;
       this.#thickness = thickness;
-      [x, y] = this.#normalizePoint(x, y);
-      const line = this.#line = [NaN, NaN, NaN, NaN, x, y];
-      this.#points = [x, y];
+      [x2, y2] = this.#normalizePoint(x2, y2);
+      const line = this.#line = [NaN, NaN, NaN, NaN, x2, y2];
+      this.#points = [x2, y2];
       this.#lines = [{
         line,
         points: this.#points
@@ -22778,8 +22778,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         this.#thickness = value;
       }
     }
-    #normalizePoint(x, y) {
-      return Outline._normalizePoint(x, y, this.#parentWidth, this.#parentHeight, this.#rotation);
+    #normalizePoint(x2, y2) {
+      return Outline._normalizePoint(x2, y2, this.#parentWidth, this.#parentHeight, this.#rotation);
     }
     isEmpty() {
       return !this.#lines || this.#lines.length === 0;
@@ -22787,19 +22787,19 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     isCancellable() {
       return this.#points.length <= 10;
     }
-    add(x, y) {
-      [x, y] = this.#normalizePoint(x, y);
-      const [x1, y1, x2, y2] = this.#last.subarray(2, 6);
-      const diffX = x - x2;
-      const diffY = y - y2;
+    add(x2, y2) {
+      [x2, y2] = this.#normalizePoint(x2, y2);
+      const [x1, y1, x22, y22] = this.#last.subarray(2, 6);
+      const diffX = x2 - x22;
+      const diffY = y2 - y22;
       const d = Math.hypot(this.#parentWidth * diffX, this.#parentHeight * diffY);
       if (d <= 2) {
         return null;
       }
-      this.#points.push(x, y);
+      this.#points.push(x2, y2);
       if (isNaN(x1)) {
-        this.#last.set([x2, y2, x, y], 2);
-        this.#line.push(NaN, NaN, NaN, NaN, x, y);
+        this.#last.set([x22, y22, x2, y2], 2);
+        this.#line.push(NaN, NaN, NaN, NaN, x2, y2);
         return {
           path: {
             d: this.toSVGPath()
@@ -22809,16 +22809,16 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       if (isNaN(this.#last[0])) {
         this.#line.splice(6, 6);
       }
-      this.#last.set([x1, y1, x2, y2, x, y], 0);
-      this.#line.push(...Outline.createBezierPoints(x1, y1, x2, y2, x, y));
+      this.#last.set([x1, y1, x22, y22, x2, y2], 0);
+      this.#line.push(...Outline.createBezierPoints(x1, y1, x22, y22, x2, y2));
       return {
         path: {
           d: this.toSVGPath()
         }
       };
     }
-    end(x, y) {
-      const change = this.add(x, y);
+    end(x2, y2) {
+      const change = this.add(x2, y2);
       if (change) {
         return change;
       }
@@ -22831,13 +22831,13 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       }
       return null;
     }
-    startNew(x, y, parentWidth, parentHeight, rotation) {
+    startNew(x2, y2, parentWidth, parentHeight, rotation) {
       this.#parentWidth = parentWidth;
       this.#parentHeight = parentHeight;
       this.#rotation = rotation;
-      [x, y] = this.#normalizePoint(x, y);
-      const line = this.#line = [NaN, NaN, NaN, NaN, x, y];
-      this.#points = [x, y];
+      [x2, y2] = this.#normalizePoint(x2, y2);
+      const line = this.#line = [NaN, NaN, NaN, NaN, x2, y2];
+      this.#points = [x2, y2];
       const last = this.#lines.at(-1);
       if (last) {
         last.line = new Float32Array(last.line);
@@ -22916,8 +22916,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         this.#lastIndex = 6;
       }
       for (let i = this.#lastIndex, ii = this.#line.length; i < ii; i += 6) {
-        const [c1x, c1y, c2x, c2y, x, y] = this.#line.slice(i, i + 6).map(Outline.svgRound);
-        buffer.push(`C${c1x} ${c1y} ${c2x} ${c2y} ${x} ${y}`);
+        const [c1x, c1y, c2x, c2y, x2, y2] = this.#line.slice(i, i + 6).map(Outline.svgRound);
+        buffer.push(`C${c1x} ${c1y} ${c2x} ${c2y} ${x2} ${y2}`);
       }
       this.#lastSVGPath += buffer.join(" ");
       this.#lastIndex = this.#line.length;
@@ -23000,8 +23000,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           continue;
         }
         for (let i = 6, ii = line.length; i < ii; i += 6) {
-          const [c1x, c1y, c2x, c2y, x, y] = line.subarray(i, i + 6).map(Outline.svgRound);
-          buffer.push(`C${c1x} ${c1y} ${c2x} ${c2y} ${x} ${y}`);
+          const [c1x, c1y, c2x, c2y, x2, y2] = line.subarray(i, i + 6).map(Outline.svgRound);
+          buffer.push(`C${c1x} ${c1y} ${c2x} ${c2y} ${x2} ${y2}`);
         }
       }
       return buffer.join("");
@@ -23009,8 +23009,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     serialize([pageX, pageY, pageWidth, pageHeight], isForCopying) {
       const serializedLines = [];
       const serializedPoints = [];
-      const [x, y, width, height] = this.#getBBoxWithNoMargin();
-      let tx, ty, sx, sy, x1, y1, x2, y2, rescaleFn;
+      const [x2, y2, width, height] = this.#getBBoxWithNoMargin();
+      let tx, ty, sx, sy, x1, y1, x22, y22, rescaleFn;
       switch (this.#rotation) {
         case 0:
           rescaleFn = Outline._rescale;
@@ -23018,10 +23018,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           ty = pageY + pageHeight;
           sx = pageWidth;
           sy = -pageHeight;
-          x1 = pageX + x * pageWidth;
-          y1 = pageY + (1 - y - height) * pageHeight;
-          x2 = pageX + (x + width) * pageWidth;
-          y2 = pageY + (1 - y) * pageHeight;
+          x1 = pageX + x2 * pageWidth;
+          y1 = pageY + (1 - y2 - height) * pageHeight;
+          x22 = pageX + (x2 + width) * pageWidth;
+          y22 = pageY + (1 - y2) * pageHeight;
           break;
         case 90:
           rescaleFn = Outline._rescaleAndSwap;
@@ -23029,10 +23029,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           ty = pageY;
           sx = pageWidth;
           sy = pageHeight;
-          x1 = pageX + y * pageWidth;
-          y1 = pageY + x * pageHeight;
-          x2 = pageX + (y + height) * pageWidth;
-          y2 = pageY + (x + width) * pageHeight;
+          x1 = pageX + y2 * pageWidth;
+          y1 = pageY + x2 * pageHeight;
+          x22 = pageX + (y2 + height) * pageWidth;
+          y22 = pageY + (x2 + width) * pageHeight;
           break;
         case 180:
           rescaleFn = Outline._rescale;
@@ -23040,10 +23040,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           ty = pageY;
           sx = -pageWidth;
           sy = pageHeight;
-          x1 = pageX + (1 - x - width) * pageWidth;
-          y1 = pageY + y * pageHeight;
-          x2 = pageX + (1 - x) * pageWidth;
-          y2 = pageY + (y + height) * pageHeight;
+          x1 = pageX + (1 - x2 - width) * pageWidth;
+          y1 = pageY + y2 * pageHeight;
+          x22 = pageX + (1 - x2) * pageWidth;
+          y22 = pageY + (y2 + height) * pageHeight;
           break;
         case 270:
           rescaleFn = Outline._rescaleAndSwap;
@@ -23051,10 +23051,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           ty = pageY + pageHeight;
           sx = -pageWidth;
           sy = -pageHeight;
-          x1 = pageX + (1 - y - height) * pageWidth;
-          y1 = pageY + (1 - x - width) * pageHeight;
-          x2 = pageX + (1 - y) * pageWidth;
-          y2 = pageY + (1 - x) * pageHeight;
+          x1 = pageX + (1 - y2 - height) * pageWidth;
+          y1 = pageY + (1 - x2 - width) * pageHeight;
+          x22 = pageX + (1 - y2) * pageWidth;
+          y22 = pageY + (1 - x2) * pageHeight;
           break;
       }
       for (const {
@@ -23067,7 +23067,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       return {
         lines: serializedLines,
         points: serializedPoints,
-        rect: [x1, y1, x2, y2]
+        rect: [x1, y1, x22, y22]
       };
     }
     static deserialize(pageX, pageY, pageWidth, pageHeight, innerMargin, {
@@ -23127,17 +23127,17 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           let [x1, y1, x2, y2] = point.subarray(0, 4);
           line.set([NaN, NaN, NaN, NaN, x1, y1], 0);
           for (let i = 4; i < len; i += 2) {
-            const x = point[i];
-            const y = point[i + 1];
-            line.set(Outline.createBezierPoints(x1, y1, x2, y2, x, y), (i - 2) * 3);
-            [x1, y1, x2, y2] = [x2, y2, x, y];
+            const x3 = point[i];
+            const y3 = point[i + 1];
+            line.set(Outline.createBezierPoints(x1, y1, x2, y2, x3, y3), (i - 2) * 3);
+            [x1, y1, x2, y2] = [x2, y2, x3, y3];
           }
         }
       }
       for (let i = 0, ii = lines.length; i < ii; i++) {
         newLines.push({
-          line: rescaleFn(lines[i].map((x) => x ?? NaN), tx, ty, sx, sy),
-          points: rescaleFn(points[i].map((x) => x ?? NaN), tx, ty, sx, sy)
+          line: rescaleFn(lines[i].map((x2) => x2 ?? NaN), tx, ty, sx, sy),
+          points: rescaleFn(points[i].map((x2) => x2 ?? NaN), tx, ty, sx, sy)
         });
       }
       const outlines = new this.prototype.constructor();
@@ -23149,9 +23149,9 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       return this.#rotation % 180 === 0 ? [margin / this.#parentWidth, margin / this.#parentHeight] : [margin / this.#parentHeight, margin / this.#parentWidth];
     }
     #getBBoxWithNoMargin() {
-      const [x, y, width, height] = this.#bbox;
+      const [x2, y2, width, height] = this.#bbox;
       const [marginX, marginY] = this.#getMarginComponents(0);
-      return [x + marginX, y + marginY, width - 2 * marginX, height - 2 * marginY];
+      return [x2 + marginX, y2 + marginY, width - 2 * marginX, height - 2 * marginY];
     }
     #computeBbox() {
       const bbox = this.#bbox = F32_BBOX_INIT.slice();
@@ -23166,10 +23166,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         }
         let lastX = line[4], lastY = line[5];
         for (let i = 6, ii = line.length; i < ii; i += 6) {
-          const [c1x, c1y, c2x, c2y, x, y] = line.subarray(i, i + 6);
-          Util.bezierBoundingBox(lastX, lastY, c1x, c1y, c2x, c2y, x, y, bbox);
-          lastX = x;
-          lastY = y;
+          const [c1x, c1y, c2x, c2y, x2, y2] = line.subarray(i, i + 6);
+          Util.bezierBoundingBox(lastX, lastY, c1x, c1y, c2x, c2y, x2, y2, bbox);
+          lastX = x2;
+          lastY = y2;
         }
       }
       const [marginX, marginY] = this.#getMarginComponents();
@@ -23228,22 +23228,22 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       return this.#bbox.map(Outline.svgRound).join(" ");
     }
     get defaultProperties() {
-      const [x, y] = this.#bbox;
+      const [x2, y2] = this.#bbox;
       return {
         root: {
           viewBox: this.viewBox
         },
         path: {
-          "transform-origin": `${Outline.svgRound(x)} ${Outline.svgRound(y)}`
+          "transform-origin": `${Outline.svgRound(x2)} ${Outline.svgRound(y2)}`
         }
       };
     }
     get rotationTransform() {
       const [, , width, height] = this.#bbox;
-      let a = 0, b = 0, c = 0, d = 0, e = 0, f = 0;
+      let a = 0, b2 = 0, c = 0, d = 0, e = 0, f = 0;
       switch (this.#currentRotation) {
         case 90:
-          b = height / width;
+          b2 = height / width;
           c = -width / height;
           e = width;
           break;
@@ -23254,21 +23254,21 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           f = height;
           break;
         case 270:
-          b = -height / width;
+          b2 = -height / width;
           c = width / height;
           f = height;
           break;
         default:
           return "";
       }
-      return `matrix(${a} ${b} ${c} ${d} ${Outline.svgRound(e)} ${Outline.svgRound(f)})`;
+      return `matrix(${a} ${b2} ${c} ${d} ${Outline.svgRound(e)} ${Outline.svgRound(f)})`;
     }
     getPathResizingSVGProperties([newX, newY, newWidth, newHeight]) {
       const [marginX, marginY] = this.#getMarginComponents();
-      const [x, y, width, height] = this.#bbox;
+      const [x2, y2, width, height] = this.#bbox;
       if (Math.abs(width - marginX) <= Outline.PRECISION || Math.abs(height - marginY) <= Outline.PRECISION) {
-        const tx = newX + newWidth / 2 - (x + width / 2);
-        const ty = newY + newHeight / 2 - (y + height / 2);
+        const tx = newX + newWidth / 2 - (x2 + width / 2);
+        const ty = newY + newHeight / 2 - (y2 + height / 2);
         return {
           path: {
             "transform-origin": `${Outline.svgRound(newX)} ${Outline.svgRound(newY)}`,
@@ -23282,7 +23282,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       const s2y = height / newHeight;
       return {
         path: {
-          "transform-origin": `${Outline.svgRound(x)} ${Outline.svgRound(y)}`,
+          "transform-origin": `${Outline.svgRound(x2)} ${Outline.svgRound(y2)}`,
           transform: `${this.rotationTransform} scale(${s2x} ${s2y}) translate(${Outline.svgRound(marginX)} ${Outline.svgRound(marginY)}) scale(${s1x} ${s1y}) translate(${Outline.svgRound(-marginX)} ${Outline.svgRound(-marginY)})`
         }
       };
@@ -23290,14 +23290,14 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     getPathResizedSVGProperties([newX, newY, newWidth, newHeight]) {
       const [marginX, marginY] = this.#getMarginComponents();
       const bbox = this.#bbox;
-      const [x, y, width, height] = bbox;
+      const [x2, y2, width, height] = bbox;
       bbox[0] = newX;
       bbox[1] = newY;
       bbox[2] = newWidth;
       bbox[3] = newHeight;
       if (Math.abs(width - marginX) <= Outline.PRECISION || Math.abs(height - marginY) <= Outline.PRECISION) {
-        const tx2 = newX + newWidth / 2 - (x + width / 2);
-        const ty2 = newY + newHeight / 2 - (y + height / 2);
+        const tx2 = newX + newWidth / 2 - (x2 + width / 2);
+        const ty2 = newY + newHeight / 2 - (y2 + height / 2);
         for (const {
           line,
           points
@@ -23318,8 +23318,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       }
       const s1x = (newWidth - 2 * marginX) / (width - 2 * marginX);
       const s1y = (newHeight - 2 * marginY) / (height - 2 * marginY);
-      const tx = -s1x * (x + marginX) + newX + marginX;
-      const ty = -s1y * (y + marginY) + newY + marginY;
+      const tx = -s1x * (x2 + marginX) + newX + marginX;
+      const ty = -s1y * (y2 + marginY) + newY + marginY;
       if (s1x !== 1 || s1y !== 1 || tx !== 0 || ty !== 0) {
         for (const {
           line,
@@ -23452,8 +23452,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     static get typesMap() {
       return shadow(this, "typesMap", /* @__PURE__ */ new Map([[AnnotationEditorParamsType.INK_THICKNESS, "stroke-width"], [AnnotationEditorParamsType.INK_COLOR, "stroke"], [AnnotationEditorParamsType.INK_OPACITY, "stroke-opacity"]]));
     }
-    static createDrawerInstance(x, y, parentWidth, parentHeight, rotation) {
-      return new InkDrawOutliner(x, y, parentWidth, parentHeight, rotation, this._defaultDrawingOptions["stroke-width"]);
+    static createDrawerInstance(x2, y2, parentWidth, parentHeight, rotation) {
+      return new InkDrawOutliner(x2, y2, parentWidth, parentHeight, rotation, this._defaultDrawingOptions["stroke-width"]);
     }
     static deserializeDraw(pageX, pageY, pageWidth, pageHeight, innerMargin, data) {
       return InkDrawOutline.deserialize(pageX, pageY, pageWidth, pageHeight, innerMargin, data);
@@ -23663,22 +23663,22 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       sigmaR: 25,
       kernelSize: 16
     };
-    static #neighborIndexToId(i0, j0, i, j) {
+    static #neighborIndexToId(i0, j0, i, j2) {
       i -= i0;
-      j -= j0;
+      j2 -= j0;
       if (i === 0) {
-        return j > 0 ? 0 : 4;
+        return j2 > 0 ? 0 : 4;
       }
       if (i === 1) {
-        return j + 6;
+        return j2 + 6;
       }
-      return 2 - j;
+      return 2 - j2;
     }
     static #neighborIdToIndex = new Int32Array([0, 1, -1, 1, -1, 0, -1, -1, 0, -1, 1, -1, 1, 0, 1, 1]);
-    static #clockwiseNonZero(buf, width, i0, j0, i, j, offset) {
-      const id = this.#neighborIndexToId(i0, j0, i, j);
-      for (let k = 0; k < 8; k++) {
-        const kk = (-k + id - offset + 16) % 8;
+    static #clockwiseNonZero(buf, width, i0, j0, i, j2, offset) {
+      const id = this.#neighborIndexToId(i0, j0, i, j2);
+      for (let k2 = 0; k2 < 8; k2++) {
+        const kk = (-k2 + id - offset + 16) % 8;
         const shiftI = this.#neighborIdToIndex[2 * kk];
         const shiftJ = this.#neighborIdToIndex[2 * kk + 1];
         if (buf[(i0 + shiftI) * width + (j0 + shiftJ)] !== 0) {
@@ -23687,10 +23687,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       }
       return -1;
     }
-    static #counterClockwiseNonZero(buf, width, i0, j0, i, j, offset) {
-      const id = this.#neighborIndexToId(i0, j0, i, j);
-      for (let k = 0; k < 8; k++) {
-        const kk = (k + id + offset + 16) % 8;
+    static #counterClockwiseNonZero(buf, width, i0, j0, i, j2, offset) {
+      const id = this.#neighborIndexToId(i0, j0, i, j2);
+      for (let k2 = 0; k2 < 8; k2++) {
+        const kk = (k2 + id + offset + 16) % 8;
         const shiftI = this.#neighborIdToIndex[2 * kk];
         const shiftJ = this.#neighborIdToIndex[2 * kk + 1];
         if (buf[(i0 + shiftI) * width + (j0 + shiftJ)] !== 0) {
@@ -23700,9 +23700,9 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       return -1;
     }
     static #findContours(buf, width, height, threshold) {
-      const N = buf.length;
-      const types = new Int32Array(N);
-      for (let i = 0; i < N; i++) {
+      const N2 = buf.length;
+      const types = new Int32Array(N2);
+      for (let i = 0; i < N2; i++) {
         types[i] = buf[i] <= threshold ? 1 : 0;
       }
       for (let i = 1; i < height - 1; i++) {
@@ -23716,20 +23716,20 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       const contours = [];
       for (let i = 1; i < height - 1; i++) {
         lnbd = 1;
-        for (let j = 1; j < width - 1; j++) {
-          const ij = i * width + j;
+        for (let j2 = 1; j2 < width - 1; j2++) {
+          const ij = i * width + j2;
           const pix = types[ij];
           if (pix === 0) {
             continue;
           }
           let i2 = i;
-          let j2 = j;
+          let j22 = j2;
           if (pix === 1 && types[ij - 1] === 0) {
             nbd += 1;
-            j2 -= 1;
+            j22 -= 1;
           } else if (pix >= 1 && types[ij + 1] === 0) {
             nbd += 1;
-            j2 += 1;
+            j22 += 1;
             if (pix > 1) {
               lnbd = pix;
             }
@@ -23739,8 +23739,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             }
             continue;
           }
-          const points = [j, i];
-          const isHole = j2 === j + 1;
+          const points = [j2, i];
+          const isHole = j22 === j2 + 1;
           const contour = {
             isHole,
             points,
@@ -23762,24 +23762,24 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           } else {
             contour.parent = isHole ? lnbd : contour0.parent;
           }
-          const k = this.#clockwiseNonZero(types, width, i, j, i2, j2, 0);
-          if (k === -1) {
+          const k2 = this.#clockwiseNonZero(types, width, i, j2, i2, j22, 0);
+          if (k2 === -1) {
             types[ij] = -nbd;
             if (types[ij] !== 1) {
               lnbd = Math.abs(types[ij]);
             }
             continue;
           }
-          let shiftI = this.#neighborIdToIndex[2 * k];
-          let shiftJ = this.#neighborIdToIndex[2 * k + 1];
+          let shiftI = this.#neighborIdToIndex[2 * k2];
+          let shiftJ = this.#neighborIdToIndex[2 * k2 + 1];
           const i1 = i + shiftI;
-          const j1 = j + shiftJ;
+          const j1 = j2 + shiftJ;
           i2 = i1;
-          j2 = j1;
+          j22 = j1;
           let i3 = i;
-          let j3 = j;
+          let j3 = j2;
           while (true) {
-            const kk = this.#counterClockwiseNonZero(types, width, i3, j3, i2, j2, 1);
+            const kk = this.#counterClockwiseNonZero(types, width, i3, j3, i2, j22, 1);
             shiftI = this.#neighborIdToIndex[2 * kk];
             shiftJ = this.#neighborIdToIndex[2 * kk + 1];
             const i4 = i3 + shiftI;
@@ -23791,14 +23791,14 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             } else if (types[ij3] === 1) {
               types[ij3] = nbd;
             }
-            if (i4 === i && j4 === j && i3 === i1 && j3 === j1) {
+            if (i4 === i && j4 === j2 && i3 === i1 && j3 === j1) {
               if (types[ij] !== 1) {
                 lnbd = Math.abs(types[ij]);
               }
               break;
             } else {
               i2 = i3;
-              j2 = j3;
+              j22 = j3;
               i3 = i4;
               j3 = j4;
             }
@@ -23822,9 +23822,9 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       const nabx = abx / dist;
       const naby = aby / dist;
       const aa = nabx * ay - naby * ax;
-      const m = aby / abx;
+      const m2 = aby / abx;
       const invS = 1 / dist;
-      const phi = Math.atan(m);
+      const phi = Math.atan(m2);
       const cosPhi = Math.cos(phi);
       const sinPhi = Math.sin(phi);
       const tmax = invS * (Math.abs(cosPhi) + Math.abs(sinPhi));
@@ -23858,9 +23858,9 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       const sigmaS2 = -2 * sigmaS ** 2;
       const halfSize = kernelSize >> 1;
       for (let i = 0; i < kernelSize; i++) {
-        const x = (i - halfSize) ** 2;
-        for (let j = 0; j < kernelSize; j++) {
-          kernel[i * kernelSize + j] = Math.exp((x + (j - halfSize) ** 2) / sigmaS2);
+        const x2 = (i - halfSize) ** 2;
+        for (let j2 = 0; j2 < kernelSize; j2++) {
+          kernel[i * kernelSize + j2] = Math.exp((x2 + (j2 - halfSize) ** 2) / sigmaS2);
         }
       }
       const rangeValues = new Float32Array(256);
@@ -23868,29 +23868,29 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       for (let i = 0; i < 256; i++) {
         rangeValues[i] = Math.exp(i ** 2 / sigmaR2);
       }
-      const N = buf.length;
-      const out = new Uint8Array(N);
+      const N2 = buf.length;
+      const out = new Uint8Array(N2);
       const histogram = new Uint32Array(256);
       for (let i = 0; i < height; i++) {
-        for (let j = 0; j < width; j++) {
-          const ij = i * width + j;
+        for (let j2 = 0; j2 < width; j2++) {
+          const ij = i * width + j2;
           const center = buf[ij];
           let sum = 0;
           let norm = 0;
-          for (let k = 0; k < kernelSize; k++) {
-            const y = i + k - halfSize;
-            if (y < 0 || y >= height) {
+          for (let k2 = 0; k2 < kernelSize; k2++) {
+            const y2 = i + k2 - halfSize;
+            if (y2 < 0 || y2 >= height) {
               continue;
             }
             for (let l = 0; l < kernelSize; l++) {
-              const x = j + l - halfSize;
-              if (x < 0 || x >= width) {
+              const x2 = j2 + l - halfSize;
+              if (x2 < 0 || x2 >= width) {
                 continue;
               }
-              const neighbour = buf[y * width + x];
-              const w = kernel[k * kernelSize + l] * rangeValues[Math.abs(neighbour - center)];
-              sum += neighbour * w;
-              norm += w;
+              const neighbour = buf[y2 * width + x2];
+              const w2 = kernel[k2 * kernelSize + l] * rangeValues[Math.abs(neighbour - center)];
+              sum += neighbour * w2;
+              norm += w2;
             }
           }
           const pix = out[ij] = Math.round(sum / norm);
@@ -23901,14 +23901,14 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     }
     static #getHistogram(buf) {
       const histogram = new Uint32Array(256);
-      for (const g of buf) {
-        histogram[g]++;
+      for (const g2 of buf) {
+        histogram[g2]++;
       }
       return histogram;
     }
     static #toUint8(buf) {
-      const N = buf.length;
-      const out = new Uint8ClampedArray(N >> 2);
+      const N2 = buf.length;
+      const out = new Uint8ClampedArray(N2 >> 2);
       let max = -Infinity;
       let min = Infinity;
       for (let i = 0, ii = out.length; i < ii; i++) {
@@ -23924,19 +23924,19 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     }
     static #guessThreshold(histogram) {
       let i;
-      let M = -Infinity;
-      let L = -Infinity;
-      const min = histogram.findIndex((v) => v !== 0);
+      let M2 = -Infinity;
+      let L2 = -Infinity;
+      const min = histogram.findIndex((v2) => v2 !== 0);
       let pos = min;
       let spos = min;
       for (i = min; i < 256; i++) {
-        const v = histogram[i];
-        if (v > M) {
-          if (i - pos > L) {
-            L = i - pos;
+        const v2 = histogram[i];
+        if (v2 > M2) {
+          if (i - pos > L2) {
+            L2 = i - pos;
             spos = i - 1;
           }
-          M = v;
+          M2 = v2;
           pos = i;
         }
       }
@@ -24116,10 +24116,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         newPoints.set([x1, y1, x2, y2], 0);
         line.set([NaN, NaN, NaN, NaN, x1, y1], 0);
         for (let i = 4; i < len; i += 2) {
-          const x = newPoints[i] = reducedPoints[i] * xScale;
-          const y = newPoints[i + 1] = reducedPoints[i + 1] * yScale;
-          line.set(Outline.createBezierPoints(x1, y1, x2, y2, x, y), (i - 2) * 3);
-          [x1, y1, x2, y2] = [x2, y2, x, y];
+          const x3 = newPoints[i] = reducedPoints[i] * xScale;
+          const y3 = newPoints[i + 1] = reducedPoints[i + 1] * yScale;
+          line.set(Outline.createBezierPoints(x1, y1, x2, y2, x3, y3), (i - 2) * 3);
+          [x1, y1, x2, y2] = [x2, y2, x3, y3];
         }
       }
       if (linesAndPoints.length === 0) {
@@ -24246,11 +24246,11 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           const len = header[POINTS_PROPERTIES_NUMBER * i + BASE_HEADER_LENGTH];
           const points = new Float32Array(len + 2);
           outlines.push(points);
-          for (let j = 0; j < POINTS_PROPERTIES_NUMBER - 1; j++) {
-            points[j] = header[POINTS_PROPERTIES_NUMBER * i + BASE_HEADER_LENGTH + j + 1];
+          for (let j2 = 0; j2 < POINTS_PROPERTIES_NUMBER - 1; j2++) {
+            points[j2] = header[POINTS_PROPERTIES_NUMBER * i + BASE_HEADER_LENGTH + j2 + 1];
           }
-          for (let j = 0; j < len; j++) {
-            points[j + 2] = points[j] + diffs[offset++];
+          for (let j2 = 0; j2 < len; j2++) {
+            points[j2 + 2] = points[j2] + diffs[offset++];
           }
         }
         return {
@@ -25835,17 +25835,17 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     }
     #getCenterPoint() {
       const {
-        x,
-        y,
+        x: x2,
+        y: y2,
         width,
         height
       } = this.boundingClientRect;
-      const tlX = Math.max(0, x);
-      const tlY = Math.max(0, y);
-      const brX = Math.min(window.innerWidth, x + width);
-      const brY = Math.min(window.innerHeight, y + height);
-      const centerX = (tlX + brX) / 2 - x;
-      const centerY = (tlY + brY) / 2 - y;
+      const tlX = Math.max(0, x2);
+      const tlY = Math.max(0, y2);
+      const brX = Math.min(window.innerWidth, x2 + width);
+      const brY = Math.min(window.innerHeight, y2 + height);
+      const centerX = (tlX + brX) / 2 - x2;
+      const centerY = (tlY + brY) / 2 - y2;
       const [offsetX, offsetY] = this.viewport.rotation % 180 === 0 ? [centerX, centerY] : [centerY, centerX];
       return {
         offsetX,
@@ -25967,8 +25967,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       this.#focusedElement = null;
       return this.#currentEditorType.endDrawing(isAborted);
     }
-    findNewParent(editor, x, y) {
-      const layer = this.#uiManager.findParent(x, y);
+    findNewParent(editor, x2, y2) {
+      const layer = this.#uiManager.findParent(x2, y2);
       if (layer === null || layer === this) {
         return false;
       }
@@ -26079,12 +26079,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     static get _svgFactory() {
       return shadow(this, "_svgFactory", new DOMSVGFactory());
     }
-    static #setBox(element, [x, y, width, height]) {
+    static #setBox(element, [x2, y2, width, height]) {
       const {
         style
       } = element;
-      style.top = `${100 * y}%`;
-      style.left = `${100 * x}%`;
+      style.top = `${100 * y2}%`;
+      style.left = `${100 * x2}%`;
       style.width = `${100 * width}%`;
       style.height = `${100 * height}%`;
     }
@@ -26419,6 +26419,67 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
 
   // src/client/api.js
   var errors = {
+    ANNOTATION_HISTORY_EMPTY: [
+      "\u5F53\u524D\u6CA1\u6709\u53EF\u4EE5\u64A4\u9500\u6216\u91CD\u505A\u7684\u6807\u6CE8\u64CD\u4F5C\u3002",
+      "No annotation action is available to undo or redo."
+    ],
+    ANNOTATION_HISTORY_CONFLICT: [
+      "\u8FD9\u6761\u6807\u6CE8\u5DF2\u88AB\u5176\u4ED6\u64CD\u4F5C\u4FEE\u6539\uFF0C\u672A\u6267\u884C\u64A4\u9500\u3002\u8BF7\u6838\u5BF9\u5F53\u524D\u6807\u6CE8\u3002",
+      "This annotation was changed elsewhere. Undo was not applied; review its current state."
+    ],
+    REVIEW_RANGE_INVALID: [
+      "\u56DE\u987E\u8D77\u59CB\u65F6\u95F4\u4E0D\u80FD\u665A\u4E8E\u7ED3\u675F\u65F6\u95F4\uFF0C\u8BF7\u68C0\u67E5\u53D6\u6750\u8303\u56F4\u3002",
+      "The review start must not follow its end. Check the source range."
+    ],
+    CITATION_NOT_READ: [
+      "\u8FD9\u6BB5\u539F\u6587\u5C1A\u672A\u6838\u5BF9\uFF0C\u6682\u4E0D\u80FD\u4F5C\u4E3A\u7CBE\u786E\u5F15\u7528\u3002",
+      "This passage has not been verified for an exact citation."
+    ],
+    CITATION_AMBIGUOUS: [
+      "\u539F\u6587\u6709\u591A\u5904\u76F8\u540C\u5185\u5BB9\uFF0C\u9700\u8981\u8FDB\u4E00\u6B65\u786E\u8BA4\u5F15\u7528\u4F4D\u7F6E\u3002",
+      "The quote occurs more than once; its position needs confirmation."
+    ],
+    PROMPT_CHANGED: [
+      "\u65B9\u6CD5\u6216\u53C2\u8003\u5185\u5BB9\u5DF2\u53D8\u5316\uFF0C\u8BF7\u67E5\u770B\u66F4\u65B0\u540E\u7684\u63D0\u793A\u8BCD\u518D\u53D1\u9001\u3002",
+      "Method or source changed. Review the updated prompt before sending."
+    ],
+    PROMPT_TOO_LONG: [
+      "\u5C55\u5F00\u540E\u7684\u63D0\u793A\u8BCD\u592A\u957F\uFF0C\u8BF7\u51CF\u5C11\u6A21\u677F\u91CD\u590D\u6216\u7B14\u8BB0\u5185\u5BB9\u3002",
+      "The expanded prompt is too long. Reduce repeated variables or included notes."
+    ],
+    METHOD_NOT_FOUND: [
+      "\u627E\u4E0D\u5230\u8BE5\u65B9\u6CD5\uFF0C\u8BF7\u4ECE\u65B9\u6CD5\u5E93\u9009\u62E9\u5176\u4ED6\u65B9\u6CD5\u3002",
+      "Method not found. Choose another method from the library."
+    ],
+    METHOD_DISABLED: [
+      "\u8FD9\u4E2A\u65B9\u6CD5\u5DF2\u505C\u7528\uFF0C\u8BF7\u91CD\u65B0\u542F\u7528\u6216\u5207\u6362\u65B9\u6CD5\u3002",
+      "This method is disabled. Enable it or choose another."
+    ],
+    ABSOLUTE_DIRECTORY_REQUIRED: [
+      "\u8BF7\u8F93\u5165\u672C\u673A\u7EDD\u5BF9\u76EE\u5F55\u6216\u6587\u4EF6\u8DEF\u5F84\u3002",
+      "Enter an absolute local path."
+    ],
+    DIRECTORY_REQUIRED: ["\u8BF7\u9009\u62E9\u4E00\u4E2A\u76EE\u5F55\u3002", "Choose a directory."],
+    DIRECTORY_NOT_FOUND: [
+      "\u5173\u8054\u76EE\u5F55\u4E0D\u5B58\u5728\uFF0C\u8BF7\u91CD\u65B0\u9009\u62E9\u3002",
+      "Linked folder not found. Select it again."
+    ],
+    ORIGINAL_HASH_MISMATCH: [
+      "\u539F\u4E66\u5185\u5BB9\u4E0E\u8BB0\u5F55\u4E0D\u4E00\u81F4\uFF0C\u8BF7\u91CD\u65B0\u5B9A\u4F4D\u6B63\u786E\u7248\u672C\uFF1B\u7B14\u8BB0\u5DF2\u4FDD\u7559\u3002",
+      "The original differs from the recorded version. Locate the correct file; notes are preserved."
+    ],
+    TARGET_FILE_CONFLICT: [
+      "\u76EE\u6807\u4F4D\u7F6E\u5DF2\u6709\u4E0D\u540C\u5185\u5BB9\u7684\u6587\u4EF6\uFF0C\u8BF7\u9009\u62E9\u5176\u4ED6\u76EE\u5F55\u3002",
+      "The destination contains a different file. Choose another location."
+    ],
+    COPY_VERIFY_FAILED: [
+      "\u590D\u5236\u6821\u9A8C\u5931\u8D25\uFF0C\u4E66\u5E93\u4F4D\u7F6E\u672A\u5207\u6362\u3002",
+      "Copy verification failed. The library location was not changed."
+    ],
+    METHOD_IMPORT_INVALID: [
+      "\u65B9\u6CD5 JSON \u683C\u5F0F\u4E0D\u53D7\u652F\u6301\u3002",
+      "Unsupported methods JSON format."
+    ],
     BACKUP_SIZE_LIMIT: [
       "\u5907\u4EFD\u89E3\u538B\u540E\u8D85\u8FC7\u9996\u7248 192 MiB \u9650\u5236\uFF0C\u8BF7\u6539\u7528\u4E0D\u542B\u539F\u4E66\u7684\u5907\u4EFD\uFF0C\u6216\u5148\u5BFC\u51FA\u5404\u4E66\u7B14\u8BB0\u3002",
       "Backup exceeds the 192 MiB uncompressed limit. Exclude originals or export notes per book."
@@ -26501,8 +26562,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       "Configure an available model in DSH first."
     ],
     SPIRIT_BUSY: [
-      "\u4E66\u7075\u6B63\u5728\u56DE\u590D\uFF0C\u8BF7\u7B49\u5F85\u6216\u505C\u6B62\u5F53\u524D\u56DE\u590D\u3002",
-      "Book Spirit is replying. Wait or stop the current response."
+      "\u4E66\u866B\u6B63\u5728\u56DE\u590D\uFF0C\u8BF7\u7B49\u5F85\u6216\u505C\u6B62\u5F53\u524D\u56DE\u590D\u3002",
+      "Bookworm is replying. Wait or stop the current response."
     ],
     EXERCISE_PAUSED: ["\u8BF7\u5148\u7EE7\u7EED\u8FD9\u6B21\u7EC3\u4E60\u3002", "Resume this exercise first."],
     MESSAGE_REQUIRED: [
@@ -26514,12 +26575,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       "Enter a goal or question first."
     ],
     SPIRIT_UNAVAILABLE: [
-      "\u4E66\u7075\u670D\u52A1\u5C1A\u672A\u5C31\u7EEA\uFF0C\u8BF7\u7A0D\u540E\u91CD\u8BD5\u3002",
-      "Book Spirit is not ready. Try again shortly."
+      "\u4E66\u866B\u670D\u52A1\u5C1A\u672A\u5C31\u7EEA\uFF0C\u8BF7\u7A0D\u540E\u91CD\u8BD5\u3002",
+      "Bookworm is not ready. Try again shortly."
     ],
     SPIRIT_CLOSED: [
-      "\u4E66\u7075\u6B63\u5728\u91CD\u65B0\u52A0\u8F7D\uFF0C\u8BF7\u91CD\u65B0\u6253\u5F00\u8BA8\u8BBA\u3002",
-      "Book Spirit is reloading. Reopen the discussion."
+      "\u4E66\u866B\u6B63\u5728\u91CD\u65B0\u52A0\u8F7D\uFF0C\u8BF7\u91CD\u65B0\u6253\u5F00\u8BA8\u8BBA\u3002",
+      "Bookworm is reloading. Reopen the discussion."
     ],
     STORE_CLOSED: [
       "\u4E66\u623F\u6B63\u5728\u91CD\u65B0\u52A0\u8F7D\uFF0C\u8BF7\u5237\u65B0\u540E\u91CD\u8BD5\u3002",
@@ -26573,38 +26634,3810 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       s += String.fromCharCode(...bytes.subarray(i, i + 32768));
     return btoa(s);
   }
-  var stageNames = {
-    free: { zh: ["\u4EA4\u6D41", "\u56DE\u987E"], en: ["Discuss", "Reflect"] },
-    hunt: {
-      zh: ["\u660E\u786E\u95EE\u9898", "\u9605\u8BFB\u8DEF\u7EBF", "\u8054\u7CFB\u81EA\u8EAB", "\u6211\u7684\u7406\u89E3"],
-      en: ["Question", "Reading route", "Personal context", "My understanding"]
-    },
-    feynman: {
-      zh: ["\u6211\u7684\u89E3\u91CA", "\u8FFD\u95EE\u4E0E\u4F8B\u5B50", "\u65B0\u60C5\u5883", "\u518D\u6B21\u89E3\u91CA"],
-      en: [
-        "My explanation",
-        "Questions & examples",
-        "New context",
-        "Explain again"
-      ]
-    },
-    debate: {
-      zh: ["\u8FD8\u539F\u89C2\u70B9", "\u652F\u6301\u4E0E\u6311\u6218", "\u56DE\u5E94\u4E0E\u8FB9\u754C", "\u6211\u7684\u5224\u65AD"],
-      en: [
-        "Clarify claim",
-        "Support & challenge",
-        "Response & limits",
-        "My judgment"
-      ]
-    }
-  };
 
   // src/client/forms.jsx
+  var import_react15 = __toESM(__require("react"), 1);
+
+  // src/client/import-wizard.jsx
   var import_react = __toESM(__require("react"), 1);
-  function RecordCard({ r, t, date, onEdit, onTrash, onSource }) {
-    return /* @__PURE__ */ import_react.default.createElement("article", { className: "card" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "row spread" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "pill" }, t(r.kind)), /* @__PURE__ */ import_react.default.createElement("span", { className: "muted small" }, date(r.createdAt))), r.anchor?.quote && /* @__PURE__ */ import_react.default.createElement("blockquote", null, r.anchor.quote), /* @__PURE__ */ import_react.default.createElement("p", { className: "recordBody" }, r.body), /* @__PURE__ */ import_react.default.createElement("div", { className: "muted small" }, r.origin === "user" ? t("myRecord") : t("aiRecord")), /* @__PURE__ */ import_react.default.createElement("div", { className: "row", style: { marginTop: 10 } }, r.anchor && onSource && /* @__PURE__ */ import_react.default.createElement("button", { onClick: () => onSource(r.anchor) }, t("source")), onEdit && /* @__PURE__ */ import_react.default.createElement("button", { onClick: () => onEdit(r) }, t("edit")), onTrash && /* @__PURE__ */ import_react.default.createElement("button", { onClick: () => onTrash(r) }, t(r.deletedAt ? "restore" : "remove"))), r.history?.length > 0 && /* @__PURE__ */ import_react.default.createElement("details", { style: { marginTop: 10 } }, /* @__PURE__ */ import_react.default.createElement("summary", null, t("versions"), " (", r.history.length, ")"), r.history.map((v, i) => /* @__PURE__ */ import_react.default.createElement("div", { className: "card small", key: i }, /* @__PURE__ */ import_react.default.createElement("div", null, date(v.at)), /* @__PURE__ */ import_react.default.createElement("p", { className: "recordBody" }, v.body)))));
+  function ImportWizard({
+    t,
+    run,
+    busy,
+    refresh,
+    close,
+    open,
+    initialPath = "",
+    libraryPath = ""
+  }) {
+    const [mode, setMode] = (0, import_react.useState)(initialPath ? "folder" : "files"), [path, setPath] = (0, import_react.useState)(initialPath), [recursive, setRecursive] = (0, import_react.useState)(true), [checkOnOpen, setCheckOnOpen] = (0, import_react.useState)(false), [items, setItems] = (0, import_react.useState)([]), [results, setResults] = (0, import_react.useState)([]), [done, setDone] = (0, import_react.useState)(false), [encoding, setEncoding] = (0, import_react.useState)("utf-8");
+    const stop = (0, import_react.useRef)(false);
+    async function finish(list, selectedMode = mode) {
+      stop.current = false;
+      setDone(false);
+      const output = [];
+      let dir = null;
+      if (selectedMode === "linked") {
+        dir = (await rpc({
+          action: "addDirectory",
+          path,
+          recursive,
+          checkOnOpen,
+          excludedPaths: items.filter((x2) => x2.selected === false).map((x2) => x2.path),
+          requestId: request()
+        })).directory;
+      }
+      for (const f of list) {
+        if (stop.current) break;
+        try {
+          let v2;
+          if (f.file) {
+            const r = await fetch(
+              API + "/upload?name=" + encodeURIComponent(f.name) + "&encoding=" + encoding + "&requestId=" + request(),
+              { method: "POST", body: f.file }
+            );
+            const d = await r.json();
+            if (!d.ok) throw new Error(d.error);
+            v2 = d.value;
+          } else
+            v2 = await rpc({
+              action: "importPath",
+              path: f.path,
+              encoding,
+              link: selectedMode === "linked",
+              directoryId: dir?.id,
+              requestId: request()
+            });
+          output.push({
+            ...f,
+            file: void 0,
+            bookId: v2.book.id,
+            title: v2.book.title,
+            status: v2.duplicate ? "duplicate" : "success"
+          });
+        } catch (e) {
+          output.push({
+            ...f,
+            status: "failed",
+            error: localizeError(e.message, t)
+          });
+        }
+        setResults([...output]);
+      }
+      setDone(true);
+      await refresh();
+    }
+    async function choose() {
+      try {
+        const v2 = await rpc({ action: "pickDirectory" });
+        if (v2.path) setPath(v2.path);
+      } catch {
+        inputRef.current?.focus();
+      }
+    }
+    const inputRef = (0, import_react.useRef)(null), ok = results.filter((x2) => x2.status !== "failed"), bad = results.filter((x2) => x2.status === "failed");
+    if (done)
+      return /* @__PURE__ */ import_react.default.createElement("div", { className: "form" }, /* @__PURE__ */ import_react.default.createElement("h3", null, t("importDone")), /* @__PURE__ */ import_react.default.createElement("div", { className: "row" }, [
+        ["successCount", "success"],
+        ["duplicateCount", "duplicate"],
+        ["failedCount", "failed"]
+      ].map(([label, status]) => /* @__PURE__ */ import_react.default.createElement("span", { className: "pill", key: status }, t(label), " \xB7 ", results.filter((x2) => x2.status === status).length))), /* @__PURE__ */ import_react.default.createElement("div", { className: "arr-import-results" }, results.map((x2, i) => /* @__PURE__ */ import_react.default.createElement("div", { className: "card row spread", key: i }, /* @__PURE__ */ import_react.default.createElement("span", { className: "grow" }, x2.title || x2.name, /* @__PURE__ */ import_react.default.createElement("small", { className: "muted" }, " ", "\xB7", " ", x2.status === "failed" ? x2.error : t(x2.status === "duplicate" ? "duplicate" : "saved"))), x2.bookId && /* @__PURE__ */ import_react.default.createElement(
+        "button",
+        {
+          onClick: () => {
+            close();
+            open(x2.bookId);
+          }
+        },
+        t("openBook")
+      )))), /* @__PURE__ */ import_react.default.createElement("div", { className: "row" }, ok.length === 1 ? /* @__PURE__ */ import_react.default.createElement(
+        "button",
+        {
+          className: "primary",
+          onClick: () => {
+            close();
+            open(ok[0].bookId);
+          }
+        },
+        t("startReading")
+      ) : /* @__PURE__ */ import_react.default.createElement(
+        "button",
+        {
+          className: "primary",
+          onClick: () => {
+            close();
+          }
+        },
+        t("viewImported")
+      ), /* @__PURE__ */ import_react.default.createElement("button", { onClick: close }, t("back")), /* @__PURE__ */ import_react.default.createElement(
+        "button",
+        {
+          onClick: () => {
+            setDone(false);
+            setResults([]);
+            setItems([]);
+          }
+        },
+        t("continueImport")
+      ), bad.length > 0 && /* @__PURE__ */ import_react.default.createElement("button", { onClick: () => run(() => finish(bad)) }, t("retryFailed"))));
+    return /* @__PURE__ */ import_react.default.createElement(
+      "div",
+      {
+        className: "form",
+        onDragOver: (e) => e.preventDefault(),
+        onDrop: (e) => {
+          e.preventDefault();
+          setMode("files");
+          run(
+            () => finish(
+              [...e.dataTransfer.files].map((file) => ({
+                name: file.name,
+                file
+              })),
+              "files"
+            )
+          );
+        }
+      },
+      /* @__PURE__ */ import_react.default.createElement("div", { className: "row" }, [
+        ["files", "importFiles"],
+        ["folder", "importFolder"],
+        ["linked", "linkFolder"]
+      ].map(([key, label]) => /* @__PURE__ */ import_react.default.createElement(
+        "button",
+        {
+          key,
+          "aria-selected": mode === key,
+          disabled: busy,
+          onClick: () => {
+            setMode(key);
+            setItems([]);
+          }
+        },
+        t(label)
+      ))),
+      /* @__PURE__ */ import_react.default.createElement("p", { className: "muted" }, t(mode === "linked" ? "linkedHint" : "managedHint"), mode !== "linked" && libraryPath && /* @__PURE__ */ import_react.default.createElement("small", { className: "arr-path" }, t("libraryLocation"), "\uFF1A", libraryPath)),
+      mode === "files" ? /* @__PURE__ */ import_react.default.createElement("label", null, t("chooseFiles"), /* @__PURE__ */ import_react.default.createElement(
+        "input",
+        {
+          disabled: busy,
+          type: "file",
+          accept: ".epub,.pdf,.txt,.md,.markdown",
+          multiple: true,
+          onChange: (e) => run(
+            () => finish(
+              [...e.target.files].map((file) => ({
+                name: file.name,
+                file
+              }))
+            )
+          )
+        }
+      )) : /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("label", null, t("path"), /* @__PURE__ */ import_react.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react.default.createElement(
+        "input",
+        {
+          ref: inputRef,
+          className: "grow",
+          value: path,
+          onChange: (e) => setPath(e.target.value)
+        }
+      ), /* @__PURE__ */ import_react.default.createElement("button", { disabled: busy, onClick: () => run(choose) }, t("chooseDirectory")))), /* @__PURE__ */ import_react.default.createElement("label", { className: "arr-check" }, /* @__PURE__ */ import_react.default.createElement(
+        "input",
+        {
+          type: "checkbox",
+          checked: recursive,
+          onChange: (e) => setRecursive(e.target.checked)
+        }
+      ), t("includeSubfolders")), mode === "linked" && /* @__PURE__ */ import_react.default.createElement("label", { className: "arr-check" }, /* @__PURE__ */ import_react.default.createElement(
+        "input",
+        {
+          type: "checkbox",
+          checked: checkOnOpen,
+          onChange: (e) => setCheckOnOpen(e.target.checked)
+        }
+      ), t("checkOnOpen")), /* @__PURE__ */ import_react.default.createElement(
+        "button",
+        {
+          disabled: busy || !path.trim(),
+          onClick: () => run(async () => {
+            const s = await rpc({ action: "scan", path, recursive });
+            setItems(s.items);
+            if (!s.items.length)
+              setResults([
+                { name: "", status: "failed", error: t("emptyScan") }
+              ]);
+          })
+        },
+        t("scanPreview")
+      ), /* @__PURE__ */ import_react.default.createElement("div", { className: "arr-import-results" }, items.map((f, i) => /* @__PURE__ */ import_react.default.createElement("label", { className: "arr-check", key: f.path }, /* @__PURE__ */ import_react.default.createElement(
+        "input",
+        {
+          type: "checkbox",
+          checked: f.selected !== false,
+          onChange: (e) => setItems(
+            (old) => old.map(
+              (x2, n) => n === i ? { ...x2, selected: e.target.checked } : x2
+            )
+          )
+        }
+      ), /* @__PURE__ */ import_react.default.createElement("span", null, f.relative || f.name)))), items.length > 0 && /* @__PURE__ */ import_react.default.createElement(
+        "button",
+        {
+          className: "primary",
+          disabled: busy || !items.some((x2) => x2.selected !== false),
+          onClick: () => run(() => finish(items.filter((x2) => x2.selected !== false)))
+        },
+        t("importSelected")
+      )),
+      /* @__PURE__ */ import_react.default.createElement("details", null, /* @__PURE__ */ import_react.default.createElement("summary", null, t("advanced")), /* @__PURE__ */ import_react.default.createElement("label", null, t("encoding"), /* @__PURE__ */ import_react.default.createElement(
+        "select",
+        {
+          value: encoding,
+          onChange: (e) => setEncoding(e.target.value)
+        },
+        /* @__PURE__ */ import_react.default.createElement("option", { value: "utf-8" }, "UTF-8 / Auto"),
+        /* @__PURE__ */ import_react.default.createElement("option", { value: "gb18030" }, "GB18030 / GBK"),
+        /* @__PURE__ */ import_react.default.createElement("option", { value: "big5" }, "Big5")
+      ))),
+      busy && /* @__PURE__ */ import_react.default.createElement(
+        "button",
+        {
+          onClick: () => {
+            stop.current = true;
+          }
+        },
+        t("cancel")
+      ),
+      results.length > 0 && /* @__PURE__ */ import_react.default.createElement("div", { role: "status" }, results.map((x2, i) => /* @__PURE__ */ import_react.default.createElement("p", { key: i }, x2.name, " \xB7", " ", x2.error || t(x2.status === "duplicate" ? "duplicate" : "saved"))))
+    );
   }
-  function Traces({
+
+  // src/client/library-settings.jsx
+  var import_react2 = __toESM(__require("react"), 1);
+  function LibrarySettings({ data, t, run, refresh, setModal }) {
+    const [target, setTarget] = (0, import_react2.useState)(""), [show, setShow] = (0, import_react2.useState)(false), [status, setStatus] = (0, import_react2.useState)("");
+    async function pick() {
+      try {
+        const x2 = await rpc({ action: "pickDirectory" });
+        if (x2.path) {
+          setTarget(x2.path);
+          setShow(true);
+        }
+      } catch {
+        setShow(true);
+      }
+    }
+    return /* @__PURE__ */ import_react2.default.createElement("section", { className: "card form", style: { marginTop: 20 } }, /* @__PURE__ */ import_react2.default.createElement("h2", null, t("libraryFiles")), /* @__PURE__ */ import_react2.default.createElement("label", null, t("libraryLocation"), /* @__PURE__ */ import_react2.default.createElement("code", { className: "arr-path" }, data.libraryPath)), /* @__PURE__ */ import_react2.default.createElement("p", { className: "muted" }, t("migrationHint")), /* @__PURE__ */ import_react2.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react2.default.createElement("button", { onClick: () => run(pick) }, t("changeLocation")), /* @__PURE__ */ import_react2.default.createElement("button", { onClick: () => run(() => rpc({ action: "revealLibrary" })) }, t("openLocation")), /* @__PURE__ */ import_react2.default.createElement(
+      "button",
+      {
+        onClick: () => setModal({ kind: "import", initialPath: data.libraryPath })
+      },
+      t("scanLibrary")
+    ), /* @__PURE__ */ import_react2.default.createElement("button", { onClick: () => setModal({ kind: "import" }) }, t("linkFolder"))), show && /* @__PURE__ */ import_react2.default.createElement("div", { className: "form" }, /* @__PURE__ */ import_react2.default.createElement(
+      "input",
+      {
+        "aria-label": t("libraryLocation"),
+        value: target,
+        onChange: (e) => setTarget(e.target.value),
+        placeholder: data.libraryPath
+      }
+    ), /* @__PURE__ */ import_react2.default.createElement(
+      "button",
+      {
+        disabled: !target.trim(),
+        onClick: () => run(async () => {
+          const x2 = await rpc({
+            action: "migrateLibrary",
+            path: target,
+            requestId: request()
+          });
+          setStatus(t("saved") + " \xB7 " + x2.copied);
+          setShow(false);
+          await refresh();
+        })
+      },
+      t("confirmMigration")
+    )), /* @__PURE__ */ import_react2.default.createElement("h3", null, t("linkedDirectories")), (data.directories || []).map((d) => /* @__PURE__ */ import_react2.default.createElement("div", { className: "card", key: d.id }, /* @__PURE__ */ import_react2.default.createElement("code", { className: "arr-path" }, d.path), /* @__PURE__ */ import_react2.default.createElement("div", { className: "row", style: { marginTop: 10 } }, /* @__PURE__ */ import_react2.default.createElement(
+      "button",
+      {
+        onClick: () => run(async () => {
+          const x2 = await rpc({
+            action: "refreshDirectory",
+            id: d.id,
+            requestId: request()
+          });
+          setStatus(
+            x2.results.filter((x3) => x3.book).length + " " + t("books") + " \xB7 " + x2.results.filter((x3) => x3.error).length + " " + t("failedCount")
+          );
+          await refresh();
+        })
+      },
+      t("rescan")
+    ), /* @__PURE__ */ import_react2.default.createElement(
+      "button",
+      {
+        onClick: () => run(async () => {
+          await rpc({
+            action: "removeDirectory",
+            id: d.id,
+            requestId: request()
+          });
+          await refresh();
+        })
+      },
+      t("removeLink")
+    ), /* @__PURE__ */ import_react2.default.createElement("label", { className: "arr-check" }, /* @__PURE__ */ import_react2.default.createElement(
+      "input",
+      {
+        type: "checkbox",
+        checked: d.checkOnOpen,
+        onChange: (e) => run(async () => {
+          await rpc({
+            action: "addDirectory",
+            path: d.path,
+            recursive: d.recursive,
+            checkOnOpen: e.target.checked,
+            requestId: request()
+          });
+          await refresh();
+        })
+      }
+    ), t("checkOnOpen"))))), status && /* @__PURE__ */ import_react2.default.createElement("p", { role: "status" }, status));
+  }
+
+  // src/client/help-center.jsx
+  var import_react8 = __toESM(__require("react"), 1);
+
+  // src/shared/shortcuts.js
+  var SHORTCUTS = [
+    {
+      id: "undoAnnotation",
+      keys: ["Mod+KeyZ"],
+      zh: "\u64A4\u9500\u4E0A\u4E00\u6B65\u6807\u6CE8",
+      en: "Undo annotation"
+    },
+    {
+      id: "redoAnnotation",
+      keys: ["Mod+Shift+KeyZ"],
+      zh: "\u91CD\u505A\u6807\u6CE8",
+      en: "Redo annotation"
+    },
+    {
+      id: "focus",
+      keys: ["KeyF"],
+      zh: "\u5207\u6362\u4E13\u6CE8\u9605\u8BFB",
+      en: "Toggle focus reading"
+    },
+    {
+      id: "returnReading",
+      keys: ["KeyR"],
+      zh: "\u8FD4\u56DE\u521A\u624D\u9605\u8BFB\u4F4D\u7F6E",
+      en: "Return to reading position"
+    },
+    { id: "down", keys: ["ArrowDown"], zh: "\u5411\u4E0B\u6EDA\u52A8", en: "Scroll down" },
+    { id: "up", keys: ["ArrowUp"], zh: "\u5411\u4E0A\u6EDA\u52A8", en: "Scroll up" },
+    {
+      id: "forward",
+      keys: ["Space", "PageDown", "ArrowRight"],
+      zh: "\u4E0B\u4E00\u5C4F / \u9875",
+      en: "Next screen / page"
+    },
+    {
+      id: "backward",
+      keys: ["Shift+Space", "PageUp", "ArrowLeft"],
+      zh: "\u4E0A\u4E00\u5C4F / \u9875",
+      en: "Previous screen / page"
+    },
+    { id: "start", keys: ["Home"], zh: "\u5F53\u524D\u7AE0\u8282\u5F00\u5934", en: "Start of chapter" },
+    { id: "end", keys: ["End"], zh: "\u5F53\u524D\u7AE0\u8282\u7ED3\u5C3E", en: "End of chapter" },
+    { id: "find", keys: ["Mod+KeyF"], zh: "\u641C\u7D22\u672C\u4E66", en: "Search this book" },
+    {
+      id: "goto",
+      keys: ["Mod+KeyG"],
+      zh: "\u8DF3\u8F6C\u7AE0\u8282 / \u9875",
+      en: "Go to chapter / page"
+    },
+    {
+      id: "bigger",
+      keys: ["Equal", "Shift+Equal", "NumpadAdd"],
+      zh: "\u589E\u5927\u5B57\u53F7 / \u7F29\u653E",
+      en: "Increase text size / zoom"
+    },
+    {
+      id: "smaller",
+      keys: ["Minus", "NumpadSubtract"],
+      zh: "\u51CF\u5C0F\u5B57\u53F7 / \u7F29\u653E",
+      en: "Decrease text size / zoom"
+    },
+    { id: "toc", keys: ["KeyT"], zh: "\u663E\u793A\u6216\u6536\u8D77\u76EE\u5F55", en: "Toggle contents" },
+    {
+      id: "bookmark",
+      keys: ["KeyB"],
+      zh: "\u8BB0\u5F55\u5F53\u524D\u4F4D\u7F6E",
+      en: "Bookmark current location"
+    },
+    { id: "note", keys: ["KeyN"], zh: "\u7ED9\u9009\u6BB5\u8BB0\u7B14\u8BB0", en: "Note on selection" },
+    {
+      id: "ask",
+      keys: ["KeyA"],
+      zh: "\u628A\u9009\u6BB5\u5E26\u7ED9\u4E66\u866B",
+      en: "Ask Bookworm about selection"
+    },
+    {
+      id: "help",
+      keys: ["Shift+Slash"],
+      zh: "\u5FEB\u6377\u952E\u901F\u67E5",
+      en: "Shortcut reference"
+    }
+  ];
+  var KEY_STORE = "arr-reading-shortcuts:v1";
+  function shortcutConfig(overrides = {}) {
+    return SHORTCUTS.map((s) => ({
+      ...s,
+      keys: Object.hasOwn(overrides, s.id) && Array.isArray(overrides[s.id]) ? overrides[s.id].filter((x2) => typeof x2 === "string") : s.keys
+    }));
+  }
+  function chord(e) {
+    const mods = [];
+    if (e.ctrlKey || e.metaKey) mods.push("Mod");
+    if (e.altKey) mods.push("Alt");
+    if (e.shiftKey) mods.push("Shift");
+    return [...mods, e.code].join("+");
+  }
+  function reserved(key) {
+    if (key === "Mod+KeyZ" || key === "Mod+Shift+KeyZ") return false;
+    return /Mod\+(?:Shift\+)?(?:KeyW|KeyQ|KeyR|KeyL|KeyT|KeyN|KeyC|KeyV|KeyX|KeyZ|KeyA|Tab)$/.test(
+      key
+    ) || key === "Alt+F4";
+  }
+  function resolveShortcut(e, { editable = false, modal = false, overrides = {} } = {}) {
+    if (editable || modal || e.isComposing || e.defaultPrevented || e.altGraphKey)
+      return null;
+    const key = chord(e);
+    if (reserved(key)) return null;
+    return shortcutConfig(overrides).find((x2) => x2.keys.includes(key))?.id || null;
+  }
+  function keyLabel(key, mac = false) {
+    return key.replace(/Mod/g, mac ? "\u2318" : "Ctrl").replace(/Key([A-Z])/g, "$1").replace(/ArrowUp/g, "\u2191").replace(/ArrowDown/g, "\u2193").replace(/ArrowLeft/g, "\u2190").replace(/ArrowRight/g, "\u2192").replace(/Equal/g, "=").replace(/Minus/g, "\u2212").replace(/Slash/g, "/").replace(/Space/g, "Space").replace(/NumpadAdd/g, "Num +").replace(/NumpadSubtract/g, "Num \u2212");
+  }
+
+  // src/shared/manual.js
+  var MANUAL_VERSION = "0.5.2";
+  var MANUAL = [
+    {
+      id: "start",
+      title: { zh: "\u4E09\u5206\u949F\u5F00\u59CB\u9605\u8BFB", en: "Start reading in three minutes" },
+      body: {
+        zh: "\u4ECE\u9876\u90E8\u201C\u5BFC\u5165\u4E66\u7C4D\u201D\u52A0\u5165\u4E00\u672C\u4E66\u3002\u5BFC\u5165\u5B8C\u6210\u70B9\u51FB\u201C\u5F00\u59CB\u9605\u8BFB\u201D\uFF1B\u6279\u91CF\u5BFC\u5165\u70B9\u51FB\u201C\u67E5\u770B\u5DF2\u5BFC\u5165\u4E66\u7C4D\u201D\u3002\u6CA1\u6709\u51C6\u5907\u56FE\u4E66\u65F6\uFF0C\u53EF\u70B9\u51FB\u5E2E\u52A9\u4E2D\u5FC3\u7684\u201C\u4F53\u9A8C\u793A\u4F8B\u201D\u3002\u9009\u4E2D\u6B63\u6587\u540E\uFF0C\u53EF\u4EE5\u5212\u7EBF\u3001\u8BB0\u611F\u609F\u3001\u8BB0\u7591\u95EE\u6216\u95EE\u4E66\u866B\u3002\u4E5F\u53EF\u4EE5\u76F4\u63A5\u5728\u53F3\u4FA7\u8F93\u5165\u6D88\u606F\uFF0C\u4E0D\u5FC5\u5148\u586B\u5199\u76EE\u6807\u3002\u9996\u6B21\u63D0\u793A\u53EF\u8DF3\u8FC7\uFF0C\u4E4B\u540E\u4ECE\u201C\u4F7F\u7528\u8BF4\u660E\u201D\u91CD\u65B0\u6253\u5F00\u3002",
+        en: "Import a book from the header. Click Start reading after a single import, or View imported books after a batch. Use Try a sample when no book is ready. Select text to highlight, reflect, save a question or ask Bookworm. You can also type directly, without a goal form. Onboarding can be skipped and reopened from Help."
+      }
+    },
+    {
+      id: "import",
+      title: {
+        zh: "\u5BFC\u5165\u6587\u4EF6\u3001\u6587\u4EF6\u5939\u4E0E\u5173\u8054\u76EE\u5F55",
+        en: "Files, folders and linked libraries"
+      },
+      body: {
+        zh: "\u5BFC\u5165\u6587\u4EF6\u4F1A\u590D\u5236\u4E00\u4EFD\u5230\u4E3B\u4E66\u5E93\uFF0C\u4E0D\u4FEE\u6539\u4E0B\u8F7D\u7684\u539F\u6587\u4EF6\u3002\u6279\u91CF\u5BFC\u5165\u6587\u4EF6\u5939\u5148\u626B\u63CF\u3001\u52FE\u9009\uFF0C\u518D\u590D\u5236\u6240\u9009\u56FE\u4E66\uFF1B\u53EF\u52FE\u9009\u201C\u5305\u542B\u5B50\u6587\u4EF6\u5939\u201D\u3002\u201C\u5173\u8054\u73B0\u6709\u6587\u4EF6\u5939\u201D\u4FDD\u7559\u539F\u4F4D\u7F6E\u3001\u4E0D\u91CD\u590D\u590D\u5236\uFF0C\u4FDD\u5B58\u7D22\u5F15\uFF1B\u70B9\u51FB\u201C\u91CD\u65B0\u626B\u63CF\u201D\u53D1\u73B0\u65B0\u589E\u56FE\u4E66\uFF0C\u4E5F\u53EF\u4E3B\u52A8\u5F00\u542F\u201C\u8FDB\u5165\u4E66\u623F\u65F6\u68C0\u67E5\u201D\u3002\u626B\u63CF\u4E0D\u4F1A\u8DDF\u968F\u7B26\u53F7\u94FE\u63A5\uFF0C\u4E0D\u652F\u6301\u7684\u683C\u5F0F\u4F1A\u8DF3\u8FC7\u3002\u5BFC\u5165\u5B8C\u6210\u533A\u5206\u6210\u529F\u3001\u91CD\u590D\u3001\u5931\u8D25\uFF0C\u5E76\u63D0\u4F9B\u5F00\u59CB\u9605\u8BFB\u3001\u56DE\u5230\u4E66\u5E93\u548C\u7EE7\u7EED\u5BFC\u5165\u3002TXT \u7F16\u7801\u5728\u9AD8\u7EA7\u9009\u9879\u4E2D\u3002",
+        en: "Import copies a file into the managed library without changing the download. Batch folder import scans, lets you select files and copies them; include subfolders optionally. Linking keeps originals in their folder without another copy. Rescan to discover new books, or opt into checking when the room opens. Symlinks are not followed. Completion separates success, duplicate and failed files and offers clear next actions. TXT encoding is under Advanced."
+      }
+    },
+    {
+      id: "storage",
+      title: {
+        zh: "\u4E66\u5E93\u4F4D\u7F6E\u3001\u8FC1\u79FB\u4E0E\u6587\u4EF6\u5931\u8054",
+        en: "Library location, migration and missing files"
+      },
+      body: {
+        zh: "\u5728\u201C\u8BBE\u7F6E\u4E0E\u5907\u4EFD \u2192 \u4E66\u5E93\u4E0E\u6587\u4EF6\u201D\u67E5\u770B\u4E3B\u4E66\u5E93\u548C\u5173\u8054\u76EE\u5F55\u3002\u666E\u901A EPUB/PDF \u7B49\u539F\u4E66\u653E\u5728\u4E3B\u4E66\u5E93\uFF1B\u89E3\u6790\u7F13\u5B58\u3001\u7ED3\u6784\u5316\u5B66\u4E60\u8BB0\u5F55\u4E0E\u539F\u751F\u4F1A\u8BDD\u7531 DSH \u6570\u636E\u76EE\u5F55\u7BA1\u7406\u3002\u66F4\u6539\u4E3B\u4E66\u5E93\u4F4D\u7F6E\u65F6\uFF0C\u5148\u590D\u5236\u5E76\u6821\u9A8C\u539F\u4E66\uFF0C\u5168\u90E8\u6210\u529F\u540E\u5207\u6362\uFF1B\u65E7\u6587\u4EF6\u4FDD\u7559\uFF0C\u4E0D\u81EA\u52A8\u5220\u9664\u3002\u5B66\u4E60\u8BB0\u5F55\u7684\u4E66\u7C4D ID \u548C\u5F15\u7528\u4FDD\u6301\u4E0D\u53D8\u3002\u53EF\u628A\u7535\u5B50\u4E66\u653E\u8FDB\u4E3B\u4E66\u5E93\u540E\u70B9\u51FB\u626B\u63CF\u5165\u5E93\u3002\u5173\u8054\u76EE\u5F55\u88AB\u79FB\u52A8\u65F6\uFF0C\u539F\u6709\u7B14\u8BB0\u4ECD\u4FDD\u7559\uFF1B\u53EF\u91CD\u65B0\u5173\u8054\u76EE\u5F55\uFF0C\u6216\u5728\u4E66\u7C4D\u4FE1\u606F\u4E2D\u91CD\u65B0\u5B9A\u4F4D\u540C\u4E00\u5185\u5BB9\u7684\u539F\u6587\u4EF6\u3002",
+        en: "Settings & backup \u2192 Library & files shows the managed location and linked folders. Originals live in the library; parsed caches, learning records and native sessions are managed under DSH data. Changing location copies and verifies originals before switching; old files are retained. Book IDs and citations stay stable. Place ebooks into the library and scan to add them. If a linked file moves, notes remain. Relink its directory or locate the same original from Book details."
+      }
+    },
+    {
+      id: "reading",
+      title: { zh: "\u9605\u8BFB\u3001\u76EE\u5F55\u4E0E\u641C\u7D22", en: "Reading, contents and search" },
+      body: {
+        zh: "\u5DE6\u4FA7\u76EE\u5F55\u8BFB\u53D6 EPUB \u7684\u6B63\u5F0F\u5BFC\u822A\uFF0C\u652F\u6301\u5C42\u7EA7\u548C\u6BB5\u843D\u8DF3\u8F6C\u3002\u70B9\u51FB\u2018\u4E13\u6CE8\u9605\u8BFB\u2019\u6216\u5728\u6B63\u6587\u6309 F\uFF0C\u53EF\u9690\u85CF\u4E66\u623F\u9875\u5934\u548C\u91CD\u590D\u5DE5\u5177\u680F\uFF1B\u641C\u7D22\u3001\u5BFC\u51FA\u3001\u8BBE\u7F6E\u548C\u56DE\u987E\u90FD\u5728\u2018\u66F4\u591A\u2019\u4E2D\u3002\u4FDD\u5B58\u53CD\u9988\u4E3A\u77ED\u6682\u6D6E\u52A8\u63D0\u793A\uFF0C\u4E0D\u6324\u52A8\u6B63\u6587\uFF1B\u5931\u8D25\u63D0\u793A\u63D0\u4F9B\u91CD\u8BD5\u3002\u65B0\u8FDB\u5EA6\u6309\u6B63\u5728\u770B\u7684\u6587\u5B57\u4FDD\u5B58\uFF0C\u6539\u53D8\u5B57\u53F7\u6216\u5DE6\u53F3\u680F\u5BBD\u5EA6\u540E\u5C3D\u91CF\u4FDD\u6301\u540C\u4E00\u53E5\u8BDD\uFF1B\u65E7\u8FDB\u5EA6\u7EE7\u7EED\u517C\u5BB9\u3002\u70B9\u51FB\u539F\u6587\u5F15\u7528\u6216\u8BB0\u5F55\u540E\uFF0C\u53EF\u7528\u2018\u8FD4\u56DE\u521A\u624D\u4F4D\u7F6E\u2019\u6216\u6B63\u6587\u4E2D\u7684 R \u8FD4\u56DE\u3002\u62D6\u52A8\u76EE\u5F55\u53F3\u8FB9\u7F18\u53EF\u8C03\u6574\u5BBD\u5EA6\uFF0C\u8BBE\u7F6E\u4F1A\u5728\u672C\u673A\u8BB0\u4F4F\uFF1B\u53CC\u51FB\u6216 Enter \u6062\u590D\u9ED8\u8BA4\u5BBD\u5EA6\uFF0C\u5206\u9694\u7EBF\u83B7\u5F97\u7126\u70B9\u540E\u7528\u5DE6\u53F3\u952E\u5FAE\u8C03\u3002\u65E7\u4E66\u53EF\u5728\u201C\u4E66\u7C4D\u4FE1\u606F\u201D\u4E2D\u4FEE\u590D\u76EE\u5F55\uFF1B\u4FEE\u590D\u4FDD\u7559\u6B63\u6587\u53CA\u539F\u6709\u6279\u6CE8\u4F4D\u7F6E\uFF0C\u65E0\u6CD5\u5B89\u5168\u5339\u914D\u65F6\u663E\u793A\u63D0\u793A\u3002\u8FDE\u7EED\u6A21\u5F0F\u4F7F\u7528\u7A7A\u683C\u6216 PageDown \u7FFB\u4E00\u5C4F\uFF0C\u4E0A\u4E0B\u7BAD\u5934\u5C0F\u5E45\u6EDA\u52A8\uFF1BPDF \u5230\u5F53\u524D\u9875\u8FB9\u7F18\u540E\u53EF\u8FDB\u5165\u76F8\u90BB\u9875\u3002\u4E0A\u4E00\u7AE0/\u4E0B\u4E00\u7AE0\u7528\u4E8E\u660E\u786E\u8DE8\u7AE0\u8282\u8DF3\u8F6C\u3002PDF \u539F\u7248\u53EF\u7F29\u653E\uFF0C\u4E5F\u53EF\u5207\u6362\u6587\u5B57\u89C6\u56FE\u3002\u9876\u90E8\u201C\u641C\u7D22\u539F\u6587\u201D\u68C0\u7D22\u672C\u4E66\uFF0C\u7ED3\u679C\u53EF\u8DF3\u8F6C\u539F\u6587\u3002\u957F\u4E66\u540D\u663E\u793A\u7701\u7565\uFF0C\u60AC\u505C\u53EF\u770B\u5168\u6587\u3002",
+        en: "Contents use EPUB navigation, including nesting and fragment targets. Focus (or F with body focus) hides the page header and repeated tools; search, export, settings and reviews remain in More. Save feedback uses a brief overlay; failures offer retry. New progress uses text anchors across font and column changes, while old pixel progress remains compatible. Return to reading (or R with body focus) restores the place before a reference jump. Drag the right edge of the contents panel to resize it; the width is remembered on this device. Double-click or Enter resets it; arrow keys adjust the focused separator. Repair contents in Book details for older imports; body text and annotation positions are preserved, with a warning when a safe match is unavailable. Space/PageDown advances a screen in scrolling mode; arrows scroll in small steps. At a PDF page edge, navigation can move to the adjacent page. Previous/next chapter explicitly skips chapters. PDFs have original and text views. Search book text from the header and jump from results. Hover truncated titles to read them."
+      }
+    },
+    {
+      id: "chat",
+      title: {
+        zh: "\u4E0E\u4E66\u866B\u4EA4\u6D41\u3001\u9009\u6A21\u578B\u548C\u4FDD\u5B58\u56DE\u7B54",
+        en: "Talk with Bookworm, choose a model and save replies"
+      },
+      body: {
+        zh: "\u9009\u4E2D\u4E00\u6BB5\u539F\u6587\u540E\u70B9\u201C\u95EE\u4E66\u866B\u201D\uFF0C\u6216\u5728\u8F93\u5165\u6846\u76F4\u63A5\u63D0\u95EE\u3002\u8F93\u5165\u6846\u4E0A\u65B9\u53EF\u9009\u7B80\u77ED\u3001\u9002\u4E2D\u6216\u6DF1\u5165\uFF0C\u504F\u597D\u4F5C\u7528\u4E8E\u540E\u7EED\u6D88\u606F\uFF1B\u7528\u6237\u660E\u786E\u8981\u6C42\u7684\u6DF1\u6D45\u4F18\u5148\u3002\u6700\u65B0\u56DE\u590D\u4E0B\u65B9\u53EF\u70B9\u4E3E\u4E2A\u4F8B\u5B50\u3001\u7B80\u5355\u4E00\u70B9\u6216\u5C55\u5F00\u8BBA\u8BC1\uFF0C\u8DDF\u8FDB\u4E0A\u4E00\u6761\u56DE\u7B54\u7684\u539F\u6587\u8303\u56F4\uFF0C\u4E0D\u4F1A\u6E05\u7A7A\u5C1A\u672A\u53D1\u9001\u7684\u95EE\u9898\u3002\u56DE\u590D\u7684\u539F\u6587\u6309\u94AE\u4F18\u5148\u5B9A\u4F4D\u5DF2\u6838\u5BF9\u7684\u5177\u4F53\u7247\u6BB5\uFF1B\u65E7\u8BA8\u8BBA\u53EF\u80FD\u4ECD\u56DE\u5230\u7AE0\u8282\u3002\u8F93\u5165\u6846\u5E95\u90E8\u9009\u62E9\u5F53\u524D\u8BA8\u8BBA\u6A21\u578B\uFF1BEnter \u53D1\u9001\uFF0CShift+Enter \u6362\u884C\uFF0C\u4E2D\u6587\u8F93\u5165\u6CD5\u7EC4\u5408\u8F93\u5165\u4E0D\u4F1A\u8BEF\u53D1\u3002\u62D6\u52A8\u4FA7\u680F\u5DE6\u8FB9\u7F18\u8C03\u5BBD\uFF0C\u53CC\u51FB\u6062\u590D\u9ED8\u8BA4\uFF1B\u53F3\u4E0A\u89D2\u53EF\u5C55\u5F00\u3001\u6062\u590D\u6216\u6536\u8D77\u3002\u5386\u53F2\u5165\u53E3\u53EF\u7EE7\u7EED\u65E7\u8BA8\u8BBA\uFF0C\u65B0\u5EFA\u6309\u94AE\u5F00\u542F\u53E6\u4E00\u6BB5\u3002\u52A9\u624B\u56DE\u7B54\u4E0B\u65B9\u201C\u6536\u8FDB\u7B14\u8BB0\u201D\u751F\u6210\u53EF\u5BA1\u9605\u7684\u7B14\u8BB0\uFF0C\u4FDD\u7559 AI \u6765\u6E90\u3002\u56DE\u590D\u65F6\u53EF\u4EE5\u505C\u6B62\u3002\u53C2\u8003\u8303\u56F4\u663E\u793A\u672C\u6B21\u9009\u6BB5\u6216\u7AE0\u8282\u6458\u5F55\uFF0C\u8FDC\u7A0B\u6A21\u578B\u4F1A\u6536\u5230\u8FD9\u4E9B\u76F8\u5173\u6750\u6599\uFF0C\u4E0D\u9ED8\u8BA4\u8BFB\u53D6\u6574\u4E2A\u4E66\u5E93\u3002",
+        en: "Select a passage and Ask Bookworm, or type directly. Choose Brief, Balanced or In depth for later replies; explicit requests take priority. Follow-ups under the latest reply ask for examples, simplicity or deeper reasoning while keeping the previous source scope and your draft. Source buttons favor verified passages; older discussions may still link to a chapter. Choose the discussion model inside the composer. Enter sends, Shift+Enter adds a line; IME composition is protected. Drag the left panel edge to resize, double-click to reset, and use header controls to expand or close it. History resumes a discussion; New starts another. Save to notes opens a reviewable AI-origin note. Stop a reply anytime. Source scope shows selected text or a chapter excerpt sent to the selected model, not the entire library."
+      }
+    },
+    {
+      id: "methods",
+      title: {
+        zh: "\u8BFB\u4E66\u65B9\u6CD5\u4E0E\u5B8C\u6574\u63D0\u793A\u8BCD",
+        en: "Reading methods and full prompts"
+      },
+      body: {
+        zh: "\u53F3\u4FA7\u63D0\u4F9B\u2018\u81EA\u7531\u804A\u2019\u548C\u2018\u8BFB\u4E66\u65B9\u6CD5\u8BBA\u2019\u4E24\u4E2A\u5165\u53E3\u3002\u81EA\u7531\u804A\u7528\u4E8E\u89E3\u91CA\u3001\u7FFB\u8BD1\u548C\u611F\u609F\u3002\u70B9\u51FB\u8BFB\u4E66\u65B9\u6CD5\u8BBA\uFF0C\u5728\u5217\u8868\u4E2D\u641C\u7D22\u5185\u7F6E\u6216\u4E2A\u4EBA\u65B9\u6CD5\uFF0C\u6536\u85CF\u548C\u6700\u8FD1\u4F7F\u7528\u7684\u65B9\u6CD5\u4F18\u5148\u663E\u793A\u3002\u6BCF\u79CD\u65B9\u6CD5\u9996\u6B21\u4F7F\u7528\u90FD\u4F1A\u6253\u5F00\u8BF4\u660E\u5F39\u7A97\uFF0C\u5C55\u793A\u9002\u7528\u573A\u666F\u3001\u4F7F\u7528\u6B65\u9AA4\u548C\u53EF\u7F16\u8F91\u7684\u5B8C\u6574\u63D0\u793A\u8BCD\u3002\u53EF\u4EE5\u52FE\u9009\u2018\u4EE5\u540E\u4F7F\u7528\u8FD9\u4E2A\u65B9\u6CD5\u65F6\uFF0C\u4E0D\u518D\u81EA\u52A8\u5F39\u51FA\u2019\uFF0C\u504F\u597D\u8DE8\u4E66\u7C4D\u4FDD\u7559\uFF1B\u4E4B\u540E\u4ECD\u53EF\u901A\u8FC7\u5F53\u524D\u65B9\u6CD5\u65C1\u7684\u2018\u67E5\u770B\u4E0E\u7F16\u8F91\u2019\u91CD\u65B0\u6253\u5F00\u3002\u9009\u62E9\u65B9\u6CD5\u4E0D\u4F1A\u8C03\u7528\u6A21\u578B\u6216\u6E05\u7A7A\u95EE\u9898\uFF0C\u70B9\u51FB\u672C\u6B21\u4F7F\u7528\u53EA\u56DE\u5230\u804A\u5929\u3002\u2018\u672C\u6B21\u4F7F\u7528\u2019\u7684\u63D0\u793A\u8BCD\u7F16\u8F91\u53EA\u5F71\u54CD\u4E0B\u4E00\u6761\u6D88\u606F\uFF1B\u4FDD\u5B58\u4E3A\u4E2A\u4EBA\u7248\u672C\u6216\u53E6\u5B58\u4E3A\u65B0\u65B9\u6CD5\u53EF\u53CD\u590D\u4F7F\u7528\u3002\u63D0\u793A\u8BCD\u53D8\u91CF\u548C\u672C\u8F6E\u53C2\u8003\u5185\u5BB9\u53EF\u5C55\u5F00\u6838\u5BF9\uFF0C\u9ED8\u8BA4\u4F7F\u7528\u7D27\u51D1\u72B6\u6001\u680F\uFF0C\u4E5F\u53EF\u56FA\u5B9A\u5C55\u5F00\u5B8C\u6574\u63D0\u793A\u8BCD\u3002\u6BCF\u8F6E\u4FDD\u5B58\u5B9E\u9645\u63D0\u793A\u8BCD\u7248\u672C\uFF0C\u5207\u6362\u65B9\u6CD5\u53EA\u5F71\u54CD\u540E\u7EED\u6D88\u606F\u3002\u6CA1\u6709\u660E\u786E\u95EE\u9898\u4E5F\u80FD\u5F00\u59CB\u3002",
+        en: "Choose Chat or Reading methodologies in the sidebar. Search built-in and personal methods; favorites and recent methods appear first. First use of each method opens a dialog with scenarios, steps and an editable full prompt. Do not open automatically is remembered per method across books; View & edit always reopens it. Selecting or applying sends no model request and keeps your question draft. Use for this turn affects the next message only; save a personal version or new method for reuse. Inspect expanded instructions and references, or optionally pin the full prompt. Each turn retains its actual prompt snapshot. Switching affects later messages; no predefined question is required."
+      }
+    },
+    {
+      id: "custom",
+      title: { zh: "\u521B\u5EFA\u548C\u7BA1\u7406\u6211\u7684\u65B9\u6CD5", en: "Create and manage your methods" },
+      body: {
+        zh: "\u8FDB\u5165\u9876\u90E8\u2018\u8BFB\u4E66\u65B9\u6CD5\u8BBA\u2019\u7BA1\u7406\u65B9\u6CD5\uFF0C\u540D\u79F0\u548C\u5B8C\u6574\u63D0\u793A\u8BCD\u662F\u521B\u5EFA\u65F6\u7684\u6700\u4F4E\u8981\u6C42\uFF0C\u7B80\u4ECB\u3001\u9002\u7528\u573A\u666F\u548C\u4F7F\u7528\u6B65\u9AA4\u53EF\u9009\u3002\u5185\u7F6E\u65B9\u6CD5\u53EF\u4EE5\u76F4\u63A5\u7F16\u8F91\u4FDD\u5B58\u4E3A\u4E2A\u4EBA\u7248\u672C\uFF0C\u5E76\u53EF\u6062\u590D\u5185\u7F6E\u9ED8\u8BA4\uFF1B\u4E2A\u4EBA\u65B9\u6CD5\u652F\u6301\u7F16\u8F91\u3001\u590D\u5236\u3001\u6392\u5E8F\u3001\u6536\u85CF\u3001\u505C\u7528\u548C\u91CD\u65B0\u542F\u7528\u3002\u4FEE\u8BA2\u5386\u53F2\u53EF\u67E5\u770B\u65E7\u63D0\u793A\u8BCD\uFF0C\u5E76\u6309\u65E7\u7248\u672C\u7EE7\u7EED\u7F16\u8F91\u3002\u53D8\u91CF {{book}}\u3001{{author}}\u3001{{chapter}}\u3001{{selection}} \u4F1A\u66FF\u6362\u6210\u5F53\u524D\u9605\u8BFB\u5185\u5BB9\uFF0C{{notes}} \u53EA\u6709\u660E\u786E\u52FE\u9009\u4F7F\u7528\u672C\u4E66\u7B14\u8BB0\u65F6\u624D\u5E26\u5165\u3002\u53EF\u4EE5\u8BA9\u4E66\u866B\u5EFA\u8BAE\u540D\u79F0\u4E0E\u8BF4\u660E\u8349\u7A3F\uFF0C\u518D\u7531\u4F60\u4FDD\u5B58\u3002JSON \u5BFC\u51FA\u5305\u542B\u4E2A\u4EBA\u65B9\u6CD5\u53CA\u5185\u7F6E\u65B9\u6CD5\u7684\u4E2A\u4EBA\u7248\u672C\uFF0C\u5BFC\u5165\u540E\u4F5C\u4E3A\u72EC\u7ACB\u65B9\u6CD5\u4FDD\u5B58\uFF1B\u5B8C\u6574\u4E66\u623F\u5907\u4EFD\u4FDD\u7559\u7248\u672C\u5386\u53F2\u53CA\u9996\u6B21\u63D0\u793A\u504F\u597D\u3002\u8BBE\u7F6E\u53EF\u6062\u590D\u5168\u90E8\u65B9\u6CD5\u7684\u9996\u6B21\u8BF4\u660E\u3002\u65E7\u8BA8\u8BBA\u4FDD\u7559\u5F53\u65F6\u7684\u63D0\u793A\u8BCD\uFF0C\u4E0D\u968F\u65B9\u6CD5\u4FEE\u6539\u800C\u6539\u5199\u3002",
+        en: "Open Reading methodologies in the main navigation. A name and full prompt are required; descriptions, scenarios and usage steps are optional. Edit a built-in as a personal version and restore its default anytime. Edit, copy, order, favorite, disable/re-enable and inspect earlier prompt revisions. Variables {{book}}, {{author}}, {{chapter}} and {{selection}} use the current context; {{notes}} requires an explicit opt-in. Bookworm can suggest metadata drafts for your review. JSON exports include personal versions and imports create independent methods. Full backups retain histories and introduction preferences. Settings can reset all first-use introductions. Earlier discussions keep the prompts actually used."
+      }
+    },
+    {
+      id: "annotations",
+      title: {
+        zh: "\u4E94\u8272\u6807\u6CE8\u3001\u4E0B\u5212\u7EBF\u4E0E\u53F3\u952E\u64CD\u4F5C",
+        en: "Five-color highlights, underlines and context actions"
+      },
+      body: {
+        zh: "\u666E\u901A\u9009\u5B57\u548C\u5355\u51FB\u5DF2\u6709\u6807\u6CE8\u4E0D\u4F1A\u5F39\u51FA\u6807\u6CE8\u5DE5\u5177\u3002\u53EA\u6709\u53F3\u952E\u9009\u533A\u6216\u5DF2\u6709\u6807\u6CE8\u624D\u663E\u793A\u83DC\u5355\uFF0C\u53EF\u9009\u62E9\u9EC4\u3001\u7EFF\u3001\u84DD\u3001\u7C89\u3001\u7D2B\u9AD8\u4EAE\u6216\u72EC\u7ACB\u4E0B\u5212\u7EBF\uFF0C\u76F4\u63A5\u4FDD\u5B58\u800C\u4E0D\u7528\u6253\u5F00\u7B14\u8BB0\u8868\u5355\u3002\u53F3\u952E\u9009\u533A\u6216\u5DF2\u6709\u6807\u6CE8\uFF0C\u53EF\u4EE5\u6539\u8272\u3001\u6DFB\u52A0\u6216\u7F16\u8F91\u7B14\u8BB0\u3001\u79FB\u9664\u6807\u6CE8\u3001\u95EE\u4E66\u866B\u3001\u7FFB\u8BD1\u3001\u641C\u7D22\u672C\u4E66\u6216\u62F7\u8D1D\u3002\u666E\u901A\u4F4D\u7F6E\u4FDD\u7559\u7CFB\u7EDF\u83DC\u5355\uFF1BEsc \u6216\u70B9\u51FB\u7A7A\u767D\u5904\u5173\u95ED\u6D6E\u5C42\u3002\u6BCF\u672C\u4E66\u5206\u522B\u4FDD\u7559\u6700\u8FD150\u6B65\u9605\u8BFB\u533A\u6807\u6CE8\u64CD\u4F5C\uFF0C\u652F\u6301\u65B0\u589E\u3001\u6539\u8272\u3001\u4E0B\u5212\u7EBF\u548C\u79FB\u9664\u7684\u64A4\u9500\u4E0E\u91CD\u505A\u3002Mac \u4F7F\u7528 \u2318Z / \u2318\u21E7Z\uFF0CWindows \u4F7F\u7528 Ctrl+Z / Ctrl+Shift+Z\uFF0C\u4E5F\u53EF\u70B9\u51FB\u9605\u8BFB\u5DE5\u5177\u680F\u7684\u64A4\u9500/\u91CD\u505A\u6309\u94AE\u6216\u53F3\u952E\u83DC\u5355\u9879\u3002\u804A\u5929\u3001\u7B14\u8BB0\u548C\u5176\u4ED6\u8F93\u5165\u6846\u7EE7\u7EED\u4F7F\u7528\u81EA\u8EAB\u7684\u6587\u5B57\u64A4\u9500\u3002\u64A4\u9500\u53EA\u6062\u590D\u6807\u6CE8\u5916\u89C2\u548C\u56DE\u6536\u7AD9\u72B6\u6001\uFF0C\u4E0D\u8986\u76D6\u540E\u6765\u7F16\u8F91\u7684\u7B14\u8BB0\uFF1B\u82E5\u5916\u89C2\u5728\u5176\u4ED6\u5165\u53E3\u53D1\u751F\u53D8\u5316\uFF0C\u65E7\u64CD\u4F5C\u4F1A\u505C\u6B62\u91CD\u653E\uFF0C\u907F\u514D\u64A4\u9519\u3002\u6062\u590D\u5907\u4EFD\u540E\u6E05\u7A7A\u65E7\u64A4\u9500\u6808\u3002\u6539\u8272\u4FDD\u7559\u539F\u6709\u7B14\u8BB0\u548C\u539F\u6587\u4F9D\u636E\uFF1B\u79FB\u9664\u5E26\u7B14\u8BB0\u7684\u6807\u6CE8\u53EA\u53BB\u6389\u89C6\u89C9\u6837\u5F0F\uFF0C\u4FDD\u7559\u7B14\u8BB0\u3002\u6CA1\u6709\u6B63\u6587\u7B14\u8BB0\u7684\u7EAF\u6807\u6CE8\u79FB\u5165\u53EF\u6062\u590D\u7684\u56DE\u6536\u7AD9\u3002\u65E7\u6807\u6CE8\u7EE7\u7EED\u6309\u4E0B\u5212\u7EBF\u663E\u793A\uFF0C\u53EF\u901A\u8FC7\u53F3\u952E\u6539\u8272\u3002EPUB\u3001\u6587\u5B57\u89C6\u56FE\u548C\u6709\u53EF\u9009\u6587\u5B57\u7684 PDF \u5747\u652F\u6301\uFF0C\u626B\u63CF PDF \u4E0D\u63D0\u4F9B OCR\u3002\u7FFB\u8BD1\u9009\u6BB5\u4F1A\u9884\u586B\u4E66\u866B\u95EE\u9898\uFF0C\u7531\u4F60\u51B3\u5B9A\u662F\u5426\u53D1\u9001\u3002",
+        en: "Selecting text or clicking a mark opens no annotation tools. Only right-clicking the selection or an existing mark opens the menu, with yellow, green, blue, pink and purple highlights or an independent underline, saved directly. Right-click a selection or existing mark to recolor, add/edit a note, remove the mark, ask Bookworm, translate, search this book or copy. Ordinary positions keep the system menu. Escape or clicking away closes the popover. Each book keeps its latest 50 reader annotation actions for undo/redo, including creation, color, underline and removal. Use Cmd+Z / Cmd+Shift+Z on Mac or Ctrl+Z / Ctrl+Shift+Z on Windows, or the toolbar/context menu buttons. Inputs retain native text undo. Only appearance and trash state are restored; later note edits are kept. Changes from other entry points invalidate older commands rather than overwriting them. Restoring a backup clears command history. Recoloring keeps notes and source anchors. Removing a mark with note text keeps the note; pure marks go to recoverable Trash. Legacy marks retain an underline fallback and can be recolored. EPUB, text views and selectable PDF text are supported; OCR is not included. Translate prefills a question for you to send."
+      }
+    },
+    {
+      id: "notes",
+      title: {
+        zh: "\u5B66\u4E60\u8BB0\u5F55\u3001\u5220\u9664\u4E0E\u5907\u4EFD",
+        en: "Learning records, trash and backups"
+      },
+      body: {
+        zh: "\u5212\u7EBF\u3001\u611F\u609F\u3001\u7591\u95EE\u548C\u957F\u7B14\u8BB0\u4FDD\u5B58\u65E5\u671F\u53CA\u539F\u6587\u4F9D\u636E\u3002\u4FEE\u8BA2\u4FDD\u7559\u5386\u53F2\uFF0C\u5220\u9664\u8FDB\u5165\u56DE\u6536\u7AD9\uFF0C\u4E0D\u5220\u9664\u539F\u4E66\u3002\u201C\u6211\u7684\u75D5\u8FF9\u201D\u53EF\u8DE8\u4E66\u68C0\u7D22\u8BB0\u5F55\uFF0C\u6309\u4E66\u7C4D\u3001\u989C\u8272\u3001\u8BB0\u5F55\u7C7B\u578B\u3001\u521B\u5EFA\u65E5\u671F\u7B5B\u9009\uFF0C\u4E5F\u53EF\u53EA\u770B\u6CA1\u6709\u611F\u60F3\u7684\u6807\u6CE8\u6216\u5C1A\u672A\u89E3\u51B3\u7684\u7591\u95EE\u3002\u6BCF\u6761\u6709\u51FA\u5904\u7684\u8BB0\u5F55\u53EF\u4EE5\u76F4\u63A5\u56DE\u539F\u6587\uFF1B\u7591\u95EE\u53EF\u6807\u8BB0\u5DF2\u6709\u7406\u89E3\u6216\u91CD\u65B0\u6253\u5F00\u3002\u53EF\u52FE\u9009\u5E76\u5BFC\u51FA\u5F53\u524D\u9009\u4E2D\u7684\u8BB0\u5F55\uFF0C\u65E5\u671F\u6309\u5F53\u524D\u8BBE\u5907\u65F6\u533A\u7B5B\u9009\u3002\u989C\u8272\u53EF\u5728\u8BBE\u7F6E\u4E2D\u81EA\u5B9A\u4E49\u540D\u79F0\uFF0C\u9ED8\u8BA4\u4E0D\u5F3A\u5236\u8D4B\u4E88\u5B66\u4E60\u542B\u4E49\u3002\u201C\u5BFC\u51FA Markdown\u201D\u628A\u672C\u4E66\u7B14\u8BB0\u548C\u8BA8\u8BBA\u5E26\u8D70\u3002\u201C\u8BBE\u7F6E\u4E0E\u5907\u4EFD\u201D\u53EF\u4E0B\u8F7D\u5B66\u4E60\u8D44\u4EA7\u5907\u4EFD\uFF0C\u6216\u9009\u62E9\u542B\u539F\u4E66\u7684\u5B8C\u6574\u4E66\u623F\u5907\u4EFD\u3002\u6062\u590D\u524D\u5C55\u793A\u6570\u91CF\u3001\u4FDD\u7559\u5F53\u524D\u5FEB\u7167\uFF0C\u518D\u66FF\u6362\u8BB0\u5F55\u3002\u539F\u751F\u4F1A\u8BDD\u5B8C\u6574\u8FD0\u884C\u72B6\u6001\u4E0E\u6A21\u578B\u51ED\u636E\u4E0D\u5728\u63D2\u4EF6\u5907\u4EFD\u4E2D\uFF1B\u7F3A\u5931\u7684\u539F\u751F\u4F1A\u8BDD\u4F1A\u4EE5\u53EF\u89C1\u5386\u53F2\u91CD\u65B0\u5F00\u59CB\u3002",
+        en: "Highlights, reflections, questions and long notes retain dates and sources. Edits keep history; deletion goes to Trash without deleting originals. My notes & history searches across books and filters by book, color, type, creation date, unwritten marks or open questions. Jump directly to sources, mark questions understood or reopen them, and export only selected records. Date filters use the device time zone. Color names can be customized without imposing meanings. Markdown export carries notes and conversations. Settings & backup downloads learning assets or includes originals. Restore previews counts and snapshots current state before replacing records. Full native session runtime and model credentials are not in plugin backups; visible history can start a fresh native session."
+      }
+    },
+    {
+      id: "review",
+      title: {
+        zh: "\u672C\u6B21\u9605\u8BFB\u56DE\u987E\u4E0E\u751F\u6D3B\u5C1D\u8BD5\u8349\u7A3F",
+        en: "Session reviews and optional life experiments"
+      },
+      body: {
+        zh: "\u4ECE\u9605\u8BFB\u533A\u2018\u66F4\u591A \u2192 \u672C\u6B21\u9605\u8BFB\u56DE\u987E\u2019\u6216\u4E66\u866B\u6807\u9898\u533A\u7684\u56DE\u987E\u6309\u94AE\u6253\u5F00\u3002\u57FA\u7840\u8349\u7A3F\u6765\u81EA\u672C\u6B21\u65F6\u95F4\u8303\u56F4\u5185\u4FDD\u5B58\u7684\u8BB0\u5F55\u548C\u8BA8\u8BBA\u4E2D\u7684\u7528\u6237\u539F\u8BDD\uFF0C\u7528\u6237\u95EE\u9898\u4E0D\u7B49\u540C\u4E8E\u5DF2\u7ECF\u7406\u89E3\u3002\u53D6\u6750\u8303\u56F4\u53EF\u4EE5\u5C55\u5F00\u68C0\u67E5\uFF0C\u5305\u62EC\u7528\u6237\u53D1\u8A00\u3001\u4FDD\u5B58\u8BB0\u5F55\u3001AI \u5386\u53F2\u56DE\u7B54\u548C\u5F53\u524D\u7AE0\u8282\u6458\u5F55\uFF1B\u8F83\u957F\u6216\u8F83\u591A\u6750\u6599\u4F1A\u622A\u53D6\u5E76\u63D0\u793A\u9650\u5236\u3002\u53EF\u4EE5\u7F16\u8F91\u8349\u7A3F\uFF0C\u4E5F\u53EF\u4E3B\u52A8\u8BF7\u4E66\u866B\u6574\u7406\u3002\u751F\u6210\u7ED3\u679C\u5355\u72EC\u663E\u793A\uFF0C\u53EA\u6709\u70B9\u51FB\u63D2\u5165\u624D\u8FDB\u5165\u8349\u7A3F\uFF0C\u4E0D\u8986\u76D6\u6B63\u5728\u5199\u7684\u5185\u5BB9\u3002\u8303\u56F4\u53EF\u4EE5\u624B\u52A8\u8C03\u6574\u5E76\u91CD\u65B0\u5F00\u59CB\uFF0C\u66FF\u6362\u524D\u7684\u8349\u7A3F\u53EF\u6062\u590D\u3002\u4FDD\u5B58\u540E\u8FDB\u5165\u6211\u7684\u75D5\u8FF9\uFF0C\u533A\u5206\u7528\u6237\u8BB0\u5F55\u548C AI \u53C2\u4E0E\u5185\u5BB9\u3002\u53EF\u9009\u5C0F\u884C\u52A8\u53EA\u4FDD\u5B58\u4E3A\u6587\u5B57\u8349\u7A3F\uFF0C\u4E0D\u81EA\u52A8\u521B\u5EFA\u5F85\u529E\u3001\u65E5\u7A0B\u6216\u63D0\u9192\u3002\u5173\u95ED\u751F\u6210\u7A97\u53E3\u540E\uFF0C\u5DF2\u53D1\u8D77\u7684\u56DE\u590D\u4ECD\u53EF\u5728\u8BA8\u8BBA\u5386\u53F2\u67E5\u770B\u3002",
+        en: "Open More \u2192 Reading review or the review button in Bookworm. A base draft uses saved records and reader messages within the session range; a question is not proof of understanding. Inspect the materials, including reader words, saved records, AI replies and a chapter excerpt. Long or numerous inputs are bounded and limitations shown. Edit your draft or explicitly ask Bookworm to organize suggestions. AI output is separate and inserted only by your choice, never overwriting ongoing edits. Adjust the source range and restart with an option to restore the previous draft. Save to My notes & history with user and AI origins distinguished. Optional experiments stay as text; no task, schedule or reminder is created. Started replies remain available in discussion history after closing the dialog."
+      }
+    },
+    {
+      id: "keys",
+      title: { zh: "\u9605\u8BFB\u5FEB\u6377\u952E\u4E0E\u751F\u6548\u8303\u56F4", en: "Reading shortcuts and focus" },
+      body: {
+        zh: "\u5FEB\u6377\u952E\u53EA\u5728\u9605\u8BFB\u6B63\u6587\u83B7\u5F97\u7126\u70B9\u65F6\u751F\u6548\u3002\u70B9\u51FB\u6B63\u6587\u540E\u4F7F\u7528\u7A7A\u683C\u3001\u65B9\u5411\u952E\u548C PageUp/PageDown \u9605\u8BFB\uFF1B\u804A\u5929\u6846\u3001\u7B14\u8BB0\u7F16\u8F91\u5668\u548C\u641C\u7D22\u8F93\u5165\u6846\u4FDD\u6301\u6B63\u5E38\u8F93\u5165\u3002\u76EE\u5F55\u6309\u94AE\u548C\u5F39\u7A97\u6709\u81EA\u5DF1\u7684\u952E\u76D8\u884C\u4E3A\u3002Tab \u5207\u6362\u63A7\u4EF6\u7126\u70B9\uFF0CEsc \u5173\u95ED\u5F53\u524D\u6D6E\u5C42\u3002\u5FEB\u6377\u952E\u901F\u67E5\u5C55\u793A\u672C\u673A\u5B9E\u9645\u914D\u7F6E\uFF0C\u53EF\u4FEE\u6539\u3001\u505C\u7528\u6216\u6062\u590D\u9ED8\u8BA4\uFF1B\u7CFB\u7EDF\u548C DSH \u5DF2\u4FDD\u7559\u7684\u7EC4\u5408\u4E0D\u8986\u76D6\u3002\u82E5\u5FEB\u6377\u952E\u88AB\u7CFB\u7EDF\u6216\u5BBF\u4E3B\u5148\u5904\u7406\uFF0C\u8BF7\u4F7F\u7528\u5BF9\u5E94\u6309\u94AE\u6216\u6362\u4E00\u4E2A\u952E\u4F4D\u3002",
+        en: "Shortcuts apply when the reading body is focused. Click the body to use Space, arrows and PageUp/PageDown. Chat, note editors and search fields keep normal text input. Contents and modals have their own key behavior. Tab moves focus; Escape closes overlays. The shortcut reference shows effective device-local bindings and supports customization, disabling and reset. Reserved system/DSH combinations are not overridden. If the host consumes a binding first, use its button or choose another."
+      }
+    },
+    {
+      id: "faq",
+      title: {
+        zh: "\u5E38\u89C1\u95EE\u9898\u4E0E\u5F53\u524D\u9650\u5236",
+        en: "Troubleshooting and current limits"
+      },
+      body: {
+        zh: "\u5BFC\u5165\u540E\u70B9\u51FB\u5F00\u59CB\u9605\u8BFB\uFF1B\u91CD\u590D\u9879\u53EF\u4EE5\u6253\u5F00\u5DF2\u6709\u4E66\u7C4D\u3002\u76EE\u5F55\u91CD\u590D\u65F6\u4F7F\u7528\u4FEE\u590D\u76EE\u5F55\u3002\u5173\u8054\u539F\u4E66\u627E\u4E0D\u5230\u65F6\u91CD\u65B0\u5B9A\u4F4D\uFF0C\u4E0D\u8981\u5220\u9664\u7B14\u8BB0\u3002\u6A21\u578B\u4E0D\u53EF\u7528\u65F6\u5230 DSH \u6A21\u578B\u8BBE\u7F6E\u68C0\u67E5\u914D\u7F6E\uFF0C\u518D\u5237\u65B0\u6A21\u578B\u5217\u8868\u3002\u5FEB\u6377\u952E\u65E0\u6548\u5148\u786E\u8BA4\u7126\u70B9\u662F\u5426\u5728\u6B63\u6587\u3001\u662F\u5426\u6709\u5F39\u7A97\u3001\u662F\u5426\u88AB\u7CFB\u7EDF\u5360\u7528\u3002\u9996\u7248\u652F\u6301 EPUB\u3001PDF\u3001TXT\u3001Markdown\uFF1B\u626B\u63CF PDF \u53EF\u770B\u539F\u7248\uFF0COCR\u3001MOBI/AZW3\u3001\u4E91\u540C\u6B65\u548C\u72EC\u7ACB\u751F\u6D3B\u5B9E\u8DF5\u770B\u677F\u5C1A\u672A\u63D0\u4F9B\u3002\u5355\u672C\u4E0A\u965064 MiB\uFF0CPDF\u4E0A\u96502500\u9875\uFF0CZIP\u89E3\u538B\u603B\u91CF192 MiB\u3002\u79BB\u7EBF\u9605\u8BFB\u7B14\u8BB0\u53EF\u7528\uFF0CAI \u9700\u8981\u53EF\u7528\u6A21\u578B\u3002",
+        en: "After import, choose Start reading. Open an existing book for duplicates. Repair repeated contents labels. Relocate missing linked originals rather than deleting notes. Check model configuration in DSH and refresh the model list. For shortcuts, check body focus, overlays and system conflicts. Supported formats are EPUB, PDF, TXT and Markdown; scanned PDF viewing works, but OCR, MOBI/AZW3, cloud sync and a separate life-practice board are not included. Limits: 64 MiB per book, 2,500 PDF pages, 192 MiB uncompressed ZIP. Reading and notes work offline; AI needs an available model."
+      }
+    }
+  ];
+  function manualSearch(query = "", language = "zh") {
+    const q2 = query.toLowerCase().replace(/怎么|如何|怎样|请问|how to/g, "").trim(), terms = q2.split(/\s+/).filter(Boolean);
+    const aliases = {
+      import: [
+        "\u5BFC\u5165\u76EE\u5F55",
+        "\u5BFC\u5165\u4E66\u7C4D",
+        "\u5BFC\u5165\u6587\u4EF6\u5939",
+        "\u6587\u4EF6\u5939",
+        "import",
+        "folder"
+      ],
+      storage: ["\u4E66\u5E93\u4F4D\u7F6E", "\u5DE5\u4F5C\u76EE\u5F55", "\u5B58\u653E\u4F4D\u7F6E", "\u8FC1\u79FB", "\u79FB\u52A8\u4E66\u5E93"],
+      methods: ["\u8D39\u66FC", "\u72E9\u730E", "\u8FA9\u8BBA", "\u63D0\u793A\u8BCD", "method", "prompt"],
+      keys: ["\u5FEB\u6377\u65B9\u5F0F", "\u5FEB\u6377\u952E", "\u952E\u4F4D", "keyboard", "shortcut"],
+      custom: ["\u6211\u7684\u65B9\u6CD5", "\u81EA\u5B9A\u4E49\u65B9\u6CD5"],
+      chat: ["\u5207\u6362\u6A21\u578B", "\u804A\u5929", "model"],
+      notes: ["\u5907\u4EFD", "\u5BFC\u51FA", "\u6062\u590D"]
+    };
+    return MANUAL.filter((x2) => {
+      const text = (x2.title[language] + " " + x2.body[language] + " " + x2.id).toLowerCase();
+      return !q2 || terms.every((term) => text.includes(term)) || (aliases[x2.id] || []).some((term) => q2.includes(term));
+    });
+  }
+  function isUsageQuestion(text) {
+    return /^(使用帮助|help)|导入(?:书籍|文件|目录|图书|电子书)|关联(?:目录|文件夹)|书库(?:位置|目录)|快捷键|切换模型|选择模型|模型列表|配置模型|使用说明|插件怎么用|(?:how|where).*(?:import|backup|shortcut|plugin|keyboard|folder)/i.test(
+      text
+    );
+  }
+
+  // src/client/spirit.jsx
+  var import_react7 = __toESM(__require("react"), 1);
+
+  // src/shared/reading-methods.js
+  var METHOD_GUIDANCE = {
+    free: "\u81EA\u7136\u56DE\u5E94\u5F53\u524D\u9605\u8BFB\u95EE\u9898\uFF0C\u7ED3\u5408\u539F\u6587\u89E3\u91CA\u3001\u8BA8\u8BBA\u3001\u7FFB\u8BD1\u6216\u6574\u7406\uFF1B\u4E0D\u8981\u6C42\u5148\u586B\u5199\u76EE\u6807\u6216\u5B8C\u6210\u7EC3\u4E60\u3002Respond naturally to the current reading question without a goal form or exercise prerequisites.",
+    hunt: "\u4ECE\u6B63\u5728\u9605\u8BFB\u6216\u9009\u4E2D\u7684\u5185\u5BB9\u51FA\u53D1\uFF0C\u5E2E\u52A9\u8BFB\u8005\u53D1\u73B0\u503C\u5F97\u8FFD\u5BFB\u7684\u7EBF\u7D22\u3001\u89E6\u52A8\u548C\u4E0E\u751F\u6D3B\u7684\u8054\u7CFB\u3002\u8BFB\u8005\u8FD8\u6CA1\u6709\u95EE\u9898\u65F6\uFF0C\u5148\u89E3\u91CA\u6216\u6307\u51FA\u4E00\u4E2A\u6709\u4F9D\u636E\u7684\u5207\u5165\u70B9\uFF0C\u53EF\u4EE5\u8F7B\u8F7B\u95EE\u4E00\u4E2A\u5177\u4F53\u95EE\u9898\uFF0C\u4F46\u4E0D\u8981\u53CD\u590D\u8FFD\u95EE\u201C\u4F60\u60F3\u89E3\u51B3\u4EC0\u4E48\u201D\u3001\u8EAB\u4EFD\u6216\u76EE\u6807\u3002\u95EE\u9898\u81EA\u7136\u51FA\u73B0\u540E\u518D\u636E\u6B64\u5B9A\u4F4D\u76F8\u5173\u7AE0\u8282\u3001\u524D\u7F6E\u77E5\u8BC6\u3001\u53CD\u4F8B\u4E0E\u9002\u7528\u9650\u5236\u3002\u6CA1\u6709\u8BFB\u5168\u4E66\u5C31\u8BF4\u660E\u8986\u76D6\u8303\u56F4\uFF0C\u4E0D\u673A\u68B0\u7B5B\u900920%\u3002\u5141\u8BB8\u53EA\u662F\u9605\u8BFB\u3001\u6682\u65F6\u4E0D\u56DE\u7B54\u3001\u4E0D\u8054\u7CFB\u79C1\u4EBA\u7ECF\u5386\uFF0C\u4E5F\u5141\u8BB8\u4E0D\u540C\u610F\u4F5C\u8005\u3002Start with the current passage and discover meaningful leads together; never require a predefined goal. Once a question emerges, locate relevant passages, prerequisites and counterexamples. Ask one optional, concrete question at a time.",
+    feynman: "\u56F4\u7ED5\u5F53\u524D\u6BB5\u843D\u6216\u8BFB\u8005\u521A\u95EE\u5230\u7684\u6982\u5FF5\u5E2E\u52A9\u7406\u89E3\u3002\u5148\u56DE\u5E94\u5F53\u4E0B\u95EE\u9898\uFF1B\u8BFB\u8005\u8FD8\u4E0D\u7406\u89E3\u65F6\u5148\u7ED9\u7B80\u660E\u89E3\u91CA\u6216\u4F8B\u5B50\uFF0C\u4E0D\u628A\u201C\u5148\u8BB2\u7ED9\u6211\u542C\u201D\u5F53\u6210\u51C6\u5165\u6761\u4EF6\u3002\u5DF2\u6709\u4E00\u70B9\u7406\u89E3\u65F6\u518D\u9080\u8BF7\u7528\u81EA\u5DF1\u7684\u8BDD\u590D\u8FF0\uFF0C\u56F4\u7ED5\u4E00\u4E2A\u5177\u4F53\u6A21\u7CCA\u70B9\u8FFD\u95EE\u3002\u9010\u6B65\u7528\u4F8B\u5B50\u3001\u53CD\u4F8B\u3001\u9002\u7528\u8FB9\u754C\u548C\u65B0\u60C5\u5883\u68C0\u9A8C\u7406\u89E3\uFF0C\u6B63\u786E\u6E05\u695A\u7684\u56DE\u7B54\u4E88\u4EE5\u627F\u8BA4\uFF0C\u4E0D\u5F3A\u884C\u6311\u9519\uFF0C\u4E0D\u51D1\u56FA\u5B9A\u8F6E\u6570\u3002\u5141\u8BB8\u62D2\u7EDD\u7EC3\u4E60\u3001\u8BF7\u6C42\u63D0\u793A\u6216\u76F4\u63A5\u7EE7\u7EED\u8BFB\u3002\u53CD\u9988\u5177\u4F53\u3001\u5C0A\u91CD\uFF0C\u4E0D\u5BA3\u79F0\u5B8C\u5168\u638C\u63E1\u3002Answer the immediate question first. Explain when needed, then optionally invite teach-back, examples and transfer. No mandatory explanation or quiz before help.",
+    debate: "\u4EE5\u5F53\u524D\u539F\u6587\u6216\u8BFB\u8005\u63D0\u5230\u7684\u89C2\u70B9\u4E3A\u8BA8\u8BBA\u8D77\u70B9\u3002\u5C1A\u672A\u660E\u786E\u8BBA\u70B9\u65F6\uFF0C\u5148\u4ECE\u539F\u6587\u51C6\u786E\u63D0\u53D6\u4E00\u4E2A\u503C\u5F97\u8FA8\u6790\u7684\u4E3B\u5F20\uFF0C\u5E76\u5141\u8BB8\u8BFB\u8005\u7EA0\u6B63\uFF1B\u4E0D\u8981\u6C42\u5148\u586B\u8BBA\u70B9\u3001\u5BF9\u624B\u6216\u7ACB\u573A\u3002\u51C6\u786E\u8FD8\u539F\u4F5C\u8005\u6700\u5F3A\u4E14\u6709\u4F9D\u636E\u7684\u8BBA\u8BC1\uFF0C\u518D\u9009\u62E9\u76F8\u5173\u89C6\u89D2\u63D0\u4F9B\u8BC1\u636E\u3001\u53CD\u4F8B\u6216\u63A8\u7406\u3002\u6A21\u62DF\u4EBA\u7269\u4E0E\u4F5C\u8005\u56DE\u5E94\u660E\u786E\u6807\u6CE8\u4E3A\u63A8\u6F14\uFF0C\u4E0D\u865A\u6784\u5F15\u8BED\u3001\u7814\u7A76\u6216\u4E8B\u5B9E\uFF0C\u4E0D\u51ED\u59D3\u540D\u88C1\u51B3\u3002\u8BF4\u660E\u652F\u6301\u3001\u6761\u4EF6\u3001\u8BC1\u636E\u4E0D\u8DB3\u548C\u672A\u51B3\u5206\u6B67\uFF0C\u9080\u8BF7\u800C\u4E0D\u5F3A\u8FEB\u8BFB\u8005\u5F62\u6210\u6682\u5B9A\u5224\u65AD\u3002Identify a claim from the passage when needed; do not require a stance or opponents in advance. Steelman, examine relevant challenges, distinguish simulation from sourced claims, and preserve uncertainty."
+  };
+  function panelLimits(containerWidth, tocWidth = 0) {
+    const available = Math.max(0, Number(containerWidth) || 0);
+    const max = Math.max(320, available - tocWidth - 320);
+    return { min: 320, max: Math.min(1100, max) };
+  }
+  function clampPanelWidth(width, containerWidth, tocWidth = 0) {
+    const { min, max } = panelLimits(containerWidth, tocWidth);
+    const value = Number(width);
+    return Math.min(max, Math.max(min, Number.isFinite(value) ? value : 420));
+  }
+  function tocPanelLimits(containerWidth, dockWidth = 0) {
+    return {
+      min: 140,
+      max: Math.max(
+        140,
+        Math.min(
+          600,
+          (Number(containerWidth) || 0) - (Number(dockWidth) || 0) - 320
+        )
+      )
+    };
+  }
+  function clampTocWidth(width, containerWidth, dockWidth = 0) {
+    const { min, max } = tocPanelLimits(containerWidth, dockWidth);
+    const value = Number(width);
+    return Math.min(max, Math.max(min, Number.isFinite(value) ? value : 200));
+  }
+
+  // src/client/spirit-avatar.jsx
+  var import_react3 = __toESM(__require("react"), 1);
+
+  // assets/bookworm.webp
+  var bookworm_default = "data:image/webp;base64,UklGRvhMAABXRUJQVlA4WAoAAAAQAAAAfwEAfwEAQUxQSJcXAAABHAVt2zAJf9r7IxARE8BPtYCMGkao3PWH7bNp2/H/vWrU3MfBOd0ntm3btm3bTk7SttKdNINGbHfSsW0n14ntg73GGFWj/lhrrzUX5jrjzUTEBNCtbcuSFPXCBnSsQMUiTMAKfMAWTEBGRR2ppuqc/sSLFy8iI0qOiAnAt/7/f+1T9vuvT6L/3kcgoqz3v25ShqHs12uJqG2Ut6i+XaCshY7I3HWU/ZBviXpA5iX876WU/f43Tcp+/x9vAuU+Qu7D/9pNnUeUmbow//2XKTlmdjRtR61QhRAXhMbELr8RA8AsK22w4forzAzAuWm2lruPQB1BDIxY98d3vR8sae39e7+/FMCZoNuJiNCJDHznlOfMzCSEIGY2ePEC4BwEEDqRMea4iWah5mMUiTH6mtin+8BloU4kh+1fNPNRGqqKiErN7By4LEaEc8yCaMsx2F7gDEbg8yxELTPqe2NBuYMcN3RE3UIYuMRqouUG2xOcNRwTmmVH3UBu4FIbFC0r/RMuXxADwMzLrL/D/gfsvP4yszMAdq0QUbuIcZHVRMuO9twAKFcwQKt/7z/vDlpD//GjP1mtAJhaojYxzrBB0dLF3p4uVzjCmH0eSGYmwXvvg5hZeurshQCmZtA2xoYSopYf7fmBTMHA/i+ZhUEfojSMMfho9vWv5wRcMyC0ld34N1OQRhKixCDNhXQlHHIkY77bzGo+iohoA1FVCTW1D44dADfTZsZfrSbaMFjj0JztAs4RjHXeNx9FRLRViTWzh1cEd0iBDTSI1sdgX/5lp/U3Pft981GG8Pb8SEKGdFh7snktWSTWbNKO4I4gV9xvXutjtH8ugPrZrjSrRVGVWLMpa4MzhMMCH6SalifiUzoaBXVAga0taL2oPwgomLkAjvvMLIkksxdXh0OO4H/boJQhqiqiqhqCnQTuAOfuMl8nMrgNmFHvHOb5wfNTzaY8ftIMYGRIxvZWkxJkyDqNwU4Bt42xjkStD7YvBjAkFcDwRdfdYDEGGDmS3N3mRVv2PgRfC7GRSrCzwO27yHxdsL+gQJPkGA2ZkCMd5v06ibYqYo3VSwOVYBuD20OY6QMTVY3pjbGOmgFAjtkR8iRjPQstRUs3H7PFxnv96uGplkIDjenN8URtKbCrRVXVYLuCMY1KvWnzFLTFYJ9uiYa8zLlTLUidBrsE3A4qcLEFVQ32eOFoWqUnM9ax2EKwicuACy6KAsCyt1qKdeptb3A7MPpliw12R4GM6jDfN0maCunjJTGAxo6BQ79OsS7KFwuQK4+x9KCqarTXRhNlAeoUEN1joZmQJq2NAk06hzU+SVFV1dulaI4cN3TOMQ/nXc2rarBfgpFVGFuaj0OIt8EtUKD5AaxXE1FVibI2uI4cM6PlH1tNVSVtzEVegcNPLPkoIjEk+2RjFGh1AAdaVBXxdiMcyDEajl143d2Pm/CLv116xZVX/uNPv3kjRVWxD8cAjikDdDLjqM+s8dR/LghG6wXONC8iUcIKbgAAzbflyf984J1J1qKoqqTP9l9sNAAqXD4BYZ4JD0189817zloccCiTcbF5EQ32L2D6dX752JdWn2IY0nsfRBuaDb78r73nAlC4bAIG3PjZvwvAOZTqaPw7GkUlfXP4H183Mws+RBEtVYKa2cc3HjIn4DiXwDHq2aFsxn4WVVXUzKIPom2V6L2ZfXTeCgBxJgFARGgjFcMft6iqEnwQ7UCJ3pv5azcFnMsl7XUO+LMF7WyJXs1uXxfg7EMMrHTdoGgXhmjpknlBLu84YKELvYl2Z4j28aEAZxxiDD/pcxPfLare7MY5UWQbB6z+kKWaaBeLt4nrwFGeYYz6ubdaFO1ub/5kgHIMY+GHTYKIdnsUu3wUXHYhxjYfWU20F0rNbh4Jl1mIcGwyr72yZtcOJ5dVHPh3FoP2Tm9XFKCM4jD9Deaj9tKaXTHCUTZxmOlB89pja3YZOJc4jH/Uatpza3YiijziMN29VpPeI6G2EjiHEI261QalB2mw52Ygyh/k+BobFNFeHOxK4kqgvo4Y51pNRHuzt0PBFUDod6k9BY4zL9qrRT6dm1zv63/bw9hcQtTeHexqZIC2Osz9QQrSwzTaRuCMQTxwu3nt6cHuZ5cxGMeb1x4fbWtwtnBY9MsYe1pKKdjdzmULdreZl16nGlfCQKZg7GdetOdFu30sOEs4musjCT2uYbSX1gTnCMYFVhOtwmBTNgTnB4eVa0GqQYN9shA4Q9xkvio02ONjiDIDY60YRLQqvf0TTHnB0Q3mta0ppV6i3s4EZwWH5by2N9X3EpHasnB54VwLlaLBrscAu2xAmOl9lTaklJL23CgrAKBcwDjcalo1dv9xhy2NXEgDj5iXNqBcWq1QNbPBHcBZwGGVKFKO0cVtS6Kfkv4DlwUY51hNtHeXqXg7LxOQu99CBYnIBWOJcoDDIt9o1J4ulZKmbIFMyDjMvFavpLC4K/KAwyWVpNG2Rh4gjHzJYhUF2yMTOCw8OUkVedsLnAUYm1nUKg62XTY4ykIlxbRONvip+e7yIpKmLgqXCf7WbVeN9tIIUBZwuNxCFQX7ExhZkPCfcjzAYSjyAIonLZbi7qLdzpQFCCNeKEX1OrqESloXnAdGvlSaqBvz9pdcMOLFMszuK6a3ZwRlgeLJsgCVfWmwrcAZAIS7WzMM2HnNfp0HHK6zUAqbshlvt4FyAOOCkmTPqWgvjARlgR+Zr5C02AezZIKDLLQCKCf4bF64LLC+xRK2rc19sUAWcFhgkklFfT5/FiCMfNViJUX7aHZQBoDD9ealMmhSgr08Kg8wjrdaZUCqb+DtDhByoMNyXmI5tjPUy6Skqt7OBWcBwojnLEgXuIG9MgEK/MF8l3DJRkklTVoQLg8wtrDQDRduFOxOR8iDhDGvpliKao9SbXQQOBOA8X3zJfXupJI+mQmUCxwW+lqlWlSD/QaMbMi4yELFiE5agFxOWMFLxQT7LRgZ0eFG85US0zszkcsL62islGDbg5EVHa60UF7qPd4uBiM3LPSlxNJ6b7DnxjrKDGAcbb4qYvp0MTByIzHfYr4aovgNwMiPhNnfTrG0lHpIFNsbBXIkY0OJUpb2kJD0IDDyZIHTzEtZvdPblB3AyJTEON+89DZvb62FAtmSHH5rXnpYiHbPXCiQMcnhV+ZjrxJv+rNhYGRNcvi+hdibgtoT64EcMicxTjYLPSiIDU4YicIhexJj188tSI8JanbDigAT5Q+AsfAtlkIPES8Wr1sXYEImZeCwSRZijxBvlq5fHXAO+dQ5LHWzWYg9wezLf6wFMCOrUgFs86BZiF0n+taZ8wDMhMwCdnB7Pm3WbSKyOsBMhAzLwMB2D0rsLg22UzGAXEsMFM9Z7C5vfwFnG4B57aki3RXtmQFQvnG42bx2t6TJC8JlEBqyFcYaIUqXabQtwf0SVRQ5LhyGJC7YNeFwlXntdm+n9k+gCnJMqB+Yftz48eOmG0DDwjVwWHiyStcFu6iPqlxiB2DcCnv96vYnX5/4zjsTX3/m3xeeue38AMAEME4xrz3gftA0AvUaYgALHXPbO9Fa/eaeU5chgInoXgvdF+210aBpgx5LDIzb88bJZhZ9zccoMcYYgq/5ZFZ76NhZAF50SpLuE/t0zr6OiHoTAzOf9a5Z8iGKiGiTIjF4MfvwnFlwqgXtAVpbDC43OMIMp7xrFoJoyRKD2TsH3p9iD1CV5fs69CQG9n7NrCba1lgz094otmZ/14OJsOjNZrUo2maJoWdsBM4JDjjiS/NBRKsy2mZZgTH7DWZBq1Rsk5zAWPhVC6IVs0FGKLDsW1bTihVbCy4XFFj5Y6tJ1aiukA0Ya3xqNakaSbXFcoHDil9aUNGqsU/nAGUBh9nfsaDVG+31MXmAuLjDglZwsAcIWZBxpnmtpovBOcBhdR+kkrydnQXIjXneglZysN2nochxs46oGYezzWtFp1Xg2kZE5JxzRER9nGNC646ZHQGO5vlCYjWJfTQTqDRyzMyO0DQxMzvqwwjAuCU32fvI4084/pjDD9xl/aXnmAGNHQ/DeVbTag52DwhlkmMmDDlsxvFzLrjwgvPPPeu4YWjsuM8iYM2f3vX+VGt26mcTH7jyJwduvNBoAAtNEqkob98Dt0TMhPpxC2+y7xnnX3vX029/+Pk333z91RefvvvkbVf85sSdlp0BcH0VMZ1vZpai9yGE4H2Iao0nvXLTD7a+1oJWdVwFrilyjPqZVzng9/e9PcWaTMma9W9eugmonypwlgUfRLRZkRhDCJKsXrSio70yEjQUMQPAnJv/+J73xcwsxeBDCDFGGTKGejWzn4H7J8YW6qOWLTH4KFrV3v4ERkNiBjBi1Ql3f2pmJt6HKFq6eG+HgvslhwU/0qD9abAtGzkGMHar3z4rZhZ8FBHR9sY4eSm4/oh45EPmtT8N6bXpiUDsgFEb/naimYkPop0Z7OkZHfVFBX5tXvvUmp2DghjAkr942cyij6LtTSkNpcEuBPdDjC1T1KFTUtXUplQhot8s5IYBvMElU83Ei7Y/pZSG0mCbgfsfh/k/1CZSSqI6Qz3H7fXXp5eXz99/v75yu7Nkk4aK6dXpHfU75Iq7zWvj1DSgAyY8xuPx9eXLj7+vr/fbg0UHNNh54H6Hca55bZhaHFMNQj3C/fXPt5//Xl9v9werOqLBdgT3N4yjLGjDVEobOeYJ4L//X19vdxa1r/WpQdSP5iTXzzisUotSl1pPOMu9vXp7MK5OSs1osKvBfQy56Z+3oCXZoTtgQt0aDwptJyVtNtjB4L6FGH8zr+XZklTtgRwi1hnqHNEv5oLrVwocZDVpkIZWbbCfQSmVMzhC17goNdBg14L7FIfVp8aoqpqa1DrocWorbOxH9sdSUk1DaLB9wH0J0fg3LIiqpia1PsOzRElqQuSTeeH6EGJcZjXRFlJKitljjY/Rz5HS1IwGuxlM/UeBg60mdanVFOuqJyGtMpySap026e1QcN/hsMrkGLW+BdUMgItsXBVAMqYWjXHKcnB9BtF3X7Ogqpqa1/oegI2ClqhD6i60MaZ7GQ32xHBH/QXjMqtpa1pKCBJqyrbAhXSOYBFXDHYyuK8ocIjVpEHjpNpEqxL2uqqojZdScIpKBSDzU0oliHyzCFwf4bDcpBi01ZS0aUmq5to5LmB/jh2WL0eD3e76CHIzPm9BO1clmQK5pn0mqrK8c9TbCXB9A+Ov5rVbQFnQtsw+sXHKsMQaFWyjoVN9E1GmLAXXJzB2tqAdrW6FDrFl1FhhY1yR0hDi7XLqExzm/URiZwGuBqhlgEoCUPKNq6hQpjqUiJ9qH4wG9QPk+Gbz2s0qeLV0MK6yCgENlU2oWfoROfSDjEPNSw9wjpFrLK3UNy0ONOlvO3Nl9IcE91T02rXGk1QxXEFXksmB1EqaPDdA/QGI7jaJ0iX2UevA/houNH+GBvsNDUOf6LDk3V+bdZCWtIGW0HMBWMcFQKkW/WJecn1C/fzrPWOxtKQrGV9rs3Ua7AJw3+AcZvs8SVmpvi4bGQIa6YiglzGjy8yMcV1wvwDGXyxoiymlVBoz2Jw91Q3Yg4XrFxjLTRXpnOoR1SA2fSn2osF2AfcJDrdZ0JaH0s6hb5wid1wtL704ylFfwNgqBW2nMl/yAU8DpLI02BHgfoDcmBesPR0owyqjCdD9pM5I9S3E9PZYoj6Acax56ZBUFg6VRtC4m5RS56TmNNhp4Ooj+u57GrRKN9S5JYh+MJ6o8hjnmNeuTSl1BcduTYN9H1x1jub8TGJ/4oa0NZEv5oOrOMb55rWXGeYWVbdUordLqo5puVqURqkbOjFgfY8hIa5FXGkFrrKgvV3lGhyyZj9AUWUFNvZR+9GDBH1mHFx1MVb5VPsVjhnsvtFEVeWw+CcWdVq/Zlc6pmoiN/Ip8zrNLzX7FYpKogLnWk2r06dFxdthKKpoAAebl8pQrdLjaQxhK3D1FNjKh9im1EN8bjTq18uCq4ax0lcatL0ppR5jpDrg+TTY6+PJVYujWd6woJXkLM+QWtJgNzNTpTCut5q2vff0mapHKNPb71FUSYFTzUv7em+HSZw62H4oqoOxu4SoFdxw+lSayDcrw1UFY52pMWo1y+FTSklVUxka7e3ZyFWDw/zvJS8Vdfy6+lLU2+Xgihi4w2rSj3gC1XZosK3BVcDYzmoiWsU66ZzlxfTqDEQV4HBZqqrn19vp4N5HGPasBdEcmFJqJer7M4EqYIY3M0Gqb0G97QOugFEv5YSUWki/rgAQ7kleJFPY36qAcbbVqsdnRMv5QRU4zPN5DFViuJi6DRGR8jQlbVGCbVUFcDjZpoayRCTGGEOJMUYR6Qq7a8GAdIzEEELwIYQQG4fgG4cQYowiLWhLIb08hqgCyBUXWfAylEiMIQTvo2iyNqsE70OIIl2QUuqoFtsiqjEEH6Ik60yVGHwIMYpo6zHYjmBUIZE7e9BMQn1Ua1anfvXhG88+9uAd115+6T8v+NN5fzjvT3+9+F+XXXX9fx544uW3P5mcbGgNIYQondCwUUrd0k4RSda49vl7rz5+783/Ovf7px5z8N677rDdNjvutttOO+9xwJEnn/2TX//18tseem7iZ4PJhtYYQghRRBpI8Ganw6EaibDivz6wxjL5w9ceufXCHx6/79brrLDofLNOPwzl8ujvzrnQypvuedz3L7r98be+EmsYgw9RpH2aVDWllHqNiMjgq7dfMOHwHdZYfK6ZRhPaOzB2zkWXX2/noyf86caHX/0k2JAagw/RzN7ZHQ6V6YCZ193riKMO2XPz1RaeeXqHVsk557ixc+wcEZp2Y+dZZZcT/3zzq19ZvXgfpF0NOyCl0kRKUvE2YTSaJXJcasHsHJqfbvblNztowp9vevKdz6aomeln958wHowKdQ5Nk2MumNk5R0QomYicYy4K5zDkmPk3PPTc2ycGMzMJIUq7tIu0HYdhgAtm54gIbSYi55i5YIehB8bOsfTaW+2y41pzAWBUK3ExUDCzc44IHU7kHBcFo+GMy+3+szs+sPoYorSlB0vNTqYC3UjkmJkdmqTCoXIJ3U1EjgtmQv0s6xx3+YuTzcxiiNJjYgipHWehO4YmIueY2TlC/06OCwKAkQtu9+N/f2xmyfsovSKGaGaDUaS073fZNCRx4VA/83a/f3yqmcValI5J5UkQM3v5gh13jzFKWT8D54F6cswOQLHUoZe8oWYaonRG2RKCmb183uZjgNU0SEnefp0TGlJRAMAMq576sJpZCNIlMZjZW+dvOBrAcF4vhVjaedkBADlmAG7VCQ8OmlkI0nlBzCbftMs4AMzEWFPacFGOqCdXAMDiR970uVnyoZNEYjR7/JRFADATAIcVB2N5V8HlCQDkGADmOvCWSWZRpHOi2S0bOcAxoaHDUpOlvFszRr1jB2CJCc9Y6Jwg724MgB2GdljsmzbcA8oaAKhwwMCPzXeK1OxwFIymHeb7QkIzEryISF2wRwiUOQDiAYx+0UJniLcnRxeE5gmzfaLNiJqFMNQzwzIIAMZaIcZOkJp9tBgcWprl49REsPTrS828qIoEe3lMmygXgHGwJS9tizX7YnU4tDbzhxaH8Pb5VsBO71qIDd6YoSwiAISMyNh/kiUfpTyJIZi9sCIYJXznnSHE2xNLo3CY8xIzLxLtne/0bVQ1cFjiX1PMLPoQYhQZSmIMwfuYzOytM2cAo4zpX7MgohrVLp4ODDCww+sWfbQPZiqPQMiLDCz+oyenWOOk0lCTNa69ecUuYwGHUkY+VyfeBo8HGADIYdyvo9Xk7enLypLOAbzgtqdccPcLEz+tJTNLSWXK+688fN0fT9lx8ekAMKGcYY+bl1iz19eEIzRmYM2HzK6EQ0Z1jIYjZpxjydXXWXfdtddafeXFZhqNxo4J5RL4AfM+2A2zokCTxHA7nzEHKKcA5LhgQsuOC3aEdt4tky2dRWA0z2g7ZYjG5BxzUXBDR2i7w9Vm724Jx2iVmKk9WZOI0LkOKz/2r7lREPI+I+c7OIdv/f//3SWi7Ifch/81k7Lft/7/1olEmY+Q+/Pft/7/1v//VQgAVlA4IDo1AABQtACdASqAAYABPikUiEMhoSER+fTwGAKEs7d+NgzkdGaX+lL4+wfbb8zzleP+5/4Npp/xuwP4r/SeczzX/3PuO+Yn+w/XT3JfpL/w+4H+q/qO/7v6we6T++/9z1B/zv+8/t770/+8/YD3Tf4T/Uf9T/P/AH/Vf73/5fXO9g3/A/6b/7e4H/Mf8V/8fXb/9P/I+Dn+qf7f9vPgH/lv9z/7v5//IB/8/UA9RT+Afvh3O38z/Fv9a/Jf+1/lB6B/j3z79z/uv7Xf3L/z+/jm36zf9n0d/jv2t/Of2X91fZf/ceA/wx/zP7f/efcC/Ef5P/gPzQ/yf7d/T19h2fmf/5f/e+oL7B/Nv83/c/81/1/8l8anwP+1/tPql9hP957gH6pf63+/+en/gPEU/A/7f9m/gA/mv9W/2H96/xH7WfTN/Pf9b/I/5H9u/a/+f/4L/q/5f/X/IP/JP6T/tP7l/nP/h/qP///9Puq9e37Vf+f3Nf1j/2f5wkAu7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7Ayy4rESb3FtZmZmZmZmZi6oxIiIoBef4yy3egUiuSwZ4OT+lq6smHeaDpXsvQrihwZSoh2AR0QuNc9tVVVVVVVVLOdCNwr7YxI9Hlq+JBv6MgViiv4fztE1CdTuyDiGiV0lTRqKFbUFrtjUn+j+2bGkeVVVVVVVVVUyjH37GqV3BRe05iGwp7FemLExuqqwHmKvjkiZ0iMit0WM6b+VVVVVVVVVT2OJLvs+hSu+Y2v3JIINXn1mXci7QxLP150l1hzuJbAeq0CAS4Tc6j9W7u7u7u7u5reE5BlrOlRMF98yM/Tv0WCvsyRcjNU1gGRoMMMkpar706/RVtAVxVzh7SPGfhqqqqqqqqpKhfYt9ojcgRrMSDd+qEUE3AWx1oR9LXutLBuIqGncehfyaLXeH3Vhe1pzYRDpH/UB4R/izMzMzMzMy6DFcpWgoEm/twxN94knTlYZrgeoXjf0EriBQgUTfJgNb9Erxm7u7u7u7u6AOZ6wKBUzb88dO7vnYm5ChyREP35rVzVhHB5jOjwV0uoD3PZL/////////TkgQ3OcJQKdm5ljBi1wsEv8RVOJHwx8yfsc4d0LMUOEAayovY1VVVVVVS4cYEpHYF5ZZRxo4qADDi6xyzxU2PuxIuaCHhs7gW5eYCCg5f8gIGdWvXk4XApoI8+kG6cILY5rEgwJkVMYw0EMiFB1rQrKqqqnnpph4WtXEXgYb7Er+9ulNRjL3zPzTe5sgd2+1lL3WRhX8k23xtUGzLrZUhzeQSArtVVSt3DiuPmvM2gvo4xFcQK+H3GKpMIZVqaQHHEwA8sEb7lsji8hQe2qgNb9ie44L/PyLO25AGSV7NI+9jqatiRGh76AQxnMzMKxLi6rlo+cVTpbDVKcPgi0vARMdl29w8cnI+8pCxMttZewTyLbjvGHJD0gdFWzwomiff+sGEHdD85m1gMRDr/6nCRXznacDYnftXHHgM5oHXvYRgG/cPd3Zi/ax0gR+M8IofW3DjxhhLpaX36sZTQYjABm/gF7+/QKVlRJqb6R2hoMXewFBZlROhuGJ+0r9zA5L6XX/ONB67CwcBgJActJqb8coC8Z+ChYk9iif4od2hIX20lRMbVBin4olkDwKQcNml6N/nB//thpzHP5H/6TXrTk3/abP8DQ6xMjFSXez8J7uXPmxaO+Ozg3JHWCrdK6G3hIy9lD/52VCQDiEIy9fmdZvHDIcE/qfSnVwVw3xr/9sxhn9P1Nh+WTri5mZmZmI149Sih/v0aw9j3jvY46nhVUY6k69vgxBHCGfX586HEB8xRsrONnErwK1VVVVVVVVVNSkOuU6qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqAAAD+//V+gAAAAAl6cbR74sGTZHlt/4/tgvqvrBjd3d3HGntEcsk1EfBBK2coxhp07V8hRncTU3T49qDkxTm+EuFJ/7/KFul4ZrQzy2fv8IuMQbalijqObw7sbQ0I2AGsB0iCxaup1Im3a+hQbQhYnw9+VUM9b/D/mUeVEFzyL0fAYQgkWh59LBat7swN7Uk76UzyGaC4RvQh/JlFFMLiA+DZmcnrx+DSR7AW+CvRGDq7l8Sp+o+MJAS/JjDF5AkVlWeaDrD2fAtau+qYcqMl0Z3CPINfdSVaOB/J5hWyKsgaiu8KFs27XOB9GCPF/zuAltfHXNXogbBcD7ucDcCNsAu44okjf4M+qw2CtralMMbPB3ojR6sici70yXOmAjQxdS96huywTqh28B5pTJhRfYl04dJ4P9g5H2rPLLgAXoehMfRn78NJ5ik2HCcOJHkdoJeZODxU4H7UGfeC7Wp3+qMnSYP15ou8Og9fkB/0HkWyDJFZOLmPUG8UGn2NzFU7g3Qy3OmbKauE5WNtraH5uiB/GeO0uwKtj3pkPLHZEp+1bCyVZxZuoSl2k12yTopUKUFZdg6nPoRXlQOdnwc3u//AIPTDjx0ka54//hr6WicScLC54VJtvX9MR7n0w5C5fDL9zeAz25OBUj2Z5K9AnRpSFto5ytvCmFIiDKt7c4PhZNJwyh0+MnS0bA2+6UPdACpavew9qe7AoxQ81OJUGzO+xHqLBR08QG5xczWBsul9LtuiidA3dBR5SGBAyPbAPb2/WrtfGmZgh/rlZRf1+OCXJE3RqJhiYjmW8BtEcuHOyaoxEf012x2J6ULdmaDMaSdGkBSg8R5U6oS9aVdqdnu+o2bdjLbBCoeB9pWMHtFsiCQITqI+OxdC4zAs7aRx13mxTi3k7gDPQScUbvquKh1DktkmarVWKSASu0A9Wz3sdxIeXOTBu8kxPr9/GM725uibTidcI8cZn15WvoLxnr2tWE3uQ2qiWpVWK4CLDsxUsMaVOToinMgjIi3tYN2EIFTm+KWaKNUjJRdY8Iapg66nD399QjVmLpOaYNvCq+H7D7ZWDW6aOr6CMS8z+KM4TZM97HflLXCNc2hvaSKpvQ3H+tvpk7yOUchsqh51q7gjVkzRHBA09SLzyVsrBFybaUf6YFLSrVqfXFujd32EyNiDQkqcfyCN84y28vivBnbCY/dsar5KsqhVDK/PCpiiBVFDMPSM2bJbHu0I6BkTs9NHOvTuiQH2bcXv8YkstW/L2gJCwFcc+IGXC8+q3uOUYQ5op71ce7Qrmc3+fj67Qy/zDVQbpvZ4Cw+/kvViwYtwdKdh1JsIjkNSjM41xXEXIlr2E+BaB24OGQQjOqKAHOCViC8XOD4koLDRzu8lmBC3LRmkZE+CXK7Yw5Btm/92QHrqyglturK1XemsoADUFG0T+xDeXruNmZd4MrLqH7Kr0zjBf1d8ppDV/k6VRN5FYfvIpt92V9W3pqKy+dP/Fviyf3Apgv3HwVcf4HGnK/LlvsRW2Q9hYH054Sr1MagpjWrZCXzzpyuc/J/KpFrwpOt6vYGYv/loZuFzNLT/JwYD8PL5bqcyyux9EUrcPB3d7LwR4KsjTVLiM/nOWAbbf/HJgubifXcafXMT3f1dtdScwBL49lkA6nKt+a8NSpBjeOz3vwf8SCeKU2EIaWZoGnl4YANl0w9hKLdRVx38AyRKEcF5pr6YzBEIRNw6rIGORvKmsZenDRBFL0mdWbxe4E28fde8C/cmkrhgana9bybShyKUum53f8j6QXAIwVGENde+7Y+Gfw3RBey4wAd+ScE5I/tCcmVxkerTFJYtdhG0sBdb6QDOunYdIItYSk6CpoABlqvk03XYCJlaXYbIL9kXmGAeLqLm5NAU/7M8CHXx+F7qDiATrjAEYD4RqeY5F/waiMlI1IBpOB70lFJVZ6sfjCDoPjogvqmr9Mhynh0c5CQuK+PYNGIcWPu8QHAlE+gjnkixVBNgcF6cEq07c4WTg4UtfhL/TGbnH9/5WRbccKRK+N5IDRNdJGgIAc+ZAhzK4loDUX+0qJy2YiDfL9hY+zwbwC5s3Wi20nTgUCSWgNR27TPhSm7taDPJklWe1JtGQyOCbqG+NAQMWFv9PO3PbEeA2cqIIYu21ja/IN1kX9JJsZth4YLgj2bwV1s1VBe8q94t76xa8h0a084tSPXMnRvq9d9tBkfgiOLJ7iIyKL8FyyPjsPGDxae+qTDxMNHGD/EOgWcRYzfEV97rOhdJ0oon9zuvdRt7m1f1SI2Ri76iXQ5KoqHfynXSlT3W5+SqrzSaMwXQg43WYnBR/MlEyQPhcn1ld069grrdYsAAoPSgZyNuZ3fxPQfbZG3YoqlGdREpWP0CZ73pqHqkb2JxDhw8MSGR1m6XF95i4a9CK/9eyf+UXcU1O06+zcxSKx4+VGdHxQUzk80MRhQrRVcN5EseBA/2IRtfrWHnj8H3JD7PGt/r2MJY094Y67iOiXgkazm2Vw3KrE91ltGVJXqy8hxFy6eRN9/Dt0TKTSfOyarvcu94m0KxiR5os8Pyjd9xp8c+NnPTsyPaT7bVRNV0c/InUD7f2EVoPkDoYor+8DwmQYptWfCt5Wa7QcFfIQZZ1kfo+/alZZge9x0Blw+lC3qwC2PUc3prwstK6hMqJ9BSMk1P0zipsYAjFShp5Fu+Y0UC+RntbHuWK+cx9g1CF9ym0IQxm5HFvzLeDCtJgfz/r1R9gtWosQARC6hlkSSmVvh9PxVeZqDnoFxPoHJdd3SRUdS+iv3dlEyZJAEn8AAvfeSUj5CbJrjBMRn2v760XZBbUaOTSpqXL5SYKloaUl4vKfVHFhyaEMaoDULGktcho6wN1q2MBn+7AjKsqHQ1c5Gkmi/X/3O/2N7sQy2HbdD3doTTAm6qH2BCfE2nXyKfT9XnxQC5cYHGS0axkjZ93jg+7mqUpeTT5+xgJgQel4YdCNtgOAvX03wRecjAuvsRHqqzlT/ut0liDt0xjrgQuL3F77C8x1R+nzMPq+bmDgBXh7hhTUmpZ6ejY22BLPpS78wp8NI1tk1FsX739Qe4xFq8scRalh78sjdUohF878OmoQmGrr+2Wga2d0Z5USpPz0tlJOdHbR/sMNb+XTtj+zf5aGVDrCTKr8a6apqmt5OcBSX/En9iqGSlnum22kxj24mtKNpFq64g6/yW/zbEkOZiVZzmt2X/T5VHzMygkGw+72fdhHPjgVXHszjnVQwmcbMwpj1pA+1SI4HRwvhQVR+O/4efPr9/0oAuZxm3WtQveVowmVmpDOSRV0EqCcfyIJIsMO4H74qqbDXKVW3UCL8rXyyePnIoJf42cA/1nMzM/5eTn0dsgFTSV+bnESko8N9P18WOX5Ar6zBUus4/Gd2B+38n2YZIM2q68j7Wr0bj7w4uF82qVUk1P3HX3oLjOKKjRQkAtUymmk7CLfPC9+3PUU+E09XQaWLkPj+FtTPDaWSprgn/2OHh0qZ6W2a/mY0VG0yQtpjt8qrg4pkxlLblzPnuafKb5y1lCTBAakyVh2IzYkAYvxzfoB4sEKQ5mFuDwB4ZT9O/sZiGOTGgc91xMLQwJ+WZtpWHXOmVWejxptdBzGy7eyuvi6seehezGnLlgx7OmLyNpPlqsYWAo9djq8sTdAO+8p/JmB71CR+tZNH7HWCIB73P84m7giyi9sKGLlUssA2aM7smQd/CoAHHrqUQEwXWCintlGOgKa4uhtcaR6xxvrvzWuJCzQN+MXt4FPtL/xeAWVVtV0iqZYnOzF/vvIcv1VMbjmv7VW81aeKl3/F/yjrebaC3Bla0PWF+2XdAi/G9ddsdcS8grWLMAeQA6wVCgitw1qWeMoUD4pscxFZkwkBID2GvVu2aGRN6Fwi1jdXQ6r8fMhqZseo3Qjx7WcXG6A5QwsSCOZrW0yepMTCdQEzUAKF+GVWpGez41f7vzlI/iIRqOiK03ac1x9oIsk66Z9boqYMNk134/tW9ZCTiWTRnptzAswr7pQltDoKTItuqs0Jr6F8ZsVp7qJa7SnpF9JYgRP0CkzpBtK5zu8z2wuHptd3/leh39GL6xkW2c0OPpcHw9CO/7d+mIQJSwF2qNFmwUw3LHPTM6lF7LVRaCv+JI3Q8iJSEWy6p2xFJLDoYAGjVFYNhrWYH9rAzzu7l3/zxxcFc62z39XGWNFluEgR9oCKVXZCJOPR5evvgrnIICr3+rpH4MDHrkHjbngInFVJ5ZCsgCEUe0RhDQeEGtBswbgdJr4twbMg6XBNUNr9fLNO73uCCJGqxpWNQ5m8nu0+wVMJ/yr6oHnnwc81SOiz7XgQz0Pc4wlssYaojwVVlNLQghkv9IChxXisNOqoBBj80YccNbbuHmffkQcm4tW17atovDX5m/g1FP/PX7QnxFcHsdbqaob+uzYYnha5L8NK2cd17qvn78bPVGoZyA2925SxpyY5qQb5kHb/C9gGKcCDm/sY7WUhW9olIoYsVprtSdIwwxCBw7pjwisy2Dgsd6BT0JunEYf/Q5fIJget+2z72C9M9EayC80CtvtTgVcD4mNvkgpYQs3/dapgsO/NADsiVrF7SpuElv2TCUbNDPzKXY3U7G6Nrm4mX7fjQ2uKOUrHQ9dTfTry4iSTh0BGBh58pdjCrm1CNFyyKNO8H33sAY4ilANJ0bpEkRKj1nBENklAVTg0/d18EkZPNVzDKc38XIFxES1Jto2N+IU5u4bqg5WByxwrtNwL8kh8FDF5aXlvalHFxlOft3Bo3pqb5TfFDOelem1dIs/oux2yFDRh6wz5Zc9Fd9BletXLaohhSN84Zgza30mRiNfxvpOBBQ6BWPigxQerEwxa4FFc4TKGRz4QvQtnUw273k64A9KAH9ux7903fhU8zV/yDO6RKIk3u0iYIm9woJ2epDUvc3AQ8oAOG3WQczZIL0rf/52YTbdjmz3Cx2kmGb+zJ1LR1basuiqyHwO6VtQDmxrqQjeQf9yug9D44e/XIgVYuSdMkyj9l3KZ4vW+gNtpsfP6Q2wxuNkfdvjBa5v2W/RpM+m8/+8hc1xPGTP/4X9V4MUuIuhHdMdNsYq+/y23slbJ2JluOt9IT2HlfHV+TeI88oYxSIn+r27G8CVFWa7eCRZAeAyYBGMIYFJmUAjkQU+C84lC93QBaaoSRP0GfUpE30p45hMtz9KYyAUEUIfX2IfyNQxSOLm+HXR7bwbqWgmCa0XNg2xDe5zaiFaoP75PdIecrXXy0VRJeQJ9jy/v84RlcWH9g5sn/miWHB5vPqehb0RY6E3OMNigwQOYbKIOiRYMCfIoEpY6g4dKq9GMaQ3+FtG5BxkmnYfH3QV2X89u4Z8R5pOngIIoFWmOrc5+s6F4QHewYdcEYMiNqtzV9zPObed2VHk/Nz5ccE0cDGonv/Zfdz0U9oh6PaTdYuR2W8nzrjE6GniJW/QGll6U16U504Q9n/9VXZNFK9jNHeJxNnRX+jCTZS6yynCFZUj2GFhMYRY+ZMH7iuWeb7AwE6onm+34yygfC61OUSLuyEe4rEPBOsBaNsGaBY9z0HZKUkK+5tsJleVnEXZ+MQMtRILbMlHrib7TyS6T/yCHtlA1970ag+akmxPxFYs2PKqNXd+OAsQjfn+qBJVNelLA9NgzTCjJ83BYfIGllu/PdS63p81MQ6mNT7fGr4xd5cwWMzgVY7qRlwGr+pB4GAN3p4SL0zPkXZkqhe/ChwRpbFqLTXi/km8BtsadTewZOGmxdjWr1PAk+J7OOx2CNkTFSpteADsVWFkMxiVA9tVMncE80Wy5YN+zsBqcHw04uI1aTTdg0mwaUk8TGW5/aYUyPaFZbcdEiZelEIGeg4ic62CKqMDLb/jwMQKpl/IraeRDHqDpS0f20go/BZjTTUmkYGw3VzqPNfaeEz8q1q2vgqlBFLgOjoxZqgW94OHA64JQaSJDp/+qFsjZZLwXXEXAianTDl0dbXmkn686AHgqPPIsLe6G3mVn1GRdKhFc9PKWuEHzZNMNAZ3izDIcJsi077IfwXCEpWZ06pFqocuDahV6Hpt2jLeG2nTZROAM8K31dmkPIKaxZrPG6p/+2g649jOxj2fBRzHuCB7ikww3tm+PCvz3ARt/Tzjg8UXEmFEhiIyiKcxv+xHmAtf4lo+3HGC5F9hgjAL3wMaVJPO9sVRwN/e7cHlvjIQb5dXZSc2CqfP9x+NMnyBnlDnhWSjUhuXP9Fv1ElXEJdraBuaNKCt8/qWO+y4VDNslCWGTwkKsDIxFQ077Mr7xF4F7KxzYfhnx5dIcf34BclwqdcokUGAimflkxJs6MlzpN6cTTOG+FzA0LMzD83OMy8mn5P2w6J939NJlXGjNlSZy6ae/02/QOByj4pv5mRTzVmzdEQhHgJ3XEr11Wbvn+nOLc+ho7PFV86mMw0mIOncpmae591zZTJVebSqqETYqbD82Wi5fKcho0Jq0/eSvcFGkSyv843ERfPCGdKwT5wDVtxRdj2CndCle3UwrPD9OsWIQfv1rRKmdlUXelJMYQq/iU308ROq/pHFi9nKM+sYQX3OKdwCjo/jWGNGqUcVbZhJ6KWQCc9mcZOnJBosO3IUvenSh38K6Xxg/p01/X39G+4O0DM2OA0avo5E+FzvO3f7dO8rcAFZdnhNA8R9fS1zjDVauNbYY/N043BeNIoZOhXnsvSeeXnfNkFIQrB9jskyDRfw7pi/8X96YHpXypMd34W1sQ5doLnLRHPOa9gQHSzLXE7L9k9ZbNqhVHCe4GG+j/8FB2IIi9D/PoyElkGTaq4uYyjUia8DZwg9AWLDmt1Mq95BOjtO9NNMcLnlKx6s/KYi7XZ/wryI4TjN3pwW6cypnpzeW4l1IU16atXl51B9E4N2mRBNAByBOhpVJ/w6NUlO1ivBgfWNudZ3mnj5MXw0U1+klfXF4nYv03+Oq1wX/UYHu5CCeivqQiQnVJ0Up74G4zSM+8JPGVNP+DRjaomOsQ/HyQBBCm4NX+2Xtv7l7J4DlHhLvyP/7TpN01hB5qYp3QThpaBXXVOQbe5yuoxGllYTl7NoYIfIvOcDvayy3M5Sq0GDTt5uV1N7vAeY5JfwNPAwlvLXOBKHmkxrRQGEuOGkpYA0ZD6/DBZEqkgA1D9COs0SjtF+wE072qRG6tMwky7FqBKw748+190GIbzGEZhVvSjAfDD+sjbLUxt0/ZcBs4dBZH32nevMkUBiPvYdZztMImkExwZAersTCgkvvRtY0gCvhXFMiyd6xnVOSB5ZNZHSci7C3gZyN1agS1P6Q7bn77bH9C+VkZSflMPS9e1ln/KjefnUUZ9gAn5WrSDqG5eilTPHfMGkWfl+3u3t2M3oxATxsOi8I3T7FnFofLorKl2AMXHrAVU24peCcz4gzK87rgychVjYzZvfOJ9csF10XHn6yjR3u26wQ9S6rYDCUyIrbtWXJt6m65EJigBD4MgMsT7r0JJU4IhsmAmMRwslruDVFBhlGh5OFsjK4le7BScZtbibe5MZEyYMKuyuQ85W4AbuGDbMQ0lLrVbQ95pJpFrW5CBVo3JigiGm7+AxXJYuOsfwC9v1UYpWFxZsvimombsc/2rgbstMDQZPRlbAbdbJ3Ipsiw4bQ1yWRIZaDjJb3Ver6UtQCBUAusYKBKIK6qkkQU5MExT7Uw0Ri5qzDS/Q/dZP+TdYHbkcJ8Gy52OEIUuNzJYBq3VK3mWMF7zYinfurcaaaWJ/5Q0QiPFskTQsvxr/dtbcXwX6Jg+u3OHF03rhs+S1XyxDMLwYvrOZdANhcc2dkeLDviZH0V0kVIBTUfna78BD8v/j7n0JPBYGH5chnLcvI2sHqWBHVVteK78/UpZRiAKdlL3MIAcXLaN1OmRvClZKV5JyHwNZdhXsn+oAmL2lWW3dfI1xzMf3UhwAxQRQkOg4utHMbKqlpWmPbcQqCbzBtI2ARIDmQxCJziOC8P+B2Yagq+hr7i4AYYDI331ruj6Luxkr9eHwHpmMLS+z/fpSVuOjQ2SjUpHeKo6lRrnx2a6ZaPFgGRqeQHrzXvIitqD2r+NN92spL3NKPtiKlyqoEeqYE+69Pnv1C1GT7o7v75zrDg0PIhkmPG5gdnNm/izTt51RIkhjbiglRZA6CmhT5fYcl7pWf5PrtvVJ/8MQttk6j23LXD8ibS4RGYq1ATDmrUv8J0aRpg4X5zPgJJMupYx4qTKgpen4OvmNPR+M3FpMP5LkLNZ0DZ2HHOBKHfjWzloE8RsnzoZPlgAkz6pF9W4MtthouPMsqJMj3OQWT3GhDZE/DxopBZiLH2/BazslWmKCTU1+aoQ/sVBS1sEnHXBZl7wP/3N+8Oss0kOEE1dp73MJZ2pOYegPtHHYu3YZrBinKPCM0+4GLS9w/k05Y3yCvrWjRm0hfYSm6s32B93vhb742ZbT4H4nfa92+V48zEuo9DVuw56nWe6LsUxzqHqP32cVvGUZk6XdrkX9iHw+C/IJRKjv67gnSVt9ClNK6egjs45rBus9iB3tsZvmWf1rM5mH9ozGm6Q6OiWmPaBwzW7sIJ+AJJr51XWIxwiezWrVYl/34bQGezr3shSK23k0TmaLLj+bhMdRx5ghBfSGR91hNbPlfRehYUehPAtbU7I43IrvjjgBCABWWXs4+/NfQnZPHxJ/TEHhIB45rjgyxZOuwtAx6DGNxdgdVUy7lli7Nkgj2t18mYIkdQCHoFmANCUP+C+qLJzCr+PDoxHtGVyo9jUf6vJhyZ71DmRvY4SyVDYcpdia3ei47rFRJP7hBaSIqeu9GjlxU70UL8HysR3yxWOMh8C4XloXd/vT/r/p6fHqz2XcmW6ijDa4JQLAC7ZGTvxleWbLwI3fSGc6G4tvvOkM8++HJBE3gV7hWELd9XOWG/Rge/2CMf9mG7Bzx0zXLV0UOYToC4JihCugmcKojEQFIWqWJaJ1YGSHGSBEY9jLvIYo2GKaoEf2wEMGrTILzjBOwS+kIa88aWzrNMIUqt28SIZ/N+89zajXkZfnZpSa+Wj3496POevTWeVbogRSm3HEA/NBQs0a6DQmNhPRpBT151gMJ8axD4jCdg/O2aMeOiHozuShMNp8D2Aikk2Y1ePFfkUnw4nkHKMTJIYPY2rFR8J674UUmf6K5WermG5Mmz2ofeGYDK38eA95MqaoDbVY5zV86+9NMqc6XmbLLPS9mDGE4rB6RAAMMkqcaTqsTAVJqrj/G61VD3/4p1YKiWQl5uZvjybx6MHQnetvtP6mos+wBMx8d/OYlGx7SFQXbimFZzSc2MjBVhmnVu0l/tOuQ3ab2qqw5NBOFK2/dcvt0uw5kyKRiwcmHaOaod1jmuQ65eGiMD4tc5UZhbJP1C9JvjWFCQ3JO8fEP4RhZY+/2v4NTAS8j2SZ18FfaBv20Q6frEu709hB8eML5KI5PhAAj0uYNTc3Kh8KweILNQYAiI0vm4FlR2DvRUMaQsHQNsXd+ZnkOnq8gUIVVU8SM4fH9wMswX48BNA63DOP0vvMPtF/p9U8kQYhLkcDsC+JbCfms53BtgH1r5ysS1hgsvsEiDfc5kOBZz8MvzJdyyifNaXmt7RyQ9kSpCSvz3sRK2+ERYhIHyDGqK1p9Hj0EeAg3vlLRul6WRXThf1nR4wfrWSUgoOJfULllXDI26SOcAbQBgFBkwi9IOiEBpgLyWUJErPgqeZGptLmACzoJsE2zeDyRvrLeYndBf4o4brz2v88D5QN5CNn17uotVDDLPbpd1l6a29U3WOc445ISPKI+OwlC7V/oSK1pUkR0CGJBsNc9sClGNu4gWXNA35WKGf0DRLy6GA1rp3uMaw5C7ZTtLt/a7SjNK2h6WVTxphIK2K1oELiK00iGXDWVwM7v4phgCYvXmrNKRxpN4nVXfJNyx1vAQjAseM+AXEDkMZ6m1ae7pQcwRTUFX6OduF6dzhPnyIpmEwyrjn5PFniMEiqwIgX5BaaBMrQ972RAux7jFHLx68C/0jo6qQ7faqSW43BXgq0KdEx9gWM/Hpa97jpR8BYn19m5zo2/aTPOOX/hJB54P8Z4ACnvjXAexEYIQ4zZjbbmmhuAFUSBSgbbbOq6+mC4e2HDpw16oz+jRhrxxN9IcvWH4PFNWkAcEnvhTIgVEuvzTEHY9JJtU11ENVssOMsxdPbwUemKQarYsKVlzi0O5tkYLey6s4CArxdhcETQoovg6EfnQJP8WesKubm/pTJvukNj12NMGR8dpXAhwPpfnuiNmoRItFBjaDXuAMMn7tMXfZrwLxv3Z0GpSMci+gOQ8ii60VffZYfIa05C4bUiXBg2F/wOIX/4CyJosj84aKF7RXf7fMsudTM801I3Uc39/ModVmEfs7MkFaQS7E8jIqS9Jp7PkOO4uFiKaHpp0AXnDnfILhwBMgFf8czlNYm/qziwbOOrNeTytc+ECH8dN9B0vDXMKJ95HmseXGQIaDh6sHyYXsC44IK0YnmVhI/TNc9CKdwMfsnw6rhReQ3K90VCrSo98l+qqSpC/32dHqoml12B4sGUU9/CJd9MMfpwnMuoekT1F0xy0Imu24OVSsNfoULB6x6Scy4oQdKjUgwCpfzVEX5YFzWwTAc1/L2/F6Qd1WGYYXQd5B7iYDtyGwkCU3QamV39HpvhzhEJJpGqhOwVoK9I6R8Eo/M/dfT1kRtb3aGoDH4za2SeEDcMeqWjE0NbuMReCZ2I5ngeAyBNvJeLf2VKrBsU/N53YikPrYaqLqxT34RBH0IwWx3evdO0Fq671enYjO03vqiQ5DbgNZ/iCW6iiStP4SaYKqSA4EzcY5DyACAcR1VcduZHSwBTkSh8MfomXFOZBBb/t9wZFDWzwePCaZlqju9AV0dgtSKZGWLQfOnioJF7CQYETVvsY8/wOc0dQ+CfNcyJ/B0okC4Yt44vaKTjNlzcpVIr2il7LpfM67/Bui00cmNfRawDkzZtVXE0w9cb+Mw8Lv2sSV6QWRLrjSXkfT7z5LmqrWV5Z70injqfju1HWqD/V4N/5DqXRnXLpNtEBMPm4KzOHabD6G5MIavNs4uU/SiFUpczgPKM69iMauvJfRt1hslcd/qRL0LNa1qVNbpdqlHlL6GhfOPs3aA1NRJLCnjgXjOi1NRXQF36UwFnaz6v+Omq2LTQ4pY500aSQ432beH7xSdqPuqVj1MqsJZoX0GE+juJCdNmNEnBN0hh3IrAaTh+YwH+nrRknbRuqHKeKoMS7ra+IuIXOk6SHzLaQW4n6QD8M4pZ1ZBbrp8wtKA724Q3yWQz1+x6etUwKO3m+Dm10G5PWBy6IopRIqgSN61d6/mMBKQGU4MOjrPWxdo23gPVsZlkFSWENDxFrgOT0NA95rM3OoqZ3oi0HWnN5EJwg66IIE10HBQ4IhalI3WxbvWgTrDDMTeEF0MSBedH7aqLVQmhETSY2hADbpTcAns4NYxUMR99qzzA9ut85vuzSPcGVp3Ce2vrnJzKj5Wa79EwGrXC12XN1udYfrqDMrFEOhthm1KeQDQPxJhXKd04J9fpawcbuT7xPWwIK2E2yUwk4ITz17l6TR5dSQUH1xEMh5z87LZcHT/Hgj3fV+09ANYqDB42RbX0XF11pEMMdzVb5CnjUVrTtgkQ+60uMMZ/djrkIjS/IOeZLhJl0zqCRsyZkeMVvygLtAgUI+piFY39EeA7N1AGgILcbDH5aNlTkhyWb7IE+83hz5kUiB7zAf6aD++FwrLJ0pw+ZjSuV1P06LKc0iyvFBVKLEsZFtxgvDc/ikpl0JsyODnXpnhBE3/iTz4r/2RI+0dEUUz/FfHuiDEmP+k42fI6uKHQuQQASI8N6YDkfSKAhFeCieCf2YlQ7rNZUHmZGUzHsEHxas08TIXkMHI8aDsKOfx5uy0iFpnNNDHCgzSKaZgQHtubFkOtJglS/O72XJTvBzYG2HOOLyHAcifjKSSoEunlCjfwlgB3g37rcnyMSKL2j2rhr27z1qWVG79BLeJ2TiW7PN/+dmfbJUFQ+EuhKrGqNfh3p7HNbdShDbQoM5cHEVFLKDFcsi1boBOlsWkWbBDpWw//ZHOUZncv6AEZuDjaXu2msI91+DHnmIzvh+F1sBP4dd6zbGZmBsZReOE7Mzk5KTsEeo1qAldODoG7RHmz8mneqxxbDedyR/vqx+dsgk217RNozJ39zvrGnutNvxpqVIqzbQqqHYgdbw4ZDZZI95g+p5QTClx9KZm79QCM355Ks/x+CriERv5I5ADhCuJf0gK2Z8YjMIijVO0ZX+ZbMG3p+NaEp5skPY14tXjTFEOu+AiBPs7d9li/7ALozYCgPBFzEbMw8SIWQO2fsoDqXw/vybgug9ZdYX7qtJCoRD7x+tuZlnU4VDQiDP8uR7vGPfjG8RLP8nQ+82JLxDly14GyBc3GMz/iTMDnhZ0323F+5fdiwMnjrWvDFXty0njAuzJGVucQuIp0qaCDEoWiFxTHV/8SrxeUHnrMBm8WZ413bYen4KE34TFY7EttqkkwP++D0X18B74ErsDTAqojIibKa+4mZcJvTOsJRdAn2R4gzZHvAJzoc3rwHg0uIRuLTCD2qTqkVY05UovDi43HOu6CHD4Szbf1zvm0dp244bu1d6WYueoutTL3wUlT4R5lhjAbecj4XwyUh7ND3uivHSfm/CMS7bwXJ3VOECJHZRz34jXeuYd6w48DDEB0trfEwVJVCavnjAbnwXn8/EMnMF/jmJFgDKhfU5LaqADEy8bef/u/ARMHRRUN6XSuEm+mdqHFY8k/ERG2vBAESnIJQ7FFWzGCrXDnE10p1rGHPqQLl9geMAbPskZ/qk1JqdPq5KaeCNClQzqgXrJmQ/eIzKjn9Q973zQ7C8PAHfBFD8UamMwLR3gKajUI0suJG1HqQwd0b66VuASF40tJRHawKvkSpn5TGviRl95IPF5+L4PpmyMQqUfUgE1nXEyMqHg4TApBpCb5tJhgyculmzFA5LmwYT7VJ3uZpxzhcfEI1+fnqqHtSD+uXw/DDueA1z+vrTVhPcOeuMuKROHl7zAbMgJsPREAVH4jC/NShyKtsZG3lciZS46hcWESsUr5/3jq1CYxVNj7onQE6aic9zH+EpeRVODZAzlwUukH5yZpjJrtlxYQkyO6J9D9VQi8aZsLm3Oc11ijdALNPy3ue23fMLUoQyVttSnx5wtP3m8ClcKT6CLf8xNIgYE4KW+vJezFj+Hkq5EMwL+UooxU4c3voQT4CccF0D6XGYRPsDutpldF/xdmkJt3LRr/DItkWf6mqqxM23y14MZCdXxUQhFgMg2JquLr1YJeQVgl1D7iijbguT63KSyjRbBrhsQB8acPMw/Uoyw/w3BgRa4rRhMOI5WElITJXG6GsRnWxT0EXg9h0EyFueGT6c31QK6l1LvQnA6xHATxG0eCx1XFfOLb02nUdbJqZxHCytXKD1TF/YJqH/h01i7wgQb4pwObOJsASAHD4bQ0aiSThUJuzGRUKZnBYyaJjLONTowf3lXx6N2ARrsP1hV7sfXhFi7gUOkho9k5wbwMz+VGGIua07koc+q5ZrQtxxqwo/93hXsBht1dGieuiiyokeZixvOlImhF3iWhK3S8ULO24ZZDdfD8EIE014kvvTtmbRV7v84bdThT8Fvd7pR1VJTysrsAF0c2N1qrYzwp7wsxSgb9GDbX9sW94P40D/gdhsiD1JTIEKmgOS3CjG8qvhQ+sBRe/cRs8cERGw3rYuwoBkTmUCj8XjK2pMxFmvHvQkmAevytQrLZLHJuBItpBmn1Iz8Vu/O7CRsvdGEo9qmRu7v37QL9aFCutqpKBzdjIG2vsWgTBrR51/QHcHuTt+KDMT/sBGe/UJCUUwkZ92h5Tx7wc7UHTz215zeelXHDlOu7RVhFoQvC16xDiDeufSKryEqWQnj62eSrb+/s4LJ5Z+y2bhdz9zxaLnFSKBQpwRym7JKwZaj4x4IUd6bBWCSJJ1m5sRF4+xJ5t3uEFqYLrNlva12aNuQbQ/0A8WwM+NbFdaYmedQYPccc45XBcBn/FPjG+iGKnj3d1k3Dv2KPKrUwWylvUNZj6YsjOCl9Ng96UW19EDfHlc73AJ7YQaT38Wo1B3zIUWr3lJPe7bAvYcCWrCy75ZcM90Dox6PvIqrK2U18RjPl1FthmUJlLxGL3tw0H9zhvlIDKSoLnU3i7YjQz0pQkMX/0sqSVk5LdZpyflYSJvPuIpGFgLn9lbqYA29pGFWOYPR5eFopVUF5KR7xAgIgUm6C0pGgjEw9O0wE+0YnVL/4Nj9Xv53galM7VXfT4a5E8zLLn9HT3lt4q1UNEeVpKGG8VkWBzNR5zseR+quP5www8vGJN3HeG2wmybzbsDXmd3AWmtGgFhStLtkOAGYw4wiuZH0s448jQ6/BO7d2ttK6vBlX3f3RrXh9BltH5N3E7DUYK5XwW6Pm5AAVrowRQ9j5z1MnTaGA/+wVf+HLII8Kzfq6bKBycwdgQW8UOGcuuS9Xsc9yLdRB9gl+ap1VVcq6ANxlcLWQ3PYOq+PqdJSlHEfZosUo9m5IXuotgJv86cxXQMFLbguP3/TIeSNpgx61qqXasX/dEPhxgGZNQ3JUQdd8a4NStDOBQV9uw/7bLXh9gol3ilkrjo96TwGkYmARg/vN6PGkxa/Ww1/VhBYRAc4Kg0jDUsNjVKzEjMrdq+OG0MZEv0KBOOMVB6DZk82RXmWJm5oq9K0YlMvKANjeJ/54BtFIfsP57AtNoPgGjPES5LRqzgAR+6hgxMpxrMa9byWIwrZkBEqpWHyojkUwU+eKAaq2UUp+ASxjucFD+1P+xspg3nKZnNpUmw1/sclojTy2a9YC4zwtEgpkELPiPH1e2X1hn8cOpp2zyfBv6t5OzrhLEMUCJbyFmQBPKcue/TwPqYXxK/Gn5qZTh5qU1ZdZmqH3wbrt6eZArHK9V2BpBkoeQGMGGHpmrhDzdT+nIctGlpQAeSqh0BpMsHQ6DUZwdIyWtWN2810fL1ACADiZEF3cvt75ZoUcOjgj+v+wXAMMB2oUPyJKogdBbUjJjM2MoNGjhwFfaIVRHxS5v9hCafTe7cVnCmepKfyGWJjJMfA9XX9fgsT094Y/F7a0moX+/INwPpXlKqVEXGOSocI1vSVqdBkmNpryh62XkLVCQgHlU1XxK22FRkRb9Zry0I7kGp4PQ6iXp7nqr+wDi4+8LUuczD6/lR7AV2oB6IMUTg8F1c6Pqpbn4BnOOQI+w939U/NwR7Yban5Li1nr+gh5mTnkQgP8kPPlr/JH5qtqY+0T1q5wysHyUXJwKsr0nqTLAbbGSILCXjZc9JN8+1hHYkvqpT3MAUbu9CuNlzerXWrWtP5r4YpSYJmzPHE6ssG8j8VDrn9Vx9GLnwgVtEdC/D3S+3u7t097hJqpIbFNRJmOb6cvpk7DzVL+Rv0R5hLEQmXHjzBi6IGPBPSiwAABHlYFmuILN7RgAN6AGEu2R0j0tkCd3UjoHQeQ/40lDWWPaY9wqXmA6p5a8Z9GQ4+UmRsVtB5AX1hG62SLFvU5QAZm4mg0IsD2J3TvHmA2WhPdJEWT19HFgVC1SKKA9bl52KeVt9mBE8DrrUXUx2ulQ6NycPidAb7ryv9MyQZ93NvZVVOCuP1VfnriJC1OogGqLezWi/4qCCscjv6qVpXM07Pami0Mq/HrozhII/hMg1KIR9hjfDCCyT3kmTowvaeuIK42scAddlNRD/qW+Nqi0NBi00jmUpTjeOQoVtubEohipR6ZA83RHRGdnWEDxz9TTHyG5W5RCIzTVLAJlCpUOEACtMjLWzYgdr1+KaKUSoPH8AcjYIVr1mq1hNosI9/SuH2OAF3wMrPfoeaRD+HAxB+9L0nYM6d8hwnnzr1MZmZk2huVzyaS5Kfz+GqWVMssIu7VM+gF+C29gn9e3EUwzfUrlKDm419/My+FfbhlRGUjIjwYyPDxLEQU1aDiKNX1n6pm5i1CqYycwigInSfLmBiPnx36fL9VHz5rwHEUxMYFC9cDOdn2jhhNe2bZtkOHx197e3KhWm7vGKjoYaELYAaEk8rOoFfS3A+qf1GUwalabKWi4jBBZgVWooxO4mzgJVuj6WI1GBd73bPXXLv+ZyxwX95mcmoyiBkOPFjDK9wczr3S2AZrWcXMAK3n7YeTHKz9x0qe9GPQiYkrm7SVL3/jEe2JeSzZFr3iYfF5WS7/OEP8WRSD6c/LrTFD60QAAAAAAAAAAAAAAAAA=";
+
+  // src/client/spirit-avatar.jsx
+  function SpiritAvatar({ size = 32 }) {
+    return /* @__PURE__ */ import_react3.default.createElement(
+      "img",
+      {
+        className: "arr-spirit-avatar",
+        src: bookworm_default,
+        width: size,
+        height: size,
+        alt: "",
+        "aria-hidden": "true",
+        draggable: "false"
+      }
+    );
+  }
+
+  // src/client/spirit-message.jsx
+  var import_react4 = __toESM(__require("react"), 1);
+
+  // node_modules/.pnpm/marked@17.0.6/node_modules/marked/lib/marked.esm.js
+  function M() {
+    return { async: false, breaks: false, extensions: null, gfm: true, hooks: null, pedantic: false, renderer: null, silent: false, tokenizer: null, walkTokens: null };
+  }
+  var O = M();
+  function G(u3) {
+    O = u3;
+  }
+  var _ = { exec: () => null };
+  function k(u3, e = "") {
+    let t = typeof u3 == "string" ? u3 : u3.source, n = { replace: (r, i) => {
+      let s = typeof i == "string" ? i : i.source;
+      return s = s.replace(m.caret, "$1"), t = t.replace(r, s), n;
+    }, getRegex: () => new RegExp(t, e) };
+    return n;
+  }
+  var be = (() => {
+    try {
+      return !!new RegExp("(?<=1)(?<!1)");
+    } catch {
+      return false;
+    }
+  })();
+  var m = { codeRemoveIndent: /^(?: {1,4}| {0,3}\t)/gm, outputLinkReplace: /\\([\[\]])/g, indentCodeCompensation: /^(\s+)(?:```)/, beginningSpace: /^\s+/, endingHash: /#$/, startingSpaceChar: /^ /, endingSpaceChar: / $/, nonSpaceChar: /[^ ]/, newLineCharGlobal: /\n/g, tabCharGlobal: /\t/g, multipleSpaceGlobal: /\s+/g, blankLine: /^[ \t]*$/, doubleBlankLine: /\n[ \t]*\n[ \t]*$/, blockquoteStart: /^ {0,3}>/, blockquoteSetextReplace: /\n {0,3}((?:=+|-+) *)(?=\n|$)/g, blockquoteSetextReplace2: /^ {0,3}>[ \t]?/gm, listReplaceNesting: /^ {1,4}(?=( {4})*[^ ])/g, listIsTask: /^\[[ xX]\] +\S/, listReplaceTask: /^\[[ xX]\] +/, listTaskCheckbox: /\[[ xX]\]/, anyLine: /\n.*\n/, hrefBrackets: /^<(.*)>$/, tableDelimiter: /[:|]/, tableAlignChars: /^\||\| *$/g, tableRowBlankLine: /\n[ \t]*$/, tableAlignRight: /^ *-+: *$/, tableAlignCenter: /^ *:-+: *$/, tableAlignLeft: /^ *:-+ *$/, startATag: /^<a /i, endATag: /^<\/a>/i, startPreScriptTag: /^<(pre|code|kbd|script)(\s|>)/i, endPreScriptTag: /^<\/(pre|code|kbd|script)(\s|>)/i, startAngleBracket: /^</, endAngleBracket: />$/, pedanticHrefTitle: /^([^'"]*[^\s])\s+(['"])(.*)\2/, unicodeAlphaNumeric: /[\p{L}\p{N}]/u, escapeTest: /[&<>"']/, escapeReplace: /[&<>"']/g, escapeTestNoEncode: /[<>"']|&(?!(#\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\w+);)/, escapeReplaceNoEncode: /[<>"']|&(?!(#\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\w+);)/g, caret: /(^|[^\[])\^/g, percentDecode: /%25/g, findPipe: /\|/g, splitPipe: / \|/, slashPipe: /\\\|/g, carriageReturn: /\r\n|\r/g, spaceLine: /^ +$/gm, notSpaceStart: /^\S*/, endingNewline: /\n$/, listItemRegex: (u3) => new RegExp(`^( {0,3}${u3})((?:[	 ][^\\n]*)?(?:\\n|$))`), nextBulletRegex: (u3) => new RegExp(`^ {0,${Math.min(3, u3 - 1)}}(?:[*+-]|\\d{1,9}[.)])((?:[ 	][^\\n]*)?(?:\\n|$))`), hrRegex: (u3) => new RegExp(`^ {0,${Math.min(3, u3 - 1)}}((?:- *){3,}|(?:_ *){3,}|(?:\\* *){3,})(?:\\n+|$)`), fencesBeginRegex: (u3) => new RegExp(`^ {0,${Math.min(3, u3 - 1)}}(?:\`\`\`|~~~)`), headingBeginRegex: (u3) => new RegExp(`^ {0,${Math.min(3, u3 - 1)}}#`), htmlBeginRegex: (u3) => new RegExp(`^ {0,${Math.min(3, u3 - 1)}}<(?:[a-z].*>|!--)`, "i"), blockquoteBeginRegex: (u3) => new RegExp(`^ {0,${Math.min(3, u3 - 1)}}>`) };
+  var Re = /^(?:[ \t]*(?:\n|$))+/;
+  var Oe = /^((?: {4}| {0,3}\t)[^\n]+(?:\n(?:[ \t]*(?:\n|$))*)?)+/;
+  var Te = /^ {0,3}(`{3,}(?=[^`\n]*(?:\n|$))|~{3,})([^\n]*)(?:\n|$)(?:|([\s\S]*?)(?:\n|$))(?: {0,3}\1[~`]* *(?=\n|$)|$)/;
+  var C = /^ {0,3}((?:-[\t ]*){3,}|(?:_[ \t]*){3,}|(?:\*[ \t]*){3,})(?:\n+|$)/;
+  var we = /^ {0,3}(#{1,6})(?=\s|$)(.*)(?:\n+|$)/;
+  var Q = / {0,3}(?:[*+-]|\d{1,9}[.)])/;
+  var se = /^(?!bull |blockCode|fences|blockquote|heading|html|table)((?:.|\n(?!\s*?\n|bull |blockCode|fences|blockquote|heading|html|table))+?)\n {0,3}(=+|-+) *(?:\n+|$)/;
+  var ie = k(se).replace(/bull/g, Q).replace(/blockCode/g, /(?: {4}| {0,3}\t)/).replace(/fences/g, / {0,3}(?:`{3,}|~{3,})/).replace(/blockquote/g, / {0,3}>/).replace(/heading/g, / {0,3}#{1,6}/).replace(/html/g, / {0,3}<[^\n>]+>\n/).replace(/\|table/g, "").getRegex();
+  var ye = k(se).replace(/bull/g, Q).replace(/blockCode/g, /(?: {4}| {0,3}\t)/).replace(/fences/g, / {0,3}(?:`{3,}|~{3,})/).replace(/blockquote/g, / {0,3}>/).replace(/heading/g, / {0,3}#{1,6}/).replace(/html/g, / {0,3}<[^\n>]+>\n/).replace(/table/g, / {0,3}\|?(?:[:\- ]*\|)+[\:\- ]*\n/).getRegex();
+  var j = /^([^\n]+(?:\n(?!hr|heading|lheading|blockquote|fences|list|html|table| +\n)[^\n]+)*)/;
+  var Pe = /^[^\n]+/;
+  var F = /(?!\s*\])(?:\\[\s\S]|[^\[\]\\])+/;
+  var Se = k(/^ {0,3}\[(label)\]: *(?:\n[ \t]*)?([^<\s][^\s]*|<.*?>)(?:(?: +(?:\n[ \t]*)?| *\n[ \t]*)(title))? *(?:\n+|$)/).replace("label", F).replace("title", /(?:"(?:\\"?|[^"\\])*"|'[^'\n]*(?:\n[^'\n]+)*\n?'|\([^()]*\))/).getRegex();
+  var $e = k(/^(bull)([ \t][^\n]+?)?(?:\n|$)/).replace(/bull/g, Q).getRegex();
+  var v = "address|article|aside|base|basefont|blockquote|body|caption|center|col|colgroup|dd|details|dialog|dir|div|dl|dt|fieldset|figcaption|figure|footer|form|frame|frameset|h[1-6]|head|header|hr|html|iframe|legend|li|link|main|menu|menuitem|meta|nav|noframes|ol|optgroup|option|p|param|search|section|summary|table|tbody|td|tfoot|th|thead|title|tr|track|ul";
+  var U = /<!--(?:-?>|[\s\S]*?(?:-->|$))/;
+  var _e = k("^ {0,3}(?:<(script|pre|style|textarea)[\\s>][\\s\\S]*?(?:</\\1>[^\\n]*\\n+|$)|comment[^\\n]*(\\n+|$)|<\\?[\\s\\S]*?(?:\\?>\\n*|$)|<![A-Z][\\s\\S]*?(?:>\\n*|$)|<!\\[CDATA\\[[\\s\\S]*?(?:\\]\\]>\\n*|$)|</?(tag)(?: +|\\n|/?>)[\\s\\S]*?(?:(?:\\n[ 	]*)+\\n|$)|<(?!script|pre|style|textarea)([a-z][\\w-]*)(?:attribute)*? */?>(?=[ \\t]*(?:\\n|$))[\\s\\S]*?(?:(?:\\n[ 	]*)+\\n|$)|</(?!script|pre|style|textarea)[a-z][\\w-]*\\s*>(?=[ \\t]*(?:\\n|$))[\\s\\S]*?(?:(?:\\n[ 	]*)+\\n|$))", "i").replace("comment", U).replace("tag", v).replace("attribute", / +[a-zA-Z:_][\w.:-]*(?: *= *"[^"\n]*"| *= *'[^'\n]*'| *= *[^\s"'=<>`]+)?/).getRegex();
+  var oe = k(j).replace("hr", C).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("|lheading", "").replace("|table", "").replace("blockquote", " {0,3}>").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*\\n)|~{3,})[^\\n]*\\n").replace("list", " {0,3}(?:[*+-]|1[.)])[ \\t]").replace("html", "</?(?:tag)(?: +|\\n|/?>)|<(?:script|pre|style|textarea|!--)").replace("tag", v).getRegex();
+  var Le = k(/^( {0,3}> ?(paragraph|[^\n]*)(?:\n|$))+/).replace("paragraph", oe).getRegex();
+  var K = { blockquote: Le, code: Oe, def: Se, fences: Te, heading: we, hr: C, html: _e, lheading: ie, list: $e, newline: Re, paragraph: oe, table: _, text: Pe };
+  var ne = k("^ *([^\\n ].*)\\n {0,3}((?:\\| *)?:?-+:? *(?:\\| *:?-+:? *)*(?:\\| *)?)(?:\\n((?:(?! *\\n|hr|heading|blockquote|code|fences|list|html).*(?:\\n|$))*)\\n*|$)").replace("hr", C).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("blockquote", " {0,3}>").replace("code", "(?: {4}| {0,3}	)[^\\n]").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*\\n)|~{3,})[^\\n]*\\n").replace("list", " {0,3}(?:[*+-]|1[.)])[ \\t]").replace("html", "</?(?:tag)(?: +|\\n|/?>)|<(?:script|pre|style|textarea|!--)").replace("tag", v).getRegex();
+  var Me = { ...K, lheading: ye, table: ne, paragraph: k(j).replace("hr", C).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("|lheading", "").replace("table", ne).replace("blockquote", " {0,3}>").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*\\n)|~{3,})[^\\n]*\\n").replace("list", " {0,3}(?:[*+-]|1[.)])[ \\t]").replace("html", "</?(?:tag)(?: +|\\n|/?>)|<(?:script|pre|style|textarea|!--)").replace("tag", v).getRegex() };
+  var ze = { ...K, html: k(`^ *(?:comment *(?:\\n|\\s*$)|<(tag)[\\s\\S]+?</\\1> *(?:\\n{2,}|\\s*$)|<tag(?:"[^"]*"|'[^']*'|\\s[^'"/>\\s]*)*?/?> *(?:\\n{2,}|\\s*$))`).replace("comment", U).replace(/tag/g, "(?!(?:a|em|strong|small|s|cite|q|dfn|abbr|data|time|code|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo|span|br|wbr|ins|del|img)\\b)\\w+(?!:|[^\\w\\s@]*@)\\b").getRegex(), def: /^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +(["(][^\n]+[")]))? *(?:\n+|$)/, heading: /^(#{1,6})(.*)(?:\n+|$)/, fences: _, lheading: /^(.+?)\n {0,3}(=+|-+) *(?:\n+|$)/, paragraph: k(j).replace("hr", C).replace("heading", ` *#{1,6} *[^
+]`).replace("lheading", ie).replace("|table", "").replace("blockquote", " {0,3}>").replace("|fences", "").replace("|list", "").replace("|html", "").replace("|tag", "").getRegex() };
+  var Ee = /^\\([!"#$%&'()*+,\-./:;<=>?@\[\]\\^_`{|}~])/;
+  var Ie = /^(`+)([^`]|[^`][\s\S]*?[^`])\1(?!`)/;
+  var ae = /^( {2,}|\\)\n(?!\s*$)/;
+  var Ae = /^(`+|[^`])(?:(?= {2,}\n)|[\s\S]*?(?:(?=[\\<!\[`*_]|\b_|$)|[^ ](?= {2,}\n)))/;
+  var z = /[\p{P}\p{S}]/u;
+  var H = /[\s\p{P}\p{S}]/u;
+  var W = /[^\s\p{P}\p{S}]/u;
+  var Ce = k(/^((?![*_])punctSpace)/, "u").replace(/punctSpace/g, H).getRegex();
+  var le = /(?!~)[\p{P}\p{S}]/u;
+  var Be = /(?!~)[\s\p{P}\p{S}]/u;
+  var De = /(?:[^\s\p{P}\p{S}]|~)/u;
+  var qe = k(/link|precode-code|html/, "g").replace("link", /\[(?:[^\[\]`]|(?<a>`+)[^`]+\k<a>(?!`))*?\]\((?:\\[\s\S]|[^\\\(\)]|\((?:\\[\s\S]|[^\\\(\)])*\))*\)/).replace("precode-", be ? "(?<!`)()" : "(^^|[^`])").replace("code", /(?<b>`+)[^`]+\k<b>(?!`)/).replace("html", /<(?! )[^<>]*?>/).getRegex();
+  var ue = /^(?:\*+(?:((?!\*)punct)|([^\s*]))?)|^_+(?:((?!_)punct)|([^\s_]))?/;
+  var ve = k(ue, "u").replace(/punct/g, z).getRegex();
+  var He = k(ue, "u").replace(/punct/g, le).getRegex();
+  var pe = "^[^_*]*?__[^_*]*?\\*[^_*]*?(?=__)|[^*]+(?=[^*])|(?!\\*)punct(\\*+)(?=[\\s]|$)|notPunctSpace(\\*+)(?!\\*)(?=punctSpace|$)|(?!\\*)punctSpace(\\*+)(?=notPunctSpace)|[\\s](\\*+)(?!\\*)(?=punct)|(?!\\*)punct(\\*+)(?!\\*)(?=punct)|notPunctSpace(\\*+)(?=notPunctSpace)";
+  var Ze = k(pe, "gu").replace(/notPunctSpace/g, W).replace(/punctSpace/g, H).replace(/punct/g, z).getRegex();
+  var Ge = k(pe, "gu").replace(/notPunctSpace/g, De).replace(/punctSpace/g, Be).replace(/punct/g, le).getRegex();
+  var Ne = k("^[^_*]*?\\*\\*[^_*]*?_[^_*]*?(?=\\*\\*)|[^_]+(?=[^_])|(?!_)punct(_+)(?=[\\s]|$)|notPunctSpace(_+)(?!_)(?=punctSpace|$)|(?!_)punctSpace(_+)(?=notPunctSpace)|[\\s](_+)(?!_)(?=punct)|(?!_)punct(_+)(?!_)(?=punct)", "gu").replace(/notPunctSpace/g, W).replace(/punctSpace/g, H).replace(/punct/g, z).getRegex();
+  var Qe = k(/^~~?(?:((?!~)punct)|[^\s~])/, "u").replace(/punct/g, z).getRegex();
+  var je = "^[^~]+(?=[^~])|(?!~)punct(~~?)(?=[\\s]|$)|notPunctSpace(~~?)(?!~)(?=punctSpace|$)|(?!~)punctSpace(~~?)(?=notPunctSpace)|[\\s](~~?)(?!~)(?=punct)|(?!~)punct(~~?)(?!~)(?=punct)|notPunctSpace(~~?)(?=notPunctSpace)";
+  var Fe = k(je, "gu").replace(/notPunctSpace/g, W).replace(/punctSpace/g, H).replace(/punct/g, z).getRegex();
+  var Ue = k(/\\(punct)/, "gu").replace(/punct/g, z).getRegex();
+  var Ke = k(/^<(scheme:[^\s\x00-\x1f<>]*|email)>/).replace("scheme", /[a-zA-Z][a-zA-Z0-9+.-]{1,31}/).replace("email", /[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+(@)[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+(?![-_])/).getRegex();
+  var We = k(U).replace("(?:-->|$)", "-->").getRegex();
+  var Xe = k("^comment|^</[a-zA-Z][\\w:-]*\\s*>|^<[a-zA-Z][\\w-]*(?:attribute)*?\\s*/?>|^<\\?[\\s\\S]*?\\?>|^<![a-zA-Z]+\\s[\\s\\S]*?>|^<!\\[CDATA\\[[\\s\\S]*?\\]\\]>").replace("comment", We).replace("attribute", /\s+[a-zA-Z:_][\w.:-]*(?:\s*=\s*"[^"]*"|\s*=\s*'[^']*'|\s*=\s*[^\s"'=<>`]+)?/).getRegex();
+  var q = /(?:\[(?:\\[\s\S]|[^\[\]\\])*\]|\\[\s\S]|`+(?!`)[^`]*?`+(?!`)|``+(?=\])|[^\[\]\\`])*?/;
+  var Je = k(/^!?\[(label)\]\(\s*(href)(?:(?:[ \t]+(?:\n[ \t]*)?|\n[ \t]*)(title))?\s*\)/).replace("label", q).replace("href", /<(?:\\.|[^\n<>\\])+>|[^ \t\n\x00-\x1f]*/).replace("title", /"(?:\\"?|[^"\\])*"|'(?:\\'?|[^'\\])*'|\((?:\\\)?|[^)\\])*\)/).getRegex();
+  var ce = k(/^!?\[(label)\]\[(ref)\]/).replace("label", q).replace("ref", F).getRegex();
+  var he = k(/^!?\[(ref)\](?:\[\])?/).replace("ref", F).getRegex();
+  var Ve = k("reflink|nolink(?!\\()", "g").replace("reflink", ce).replace("nolink", he).getRegex();
+  var re = /[hH][tT][tT][pP][sS]?|[fF][tT][pP]/;
+  var X = { _backpedal: _, anyPunctuation: Ue, autolink: Ke, blockSkip: qe, br: ae, code: Ie, del: _, delLDelim: _, delRDelim: _, emStrongLDelim: ve, emStrongRDelimAst: Ze, emStrongRDelimUnd: Ne, escape: Ee, link: Je, nolink: he, punctuation: Ce, reflink: ce, reflinkSearch: Ve, tag: Xe, text: Ae, url: _ };
+  var Ye = { ...X, link: k(/^!?\[(label)\]\((.*?)\)/).replace("label", q).getRegex(), reflink: k(/^!?\[(label)\]\s*\[([^\]]*)\]/).replace("label", q).getRegex() };
+  var N = { ...X, emStrongRDelimAst: Ge, emStrongLDelim: He, delLDelim: Qe, delRDelim: Fe, url: k(/^((?:protocol):\/\/|www\.)(?:[a-zA-Z0-9\-]+\.?)+[^\s<]*|^email/).replace("protocol", re).replace("email", /[A-Za-z0-9._+-]+(@)[a-zA-Z0-9-_]+(?:\.[a-zA-Z0-9-_]*[a-zA-Z0-9])+(?![-_])/).getRegex(), _backpedal: /(?:[^?!.,:;*_'"~()&]+|\([^)]*\)|&(?![a-zA-Z0-9]+;$)|[?!.,:;*_'"~)]+(?!$))+/, del: /^(~~?)(?=[^\s~])((?:\\[\s\S]|[^\\])*?(?:\\[\s\S]|[^\s~\\]))\1(?=[^~]|$)/, text: k(/^([`~]+|[^`~])(?:(?= {2,}\n)|(?=[a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-]+@)|[\s\S]*?(?:(?=[\\<!\[`*~_]|\b_|protocol:\/\/|www\.|$)|[^ ](?= {2,}\n)|[^a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-](?=[a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-]+@)))/).replace("protocol", re).getRegex() };
+  var et = { ...N, br: k(ae).replace("{2,}", "*").getRegex(), text: k(N.text).replace("\\b_", "\\b_| {2,}\\n").replace(/\{2,\}/g, "*").getRegex() };
+  var B = { normal: K, gfm: Me, pedantic: ze };
+  var E = { normal: X, gfm: N, breaks: et, pedantic: Ye };
+  var tt = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+  var ke = (u3) => tt[u3];
+  function T(u3, e) {
+    if (e) {
+      if (m.escapeTest.test(u3)) return u3.replace(m.escapeReplace, ke);
+    } else if (m.escapeTestNoEncode.test(u3)) return u3.replace(m.escapeReplaceNoEncode, ke);
+    return u3;
+  }
+  function J(u3) {
+    try {
+      u3 = encodeURI(u3).replace(m.percentDecode, "%");
+    } catch {
+      return null;
+    }
+    return u3;
+  }
+  function V(u3, e) {
+    let t = u3.replace(m.findPipe, (i, s, a) => {
+      let o = false, l = s;
+      for (; --l >= 0 && a[l] === "\\"; ) o = !o;
+      return o ? "|" : " |";
+    }), n = t.split(m.splitPipe), r = 0;
+    if (n[0].trim() || n.shift(), n.length > 0 && !n.at(-1)?.trim() && n.pop(), e) if (n.length > e) n.splice(e);
+    else for (; n.length < e; ) n.push("");
+    for (; r < n.length; r++) n[r] = n[r].trim().replace(m.slashPipe, "|");
+    return n;
+  }
+  function I(u3, e, t) {
+    let n = u3.length;
+    if (n === 0) return "";
+    let r = 0;
+    for (; r < n; ) {
+      let i = u3.charAt(n - r - 1);
+      if (i === e && !t) r++;
+      else if (i !== e && t) r++;
+      else break;
+    }
+    return u3.slice(0, n - r);
+  }
+  function de(u3, e) {
+    if (u3.indexOf(e[1]) === -1) return -1;
+    let t = 0;
+    for (let n = 0; n < u3.length; n++) if (u3[n] === "\\") n++;
+    else if (u3[n] === e[0]) t++;
+    else if (u3[n] === e[1] && (t--, t < 0)) return n;
+    return t > 0 ? -2 : -1;
+  }
+  function ge(u3, e = 0) {
+    let t = e, n = "";
+    for (let r of u3) if (r === "	") {
+      let i = 4 - t % 4;
+      n += " ".repeat(i), t += i;
+    } else n += r, t++;
+    return n;
+  }
+  function fe(u3, e, t, n, r) {
+    let i = e.href, s = e.title || null, a = u3[1].replace(r.other.outputLinkReplace, "$1");
+    n.state.inLink = true;
+    let o = { type: u3[0].charAt(0) === "!" ? "image" : "link", raw: t, href: i, title: s, text: a, tokens: n.inlineTokens(a) };
+    return n.state.inLink = false, o;
+  }
+  function nt(u3, e, t) {
+    let n = u3.match(t.other.indentCodeCompensation);
+    if (n === null) return e;
+    let r = n[1];
+    return e.split(`
+`).map((i) => {
+      let s = i.match(t.other.beginningSpace);
+      if (s === null) return i;
+      let [a] = s;
+      return a.length >= r.length ? i.slice(r.length) : i;
+    }).join(`
+`);
+  }
+  var w = class {
+    options;
+    rules;
+    lexer;
+    constructor(e) {
+      this.options = e || O;
+    }
+    space(e) {
+      let t = this.rules.block.newline.exec(e);
+      if (t && t[0].length > 0) return { type: "space", raw: t[0] };
+    }
+    code(e) {
+      let t = this.rules.block.code.exec(e);
+      if (t) {
+        let n = t[0].replace(this.rules.other.codeRemoveIndent, "");
+        return { type: "code", raw: t[0], codeBlockStyle: "indented", text: this.options.pedantic ? n : I(n, `
+`) };
+      }
+    }
+    fences(e) {
+      let t = this.rules.block.fences.exec(e);
+      if (t) {
+        let n = t[0], r = nt(n, t[3] || "", this.rules);
+        return { type: "code", raw: n, lang: t[2] ? t[2].trim().replace(this.rules.inline.anyPunctuation, "$1") : t[2], text: r };
+      }
+    }
+    heading(e) {
+      let t = this.rules.block.heading.exec(e);
+      if (t) {
+        let n = t[2].trim();
+        if (this.rules.other.endingHash.test(n)) {
+          let r = I(n, "#");
+          (this.options.pedantic || !r || this.rules.other.endingSpaceChar.test(r)) && (n = r.trim());
+        }
+        return { type: "heading", raw: t[0], depth: t[1].length, text: n, tokens: this.lexer.inline(n) };
+      }
+    }
+    hr(e) {
+      let t = this.rules.block.hr.exec(e);
+      if (t) return { type: "hr", raw: I(t[0], `
+`) };
+    }
+    blockquote(e) {
+      let t = this.rules.block.blockquote.exec(e);
+      if (t) {
+        let n = I(t[0], `
+`).split(`
+`), r = "", i = "", s = [];
+        for (; n.length > 0; ) {
+          let a = false, o = [], l;
+          for (l = 0; l < n.length; l++) if (this.rules.other.blockquoteStart.test(n[l])) o.push(n[l]), a = true;
+          else if (!a) o.push(n[l]);
+          else break;
+          n = n.slice(l);
+          let p = o.join(`
+`), c = p.replace(this.rules.other.blockquoteSetextReplace, `
+    $1`).replace(this.rules.other.blockquoteSetextReplace2, "");
+          r = r ? `${r}
+${p}` : p, i = i ? `${i}
+${c}` : c;
+          let d = this.lexer.state.top;
+          if (this.lexer.state.top = true, this.lexer.blockTokens(c, s, true), this.lexer.state.top = d, n.length === 0) break;
+          let h = s.at(-1);
+          if (h?.type === "code") break;
+          if (h?.type === "blockquote") {
+            let R = h, f = R.raw + `
+` + n.join(`
+`), S = this.blockquote(f);
+            s[s.length - 1] = S, r = r.substring(0, r.length - R.raw.length) + S.raw, i = i.substring(0, i.length - R.text.length) + S.text;
+            break;
+          } else if (h?.type === "list") {
+            let R = h, f = R.raw + `
+` + n.join(`
+`), S = this.list(f);
+            s[s.length - 1] = S, r = r.substring(0, r.length - h.raw.length) + S.raw, i = i.substring(0, i.length - R.raw.length) + S.raw, n = f.substring(s.at(-1).raw.length).split(`
+`);
+            continue;
+          }
+        }
+        return { type: "blockquote", raw: r, tokens: s, text: i };
+      }
+    }
+    list(e) {
+      let t = this.rules.block.list.exec(e);
+      if (t) {
+        let n = t[1].trim(), r = n.length > 1, i = { type: "list", raw: "", ordered: r, start: r ? +n.slice(0, -1) : "", loose: false, items: [] };
+        n = r ? `\\d{1,9}\\${n.slice(-1)}` : `\\${n}`, this.options.pedantic && (n = r ? n : "[*+-]");
+        let s = this.rules.other.listItemRegex(n), a = false;
+        for (; e; ) {
+          let l = false, p = "", c = "";
+          if (!(t = s.exec(e)) || this.rules.block.hr.test(e)) break;
+          p = t[0], e = e.substring(p.length);
+          let d = ge(t[2].split(`
+`, 1)[0], t[1].length), h = e.split(`
+`, 1)[0], R = !d.trim(), f = 0;
+          if (this.options.pedantic ? (f = 2, c = d.trimStart()) : R ? f = t[1].length + 1 : (f = d.search(this.rules.other.nonSpaceChar), f = f > 4 ? 1 : f, c = d.slice(f), f += t[1].length), R && this.rules.other.blankLine.test(h) && (p += h + `
+`, e = e.substring(h.length + 1), l = true), !l) {
+            let S = this.rules.other.nextBulletRegex(f), Y = this.rules.other.hrRegex(f), ee = this.rules.other.fencesBeginRegex(f), te = this.rules.other.headingBeginRegex(f), me = this.rules.other.htmlBeginRegex(f), xe = this.rules.other.blockquoteBeginRegex(f);
+            for (; e; ) {
+              let Z = e.split(`
+`, 1)[0], A;
+              if (h = Z, this.options.pedantic ? (h = h.replace(this.rules.other.listReplaceNesting, "  "), A = h) : A = h.replace(this.rules.other.tabCharGlobal, "    "), ee.test(h) || te.test(h) || me.test(h) || xe.test(h) || S.test(h) || Y.test(h)) break;
+              if (A.search(this.rules.other.nonSpaceChar) >= f || !h.trim()) c += `
+` + A.slice(f);
+              else {
+                if (R || d.replace(this.rules.other.tabCharGlobal, "    ").search(this.rules.other.nonSpaceChar) >= 4 || ee.test(d) || te.test(d) || Y.test(d)) break;
+                c += `
+` + h;
+              }
+              R = !h.trim(), p += Z + `
+`, e = e.substring(Z.length + 1), d = A.slice(f);
+            }
+          }
+          i.loose || (a ? i.loose = true : this.rules.other.doubleBlankLine.test(p) && (a = true)), i.items.push({ type: "list_item", raw: p, task: !!this.options.gfm && this.rules.other.listIsTask.test(c), loose: false, text: c, tokens: [] }), i.raw += p;
+        }
+        let o = i.items.at(-1);
+        if (o) o.raw = o.raw.trimEnd(), o.text = o.text.trimEnd();
+        else return;
+        i.raw = i.raw.trimEnd();
+        for (let l of i.items) {
+          if (this.lexer.state.top = false, l.tokens = this.lexer.blockTokens(l.text, []), l.task) {
+            if (l.text = l.text.replace(this.rules.other.listReplaceTask, ""), l.tokens[0]?.type === "text" || l.tokens[0]?.type === "paragraph") {
+              l.tokens[0].raw = l.tokens[0].raw.replace(this.rules.other.listReplaceTask, ""), l.tokens[0].text = l.tokens[0].text.replace(this.rules.other.listReplaceTask, "");
+              for (let c = this.lexer.inlineQueue.length - 1; c >= 0; c--) if (this.rules.other.listIsTask.test(this.lexer.inlineQueue[c].src)) {
+                this.lexer.inlineQueue[c].src = this.lexer.inlineQueue[c].src.replace(this.rules.other.listReplaceTask, "");
+                break;
+              }
+            }
+            let p = this.rules.other.listTaskCheckbox.exec(l.raw);
+            if (p) {
+              let c = { type: "checkbox", raw: p[0] + " ", checked: p[0] !== "[ ]" };
+              l.checked = c.checked, i.loose ? l.tokens[0] && ["paragraph", "text"].includes(l.tokens[0].type) && "tokens" in l.tokens[0] && l.tokens[0].tokens ? (l.tokens[0].raw = c.raw + l.tokens[0].raw, l.tokens[0].text = c.raw + l.tokens[0].text, l.tokens[0].tokens.unshift(c)) : l.tokens.unshift({ type: "paragraph", raw: c.raw, text: c.raw, tokens: [c] }) : l.tokens.unshift(c);
+            }
+          }
+          if (!i.loose) {
+            let p = l.tokens.filter((d) => d.type === "space"), c = p.length > 0 && p.some((d) => this.rules.other.anyLine.test(d.raw));
+            i.loose = c;
+          }
+        }
+        if (i.loose) for (let l of i.items) {
+          l.loose = true;
+          for (let p of l.tokens) p.type === "text" && (p.type = "paragraph");
+        }
+        return i;
+      }
+    }
+    html(e) {
+      let t = this.rules.block.html.exec(e);
+      if (t) return { type: "html", block: true, raw: t[0], pre: t[1] === "pre" || t[1] === "script" || t[1] === "style", text: t[0] };
+    }
+    def(e) {
+      let t = this.rules.block.def.exec(e);
+      if (t) {
+        let n = t[1].toLowerCase().replace(this.rules.other.multipleSpaceGlobal, " "), r = t[2] ? t[2].replace(this.rules.other.hrefBrackets, "$1").replace(this.rules.inline.anyPunctuation, "$1") : "", i = t[3] ? t[3].substring(1, t[3].length - 1).replace(this.rules.inline.anyPunctuation, "$1") : t[3];
+        return { type: "def", tag: n, raw: t[0], href: r, title: i };
+      }
+    }
+    table(e) {
+      let t = this.rules.block.table.exec(e);
+      if (!t || !this.rules.other.tableDelimiter.test(t[2])) return;
+      let n = V(t[1]), r = t[2].replace(this.rules.other.tableAlignChars, "").split("|"), i = t[3]?.trim() ? t[3].replace(this.rules.other.tableRowBlankLine, "").split(`
+`) : [], s = { type: "table", raw: t[0], header: [], align: [], rows: [] };
+      if (n.length === r.length) {
+        for (let a of r) this.rules.other.tableAlignRight.test(a) ? s.align.push("right") : this.rules.other.tableAlignCenter.test(a) ? s.align.push("center") : this.rules.other.tableAlignLeft.test(a) ? s.align.push("left") : s.align.push(null);
+        for (let a = 0; a < n.length; a++) s.header.push({ text: n[a], tokens: this.lexer.inline(n[a]), header: true, align: s.align[a] });
+        for (let a of i) s.rows.push(V(a, s.header.length).map((o, l) => ({ text: o, tokens: this.lexer.inline(o), header: false, align: s.align[l] })));
+        return s;
+      }
+    }
+    lheading(e) {
+      let t = this.rules.block.lheading.exec(e);
+      if (t) {
+        let n = t[1].trim();
+        return { type: "heading", raw: t[0], depth: t[2].charAt(0) === "=" ? 1 : 2, text: n, tokens: this.lexer.inline(n) };
+      }
+    }
+    paragraph(e) {
+      let t = this.rules.block.paragraph.exec(e);
+      if (t) {
+        let n = t[1].charAt(t[1].length - 1) === `
+` ? t[1].slice(0, -1) : t[1];
+        return { type: "paragraph", raw: t[0], text: n, tokens: this.lexer.inline(n) };
+      }
+    }
+    text(e) {
+      let t = this.rules.block.text.exec(e);
+      if (t) return { type: "text", raw: t[0], text: t[0], tokens: this.lexer.inline(t[0]) };
+    }
+    escape(e) {
+      let t = this.rules.inline.escape.exec(e);
+      if (t) return { type: "escape", raw: t[0], text: t[1] };
+    }
+    tag(e) {
+      let t = this.rules.inline.tag.exec(e);
+      if (t) return !this.lexer.state.inLink && this.rules.other.startATag.test(t[0]) ? this.lexer.state.inLink = true : this.lexer.state.inLink && this.rules.other.endATag.test(t[0]) && (this.lexer.state.inLink = false), !this.lexer.state.inRawBlock && this.rules.other.startPreScriptTag.test(t[0]) ? this.lexer.state.inRawBlock = true : this.lexer.state.inRawBlock && this.rules.other.endPreScriptTag.test(t[0]) && (this.lexer.state.inRawBlock = false), { type: "html", raw: t[0], inLink: this.lexer.state.inLink, inRawBlock: this.lexer.state.inRawBlock, block: false, text: t[0] };
+    }
+    link(e) {
+      let t = this.rules.inline.link.exec(e);
+      if (t) {
+        let n = t[2].trim();
+        if (!this.options.pedantic && this.rules.other.startAngleBracket.test(n)) {
+          if (!this.rules.other.endAngleBracket.test(n)) return;
+          let s = I(n.slice(0, -1), "\\");
+          if ((n.length - s.length) % 2 === 0) return;
+        } else {
+          let s = de(t[2], "()");
+          if (s === -2) return;
+          if (s > -1) {
+            let o = (t[0].indexOf("!") === 0 ? 5 : 4) + t[1].length + s;
+            t[2] = t[2].substring(0, s), t[0] = t[0].substring(0, o).trim(), t[3] = "";
+          }
+        }
+        let r = t[2], i = "";
+        if (this.options.pedantic) {
+          let s = this.rules.other.pedanticHrefTitle.exec(r);
+          s && (r = s[1], i = s[3]);
+        } else i = t[3] ? t[3].slice(1, -1) : "";
+        return r = r.trim(), this.rules.other.startAngleBracket.test(r) && (this.options.pedantic && !this.rules.other.endAngleBracket.test(n) ? r = r.slice(1) : r = r.slice(1, -1)), fe(t, { href: r && r.replace(this.rules.inline.anyPunctuation, "$1"), title: i && i.replace(this.rules.inline.anyPunctuation, "$1") }, t[0], this.lexer, this.rules);
+      }
+    }
+    reflink(e, t) {
+      let n;
+      if ((n = this.rules.inline.reflink.exec(e)) || (n = this.rules.inline.nolink.exec(e))) {
+        let r = (n[2] || n[1]).replace(this.rules.other.multipleSpaceGlobal, " "), i = t[r.toLowerCase()];
+        if (!i) {
+          let s = n[0].charAt(0);
+          return { type: "text", raw: s, text: s };
+        }
+        return fe(n, i, n[0], this.lexer, this.rules);
+      }
+    }
+    emStrong(e, t, n = "") {
+      let r = this.rules.inline.emStrongLDelim.exec(e);
+      if (!r || !r[1] && !r[2] && !r[3] && !r[4] || r[4] && n.match(this.rules.other.unicodeAlphaNumeric)) return;
+      if (!(r[1] || r[3] || "") || !n || this.rules.inline.punctuation.exec(n)) {
+        let s = [...r[0]].length - 1, a, o, l = s, p = 0, c = r[0][0] === "*" ? this.rules.inline.emStrongRDelimAst : this.rules.inline.emStrongRDelimUnd;
+        for (c.lastIndex = 0, t = t.slice(-1 * e.length + s); (r = c.exec(t)) !== null; ) {
+          if (a = r[1] || r[2] || r[3] || r[4] || r[5] || r[6], !a) continue;
+          if (o = [...a].length, r[3] || r[4]) {
+            l += o;
+            continue;
+          } else if ((r[5] || r[6]) && s % 3 && !((s + o) % 3)) {
+            p += o;
+            continue;
+          }
+          if (l -= o, l > 0) continue;
+          o = Math.min(o, o + l + p);
+          let d = [...r[0]][0].length, h = e.slice(0, s + r.index + d + o);
+          if (Math.min(s, o) % 2) {
+            let f = h.slice(1, -1);
+            return { type: "em", raw: h, text: f, tokens: this.lexer.inlineTokens(f) };
+          }
+          let R = h.slice(2, -2);
+          return { type: "strong", raw: h, text: R, tokens: this.lexer.inlineTokens(R) };
+        }
+      }
+    }
+    codespan(e) {
+      let t = this.rules.inline.code.exec(e);
+      if (t) {
+        let n = t[2].replace(this.rules.other.newLineCharGlobal, " "), r = this.rules.other.nonSpaceChar.test(n), i = this.rules.other.startingSpaceChar.test(n) && this.rules.other.endingSpaceChar.test(n);
+        return r && i && (n = n.substring(1, n.length - 1)), { type: "codespan", raw: t[0], text: n };
+      }
+    }
+    br(e) {
+      let t = this.rules.inline.br.exec(e);
+      if (t) return { type: "br", raw: t[0] };
+    }
+    del(e, t, n = "") {
+      let r = this.rules.inline.delLDelim.exec(e);
+      if (!r) return;
+      if (!(r[1] || "") || !n || this.rules.inline.punctuation.exec(n)) {
+        let s = [...r[0]].length - 1, a, o, l = s, p = this.rules.inline.delRDelim;
+        for (p.lastIndex = 0, t = t.slice(-1 * e.length + s); (r = p.exec(t)) !== null; ) {
+          if (a = r[1] || r[2] || r[3] || r[4] || r[5] || r[6], !a || (o = [...a].length, o !== s)) continue;
+          if (r[3] || r[4]) {
+            l += o;
+            continue;
+          }
+          if (l -= o, l > 0) continue;
+          o = Math.min(o, o + l);
+          let c = [...r[0]][0].length, d = e.slice(0, s + r.index + c + o), h = d.slice(s, -s);
+          return { type: "del", raw: d, text: h, tokens: this.lexer.inlineTokens(h) };
+        }
+      }
+    }
+    autolink(e) {
+      let t = this.rules.inline.autolink.exec(e);
+      if (t) {
+        let n, r;
+        return t[2] === "@" ? (n = t[1], r = "mailto:" + n) : (n = t[1], r = n), { type: "link", raw: t[0], text: n, href: r, tokens: [{ type: "text", raw: n, text: n }] };
+      }
+    }
+    url(e) {
+      let t;
+      if (t = this.rules.inline.url.exec(e)) {
+        let n, r;
+        if (t[2] === "@") n = t[0], r = "mailto:" + n;
+        else {
+          let i;
+          do
+            i = t[0], t[0] = this.rules.inline._backpedal.exec(t[0])?.[0] ?? "";
+          while (i !== t[0]);
+          n = t[0], t[1] === "www." ? r = "http://" + t[0] : r = t[0];
+        }
+        return { type: "link", raw: t[0], text: n, href: r, tokens: [{ type: "text", raw: n, text: n }] };
+      }
+    }
+    inlineText(e) {
+      let t = this.rules.inline.text.exec(e);
+      if (t) {
+        let n = this.lexer.state.inRawBlock;
+        return { type: "text", raw: t[0], text: t[0], escaped: n };
+      }
+    }
+  };
+  var x = class u {
+    tokens;
+    options;
+    state;
+    inlineQueue;
+    tokenizer;
+    constructor(e) {
+      this.tokens = [], this.tokens.links = /* @__PURE__ */ Object.create(null), this.options = e || O, this.options.tokenizer = this.options.tokenizer || new w(), this.tokenizer = this.options.tokenizer, this.tokenizer.options = this.options, this.tokenizer.lexer = this, this.inlineQueue = [], this.state = { inLink: false, inRawBlock: false, top: true };
+      let t = { other: m, block: B.normal, inline: E.normal };
+      this.options.pedantic ? (t.block = B.pedantic, t.inline = E.pedantic) : this.options.gfm && (t.block = B.gfm, this.options.breaks ? t.inline = E.breaks : t.inline = E.gfm), this.tokenizer.rules = t;
+    }
+    static get rules() {
+      return { block: B, inline: E };
+    }
+    static lex(e, t) {
+      return new u(t).lex(e);
+    }
+    static lexInline(e, t) {
+      return new u(t).inlineTokens(e);
+    }
+    lex(e) {
+      e = e.replace(m.carriageReturn, `
+`), this.blockTokens(e, this.tokens);
+      for (let t = 0; t < this.inlineQueue.length; t++) {
+        let n = this.inlineQueue[t];
+        this.inlineTokens(n.src, n.tokens);
+      }
+      return this.inlineQueue = [], this.tokens;
+    }
+    blockTokens(e, t = [], n = false) {
+      for (this.tokenizer.lexer = this, this.options.pedantic && (e = e.replace(m.tabCharGlobal, "    ").replace(m.spaceLine, "")); e; ) {
+        let r;
+        if (this.options.extensions?.block?.some((s) => (r = s.call({ lexer: this }, e, t)) ? (e = e.substring(r.raw.length), t.push(r), true) : false)) continue;
+        if (r = this.tokenizer.space(e)) {
+          e = e.substring(r.raw.length);
+          let s = t.at(-1);
+          r.raw.length === 1 && s !== void 0 ? s.raw += `
+` : t.push(r);
+          continue;
+        }
+        if (r = this.tokenizer.code(e)) {
+          e = e.substring(r.raw.length);
+          let s = t.at(-1);
+          s?.type === "paragraph" || s?.type === "text" ? (s.raw += (s.raw.endsWith(`
+`) ? "" : `
+`) + r.raw, s.text += `
+` + r.text, this.inlineQueue.at(-1).src = s.text) : t.push(r);
+          continue;
+        }
+        if (r = this.tokenizer.fences(e)) {
+          e = e.substring(r.raw.length), t.push(r);
+          continue;
+        }
+        if (r = this.tokenizer.heading(e)) {
+          e = e.substring(r.raw.length), t.push(r);
+          continue;
+        }
+        if (r = this.tokenizer.hr(e)) {
+          e = e.substring(r.raw.length), t.push(r);
+          continue;
+        }
+        if (r = this.tokenizer.blockquote(e)) {
+          e = e.substring(r.raw.length), t.push(r);
+          continue;
+        }
+        if (r = this.tokenizer.list(e)) {
+          e = e.substring(r.raw.length), t.push(r);
+          continue;
+        }
+        if (r = this.tokenizer.html(e)) {
+          e = e.substring(r.raw.length), t.push(r);
+          continue;
+        }
+        if (r = this.tokenizer.def(e)) {
+          e = e.substring(r.raw.length);
+          let s = t.at(-1);
+          s?.type === "paragraph" || s?.type === "text" ? (s.raw += (s.raw.endsWith(`
+`) ? "" : `
+`) + r.raw, s.text += `
+` + r.raw, this.inlineQueue.at(-1).src = s.text) : this.tokens.links[r.tag] || (this.tokens.links[r.tag] = { href: r.href, title: r.title }, t.push(r));
+          continue;
+        }
+        if (r = this.tokenizer.table(e)) {
+          e = e.substring(r.raw.length), t.push(r);
+          continue;
+        }
+        if (r = this.tokenizer.lheading(e)) {
+          e = e.substring(r.raw.length), t.push(r);
+          continue;
+        }
+        let i = e;
+        if (this.options.extensions?.startBlock) {
+          let s = 1 / 0, a = e.slice(1), o;
+          this.options.extensions.startBlock.forEach((l) => {
+            o = l.call({ lexer: this }, a), typeof o == "number" && o >= 0 && (s = Math.min(s, o));
+          }), s < 1 / 0 && s >= 0 && (i = e.substring(0, s + 1));
+        }
+        if (this.state.top && (r = this.tokenizer.paragraph(i))) {
+          let s = t.at(-1);
+          n && s?.type === "paragraph" ? (s.raw += (s.raw.endsWith(`
+`) ? "" : `
+`) + r.raw, s.text += `
+` + r.text, this.inlineQueue.pop(), this.inlineQueue.at(-1).src = s.text) : t.push(r), n = i.length !== e.length, e = e.substring(r.raw.length);
+          continue;
+        }
+        if (r = this.tokenizer.text(e)) {
+          e = e.substring(r.raw.length);
+          let s = t.at(-1);
+          s?.type === "text" ? (s.raw += (s.raw.endsWith(`
+`) ? "" : `
+`) + r.raw, s.text += `
+` + r.text, this.inlineQueue.pop(), this.inlineQueue.at(-1).src = s.text) : t.push(r);
+          continue;
+        }
+        if (e) {
+          let s = "Infinite loop on byte: " + e.charCodeAt(0);
+          if (this.options.silent) {
+            console.error(s);
+            break;
+          } else throw new Error(s);
+        }
+      }
+      return this.state.top = true, t;
+    }
+    inline(e, t = []) {
+      return this.inlineQueue.push({ src: e, tokens: t }), t;
+    }
+    inlineTokens(e, t = []) {
+      this.tokenizer.lexer = this;
+      let n = e, r = null;
+      if (this.tokens.links) {
+        let o = Object.keys(this.tokens.links);
+        if (o.length > 0) for (; (r = this.tokenizer.rules.inline.reflinkSearch.exec(n)) !== null; ) o.includes(r[0].slice(r[0].lastIndexOf("[") + 1, -1)) && (n = n.slice(0, r.index) + "[" + "a".repeat(r[0].length - 2) + "]" + n.slice(this.tokenizer.rules.inline.reflinkSearch.lastIndex));
+      }
+      for (; (r = this.tokenizer.rules.inline.anyPunctuation.exec(n)) !== null; ) n = n.slice(0, r.index) + "++" + n.slice(this.tokenizer.rules.inline.anyPunctuation.lastIndex);
+      let i;
+      for (; (r = this.tokenizer.rules.inline.blockSkip.exec(n)) !== null; ) i = r[2] ? r[2].length : 0, n = n.slice(0, r.index + i) + "[" + "a".repeat(r[0].length - i - 2) + "]" + n.slice(this.tokenizer.rules.inline.blockSkip.lastIndex);
+      n = this.options.hooks?.emStrongMask?.call({ lexer: this }, n) ?? n;
+      let s = false, a = "";
+      for (; e; ) {
+        s || (a = ""), s = false;
+        let o;
+        if (this.options.extensions?.inline?.some((p) => (o = p.call({ lexer: this }, e, t)) ? (e = e.substring(o.raw.length), t.push(o), true) : false)) continue;
+        if (o = this.tokenizer.escape(e)) {
+          e = e.substring(o.raw.length), t.push(o);
+          continue;
+        }
+        if (o = this.tokenizer.tag(e)) {
+          e = e.substring(o.raw.length), t.push(o);
+          continue;
+        }
+        if (o = this.tokenizer.link(e)) {
+          e = e.substring(o.raw.length), t.push(o);
+          continue;
+        }
+        if (o = this.tokenizer.reflink(e, this.tokens.links)) {
+          e = e.substring(o.raw.length);
+          let p = t.at(-1);
+          o.type === "text" && p?.type === "text" ? (p.raw += o.raw, p.text += o.text) : t.push(o);
+          continue;
+        }
+        if (o = this.tokenizer.emStrong(e, n, a)) {
+          e = e.substring(o.raw.length), t.push(o);
+          continue;
+        }
+        if (o = this.tokenizer.codespan(e)) {
+          e = e.substring(o.raw.length), t.push(o);
+          continue;
+        }
+        if (o = this.tokenizer.br(e)) {
+          e = e.substring(o.raw.length), t.push(o);
+          continue;
+        }
+        if (o = this.tokenizer.del(e, n, a)) {
+          e = e.substring(o.raw.length), t.push(o);
+          continue;
+        }
+        if (o = this.tokenizer.autolink(e)) {
+          e = e.substring(o.raw.length), t.push(o);
+          continue;
+        }
+        if (!this.state.inLink && (o = this.tokenizer.url(e))) {
+          e = e.substring(o.raw.length), t.push(o);
+          continue;
+        }
+        let l = e;
+        if (this.options.extensions?.startInline) {
+          let p = 1 / 0, c = e.slice(1), d;
+          this.options.extensions.startInline.forEach((h) => {
+            d = h.call({ lexer: this }, c), typeof d == "number" && d >= 0 && (p = Math.min(p, d));
+          }), p < 1 / 0 && p >= 0 && (l = e.substring(0, p + 1));
+        }
+        if (o = this.tokenizer.inlineText(l)) {
+          e = e.substring(o.raw.length), o.raw.slice(-1) !== "_" && (a = o.raw.slice(-1)), s = true;
+          let p = t.at(-1);
+          p?.type === "text" ? (p.raw += o.raw, p.text += o.text) : t.push(o);
+          continue;
+        }
+        if (e) {
+          let p = "Infinite loop on byte: " + e.charCodeAt(0);
+          if (this.options.silent) {
+            console.error(p);
+            break;
+          } else throw new Error(p);
+        }
+      }
+      return t;
+    }
+  };
+  var y = class {
+    options;
+    parser;
+    constructor(e) {
+      this.options = e || O;
+    }
+    space(e) {
+      return "";
+    }
+    code({ text: e, lang: t, escaped: n }) {
+      let r = (t || "").match(m.notSpaceStart)?.[0], i = e.replace(m.endingNewline, "") + `
+`;
+      return r ? '<pre><code class="language-' + T(r) + '">' + (n ? i : T(i, true)) + `</code></pre>
+` : "<pre><code>" + (n ? i : T(i, true)) + `</code></pre>
+`;
+    }
+    blockquote({ tokens: e }) {
+      return `<blockquote>
+${this.parser.parse(e)}</blockquote>
+`;
+    }
+    html({ text: e }) {
+      return e;
+    }
+    def(e) {
+      return "";
+    }
+    heading({ tokens: e, depth: t }) {
+      return `<h${t}>${this.parser.parseInline(e)}</h${t}>
+`;
+    }
+    hr(e) {
+      return `<hr>
+`;
+    }
+    list(e) {
+      let t = e.ordered, n = e.start, r = "";
+      for (let a = 0; a < e.items.length; a++) {
+        let o = e.items[a];
+        r += this.listitem(o);
+      }
+      let i = t ? "ol" : "ul", s = t && n !== 1 ? ' start="' + n + '"' : "";
+      return "<" + i + s + `>
+` + r + "</" + i + `>
+`;
+    }
+    listitem(e) {
+      return `<li>${this.parser.parse(e.tokens)}</li>
+`;
+    }
+    checkbox({ checked: e }) {
+      return "<input " + (e ? 'checked="" ' : "") + 'disabled="" type="checkbox"> ';
+    }
+    paragraph({ tokens: e }) {
+      return `<p>${this.parser.parseInline(e)}</p>
+`;
+    }
+    table(e) {
+      let t = "", n = "";
+      for (let i = 0; i < e.header.length; i++) n += this.tablecell(e.header[i]);
+      t += this.tablerow({ text: n });
+      let r = "";
+      for (let i = 0; i < e.rows.length; i++) {
+        let s = e.rows[i];
+        n = "";
+        for (let a = 0; a < s.length; a++) n += this.tablecell(s[a]);
+        r += this.tablerow({ text: n });
+      }
+      return r && (r = `<tbody>${r}</tbody>`), `<table>
+<thead>
+` + t + `</thead>
+` + r + `</table>
+`;
+    }
+    tablerow({ text: e }) {
+      return `<tr>
+${e}</tr>
+`;
+    }
+    tablecell(e) {
+      let t = this.parser.parseInline(e.tokens), n = e.header ? "th" : "td";
+      return (e.align ? `<${n} align="${e.align}">` : `<${n}>`) + t + `</${n}>
+`;
+    }
+    strong({ tokens: e }) {
+      return `<strong>${this.parser.parseInline(e)}</strong>`;
+    }
+    em({ tokens: e }) {
+      return `<em>${this.parser.parseInline(e)}</em>`;
+    }
+    codespan({ text: e }) {
+      return `<code>${T(e, true)}</code>`;
+    }
+    br(e) {
+      return "<br>";
+    }
+    del({ tokens: e }) {
+      return `<del>${this.parser.parseInline(e)}</del>`;
+    }
+    link({ href: e, title: t, tokens: n }) {
+      let r = this.parser.parseInline(n), i = J(e);
+      if (i === null) return r;
+      e = i;
+      let s = '<a href="' + e + '"';
+      return t && (s += ' title="' + T(t) + '"'), s += ">" + r + "</a>", s;
+    }
+    image({ href: e, title: t, text: n, tokens: r }) {
+      r && (n = this.parser.parseInline(r, this.parser.textRenderer));
+      let i = J(e);
+      if (i === null) return T(n);
+      e = i;
+      let s = `<img src="${e}" alt="${T(n)}"`;
+      return t && (s += ` title="${T(t)}"`), s += ">", s;
+    }
+    text(e) {
+      return "tokens" in e && e.tokens ? this.parser.parseInline(e.tokens) : "escaped" in e && e.escaped ? e.text : T(e.text);
+    }
+  };
+  var $ = class {
+    strong({ text: e }) {
+      return e;
+    }
+    em({ text: e }) {
+      return e;
+    }
+    codespan({ text: e }) {
+      return e;
+    }
+    del({ text: e }) {
+      return e;
+    }
+    html({ text: e }) {
+      return e;
+    }
+    text({ text: e }) {
+      return e;
+    }
+    link({ text: e }) {
+      return "" + e;
+    }
+    image({ text: e }) {
+      return "" + e;
+    }
+    br() {
+      return "";
+    }
+    checkbox({ raw: e }) {
+      return e;
+    }
+  };
+  var b = class u2 {
+    options;
+    renderer;
+    textRenderer;
+    constructor(e) {
+      this.options = e || O, this.options.renderer = this.options.renderer || new y(), this.renderer = this.options.renderer, this.renderer.options = this.options, this.renderer.parser = this, this.textRenderer = new $();
+    }
+    static parse(e, t) {
+      return new u2(t).parse(e);
+    }
+    static parseInline(e, t) {
+      return new u2(t).parseInline(e);
+    }
+    parse(e) {
+      this.renderer.parser = this;
+      let t = "";
+      for (let n = 0; n < e.length; n++) {
+        let r = e[n];
+        if (this.options.extensions?.renderers?.[r.type]) {
+          let s = r, a = this.options.extensions.renderers[s.type].call({ parser: this }, s);
+          if (a !== false || !["space", "hr", "heading", "code", "table", "blockquote", "list", "html", "def", "paragraph", "text"].includes(s.type)) {
+            t += a || "";
+            continue;
+          }
+        }
+        let i = r;
+        switch (i.type) {
+          case "space": {
+            t += this.renderer.space(i);
+            break;
+          }
+          case "hr": {
+            t += this.renderer.hr(i);
+            break;
+          }
+          case "heading": {
+            t += this.renderer.heading(i);
+            break;
+          }
+          case "code": {
+            t += this.renderer.code(i);
+            break;
+          }
+          case "table": {
+            t += this.renderer.table(i);
+            break;
+          }
+          case "blockquote": {
+            t += this.renderer.blockquote(i);
+            break;
+          }
+          case "list": {
+            t += this.renderer.list(i);
+            break;
+          }
+          case "checkbox": {
+            t += this.renderer.checkbox(i);
+            break;
+          }
+          case "html": {
+            t += this.renderer.html(i);
+            break;
+          }
+          case "def": {
+            t += this.renderer.def(i);
+            break;
+          }
+          case "paragraph": {
+            t += this.renderer.paragraph(i);
+            break;
+          }
+          case "text": {
+            t += this.renderer.text(i);
+            break;
+          }
+          default: {
+            let s = 'Token with "' + i.type + '" type was not found.';
+            if (this.options.silent) return console.error(s), "";
+            throw new Error(s);
+          }
+        }
+      }
+      return t;
+    }
+    parseInline(e, t = this.renderer) {
+      this.renderer.parser = this;
+      let n = "";
+      for (let r = 0; r < e.length; r++) {
+        let i = e[r];
+        if (this.options.extensions?.renderers?.[i.type]) {
+          let a = this.options.extensions.renderers[i.type].call({ parser: this }, i);
+          if (a !== false || !["escape", "html", "link", "image", "strong", "em", "codespan", "br", "del", "text"].includes(i.type)) {
+            n += a || "";
+            continue;
+          }
+        }
+        let s = i;
+        switch (s.type) {
+          case "escape": {
+            n += t.text(s);
+            break;
+          }
+          case "html": {
+            n += t.html(s);
+            break;
+          }
+          case "link": {
+            n += t.link(s);
+            break;
+          }
+          case "image": {
+            n += t.image(s);
+            break;
+          }
+          case "checkbox": {
+            n += t.checkbox(s);
+            break;
+          }
+          case "strong": {
+            n += t.strong(s);
+            break;
+          }
+          case "em": {
+            n += t.em(s);
+            break;
+          }
+          case "codespan": {
+            n += t.codespan(s);
+            break;
+          }
+          case "br": {
+            n += t.br(s);
+            break;
+          }
+          case "del": {
+            n += t.del(s);
+            break;
+          }
+          case "text": {
+            n += t.text(s);
+            break;
+          }
+          default: {
+            let a = 'Token with "' + s.type + '" type was not found.';
+            if (this.options.silent) return console.error(a), "";
+            throw new Error(a);
+          }
+        }
+      }
+      return n;
+    }
+  };
+  var P = class {
+    options;
+    block;
+    constructor(e) {
+      this.options = e || O;
+    }
+    static passThroughHooks = /* @__PURE__ */ new Set(["preprocess", "postprocess", "processAllTokens", "emStrongMask"]);
+    static passThroughHooksRespectAsync = /* @__PURE__ */ new Set(["preprocess", "postprocess", "processAllTokens"]);
+    preprocess(e) {
+      return e;
+    }
+    postprocess(e) {
+      return e;
+    }
+    processAllTokens(e) {
+      return e;
+    }
+    emStrongMask(e) {
+      return e;
+    }
+    provideLexer(e = this.block) {
+      return e ? x.lex : x.lexInline;
+    }
+    provideParser(e = this.block) {
+      return e ? b.parse : b.parseInline;
+    }
+  };
+  var D = class {
+    defaults = M();
+    options = this.setOptions;
+    parse = this.parseMarkdown(true);
+    parseInline = this.parseMarkdown(false);
+    Parser = b;
+    Renderer = y;
+    TextRenderer = $;
+    Lexer = x;
+    Tokenizer = w;
+    Hooks = P;
+    constructor(...e) {
+      this.use(...e);
+    }
+    walkTokens(e, t) {
+      let n = [];
+      for (let r of e) switch (n = n.concat(t.call(this, r)), r.type) {
+        case "table": {
+          let i = r;
+          for (let s of i.header) n = n.concat(this.walkTokens(s.tokens, t));
+          for (let s of i.rows) for (let a of s) n = n.concat(this.walkTokens(a.tokens, t));
+          break;
+        }
+        case "list": {
+          let i = r;
+          n = n.concat(this.walkTokens(i.items, t));
+          break;
+        }
+        default: {
+          let i = r;
+          this.defaults.extensions?.childTokens?.[i.type] ? this.defaults.extensions.childTokens[i.type].forEach((s) => {
+            let a = i[s].flat(1 / 0);
+            n = n.concat(this.walkTokens(a, t));
+          }) : i.tokens && (n = n.concat(this.walkTokens(i.tokens, t)));
+        }
+      }
+      return n;
+    }
+    use(...e) {
+      let t = this.defaults.extensions || { renderers: {}, childTokens: {} };
+      return e.forEach((n) => {
+        let r = { ...n };
+        if (r.async = this.defaults.async || r.async || false, n.extensions && (n.extensions.forEach((i) => {
+          if (!i.name) throw new Error("extension name required");
+          if ("renderer" in i) {
+            let s = t.renderers[i.name];
+            s ? t.renderers[i.name] = function(...a) {
+              let o = i.renderer.apply(this, a);
+              return o === false && (o = s.apply(this, a)), o;
+            } : t.renderers[i.name] = i.renderer;
+          }
+          if ("tokenizer" in i) {
+            if (!i.level || i.level !== "block" && i.level !== "inline") throw new Error("extension level must be 'block' or 'inline'");
+            let s = t[i.level];
+            s ? s.unshift(i.tokenizer) : t[i.level] = [i.tokenizer], i.start && (i.level === "block" ? t.startBlock ? t.startBlock.push(i.start) : t.startBlock = [i.start] : i.level === "inline" && (t.startInline ? t.startInline.push(i.start) : t.startInline = [i.start]));
+          }
+          "childTokens" in i && i.childTokens && (t.childTokens[i.name] = i.childTokens);
+        }), r.extensions = t), n.renderer) {
+          let i = this.defaults.renderer || new y(this.defaults);
+          for (let s in n.renderer) {
+            if (!(s in i)) throw new Error(`renderer '${s}' does not exist`);
+            if (["options", "parser"].includes(s)) continue;
+            let a = s, o = n.renderer[a], l = i[a];
+            i[a] = (...p) => {
+              let c = o.apply(i, p);
+              return c === false && (c = l.apply(i, p)), c || "";
+            };
+          }
+          r.renderer = i;
+        }
+        if (n.tokenizer) {
+          let i = this.defaults.tokenizer || new w(this.defaults);
+          for (let s in n.tokenizer) {
+            if (!(s in i)) throw new Error(`tokenizer '${s}' does not exist`);
+            if (["options", "rules", "lexer"].includes(s)) continue;
+            let a = s, o = n.tokenizer[a], l = i[a];
+            i[a] = (...p) => {
+              let c = o.apply(i, p);
+              return c === false && (c = l.apply(i, p)), c;
+            };
+          }
+          r.tokenizer = i;
+        }
+        if (n.hooks) {
+          let i = this.defaults.hooks || new P();
+          for (let s in n.hooks) {
+            if (!(s in i)) throw new Error(`hook '${s}' does not exist`);
+            if (["options", "block"].includes(s)) continue;
+            let a = s, o = n.hooks[a], l = i[a];
+            P.passThroughHooks.has(s) ? i[a] = (p) => {
+              if (this.defaults.async && P.passThroughHooksRespectAsync.has(s)) return (async () => {
+                let d = await o.call(i, p);
+                return l.call(i, d);
+              })();
+              let c = o.call(i, p);
+              return l.call(i, c);
+            } : i[a] = (...p) => {
+              if (this.defaults.async) return (async () => {
+                let d = await o.apply(i, p);
+                return d === false && (d = await l.apply(i, p)), d;
+              })();
+              let c = o.apply(i, p);
+              return c === false && (c = l.apply(i, p)), c;
+            };
+          }
+          r.hooks = i;
+        }
+        if (n.walkTokens) {
+          let i = this.defaults.walkTokens, s = n.walkTokens;
+          r.walkTokens = function(a) {
+            let o = [];
+            return o.push(s.call(this, a)), i && (o = o.concat(i.call(this, a))), o;
+          };
+        }
+        this.defaults = { ...this.defaults, ...r };
+      }), this;
+    }
+    setOptions(e) {
+      return this.defaults = { ...this.defaults, ...e }, this;
+    }
+    lexer(e, t) {
+      return x.lex(e, t ?? this.defaults);
+    }
+    parser(e, t) {
+      return b.parse(e, t ?? this.defaults);
+    }
+    parseMarkdown(e) {
+      return (n, r) => {
+        let i = { ...r }, s = { ...this.defaults, ...i }, a = this.onError(!!s.silent, !!s.async);
+        if (this.defaults.async === true && i.async === false) return a(new Error("marked(): The async option was set to true by an extension. Remove async: false from the parse options object to return a Promise."));
+        if (typeof n > "u" || n === null) return a(new Error("marked(): input parameter is undefined or null"));
+        if (typeof n != "string") return a(new Error("marked(): input parameter is of type " + Object.prototype.toString.call(n) + ", string expected"));
+        if (s.hooks && (s.hooks.options = s, s.hooks.block = e), s.async) return (async () => {
+          let o = s.hooks ? await s.hooks.preprocess(n) : n, p = await (s.hooks ? await s.hooks.provideLexer(e) : e ? x.lex : x.lexInline)(o, s), c = s.hooks ? await s.hooks.processAllTokens(p) : p;
+          s.walkTokens && await Promise.all(this.walkTokens(c, s.walkTokens));
+          let h = await (s.hooks ? await s.hooks.provideParser(e) : e ? b.parse : b.parseInline)(c, s);
+          return s.hooks ? await s.hooks.postprocess(h) : h;
+        })().catch(a);
+        try {
+          s.hooks && (n = s.hooks.preprocess(n));
+          let l = (s.hooks ? s.hooks.provideLexer(e) : e ? x.lex : x.lexInline)(n, s);
+          s.hooks && (l = s.hooks.processAllTokens(l)), s.walkTokens && this.walkTokens(l, s.walkTokens);
+          let c = (s.hooks ? s.hooks.provideParser(e) : e ? b.parse : b.parseInline)(l, s);
+          return s.hooks && (c = s.hooks.postprocess(c)), c;
+        } catch (o) {
+          return a(o);
+        }
+      };
+    }
+    onError(e, t) {
+      return (n) => {
+        if (n.message += `
+Please report this to https://github.com/markedjs/marked.`, e) {
+          let r = "<p>An error occurred:</p><pre>" + T(n.message + "", true) + "</pre>";
+          return t ? Promise.resolve(r) : r;
+        }
+        if (t) return Promise.reject(n);
+        throw n;
+      };
+    }
+  };
+  var L = new D();
+  function g(u3, e) {
+    return L.parse(u3, e);
+  }
+  g.options = g.setOptions = function(u3) {
+    return L.setOptions(u3), g.defaults = L.defaults, G(g.defaults), g;
+  };
+  g.getDefaults = M;
+  g.defaults = O;
+  g.use = function(...u3) {
+    return L.use(...u3), g.defaults = L.defaults, G(g.defaults), g;
+  };
+  g.walkTokens = function(u3, e) {
+    return L.walkTokens(u3, e);
+  };
+  g.parseInline = L.parseInline;
+  g.Parser = b;
+  g.parser = b.parse;
+  g.Renderer = y;
+  g.TextRenderer = $;
+  g.Lexer = x;
+  g.lexer = x.lex;
+  g.Tokenizer = w;
+  g.Hooks = P;
+  g.parse = g;
+  var Qt = g.options;
+  var jt = g.setOptions;
+  var Ft = g.use;
+  var Ut = g.walkTokens;
+  var Kt = g.parseInline;
+  var Xt = b.parse;
+  var Jt = x.lex;
+
+  // src/client/spirit-message.jsx
+  var allowed = /* @__PURE__ */ new Set([
+    "P",
+    "BR",
+    "STRONG",
+    "EM",
+    "B",
+    "I",
+    "DEL",
+    "S",
+    "BLOCKQUOTE",
+    "UL",
+    "OL",
+    "LI",
+    "PRE",
+    "CODE",
+    "TABLE",
+    "THEAD",
+    "TBODY",
+    "TR",
+    "TH",
+    "TD",
+    "H1",
+    "H2",
+    "H3",
+    "H4",
+    "H5",
+    "H6",
+    "HR",
+    "A"
+  ]);
+  function messageHtml(text, citations, references, label) {
+    const doc = new DOMParser().parseFromString(
+      g.parse(text, { breaks: true }),
+      "text/html"
+    );
+    for (const el of [...doc.body.querySelectorAll("*")]) {
+      if (!allowed.has(el.tagName)) {
+        el.remove();
+        continue;
+      }
+      const href = el.getAttribute("href");
+      for (const a of [...el.attributes]) el.removeAttribute(a.name);
+      if (el.tagName === "A" && /^https?:\/\//i.test(href || "")) {
+        el.setAttribute("href", href);
+        el.setAttribute("target", "_blank");
+        el.setAttribute("rel", "noopener noreferrer");
+      }
+    }
+    const walk = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT), nodes = [];
+    let node;
+    while (node = walk.nextNode())
+      if (!node.parentElement.closest("pre,code,a")) nodes.push(node);
+    for (const n of nodes) {
+      if (!/\[c\d+(?::\d+-\d+)?\]/.test(n.textContent)) continue;
+      const frag = doc.createDocumentFragment();
+      for (const part of n.textContent.split(/(\[c\d+(?::\d+-\d+)?\])/g)) {
+        const id = part.slice(1, -1);
+        if (/^\[c\d+(?::\d+-\d+)?\]$/.test(part) && (references[id] || !id.includes(":") && citations.includes(id))) {
+          const b2 = doc.createElement("button");
+          b2.type = "button";
+          b2.className = "arr-citation";
+          b2.dataset.reference = id;
+          b2.textContent = label || part;
+          if (references[id]?.quote) b2.title = references[id].quote.slice(0, 140);
+          frag.append(b2);
+        } else frag.append(doc.createTextNode(part));
+      }
+      n.replaceWith(frag);
+    }
+    return doc.body.innerHTML;
+  }
+  function SpiritMessage({
+    text,
+    citations = [],
+    references = {},
+    referenceLabel,
+    onJump
+  }) {
+    const html = (0, import_react4.useMemo)(
+      () => messageHtml(text, citations, references, referenceLabel),
+      [text, citations, references, referenceLabel]
+    );
+    return /* @__PURE__ */ import_react4.default.createElement(
+      "div",
+      {
+        className: "arr-chat-markdown",
+        dangerouslySetInnerHTML: { __html: html },
+        onClick: (e) => {
+          const button = e.target.closest("button[data-reference]");
+          if (!button || !e.currentTarget.contains(button)) return;
+          const id = button.dataset.reference;
+          if (references[id]) onJump(references[id]);
+          else if (!id.includes(":") && citations.includes(id))
+            onJump({ chapterId: id, start: 0, end: 1 });
+        }
+      }
+    );
+  }
+
+  // src/client/method-prompt.jsx
+  var import_react5 = __toESM(__require("react"), 1);
+  function MethodPrompt({
+    book,
+    chapterId,
+    anchor,
+    method,
+    lang,
+    t,
+    override,
+    setOverride,
+    preview,
+    setPreview,
+    includeNotes,
+    setIncludeNotes,
+    onSave,
+    onHelp,
+    refreshEpoch = 0
+  }) {
+    const key = "arr-prompt-display:" + method, [display, setDisplay] = (0, import_react5.useState)(() => {
+      try {
+        return localStorage.getItem(key) || localStorage.getItem("arr-prompt-default") || "full";
+      } catch {
+        return "full";
+      }
+    }), [editing, setEditing] = (0, import_react5.useState)(false), [draft, setDraft] = (0, import_react5.useState)(""), [error, setError] = (0, import_react5.useState)("");
+    (0, import_react5.useEffect)(() => {
+      try {
+        setDisplay(
+          localStorage.getItem(key) || localStorage.getItem("arr-prompt-default") || "full"
+        );
+      } catch {
+      }
+      setEditing(false);
+    }, [method]);
+    (0, import_react5.useEffect)(() => {
+      let active = true;
+      const ac = new AbortController();
+      setError("");
+      rpc(
+        {
+          action: "methodPreview",
+          bookId: book.id,
+          chapterId,
+          anchor,
+          method,
+          language: lang,
+          override: override ?? void 0,
+          includeNotes
+        },
+        ac.signal
+      ).then((x2) => {
+        if (active) setPreview(x2);
+      }).catch((e) => {
+        if (active && e.name !== "AbortError") {
+          setError(e.message);
+          setPreview(null);
+        }
+      });
+      return () => {
+        active = false;
+        ac.abort();
+      };
+    }, [
+      book.id,
+      chapterId,
+      anchor,
+      method,
+      lang,
+      override,
+      includeNotes,
+      refreshEpoch
+    ]);
+    function choose(value) {
+      setDisplay(value);
+      try {
+        localStorage.setItem(key, value);
+      } catch {
+      }
+    }
+    return /* @__PURE__ */ import_react5.default.createElement("section", { className: "arr-prompt-card is-" + display }, /* @__PURE__ */ import_react5.default.createElement("div", { className: "row spread" }, /* @__PURE__ */ import_react5.default.createElement("strong", null, preview?.name || t("methodPrompt")), /* @__PURE__ */ import_react5.default.createElement(
+      "select",
+      {
+        "aria-label": t("promptDisplay"),
+        value: display,
+        onChange: (e) => choose(e.target.value)
+      },
+      [
+        ["full", "promptFull"],
+        ["compact", "promptCompact"],
+        ["hidden", "promptHidden"]
+      ].map(([v2, k2]) => /* @__PURE__ */ import_react5.default.createElement("option", { value: v2, key: v2 }, t(k2)))
+    )), display !== "hidden" && /* @__PURE__ */ import_react5.default.createElement(import_react5.default.Fragment, null, /* @__PURE__ */ import_react5.default.createElement("p", { className: "muted small" }, preview?.description), display === "full" && /* @__PURE__ */ import_react5.default.createElement(import_react5.default.Fragment, null, /* @__PURE__ */ import_react5.default.createElement("p", { className: "muted small" }, t("promptHint")), editing ? /* @__PURE__ */ import_react5.default.createElement(
+      "textarea",
+      {
+        rows: 8,
+        value: draft,
+        onChange: (e) => setDraft(e.target.value)
+      }
+    ) : /* @__PURE__ */ import_react5.default.createElement("pre", { className: "arr-prompt-text" }, preview?.prompt || error || t("loading")), /* @__PURE__ */ import_react5.default.createElement("label", { className: "arr-check small" }, /* @__PURE__ */ import_react5.default.createElement(
+      "input",
+      {
+        type: "checkbox",
+        checked: includeNotes,
+        onChange: (e) => setIncludeNotes(e.target.checked)
+      }
+    ), t("includeNotes")), /* @__PURE__ */ import_react5.default.createElement("div", { className: "row" }, editing ? /* @__PURE__ */ import_react5.default.createElement(import_react5.default.Fragment, null, /* @__PURE__ */ import_react5.default.createElement(
+      "button",
+      {
+        onClick: () => {
+          setOverride(draft);
+          setEditing(false);
+        }
+      },
+      t("save")
+    ), /* @__PURE__ */ import_react5.default.createElement("button", { onClick: () => setEditing(false) }, t("cancel"))) : /* @__PURE__ */ import_react5.default.createElement(
+      "button",
+      {
+        onClick: () => {
+          setDraft(preview?.prompt || "");
+          setEditing(true);
+        }
+      },
+      t("editThisPrompt")
+    ), override !== null && /* @__PURE__ */ import_react5.default.createElement("button", { onClick: () => setOverride(null) }, t("resetPrompt")), /* @__PURE__ */ import_react5.default.createElement("button", { disabled: !preview, onClick: () => onSave(preview) }, t("saveAsMethod")), /* @__PURE__ */ import_react5.default.createElement(
+      "button",
+      {
+        disabled: !preview,
+        onClick: () => navigator.clipboard?.writeText(preview.prompt)
+      },
+      t("copyPrompt")
+    ))), /* @__PURE__ */ import_react5.default.createElement("button", { className: "arr-text-button", onClick: onHelp }, t("learnMethod"))));
+  }
+
+  // src/client/method-library.jsx
+  var import_react6 = __toESM(__require("react"), 1);
+
+  // src/shared/methodology-details.js
+  var METHODOLOGY_DETAILS = {
+    free: {
+      scenario: {
+        zh: "\u968F\u65F6\u60F3\u89E3\u91CA\u3001\u7FFB\u8BD1\u6216\u804A\u804A\u611F\u53D7\u3002",
+        en: "Any time you want an explanation, translation or reflection."
+      },
+      usage: {
+        zh: "\u76F4\u63A5\u8F93\u5165\u95EE\u9898\u6216\u9009\u4E2D\u4E00\u6BB5\u6587\u5B57\u3002\u4E0D\u9700\u8981\u586B\u5199\u76EE\u6807\u3002",
+        en: "Type a question or select a passage. No goal is required."
+      }
+    },
+    hunt: {
+      scenario: {
+        zh: "\u521A\u5F00\u59CB\u8BFB\u4E00\u672C\u4E66\u8FD8\u6CA1\u6709\u660E\u786E\u95EE\u9898\uFF1B\u67D0\u6BB5\u8BDD\u8BA9\u4F60\u597D\u5947\uFF0C\u60F3\u77E5\u9053\u4E0E\u81EA\u5DF1\u7684\u7ECF\u5386\u6709\u4EC0\u4E48\u8054\u7CFB\u3002",
+        en: "You are starting without a defined question, or a passage sparks curiosity and personal connections."
+      },
+      usage: {
+        zh: "1. \u8BFB\u4E00\u6BB5\u6216\u9009\u4E2D\u89E6\u52A8\u4F60\u7684\u6587\u5B57\u3002\n2. \u8F93\u5165\u201C\u8FD9\u91CC\u6709\u4EC0\u4E48\u503C\u5F97\u6211\u6CE8\u610F\u7684\uFF1F\u201D\u6216\u70B9\u51FB\u966A\u6211\u8BFB\u5F53\u524D\u5185\u5BB9\u3002\n3. \u8DDF\u968F\u4E00\u4E2A\u5177\u4F53\u7EBF\u7D22\u8BA8\u8BBA\uFF0C\u5199\u4E0B\u81EA\u5DF1\u7684\u7406\u89E3\u548C\u4ECD\u672A\u89E3\u51B3\u7684\u95EE\u9898\u3002\u53EF\u4EE5\u6682\u65F6\u4E0D\u56DE\u7B54\u8FFD\u95EE\uFF0C\u4E5F\u4E0D\u5FC5\u900F\u9732\u79C1\u4EBA\u7ECF\u5386\u3002",
+        en: "1. Read or select a meaningful passage.\n2. Ask \u201CWhat is worth noticing here?\u201D or choose Read this with me.\n3. Follow a concrete lead and keep your understanding and open questions. You can decline personal questions."
+      }
+    },
+    feynman: {
+      scenario: {
+        zh: "\u6982\u5FF5\u4F3C\u61C2\u975E\u61C2\uFF0C\u60F3\u68C0\u67E5\u81EA\u5DF1\u662F\u5426\u771F\u7684\u7406\u89E3\uFF1B\u80FD\u591F\u590D\u8FF0\uFF0C\u5374\u4E0D\u786E\u5B9A\u5982\u4F55\u5E94\u7528\u3002",
+        en: "A concept feels familiar but unclear, or you can repeat it without knowing how to apply it."
+      },
+      usage: {
+        zh: "1. \u6CA1\u770B\u61C2\u65F6\u5148\u8BA9\u4E66\u866B\u89E3\u91CA\u3002\n2. \u6709\u4E00\u70B9\u7406\u89E3\u540E\uFF0C\u7528\u81EA\u5DF1\u7684\u8BDD\u8BF4\u4E00\u904D\u5E76\u4E3E\u4F8B\u3002\n3. \u8BA9\u4E66\u866B\u56F4\u7ED5\u6A21\u7CCA\u5904\u3001\u53CD\u4F8B\u6216\u65B0\u60C5\u5883\u5E2E\u4F60\u68C0\u67E5\uFF0C\u518D\u91CD\u65B0\u89E3\u91CA\u3002\u5361\u4F4F\u65F6\u968F\u65F6\u8BF7\u6C42\u63D0\u793A\uFF0C\u4E0D\u662F\u5FC5\u987B\u5B8C\u6210\u7684\u8003\u8BD5\u3002\n\u8BD5\u8BD5\uFF1A\u201C\u5148\u5E2E\u6211\u7406\u89E3\u8FD9\u6BB5\uFF0C\u518D\u542C\u542C\u6211\u8BB2\u5F97\u5BF9\u4E0D\u5BF9\u3002\u201D",
+        en: "1. Ask for an explanation first when needed.\n2. Explain it in your own words and give an example.\n3. Check ambiguities, counterexamples and transfer, then explain again. Hints are always allowed; this is not a required test.\nTry: \u201CExplain this first, then listen to my explanation.\u201D"
+      }
+    },
+    debate: {
+      scenario: {
+        zh: "\u9047\u5230\u5F3A\u70C8\u8BA4\u540C\u3001\u6000\u7591\u6216\u6709\u4E89\u8BAE\u7684\u89C2\u70B9\uFF0C\u60F3\u5F04\u6E05\u5B83\u7684\u4F9D\u636E\u4E0E\u9002\u7528\u8303\u56F4\u3002",
+        en: "You strongly agree with or doubt a claim and want to examine its support and limits."
+      },
+      usage: {
+        zh: "1. \u9009\u4E2D\u4F5C\u8005\u7684\u89C2\u70B9\uFF0C\u6216\u8BA9\u4E66\u866B\u4ECE\u5F53\u524D\u6BB5\u843D\u63D0\u53D6\u3002\n2. \u6BD4\u8F83\u6700\u6709\u529B\u7684\u652F\u6301\u3001\u53CD\u4F8B\u548C\u9002\u7528\u6761\u4EF6\u3002\n3. \u8BF4\u8BF4\u81EA\u5DF1\u4FDD\u7559\u4EC0\u4E48\u3001\u4FEE\u6539\u4EC0\u4E48\u3001\u8FD8\u60F3\u67E5\u4EC0\u4E48\uFF1B\u4E5F\u53EF\u4EE5\u6682\u65F6\u4E0D\u4E0B\u7ED3\u8BBA\u3002\u6A21\u62DF\u4EBA\u7269\u89C2\u70B9\u5FC5\u987B\u4E0E\u771F\u5B9E\u5F15\u8BED\u533A\u5206\u3002\n\u8BD5\u8BD5\uFF1A\u201C\u8FD9\u4E2A\u89C2\u70B9\u5728\u4EC0\u4E48\u60C5\u51B5\u4E0B\u4E0D\u6210\u7ACB\uFF1F\u201D",
+        en: "1. Select a claim or let Bookworm identify one.\n2. Compare its strongest support, counterexamples and conditions.\n3. Keep, revise or defer your judgment. Simulated viewpoints must be distinguished from real quotations.\nTry: \u201CWhen would this claim not hold?\u201D"
+      }
+    }
+  };
+  function prepareReadingTurn({ message, textOverride, promptOverride }) {
+    return {
+      text: typeof textOverride === "string" ? textOverride : message,
+      override: typeof promptOverride === "string" ? promptOverride : void 0
+    };
+  }
+  function shouldShowMethodIntro(method, pref) {
+    return !pref?.seenRevision || !pref.skip;
+  }
+
+  // src/shared/method-library.js
+  var BUILTIN_METHODS = [
+    {
+      id: "free",
+      name: { zh: "\u81EA\u7531\u804A", en: "Chat" },
+      description: {
+        zh: "\u89E3\u91CA\u3001\u7FFB\u8BD1\u3001\u611F\u609F\uFF0C\u60F3\u5230\u4EC0\u4E48\u5C31\u804A\u4EC0\u4E48\u3002",
+        en: "Ask, translate or reflect naturally."
+      },
+      starter: {
+        zh: "\u8BF7\u966A\u6211\u8BFB\u5F53\u524D\u5185\u5BB9\u3002",
+        en: "Please read this passage with me."
+      }
+    },
+    {
+      id: "hunt",
+      name: { zh: "\u72E9\u730E\u6CD5", en: "Explore" },
+      description: {
+        zh: "\u4ECE\u773C\u524D\u7684\u6BB5\u843D\u53D1\u73B0\u7EBF\u7D22\uFF0C\u95EE\u9898\u53EF\u4EE5\u8FB9\u8BFB\u8FB9\u5F62\u6210\u3002",
+        en: "Discover meaningful leads; questions can emerge as you read."
+      },
+      starter: {
+        zh: "\u6211\u8FD8\u6CA1\u6709\u660E\u786E\u95EE\u9898\uFF0C\u8BF7\u4ECE\u5F53\u524D\u5185\u5BB9\u627E\u4E00\u4E2A\u503C\u5F97\u8FFD\u5BFB\u7684\u7EBF\u7D22\u3002",
+        en: "Find a meaningful lead in this passage; I do not have a specific question yet."
+      }
+    },
+    {
+      id: "feynman",
+      name: { zh: "\u8D39\u66FC\u6CD5", en: "Teach-back" },
+      description: {
+        zh: "\u5148\u4E00\u8D77\u770B\u61C2\uFF0C\u518D\u7528\u81EA\u5DF1\u7684\u8BDD\u8BF4\u660E\uFF0C\u968F\u65F6\u53EF\u4EE5\u8BF7\u6C42\u63D0\u793A\u3002",
+        en: "Understand together, then explain in your own words with hints when needed."
+      },
+      starter: {
+        zh: "\u5148\u5E2E\u6211\u7406\u89E3\u8FD9\u4E2A\u6982\u5FF5\uFF0C\u518D\u542C\u542C\u6211\u80FD\u5426\u8BB2\u6E05\u695A\u3002",
+        en: "Explain the idea first, then help me teach it back."
+      }
+    },
+    {
+      id: "debate",
+      name: { zh: "\u8FA9\u8BBA\u6CD5", en: "Debate" },
+      description: {
+        zh: "\u68C0\u67E5\u89C2\u70B9\u7684\u4F9D\u636E\u3001\u53CD\u4F8B\u4E0E\u6761\u4EF6\uFF0C\u5F62\u6210\u81EA\u5DF1\u7684\u6682\u5B9A\u5224\u65AD\u3002",
+        en: "Examine evidence, counterexamples and limits to form a provisional judgment."
+      },
+      starter: {
+        zh: "\u8FD9\u4E2A\u89C2\u70B9\u5728\u4EC0\u4E48\u60C5\u51B5\u4E0B\u4E0D\u6210\u7ACB\uFF1F",
+        en: "Under what conditions would this claim not hold?"
+      }
+    }
+  ].map((x2) => ({
+    ...x2,
+    ...METHODOLOGY_DETAILS[x2.id],
+    builtin: true,
+    revision: 4,
+    enabled: true,
+    prompt: {
+      zh: METHOD_GUIDANCE[x2.id].replace(
+        /(Respond naturally|Start with|Answer the|Identify a claim)[\s\S]*$/,
+        ""
+      ) + "\n\n\u5F53\u524D\u4E66\u7C4D\uFF1A{{book}}\n\u4F5C\u8005\uFF1A{{author}}\n\u5F53\u524D\u7AE0\u8282\uFF1A{{chapter}}\n\u9009\u4E2D\u539F\u6587\uFF1A{{selection}}",
+      en: {
+        free: "Respond naturally to the current reading question. Explain, translate or reflect without requiring goals or exercise prerequisites.",
+        hunt: "Explore the current passage with the reader. Offer one useful lead when no question is defined. Never require a goal, identity or private experience. As questions emerge, find relevant sources, prerequisites and counterexamples. State actual coverage and avoid claiming to have read the whole book.",
+        feynman: "Answer the immediate question first. Explain a concept or example when needed, then optionally invite teach-back. Probe one ambiguity at a time; acknowledge clear answers. Use examples, counterexamples, boundaries and transfer. Give hints; never force a quiz or fixed rounds. Describe demonstrated understanding without declaring mastery.",
+        debate: "Identify and steelman a claim in the current passage. Do not require a stance or opponents in advance. Examine relevant support, counterexamples and conditions. Distinguish sourced quotations from simulated viewpoints. Preserve uncertainty and invite a provisional reader judgment."
+      }[x2.id] + "\n\nBook: {{book}}\nAuthor: {{author}}\nChapter: {{chapter}}\nSelected passage: {{selection}}"
+    }
+  }));
+  function localMethod(value, language = "zh") {
+    return typeof value === "string" ? value : value?.[language] || value?.en || value?.zh || "";
+  }
+
+  // src/client/method-library.jsx
+  function MethodLibrary({
+    t,
+    lang,
+    run,
+    refreshEpoch = 0,
+    onChoose,
+    onSuggest
+  }) {
+    const [items, setItems] = (0, import_react6.useState)([]), [editing, setEditing] = (0, import_react6.useState)(null), [name, setName] = (0, import_react6.useState)(""), [description, setDescription] = (0, import_react6.useState)(""), [prompt, setPrompt] = (0, import_react6.useState)(""), [scenario, setScenario] = (0, import_react6.useState)(""), [usage, setUsage] = (0, import_react6.useState)(""), [query, setQuery] = (0, import_react6.useState)(""), [favorites, setFavorites] = (0, import_react6.useState)([]);
+    async function load() {
+      const x2 = await rpc({ action: "methods" });
+      setItems(x2.items);
+      setFavorites(x2.favorites || []);
+    }
+    (0, import_react6.useEffect)(() => {
+      load().catch(() => {
+      });
+    }, [refreshEpoch]);
+    function edit(m2, copy = false) {
+      setEditing(copy || !m2 ? {} : m2);
+      setName(
+        m2 ? localMethod(m2.name, lang) + (copy ? lang === "zh" ? "\uFF08\u6211\u7684\u7248\u672C\uFF09" : " (my version)" : "") : ""
+      );
+      setDescription(m2 ? localMethod(m2.description, lang) : "");
+      setPrompt(m2 ? localMethod(m2.prompt, lang) : "");
+      setScenario(m2 ? localMethod(m2.scenario, lang) : "");
+      setUsage(m2 ? localMethod(m2.usage, lang) : "");
+    }
+    if (editing)
+      return /* @__PURE__ */ import_react6.default.createElement("section", { className: "card form" }, /* @__PURE__ */ import_react6.default.createElement("h2", null, t(editing.id ? "editMethodology" : "newMethod")), /* @__PURE__ */ import_react6.default.createElement("label", null, t("methodName"), /* @__PURE__ */ import_react6.default.createElement("input", { value: name, onChange: (e) => setName(e.target.value) })), /* @__PURE__ */ import_react6.default.createElement("label", null, t("methodDescription"), /* @__PURE__ */ import_react6.default.createElement(
+        "input",
+        {
+          value: description,
+          onChange: (e) => setDescription(e.target.value)
+        }
+      )), /* @__PURE__ */ import_react6.default.createElement("label", null, t("methodScenario"), /* @__PURE__ */ import_react6.default.createElement(
+        "textarea",
+        {
+          rows: 3,
+          value: scenario,
+          onChange: (e) => setScenario(e.target.value)
+        }
+      )), /* @__PURE__ */ import_react6.default.createElement("label", null, t("methodUsage"), /* @__PURE__ */ import_react6.default.createElement(
+        "textarea",
+        {
+          rows: 4,
+          value: usage,
+          onChange: (e) => setUsage(e.target.value)
+        }
+      )), /* @__PURE__ */ import_react6.default.createElement("label", null, t("methodPrompt"), /* @__PURE__ */ import_react6.default.createElement(
+        "textarea",
+        {
+          rows: 12,
+          value: prompt,
+          onChange: (e) => setPrompt(e.target.value)
+        }
+      )), /* @__PURE__ */ import_react6.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react6.default.createElement("span", null, t("insertVariable")), ["book", "author", "chapter", "selection", "notes"].map((key) => /* @__PURE__ */ import_react6.default.createElement(
+        "button",
+        {
+          key,
+          onClick: () => setPrompt((p) => p + " {{" + key + "}}")
+        },
+        key
+      ))), /* @__PURE__ */ import_react6.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react6.default.createElement(
+        "button",
+        {
+          className: "primary",
+          disabled: !name.trim() || !prompt.trim(),
+          onClick: () => run(async () => {
+            await rpc({
+              action: "saveMethod",
+              id: editing.id,
+              revision: editing.revision,
+              language: lang,
+              item: {
+                name,
+                description,
+                prompt,
+                scenario,
+                usage,
+                enabled: true
+              },
+              requestId: request()
+            });
+            await load();
+            setEditing(null);
+          })
+        },
+        t("save")
+      ), /* @__PURE__ */ import_react6.default.createElement("button", { onClick: () => setEditing(null) }, t("cancel")), onSuggest && /* @__PURE__ */ import_react6.default.createElement("button", { disabled: !prompt.trim(), onClick: () => onSuggest(prompt) }, t("suggestMethod"))), onSuggest && /* @__PURE__ */ import_react6.default.createElement("p", { className: "muted small" }, t("suggestionHint")));
+    return /* @__PURE__ */ import_react6.default.createElement("div", { className: "form" }, /* @__PURE__ */ import_react6.default.createElement("div", { className: "row spread" }, /* @__PURE__ */ import_react6.default.createElement("h2", null, t("methodLibrary")), /* @__PURE__ */ import_react6.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react6.default.createElement("button", { onClick: () => edit(null) }, t("newMethod")), /* @__PURE__ */ import_react6.default.createElement(
+      "button",
+      {
+        onClick: () => run(async () => {
+          const x2 = await rpc({ action: "exportMethods" });
+          download(
+            JSON.stringify(x2, null, 2),
+            "reading-methods.json",
+            "application/json"
+          );
+        })
+      },
+      t("exportMethods")
+    ), /* @__PURE__ */ import_react6.default.createElement("label", null, t("importMethods"), /* @__PURE__ */ import_react6.default.createElement(
+      "input",
+      {
+        type: "file",
+        accept: ".json",
+        onChange: (e) => {
+          const file = e.target.files[0];
+          if (file)
+            run(async () => {
+              if (file.size > 3 * 1024 * 1024)
+                throw new Error("FILE_SIZE_LIMIT");
+              await rpc({
+                action: "importMethods",
+                item: JSON.parse(await file.text()),
+                requestId: request()
+              });
+              await load();
+            });
+        }
+      }
+    )))), /* @__PURE__ */ import_react6.default.createElement(
+      "input",
+      {
+        value: query,
+        onChange: (e) => setQuery(e.target.value),
+        placeholder: t("methodSearch")
+      }
+    ), items.filter(
+      (m2) => m2.id !== "free" && (localMethod(m2.name, lang) + " " + localMethod(m2.description, lang)).toLowerCase().includes(query.toLowerCase())
+    ).map((m2) => /* @__PURE__ */ import_react6.default.createElement("section", { className: "card", key: m2.id }, /* @__PURE__ */ import_react6.default.createElement("div", { className: "row spread" }, /* @__PURE__ */ import_react6.default.createElement("h3", null, localMethod(m2.name, lang), " ", m2.personalized && /* @__PURE__ */ import_react6.default.createElement("small", { className: "pill" }, t("personalVersion"))), /* @__PURE__ */ import_react6.default.createElement(
+      "button",
+      {
+        "aria-pressed": favorites.includes(m2.id),
+        title: t(
+          favorites.includes(m2.id) ? "unfavoriteMethod" : "favoriteMethod"
+        ),
+        onClick: () => run(async () => {
+          const next = favorites.includes(m2.id) ? favorites.filter((id) => id !== m2.id) : [...favorites, m2.id];
+          await rpc({
+            action: "preferences",
+            item: { methodFavorites: next },
+            requestId: request()
+          });
+          await load();
+        })
+      },
+      favorites.includes(m2.id) ? "\u2605" : "\u2606"
+    ), onChoose && m2.enabled && /* @__PURE__ */ import_react6.default.createElement("button", { onClick: () => onChoose(m2.id) }, t("view"))), /* @__PURE__ */ import_react6.default.createElement("p", { className: "muted" }, localMethod(m2.description, lang)), /* @__PURE__ */ import_react6.default.createElement("details", null, /* @__PURE__ */ import_react6.default.createElement("summary", null, t("methodScenario"), " \xB7 ", t("methodUsage")), /* @__PURE__ */ import_react6.default.createElement("p", { className: "arr-method-instructions" }, localMethod(m2.scenario, lang) || localMethod(m2.description, lang)), /* @__PURE__ */ import_react6.default.createElement("p", { className: "arr-method-instructions" }, localMethod(m2.usage, lang) || t("genericUsage"))), /* @__PURE__ */ import_react6.default.createElement("details", null, /* @__PURE__ */ import_react6.default.createElement("summary", null, t("methodPrompt")), /* @__PURE__ */ import_react6.default.createElement("pre", { className: "arr-prompt-text" }, localMethod(m2.prompt, lang))), /* @__PURE__ */ import_react6.default.createElement("div", { className: "row", style: { marginTop: 10 } }, /* @__PURE__ */ import_react6.default.createElement("button", { onClick: () => edit(m2) }, t("edit")), /* @__PURE__ */ import_react6.default.createElement("button", { onClick: () => edit(m2, true) }, t("copyMethod")), m2.builtin && m2.personalized && /* @__PURE__ */ import_react6.default.createElement(
+      "button",
+      {
+        onClick: () => run(async () => {
+          await rpc({
+            action: "resetMethod",
+            id: m2.id,
+            revision: m2.revision,
+            language: lang,
+            requestId: request()
+          });
+          await load();
+        })
+      },
+      t("restoreBuiltin")
+    ), /* @__PURE__ */ import_react6.default.createElement(
+      "button",
+      {
+        title: t("moveUp"),
+        onClick: () => run(async () => {
+          await rpc({
+            action: "moveMethod",
+            id: m2.id,
+            item: { direction: -1 },
+            requestId: request()
+          });
+          await load();
+        })
+      },
+      "\u2191"
+    ), /* @__PURE__ */ import_react6.default.createElement(
+      "button",
+      {
+        title: t("moveDown"),
+        onClick: () => run(async () => {
+          await rpc({
+            action: "moveMethod",
+            id: m2.id,
+            item: { direction: 1 },
+            requestId: request()
+          });
+          await load();
+        })
+      },
+      "\u2193"
+    ), !m2.builtin && /* @__PURE__ */ import_react6.default.createElement(import_react6.default.Fragment, null, /* @__PURE__ */ import_react6.default.createElement(
+      "button",
+      {
+        onClick: () => run(async () => {
+          if (m2.enabled)
+            await rpc({
+              action: "removeMethod",
+              id: m2.id,
+              revision: m2.revision,
+              requestId: request()
+            });
+          else
+            await rpc({
+              action: "saveMethod",
+              id: m2.id,
+              revision: m2.revision,
+              item: {
+                name: m2.name,
+                description: m2.description,
+                prompt: m2.prompt,
+                enabled: true
+              },
+              requestId: request()
+            });
+          await load();
+        })
+      },
+      t(m2.enabled ? "disableMethod" : "enableMethod")
+    ))), m2.history?.length > 0 && /* @__PURE__ */ import_react6.default.createElement("details", null, /* @__PURE__ */ import_react6.default.createElement("summary", null, t("methodVersionHistory"), " \xB7 ", m2.history.length), [...m2.history].reverse().map((v2, i) => /* @__PURE__ */ import_react6.default.createElement("div", { className: "card", key: i }, /* @__PURE__ */ import_react6.default.createElement("small", null, v2.at, " \xB7 v", v2.revision), /* @__PURE__ */ import_react6.default.createElement("pre", { className: "arr-prompt-text" }, v2.prompt), /* @__PURE__ */ import_react6.default.createElement(
+      "button",
+      {
+        onClick: () => {
+          edit(m2);
+          setPrompt(v2.prompt);
+        }
+      },
+      t("editFromVersion")
+    )))))));
+  }
+
+  // src/client/spirit.jsx
+  function SpiritPanel({
+    book,
+    chapters,
+    chapterId,
+    anchor,
+    t,
+    lang,
+    date,
+    onUpdate,
+    exercises,
+    showNote,
+    onJump,
+    focusSignal = 0,
+    helpOnly = false,
+    initialMessage = "",
+    onHelp,
+    onMethodDialog,
+    onDiscussionChange,
+    onModelChange,
+    onReview,
+    getReadingLocation
+  }) {
+    const initial = [...exercises].sort(
+      (a, b2) => b2.updatedAt.localeCompare(a.updatedAt)
+    )[0];
+    const [selected, setSelected] = (0, import_react7.useState)(initial?.id || ""), [view, setView] = (0, import_react7.useState)(null), [method, setMethod] = (0, import_react7.useState)(initial?.method || "free"), [message, setMessage] = (0, import_react7.useState)(""), [sending, setSending] = (0, import_react7.useState)(false), [error, setError] = (0, import_react7.useState)(""), [catalog, setCatalog] = (0, import_react7.useState)(null), [model, setModel] = (0, import_react7.useState)(null), [modelBusy, setModelBusy] = (0, import_react7.useState)(false), [historyOpen, setHistoryOpen] = (0, import_react7.useState)(false), [methodHelp, setMethodHelp] = (0, import_react7.useState)(false), [watchEpoch, setWatchEpoch] = (0, import_react7.useState)(0), [methods, setMethods] = (0, import_react7.useState)([]), [override, setOverride] = (0, import_react7.useState)(null), [preview, setPreview] = (0, import_react7.useState)(null), [includeNotes, setIncludeNotes] = (0, import_react7.useState)(false), [methodLibrary, setMethodLibrary] = (0, import_react7.useState)(false), [methodStatus, setMethodStatus] = (0, import_react7.useState)(""), [previewEpoch, setPreviewEpoch] = (0, import_react7.useState)(0), [introPrefs, setIntroPrefs] = (0, import_react7.useState)({}), [pickerOpen, setPickerOpen] = (0, import_react7.useState)(false), [methodQuery, setMethodQuery] = (0, import_react7.useState)(""), [pinPrompt, setPinPrompt] = (0, import_react7.useState)(false), [replyLength, setReplyLength] = (0, import_react7.useState)("balanced"), [replyBusy, setReplyBusy] = (0, import_react7.useState)(false), [favorites, setFavorites] = (0, import_react7.useState)([]), [recent, setRecent] = (0, import_react7.useState)(() => {
+      try {
+        const x2 = JSON.parse(
+          localStorage.getItem("arr-method-recent:v1") || "[]"
+        );
+        return Array.isArray(x2) ? x2 : [];
+      } catch {
+        return [];
+      }
+    });
+    const input = (0, import_react7.useRef)(null), scroll = (0, import_react7.useRef)(null), follow = (0, import_react7.useRef)(true), sendRef = (0, import_react7.useRef)(null), creatingRef = (0, import_react7.useRef)(null), operation = (0, import_react7.useRef)(false), mounted = (0, import_react7.useRef)(true), selectedRef = (0, import_react7.useRef)(selected), pendingRef = (0, import_react7.useRef)(null), methodTouched = (0, import_react7.useRef)(false), messageRef = (0, import_react7.useRef)(message);
+    (0, import_react7.useEffect)(() => {
+      onDiscussionChange?.(selected);
+    }, [selected]);
+    (0, import_react7.useEffect)(() => {
+      onModelChange?.(model);
+    }, [model]);
+    selectedRef.current = selected;
+    messageRef.current = message;
+    const busy = sending || !!view?.busy;
+    const draftKey = "arr-message:" + (selected || "new:" + book.id);
+    (0, import_react7.useEffect)(() => {
+      mounted.current = true;
+      return () => {
+        mounted.current = false;
+      };
+    }, []);
+    (0, import_react7.useEffect)(() => {
+      try {
+        setMessage(localStorage.getItem(draftKey) || "");
+      } catch {
+        setMessage("");
+      }
+      sendRef.current = null;
+    }, [draftKey]);
+    (0, import_react7.useEffect)(() => {
+      if (focusSignal) input.current?.focus();
+    }, [focusSignal]);
+    (0, import_react7.useEffect)(() => {
+      if (initialMessage) setMessage(initialMessage);
+    }, [initialMessage]);
+    async function loadMethods() {
+      const x2 = await rpc({ action: "methods" });
+      setMethods(x2.items || []);
+      setIntroPrefs(x2.methodIntro || {});
+      setFavorites(x2.favorites || []);
+      setReplyLength(x2.replyLength || "balanced");
+      setPreviewEpoch((n) => n + 1);
+      return x2;
+    }
+    (0, import_react7.useEffect)(() => {
+      loadMethods().catch(() => {
+      });
+    }, [methodLibrary]);
+    (0, import_react7.useEffect)(() => {
+      setPreview(null);
+    }, [method]);
+    function rememberMethod(id) {
+      setRecent((old) => {
+        const next = [id, ...old.filter((x2) => x2 !== id)].slice(0, 20);
+        try {
+          localStorage.setItem("arr-method-recent:v1", JSON.stringify(next));
+        } catch {
+        }
+        return next;
+      });
+    }
+    function methodDialog(id, candidate) {
+      const m2 = candidate || methods.find((x2) => x2.id === id);
+      if (!m2) {
+        setError(t("loading"));
+        return;
+      }
+      onMethodDialog?.({
+        method: m2,
+        bookId: book.id,
+        bookTitle: book.title,
+        chapterId,
+        anchor,
+        preference: introPrefs[id],
+        override: id === method ? override : null,
+        includeNotes: id === method ? includeNotes : false,
+        onApply: async (result) => {
+          methodTouched.current = true;
+          setMethod(result.method.id);
+          rememberMethod(result.method.id);
+          setOverride(result.override);
+          setIncludeNotes(result.includeNotes);
+          setIntroPrefs(result.preferences?.methodIntro || {});
+          setPickerOpen(false);
+          await loadMethods();
+        }
+      });
+    }
+    function chooseMethod(id) {
+      const m2 = methods.find((x2) => x2.id === id);
+      if (!m2) return;
+      if (shouldShowMethodIntro(m2, introPrefs[id])) methodDialog(id);
+      else {
+        methodTouched.current = true;
+        setMethod(id);
+        rememberMethod(id);
+        setOverride(null);
+        setIncludeNotes(false);
+        setPickerOpen(false);
+      }
+    }
+    (0, import_react7.useEffect)(() => {
+      if (helpOnly) return;
+      const ac = new AbortController();
+      setPreview(null);
+      rpc(
+        {
+          action: "methodPreview",
+          bookId: book.id,
+          chapterId,
+          anchor,
+          method,
+          language: lang,
+          override: override ?? void 0,
+          includeNotes
+        },
+        ac.signal
+      ).then(setPreview).catch((e) => {
+        if (e.name !== "AbortError") setError(localizeError(e.message, t));
+      });
+      return () => ac.abort();
+    }, [
+      book.id,
+      chapterId,
+      anchor,
+      method,
+      lang,
+      override,
+      includeNotes,
+      previewEpoch
+    ]);
+    async function loadModels() {
+      try {
+        const c = await rpc({ action: "spirit", command: "models" });
+        if (mounted.current) setCatalog(c);
+      } catch (e) {
+        if (mounted.current) setError(localizeError(e.message, t));
+      }
+    }
+    (0, import_react7.useEffect)(() => {
+      loadModels();
+    }, []);
+    (0, import_react7.useEffect)(() => {
+      if (!selected) {
+        setView(null);
+        return;
+      }
+      let active = true;
+      const ac = new AbortController();
+      setError("");
+      (async () => {
+        let v2 = await rpc(
+          { action: "spirit", command: "read", id: selected },
+          ac.signal
+        );
+        if (!active) return;
+        setView(v2);
+        setModel(v2.exercise.model || null);
+        if (!operation.current && !methodTouched.current)
+          setMethod(v2.exercise.method);
+        while (active && !ac.signal.aborted) {
+          v2 = await rpc(
+            {
+              action: "spirit",
+              command: "watch",
+              id: selected,
+              after: v2.version
+            },
+            ac.signal
+          );
+          if (active) {
+            setView(v2);
+            setModel(v2.exercise.model || null);
+          }
+        }
+      })().catch((e) => {
+        if (active && e.name !== "AbortError")
+          setError(localizeError(e.message, t));
+      });
+      return () => {
+        active = false;
+        ac.abort();
+      };
+    }, [selected, watchEpoch]);
+    (0, import_react7.useEffect)(() => {
+      if (follow.current && scroll.current)
+        scroll.current.scrollTop = view?.messages.length || view?.liveText ? scroll.current.scrollHeight : 0;
+    }, [view?.messages.length, view?.liveText]);
+    async function act(fn) {
+      setError("");
+      try {
+        return await fn();
+      } catch (e) {
+        if (mounted.current && e.name !== "AbortError")
+          setError(localizeError(e.message, t));
+      }
+    }
+    function newDiscussion() {
+      if (busy || operation.current) return;
+      pendingRef.current = null;
+      creatingRef.current = null;
+      sendRef.current = null;
+      setSelected("");
+      setView(null);
+      setHistoryOpen(false);
+      follow.current = true;
+      input.current?.focus();
+    }
+    function selectHistory(x2) {
+      if (busy || operation.current) return;
+      methodTouched.current = false;
+      pendingRef.current = null;
+      creatingRef.current = null;
+      setSelected(x2.id);
+      setView(null);
+      setMethod(x2.method);
+      setModel(x2.model || null);
+      setHistoryOpen(false);
+      follow.current = true;
+    }
+    async function ensureDiscussion() {
+      if (selectedRef.current) return selectedRef.current;
+      if (pendingRef.current) return pendingRef.current;
+      if (!creatingRef.current) creatingRef.current = request();
+      const v2 = await rpc({
+        action: "createExercise",
+        bookId: book.id,
+        method,
+        requestId: creatingRef.current,
+        item: { model }
+      });
+      pendingRef.current = v2.exercise.id;
+      return v2.exercise.id;
+    }
+    async function send(textOverride, followup = false) {
+      const turn = prepareReadingTurn({
+        message,
+        textOverride,
+        promptOverride: override
+      }), text = turn.text;
+      if (!text.trim() || busy || operation.current) return;
+      if (!helpOnly && !isUsageQuestion(text) && method !== "free" && !introPrefs[method]?.seenRevision) {
+        methodDialog(method);
+        return;
+      }
+      operation.current = true;
+      setSending(true);
+      setError("");
+      follow.current = true;
+      const outgoingMethod = method, oldDraftKey = draftKey;
+      if (!sendRef.current || sendRef.current.text !== text || sendRef.current.method !== outgoingMethod)
+        sendRef.current = { requestId: request(), text, method: outgoingMethod };
+      try {
+        const turnPreview = helpOnly || isUsageQuestion(text) ? null : preview || await rpc({
+          action: "methodPreview",
+          bookId: book.id,
+          chapterId,
+          anchor,
+          method,
+          language: lang,
+          override: override ?? void 0,
+          includeNotes
+        });
+        const id = await ensureDiscussion();
+        const v2 = await rpc({
+          action: "spirit",
+          command: "send",
+          id,
+          text,
+          method: outgoingMethod,
+          override: turn.override,
+          promptHash: turnPreview?.hash,
+          includeNotes,
+          uiLanguage: lang,
+          help: helpOnly,
+          followup,
+          readingOffset: getReadingLocation?.()?.textOffset || 0,
+          shortcutMac: /Mac/.test(navigator.platform),
+          shortcutOverrides: (() => {
+            try {
+              return JSON.parse(
+                localStorage.getItem("arr-reading-shortcuts:v1") || "{}"
+              );
+            } catch {
+              return {};
+            }
+          })(),
+          anchor,
+          chapterId,
+          language: "auto",
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          requestId: sendRef.current.requestId
+        });
+        if (!mounted.current) return;
+        const remaining = messageRef.current === text ? "" : messageRef.current;
+        setMessage(remaining);
+        setOverride(null);
+        try {
+          localStorage.removeItem(oldDraftKey);
+          if (remaining) localStorage.setItem("arr-message:" + id, remaining);
+          else localStorage.removeItem("arr-message:" + id);
+        } catch {
+        }
+        selectedRef.current = id;
+        setSelected(id);
+        setView(v2);
+        pendingRef.current = null;
+        creatingRef.current = null;
+        sendRef.current = null;
+        await onUpdate();
+      } catch (e) {
+        if (e.message === "PROMPT_CHANGED")
+          loadMethods().catch(() => setPreviewEpoch((n) => n + 1));
+        if (mounted.current) setError(localizeError(e.message, t));
+      } finally {
+        operation.current = false;
+        if (mounted.current) setSending(false);
+      }
+    }
+    async function chooseModel(value) {
+      if (busy || modelBusy) return;
+      const next = value ? JSON.parse(value) : null;
+      setModelBusy(true);
+      await act(async () => {
+        const id = selectedRef.current || pendingRef.current;
+        if (id) {
+          const v2 = await rpc({
+            action: "spirit",
+            command: "selectModel",
+            id,
+            selection: next
+          });
+          if (mounted.current && selectedRef.current === id) setView(v2);
+        }
+        if (mounted.current) setModel(next);
+      });
+      if (mounted.current) setModelBusy(false);
+    }
+    const effective = model || catalog?.roomDefault || catalog?.default;
+    const group = catalog?.groups.find((g2) => g2.id === effective?.provider);
+    const modelName = group?.models.find((m2) => m2.id === effective?.model)?.name || effective?.model || t("defaultModel");
+    const validRefs = (view?.exercise.citations || []).filter(
+      (id) => chapters.some((c) => c.id === id)
+    );
+    const rows = view?.messages || [];
+    const choices = [...exercises].sort(
+      (a, b2) => b2.updatedAt.localeCompare(a.updatedAt)
+    );
+    return /* @__PURE__ */ import_react7.default.createElement(import_react7.default.Fragment, null, /* @__PURE__ */ import_react7.default.createElement("div", { className: "arr-chat-tools" }, /* @__PURE__ */ import_react7.default.createElement("div", { className: "row spread" }, /* @__PURE__ */ import_react7.default.createElement(
+      "div",
+      {
+        className: "arr-method-switch",
+        role: "group",
+        "aria-label": t("readingMode")
+      },
+      /* @__PURE__ */ import_react7.default.createElement(
+        "button",
+        {
+          type: "button",
+          "aria-pressed": method === "free" && !pickerOpen,
+          onClick: () => {
+            methodTouched.current = true;
+            setMethod("free");
+            setOverride(null);
+            setIncludeNotes(false);
+            setPickerOpen(false);
+          }
+        },
+        t("free")
+      ),
+      !helpOnly && /* @__PURE__ */ import_react7.default.createElement(
+        "button",
+        {
+          type: "button",
+          "aria-pressed": method !== "free" || pickerOpen,
+          "aria-expanded": pickerOpen,
+          onClick: () => setPickerOpen(!pickerOpen)
+        },
+        t("methodologies"),
+        " \u25BE"
+      )
+    ), /* @__PURE__ */ import_react7.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react7.default.createElement(
+      "button",
+      {
+        className: "arr-icon-button",
+        title: t("help"),
+        onClick: () => onHelp?.("methods")
+      },
+      "?"
+    ), /* @__PURE__ */ import_react7.default.createElement(
+      "button",
+      {
+        className: "arr-icon-button",
+        "aria-expanded": historyOpen,
+        title: t("discussionHistory"),
+        onClick: () => setHistoryOpen(!historyOpen)
+      },
+      "\u2637"
+    ), !helpOnly && onReview && /* @__PURE__ */ import_react7.default.createElement(
+      "button",
+      {
+        className: "arr-icon-button",
+        title: t("readingReview"),
+        "aria-label": t("readingReview"),
+        onClick: onReview
+      },
+      "\u21BA"
+    ), /* @__PURE__ */ import_react7.default.createElement(
+      "button",
+      {
+        className: "arr-icon-button",
+        disabled: busy,
+        title: t("newDiscussion"),
+        onClick: newDiscussion
+      },
+      "\uFF0B"
+    ))), !helpOnly && method !== "free" && /* @__PURE__ */ import_react7.default.createElement("div", { className: "arr-method-current" }, /* @__PURE__ */ import_react7.default.createElement("span", null, t("currentMethod"), "\uFF1A", /* @__PURE__ */ import_react7.default.createElement("b", null, localMethod(
+      methods.find((x2) => x2.id === method)?.name,
+      lang
+    ) || t("unknownMethod"))), introPrefs[method]?.seenRevision && methods.find((x2) => x2.id === method)?.revision > introPrefs[method].seenRevision && /* @__PURE__ */ import_react7.default.createElement("small", { className: "muted" }, t("methodUpdated")), /* @__PURE__ */ import_react7.default.createElement("button", { onClick: () => methodDialog(method) }, t("viewEdit")), /* @__PURE__ */ import_react7.default.createElement("button", { onClick: () => setPickerOpen(true) }, t("changeMethod")), /* @__PURE__ */ import_react7.default.createElement(
+      "button",
+      {
+        "aria-pressed": pinPrompt,
+        onClick: () => {
+          if (!pinPrompt)
+            try {
+              localStorage.setItem(
+                "arr-prompt-display:" + method,
+                "full"
+              );
+            } catch {
+            }
+          setPinPrompt(!pinPrompt);
+        }
+      },
+      t(pinPrompt ? "unpinPrompt" : "pinPrompt")
+    )), pickerOpen && !helpOnly && /* @__PURE__ */ import_react7.default.createElement("div", { className: "arr-method-picker" }, /* @__PURE__ */ import_react7.default.createElement(
+      "input",
+      {
+        value: methodQuery,
+        onChange: (e) => setMethodQuery(e.target.value),
+        placeholder: t("methodSearch"),
+        "aria-label": t("methodSearch")
+      }
+    ), methods.filter(
+      (m2) => m2.enabled && m2.id !== "free" && (localMethod(m2.name, lang) + " " + localMethod(m2.description, lang)).toLowerCase().includes(methodQuery.toLowerCase())
+    ).sort(
+      (a, b2) => Number(favorites.includes(b2.id)) - Number(favorites.includes(a.id)) || (recent.indexOf(a.id) < 0 ? 999 : recent.indexOf(a.id)) - (recent.indexOf(b2.id) < 0 ? 999 : recent.indexOf(b2.id))
+    ).map((m2) => /* @__PURE__ */ import_react7.default.createElement("button", { key: m2.id, onClick: () => chooseMethod(m2.id) }, /* @__PURE__ */ import_react7.default.createElement("b", null, favorites.includes(m2.id) ? "\u2605 " : "", localMethod(m2.name, lang)), /* @__PURE__ */ import_react7.default.createElement("small", { className: "muted" }, localMethod(m2.description, lang)))), /* @__PURE__ */ import_react7.default.createElement("button", { onClick: () => setMethodLibrary(!methodLibrary) }, t("methodLibrary")), /* @__PURE__ */ import_react7.default.createElement("p", { className: "muted small" }, t("methodSelectHint"))), historyOpen && /* @__PURE__ */ import_react7.default.createElement("div", { className: "arr-thread-list" }, /* @__PURE__ */ import_react7.default.createElement("b", null, t("discussionHistory")), choices.length ? choices.map((x2) => /* @__PURE__ */ import_react7.default.createElement(
+      "button",
+      {
+        type: "button",
+        key: x2.id,
+        disabled: busy,
+        "aria-pressed": x2.id === selected,
+        onClick: () => selectHistory(x2)
+      },
+      /* @__PURE__ */ import_react7.default.createElement("span", null, x2.title || x2.goal || t(x2.method)),
+      /* @__PURE__ */ import_react7.default.createElement("small", null, date(x2.updatedAt))
+    )) : /* @__PURE__ */ import_react7.default.createElement("p", { className: "muted" }, t("noDiscussions")))), error && /* @__PURE__ */ import_react7.default.createElement("div", { className: "arr-chat-error", role: "alert" }, /* @__PURE__ */ import_react7.default.createElement("span", null, error), /* @__PURE__ */ import_react7.default.createElement(
+      "button",
+      {
+        type: "button",
+        onClick: () => {
+          setError("");
+          setWatchEpoch((x2) => x2 + 1);
+          loadModels();
+        }
+      },
+      t("retry")
+    )), methodLibrary && /* @__PURE__ */ import_react7.default.createElement("div", { className: "arr-side-method-library" }, /* @__PURE__ */ import_react7.default.createElement(
+      MethodLibrary,
+      {
+        t,
+        lang,
+        run: act,
+        onChoose: (id) => act(async () => {
+          const x2 = await loadMethods();
+          methodDialog(
+            id,
+            x2.items.find((m2) => m2.id === id)
+          );
+          setMethodLibrary(false);
+        }),
+        onSuggest: (prompt) => {
+          setMessage(
+            (lang === "zh" ? "\u8BF7\u4E3A\u4E0B\u9762\u7684\u8BFB\u4E66\u65B9\u6CD5\u8BBA\u5EFA\u8BAE\u540D\u79F0\u3001\u7B80\u4ECB\u3001\u9002\u7528\u573A\u666F\u548C\u4F7F\u7528\u6B65\u9AA4\uFF0C\u53EA\u63D0\u4F9B\u8349\u7A3F\uFF0C\u4E0D\u6539\u5199\u539F\u63D0\u793A\u8BCD\uFF1A\n" : "Suggest a name, description, scenarios and usage steps for this reading methodology, without rewriting its prompt:\n") + prompt
+          );
+          setMethodLibrary(false);
+        }
+      }
+    )), /* @__PURE__ */ import_react7.default.createElement(
+      "div",
+      {
+        className: "arr-chat-scroll",
+        ref: scroll,
+        onScroll: () => {
+          const el = scroll.current;
+          follow.current = el.scrollHeight - el.scrollTop - el.clientHeight < 100;
+        }
+      },
+      methodStatus && /* @__PURE__ */ import_react7.default.createElement("p", { className: "muted small", role: "status" }, methodStatus),
+      !rows.length && !view?.liveText && !sending ? /* @__PURE__ */ import_react7.default.createElement("div", { className: "arr-chat-welcome" }, /* @__PURE__ */ import_react7.default.createElement(SpiritAvatar, { size: 92 }), /* @__PURE__ */ import_react7.default.createElement("h3", null, t("spiritWelcome")), /* @__PURE__ */ import_react7.default.createElement("p", null, t("spiritWelcomeHint")), /* @__PURE__ */ import_react7.default.createElement("div", { className: "arr-starters" }, /* @__PURE__ */ import_react7.default.createElement(
+        "button",
+        {
+          type: "button",
+          onClick: () => send(
+            localMethod(
+              methods.find((m2) => m2.id === method)?.starter,
+              lang
+            ) || t("freeStarter")
+          )
+        },
+        t("readTogether")
+      ), /* @__PURE__ */ import_react7.default.createElement(
+        "button",
+        {
+          type: "button",
+          onClick: () => {
+            setMessage(t("explainStarter"));
+            input.current?.focus();
+          }
+        },
+        t("explainPassage")
+      ))) : null,
+      rows.map((m2) => /* @__PURE__ */ import_react7.default.createElement("article", { key: m2.id, className: "arr-chat-message " + m2.role }, m2.role === "assistant" && /* @__PURE__ */ import_react7.default.createElement("div", { className: "arr-message-author" }, /* @__PURE__ */ import_react7.default.createElement(SpiritAvatar, { size: 25 }), /* @__PURE__ */ import_react7.default.createElement("b", null, t("spirit"))), /* @__PURE__ */ import_react7.default.createElement(
+        SpiritMessage,
+        {
+          text: m2.text,
+          referenceLabel: t("source"),
+          references: view?.exercise.replyReferences?.[m2.id] || (/\[c\d+:\d+-\d+\]/.test(m2.text) ? view?.exercise.citationRefs || {} : {}),
+          citations: m2.role === "assistant" ? validRefs : [],
+          onJump
+        }
+      ), /* @__PURE__ */ import_react7.default.createElement("div", { className: "arr-message-meta" }, /* @__PURE__ */ import_react7.default.createElement("span", null, date(m2.time)), m2.role === "assistant" && !helpOnly && /* @__PURE__ */ import_react7.default.createElement(
+        "button",
+        {
+          type: "button",
+          onClick: () => showNote(book.id, "ai", null, m2.text, "ai", selected)
+        },
+        t("saveReply")
+      )), m2.role === "assistant" && m2.id === rows.filter((x2) => x2.role === "assistant").at(-1)?.id && !busy && !helpOnly && /* @__PURE__ */ import_react7.default.createElement("div", { className: "arr-followups" }, [
+        ["followupExample", "exampleRequest"],
+        ["followupSimple", "simpleRequest"],
+        ["followupDeep", "deepRequest"]
+      ].map(([label, prompt]) => /* @__PURE__ */ import_react7.default.createElement("button", { key: label, onClick: () => send(t(prompt), true) }, t(label)))))),
+      view?.liveText && /* @__PURE__ */ import_react7.default.createElement("article", { className: "arr-chat-message assistant" }, /* @__PURE__ */ import_react7.default.createElement("div", { className: "arr-message-author" }, /* @__PURE__ */ import_react7.default.createElement(SpiritAvatar, { size: 25 }), /* @__PURE__ */ import_react7.default.createElement("b", null, t("spirit"))), /* @__PURE__ */ import_react7.default.createElement(
+        SpiritMessage,
+        {
+          text: view.liveText,
+          referenceLabel: t("source"),
+          references: view?.exercise.citationRefs || {},
+          citations: validRefs,
+          onJump
+        }
+      )),
+      busy && !view?.liveText && /* @__PURE__ */ import_react7.default.createElement("p", { className: "arr-chat-status", role: "status" }, t("spiritThinking")),
+      view?.outcome && view.outcome.kind !== "completed" && !busy && /* @__PURE__ */ import_react7.default.createElement("p", { className: "arr-chat-status" }, view.outcome.error?.message || t("replyStopped"))
+    ), /* @__PURE__ */ import_react7.default.createElement("div", { className: "arr-prompt-dock" }, !helpOnly && method !== "free" && pinPrompt && /* @__PURE__ */ import_react7.default.createElement(
+      MethodPrompt,
+      {
+        book,
+        chapterId,
+        anchor,
+        method,
+        lang,
+        t,
+        override,
+        setOverride,
+        preview,
+        setPreview,
+        refreshEpoch: previewEpoch,
+        includeNotes,
+        setIncludeNotes,
+        onHelp: () => onHelp?.("methods"),
+        onSave: (p) => act(async () => {
+          await rpc({
+            action: "saveMethod",
+            item: {
+              name: p.name + (lang === "zh" ? "\uFF08\u6211\u7684\u7248\u672C\uFF09" : " (my copy)"),
+              description: p.description,
+              prompt: p.template
+            },
+            requestId: request()
+          });
+          await loadMethods();
+          setMethodStatus(t("saved"));
+        })
+      }
+    )), /* @__PURE__ */ import_react7.default.createElement("div", { className: "arr-chat-compose" }, /* @__PURE__ */ import_react7.default.createElement("div", { className: "arr-reply-length" }, /* @__PURE__ */ import_react7.default.createElement("label", null, t("replyDepth"), " ", /* @__PURE__ */ import_react7.default.createElement(
+      "select",
+      {
+        value: replyLength,
+        disabled: replyBusy,
+        onChange: async (e) => {
+          const length = e.target.value;
+          setReplyBusy(true);
+          try {
+            await rpc({
+              action: "replyLength",
+              item: { length },
+              requestId: request()
+            });
+            setReplyLength(length);
+          } catch (e2) {
+            setError(localizeError(e2.message, t));
+          } finally {
+            setReplyBusy(false);
+          }
+        }
+      },
+      ["short", "balanced", "deep"].map((v2) => /* @__PURE__ */ import_react7.default.createElement("option", { key: v2, value: v2 }, t("reply_" + v2)))
+    ))), anchor?.quote && /* @__PURE__ */ import_react7.default.createElement("details", { className: "arr-compose-quote" }, /* @__PURE__ */ import_react7.default.createElement("summary", null, t("selection")), /* @__PURE__ */ import_react7.default.createElement("blockquote", null, anchor.quote), /* @__PURE__ */ import_react7.default.createElement("p", null, t("contextHint"))), /* @__PURE__ */ import_react7.default.createElement("div", { className: "arr-compose-box" }, /* @__PURE__ */ import_react7.default.createElement(
+      "textarea",
+      {
+        ref: input,
+        rows: 3,
+        value: message,
+        placeholder: t("spiritMessagePlaceholder"),
+        "aria-label": t("message"),
+        onChange: (e) => {
+          setMessage(e.target.value);
+          sendRef.current = null;
+          try {
+            localStorage.setItem(draftKey, e.target.value);
+          } catch {
+          }
+        },
+        onKeyDown: (e) => {
+          if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
+            e.preventDefault();
+            send();
+          }
+        }
+      }
+    ), /* @__PURE__ */ import_react7.default.createElement("div", { className: "arr-compose-bottom" }, /* @__PURE__ */ import_react7.default.createElement("span", { className: "arr-key-hint" }, t("sendKeys")), /* @__PURE__ */ import_react7.default.createElement("div", { className: "arr-compose-actions" }, /* @__PURE__ */ import_react7.default.createElement(
+      "label",
+      {
+        className: "arr-model-picker",
+        title: t("model") + " \xB7 " + modelName
+      },
+      /* @__PURE__ */ import_react7.default.createElement("span", null, modelName, group ? " \xB7 " + group.name : ""),
+      /* @__PURE__ */ import_react7.default.createElement("span", { "aria-hidden": "true" }, "\u2304"),
+      /* @__PURE__ */ import_react7.default.createElement(
+        "select",
+        {
+          "aria-label": t("model"),
+          value: model ? JSON.stringify({
+            provider: model.provider,
+            model: model.model
+          }) : "",
+          disabled: busy || modelBusy,
+          onChange: (e) => chooseModel(e.target.value)
+        },
+        /* @__PURE__ */ import_react7.default.createElement("option", { value: "" }, t("roomDefaultModel")),
+        catalog?.groups.map((g2) => /* @__PURE__ */ import_react7.default.createElement("optgroup", { key: g2.id, label: g2.name }, g2.models.map((m2) => /* @__PURE__ */ import_react7.default.createElement(
+          "option",
+          {
+            key: m2.id,
+            value: JSON.stringify({
+              provider: g2.id,
+              model: m2.id
+            })
+          },
+          m2.name
+        ))))
+      )
+    ), /* @__PURE__ */ import_react7.default.createElement(
+      "button",
+      {
+        className: "arr-icon-button",
+        type: "button",
+        disabled: modelBusy,
+        onClick: loadModels,
+        title: t("refreshModels"),
+        "aria-label": t("refreshModels")
+      },
+      "\u21BB"
+    ), busy ? /* @__PURE__ */ import_react7.default.createElement(
+      "button",
+      {
+        type: "button",
+        disabled: !selected,
+        onClick: () => act(
+          async () => setView(
+            await rpc({
+              action: "spirit",
+              command: "cancel",
+              id: selected
+            })
+          )
+        )
+      },
+      t("stop")
+    ) : /* @__PURE__ */ import_react7.default.createElement(
+      "button",
+      {
+        type: "button",
+        className: "arr-send",
+        disabled: !message.trim() || modelBusy,
+        onClick: () => send()
+      },
+      t("send"),
+      " \u2191"
+    )))), /* @__PURE__ */ import_react7.default.createElement("div", { className: "arr-chat-foot" }, !anchor && /* @__PURE__ */ import_react7.default.createElement("details", null, /* @__PURE__ */ import_react7.default.createElement("summary", null, t("scope"), " \xB7 ", t("currentReading")), /* @__PURE__ */ import_react7.default.createElement("p", null, t("contextHint"))), rows.length > 0 && /* @__PURE__ */ import_react7.default.createElement(
+      "button",
+      {
+        type: "button",
+        disabled: busy,
+        onClick: () => send(t("recapRequest"))
+      },
+      t("summarize")
+    ))));
+  }
+
+  // src/client/help-center.jsx
+  function ShortcutReference({ t, lang }) {
+    const [overrides, setOverrides] = (0, import_react8.useState)(() => {
+      try {
+        return JSON.parse(localStorage.getItem(KEY_STORE) || "{}");
+      } catch {
+        return {};
+      }
+    }), [recording, setRecording] = (0, import_react8.useState)(""), [error, setError] = (0, import_react8.useState)("");
+    const input = (0, import_react8.useRef)(null);
+    const mac = /Mac/.test(navigator.platform);
+    (0, import_react8.useEffect)(() => {
+      if (recording) input.current?.focus();
+    }, [recording]);
+    function save(next) {
+      setOverrides(next);
+      localStorage.setItem(KEY_STORE, JSON.stringify(next));
+      window.dispatchEvent(new CustomEvent("arr-shortcuts-change"));
+    }
+    return /* @__PURE__ */ import_react8.default.createElement("section", { className: "form" }, /* @__PURE__ */ import_react8.default.createElement("h2", null, t("shortcuts")), /* @__PURE__ */ import_react8.default.createElement("p", { className: "muted" }, t("keyboardScope")), error && /* @__PURE__ */ import_react8.default.createElement("p", { className: "error" }, error), recording && /* @__PURE__ */ import_react8.default.createElement(
+      "input",
+      {
+        ref: input,
+        readOnly: true,
+        placeholder: t("pressKey"),
+        "aria-label": t("pressKey"),
+        onKeyDown: (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (e.key === "Escape") {
+            setRecording("");
+            return;
+          }
+          if (e.isComposing || ["Control", "Meta", "Alt", "Shift"].includes(e.key))
+            return;
+          const k2 = chord(e), conflict = shortcutConfig(overrides).some(
+            (x2) => x2.id !== recording && x2.keys.includes(k2)
+          );
+          if (reserved(k2) || conflict) {
+            setError(t("shortcutConflict"));
+            return;
+          }
+          save({ ...overrides, [recording]: [k2] });
+          setRecording("");
+          setError("");
+        }
+      }
+    ), /* @__PURE__ */ import_react8.default.createElement("table", null, /* @__PURE__ */ import_react8.default.createElement("thead", null, /* @__PURE__ */ import_react8.default.createElement("tr", null, /* @__PURE__ */ import_react8.default.createElement("th", null, t("shortcutAction")), /* @__PURE__ */ import_react8.default.createElement("th", null, t("shortcutKeys")), /* @__PURE__ */ import_react8.default.createElement("th", null))), /* @__PURE__ */ import_react8.default.createElement("tbody", null, shortcutConfig(overrides).map((s) => /* @__PURE__ */ import_react8.default.createElement("tr", { key: s.id }, /* @__PURE__ */ import_react8.default.createElement("td", null, s[lang]), /* @__PURE__ */ import_react8.default.createElement("td", null, s.keys.map((k2) => keyLabel(k2, mac)).join(" / ") || "\u2014"), /* @__PURE__ */ import_react8.default.createElement("td", null, /* @__PURE__ */ import_react8.default.createElement("button", { onClick: () => setRecording(s.id) }, t("recordKey")), " ", /* @__PURE__ */ import_react8.default.createElement("button", { onClick: () => save({ ...overrides, [s.id]: [] }) }, t("disableKey"))))))), /* @__PURE__ */ import_react8.default.createElement(
+      "button",
+      {
+        onClick: () => {
+          save({});
+          setError("");
+        }
+      },
+      t("resetKeys")
+    ));
+  }
+  function HelpCenter({
+    t,
+    lang,
+    run,
+    onSample,
+    initialTopic = "start",
+    initialQuestion = ""
+  }) {
+    const [topic, setTopic] = (0, import_react8.useState)(initialTopic), [query, setQuery] = (0, import_react8.useState)(""), [chat, setChat] = (0, import_react8.useState)(!!initialQuestion), [exercises, setExercises] = (0, import_react8.useState)([]), [hint, setHint] = (0, import_react8.useState)(initialQuestion), [signal, setSignal] = (0, import_react8.useState)(0);
+    async function update() {
+      setExercises(
+        (await rpc({ action: "exerciseList", bookId: "__help__" })).items
+      );
+    }
+    (0, import_react8.useEffect)(() => {
+      update().catch(() => {
+      });
+    }, []);
+    const hits = manualSearch(query, lang), article = MANUAL.find((x2) => x2.id === topic) || hits[0] || MANUAL[0];
+    return /* @__PURE__ */ import_react8.default.createElement("div", { className: "arr-help-layout" }, /* @__PURE__ */ import_react8.default.createElement("aside", { className: "arr-help-nav" }, /* @__PURE__ */ import_react8.default.createElement("h2", null, t("help")), /* @__PURE__ */ import_react8.default.createElement(
+      "input",
+      {
+        value: query,
+        onChange: (e) => setQuery(e.target.value),
+        placeholder: t("helpSearch"),
+        "aria-label": t("helpSearch")
+      }
+    ), hits.map((x2) => /* @__PURE__ */ import_react8.default.createElement(
+      "button",
+      {
+        key: x2.id,
+        "aria-selected": topic === x2.id,
+        onClick: () => setTopic(x2.id)
+      },
+      x2.title[lang]
+    )), /* @__PURE__ */ import_react8.default.createElement("button", { onClick: () => setTopic("keys") }, t("shortcuts")), /* @__PURE__ */ import_react8.default.createElement("small", { className: "muted" }, "v", MANUAL_VERSION)), /* @__PURE__ */ import_react8.default.createElement("main", { className: "arr-help-article" }, topic === "keys" ? /* @__PURE__ */ import_react8.default.createElement(ShortcutReference, { t, lang }) : /* @__PURE__ */ import_react8.default.createElement(import_react8.default.Fragment, null, /* @__PURE__ */ import_react8.default.createElement("h2", null, article.title[lang]), /* @__PURE__ */ import_react8.default.createElement("div", { className: "arr-guide-body" }, article.body[lang].split(/。\s*/).map((p, i) => /* @__PURE__ */ import_react8.default.createElement("p", { key: i }, p, lang === "zh" && p ? "\u3002" : ""))), article.id === "start" && onSample && /* @__PURE__ */ import_react8.default.createElement("button", { onClick: () => run(onSample) }, t("trySample")), /* @__PURE__ */ import_react8.default.createElement(
+      "button",
+      {
+        onClick: () => {
+          setHint(
+            (lang === "zh" ? "\u8BF7\u4F9D\u636E\u4F7F\u7528\u624B\u518C\u89E3\u91CA\uFF1A" : "Explain this guide section: ") + article.title[lang]
+          );
+          setSignal((x2) => x2 + 1);
+          setChat(true);
+        }
+      },
+      t("helpBookworm")
+    ))), chat && /* @__PURE__ */ import_react8.default.createElement("aside", { className: "arr-help-chat" }, /* @__PURE__ */ import_react8.default.createElement(
+      SpiritPanel,
+      {
+        book: { id: "__help__", title: t("usageHelp") },
+        chapters: [],
+        chapterId: "",
+        anchor: null,
+        t,
+        lang,
+        date: (v2) => new Date(v2).toLocaleString(lang === "zh" ? "zh-CN" : "en-US"),
+        run,
+        onUpdate: update,
+        exercises,
+        showNote: () => {
+        },
+        onJump: () => {
+        },
+        helpOnly: true,
+        initialMessage: hint,
+        focusSignal: signal
+      }
+    )));
+  }
+
+  // src/client/go-to.jsx
+  var import_react9 = __toESM(__require("react"), 1);
+  function GoTo({ t, m: m2, close }) {
+    const [number, setNumber] = (0, import_react9.useState)(1);
+    return /* @__PURE__ */ import_react9.default.createElement("div", { className: "form" }, /* @__PURE__ */ import_react9.default.createElement("label", null, t("chapterNumber"), /* @__PURE__ */ import_react9.default.createElement(
+      "input",
+      {
+        type: "number",
+        min: "1",
+        max: m2.chapters.length,
+        value: number,
+        onChange: (e) => setNumber(Number(e.target.value))
+      }
+    )), /* @__PURE__ */ import_react9.default.createElement(
+      "button",
+      {
+        disabled: !m2.chapters[number - 1],
+        onClick: () => {
+          m2.onJump({ chapterId: m2.chapters[number - 1].id, start: 0, end: 1 });
+          close();
+        }
+      },
+      t("goTo")
+    ));
+  }
+
+  // src/client/reading-review.jsx
+  var import_react10 = __toESM(__require("react"), 1);
+
+  // src/shared/reading-review.js
+  var REVIEW_PROMPT = "\u8FD9\u662F\u7528\u6237\u4E3B\u52A8\u8981\u6C42\u7684\u672C\u6B21\u9605\u8BFB\u56DE\u987E\u8349\u7A3F\uFF0C\u6682\u505C\u5E38\u89C4\u65B9\u6CD5\u7EC3\u4E60\u3002\u4EC5\u6839\u636EreviewSource\u4E2D\u7684\u5B9E\u9645\u6750\u6599\u6574\u7406\uFF1B\u5F53\u524D\u7AE0\u8282\u6458\u5F55\u53EA\u4F9B\u51FA\u5904\u6838\u5BF9\uFF0C\u4E0D\u4EE3\u8868\u7528\u6237\u5DF2\u9605\u8BFB\u6216\u638C\u63E1\u6574\u6BB5\u3002\u4E0D\u68C0\u7D22\u672A\u8BFB\u5185\u5BB9\uFF0C\u4E0D\u58F0\u79F0\u8BFB\u5B8C\u5168\u4E66\u3002\u6309\u201C\u672C\u6B21\u8BFB\u5230\u7684\u5185\u5BB9\u201D\u201C\u7528\u6237\u4EB2\u81EA\u8868\u8FBE\u7684\u7406\u89E3\u201D\u201C\u4ECD\u672A\u89E3\u51B3\u7684\u95EE\u9898\u201D\u201C\u4E66\u866B\u6574\u7406\u5EFA\u8BAE\uFF08AI\u751F\u6210\uFF09\u201D\u201C\u53EF\u4EE5\u5C1D\u8BD5\u7684\u5C0F\u884C\u52A8\uFF08\u53EF\u9009\u8349\u7A3F\uFF09\u201D\u7EC4\u7EC7\u3002\u53EA\u6709\u7528\u6237\u660E\u786E\u8868\u8FBE\u8FC7\u7684\u5185\u5BB9\u53EF\u5217\u4E3A\u7528\u6237\u7406\u89E3\uFF0C\u4E0D\u80FD\u628A\u7528\u6237\u7684\u95EE\u9898\u3001\u52A9\u624B\u56DE\u7B54\u3001\u6A21\u62DF\u89C2\u70B9\u5F53\u6210\u7528\u6237\u5DF2\u7ECF\u638C\u63E1\u3002\u65E0\u8BC1\u636E\u65F6\u660E\u786E\u7559\u7A7A\u6216\u5199\u5C1A\u672A\u5F62\u6210\u3002\u672A\u5B8C\u6210\u6216\u88AB\u622A\u53D6\u7684\u6750\u6599\u5E94\u8BF4\u660E\u9650\u5236\uFF0C\u4E0D\u8865\u9020\u672A\u7ED9\u51FA\u7684\u5185\u5BB9\u3002\u5F15\u7528\u7528\u6237\u7684\u8BDD\u65F6\u4FDD\u6301\u539F\u610F\uFF0C\u5E76\u8BF4\u660E\u6765\u6E90\u3002\u884C\u52A8\u5FC5\u987B\u5F88\u5C0F\u3001\u53EF\u9009\u62E9\uFF0C\u4E0D\u521B\u5EFA\u4EFB\u52A1\u3001\u65E5\u7A0B\u6216\u63D0\u9192\uFF0C\u4E0D\u5BA3\u79F0\u5DF2\u4FDD\u5B58\u3002\u8F93\u51FA\u4F9B\u7528\u6237\u5BA1\u9605\u4FEE\u6539\uFF0C\u4E0D\u5411\u7528\u6237\u8981\u6C42\u5B8C\u6210\u95EE\u5377\u3002";
+
+  // src/client/reading-review.jsx
+  function localTime(value) {
+    const d = new Date(value);
+    return new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 16);
+  }
+  function ReadingReview({ m: m2, t, lang, close, saveNote }) {
+    const key = "arr-review-draft:" + m2.bookId + ":" + m2.since + ":" + (m2.discussionId || "new"), initial = (0, import_react10.useRef)(null);
+    if (initial.current === null) {
+      try {
+        initial.current = JSON.parse(localStorage.getItem(key) || "null") || {};
+      } catch {
+        initial.current = {};
+      }
+    }
+    const [source, setSource] = (0, import_react10.useState)(null), [body, setBody] = (0, import_react10.useState)(initial.current.body || ""), [since, setSince] = (0, import_react10.useState)(initial.current.since || m2.since), [pending, setPending] = (0, import_react10.useState)(false), [error, setError] = (0, import_react10.useState)(""), [suggestion, setSuggestion] = (0, import_react10.useState)(""), [containsAI, setContainsAI] = (0, import_react10.useState)(!!initial.current.containsAI), [reviewId, setReviewId] = (0, import_react10.useState)(m2.discussionId || ""), [generationRequest, setGenerationRequest] = (0, import_react10.useState)(""), [undo, setUndo] = (0, import_react10.useState)(null);
+    const active = (0, import_react10.useRef)(true), cancelWatch = (0, import_react10.useRef)(null), saveId = (0, import_react10.useRef)(request());
+    (0, import_react10.useEffect)(() => {
+      active.current = true;
+      rpc({
+        action: "reviewPreview",
+        bookId: m2.bookId,
+        chapterId: m2.chapterId,
+        discussionId: m2.discussionId || "",
+        since: initial.current.since || m2.since,
+        language: lang,
+        location: m2.location
+      }).then((x2) => {
+        if (!active.current) return;
+        setSource(x2.source);
+        if (!initial.current.body) setBody(x2.draft);
+      }).catch((e) => active.current && setError(localizeError(e.message, t)));
+      return () => {
+        active.current = false;
+        cancelWatch.current?.abort();
+      };
+    }, []);
+    function edit(value) {
+      setBody(value);
+      try {
+        localStorage.setItem(
+          key,
+          JSON.stringify({
+            body: value,
+            since: source?.since || since,
+            containsAI
+          })
+        );
+      } catch {
+      }
+    }
+    async function rebuild() {
+      if (pending) return;
+      setError("");
+      try {
+        const x2 = await rpc({
+          action: "reviewPreview",
+          bookId: m2.bookId,
+          chapterId: m2.chapterId,
+          discussionId: m2.discussionId || "",
+          since,
+          language: lang,
+          location: m2.location
+        });
+        setUndo({ body, source, containsAI, since: source?.since });
+        setSource(x2.source);
+        setBody(x2.draft);
+        setContainsAI(false);
+        setSuggestion("");
+        try {
+          localStorage.setItem(
+            key,
+            JSON.stringify({ body: x2.draft, since, containsAI: false })
+          );
+        } catch {
+        }
+      } catch (e) {
+        setError(localizeError(e.message, t));
+      }
+    }
+    async function generate() {
+      if (pending || !source) return;
+      setPending(true);
+      setError("");
+      setSuggestion("");
+      const ac = new AbortController();
+      cancelWatch.current = ac;
+      try {
+        let id = reviewId;
+        if (!id) {
+          id = (await rpc({
+            action: "createExercise",
+            bookId: m2.bookId,
+            method: "free",
+            item: { model: m2.model || null },
+            requestId: request()
+          })).exercise.id;
+          setReviewId(id);
+        }
+        const before = await rpc({ action: "spirit", command: "read", id });
+        if (before.busy) throw new Error("SPIRIT_BUSY");
+        const old = new Set(before.messages.map((x2) => x2.id));
+        const requestId = request();
+        setGenerationRequest(requestId);
+        let v2 = await rpc(
+          {
+            action: "spirit",
+            command: "send",
+            id,
+            text: lang === "zh" ? "\u8BF7\u6309\u5DF2\u5C55\u793A\u7684\u53D6\u6750\u8303\u56F4\u6574\u7406\u672C\u6B21\u9605\u8BFB\u56DE\u987E\u8349\u7A3F\uFF0C\u660E\u786E\u533A\u5206\u6211\u81EA\u5DF1\u7684\u8868\u8FBE\u4E0E AI \u5EFA\u8BAE\u3002" : "Organize a draft review from the shown source scope; distinguish my words from AI suggestions.",
+            method: before.exercise.method,
+            review: true,
+            reviewSince: source.since,
+            reviewUntil: source.until,
+            reviewLocation: m2.location,
+            chapterId: m2.chapterId,
+            uiLanguage: lang,
+            requestId,
+            timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+          },
+          ac.signal
+        );
+        if (active.current) await m2.onUpdate?.();
+        while (active.current && !ac.signal.aborted) {
+          const reply = [...v2.messages].reverse().find((x2) => x2.role === "assistant" && !old.has(x2.id));
+          setSuggestion(v2.liveText || reply?.text || "");
+          if (!v2.busy) break;
+          v2 = await rpc(
+            { action: "spirit", command: "watch", id, after: v2.version },
+            ac.signal
+          );
+        }
+        if (v2.error) setError(localizeError(v2.error, t));
+      } catch (e) {
+        if (e.name !== "AbortError" && active.current)
+          setError(localizeError(e.message, t));
+      } finally {
+        if (active.current) setPending(false);
+      }
+    }
+    async function save() {
+      if (!source || pending) return;
+      setError("");
+      try {
+        let anchor = null;
+        if (m2.location?.mode === "text" && m2.location.quote)
+          anchor = {
+            chapterId: m2.location.chapterId,
+            start: m2.location.textOffset,
+            end: m2.location.textOffset + m2.location.quote.length,
+            quote: m2.location.quote
+          };
+        else if (m2.location?.mode === "pdf")
+          anchor = {
+            chapterId: m2.location.chapterId,
+            start: 0,
+            end: 0,
+            quote: "",
+            pageOnly: true
+          };
+        await saveNote({
+          bookId: m2.bookId,
+          requestId: saveId.current,
+          item: {
+            kind: "review",
+            body,
+            anchor,
+            annotation: anchor && !anchor.pageOnly ? { style: "none", color: "yellow" } : void 0,
+            origin: containsAI ? "edited-ai" : "user",
+            discussionId: reviewId,
+            reviewMeta: {
+              since: source.since,
+              until: source.until,
+              chapterId: source.chapterId,
+              discussionId: reviewId,
+              recordIds: source.savedRecords.map((r) => r.id),
+              readerMessageIds: source.readerStatements.map((r) => r.id),
+              assistantMessageIds: source.assistantSuggestions.map((r) => r.id),
+              containsAiSuggestion: containsAI,
+              requestId: containsAI ? generationRequest : ""
+            }
+          }
+        });
+        try {
+          localStorage.removeItem(key);
+        } catch {
+        }
+        close();
+      } catch (e) {
+        setError(localizeError(e.message, t));
+      }
+    }
+    return /* @__PURE__ */ import_react10.default.createElement("div", { className: "arr-reading-review form" }, /* @__PURE__ */ import_react10.default.createElement("p", { className: "muted" }, t("reviewHint")), !source && /* @__PURE__ */ import_react10.default.createElement("p", null, t("loading")), source && /* @__PURE__ */ import_react10.default.createElement(import_react10.default.Fragment, null, /* @__PURE__ */ import_react10.default.createElement("details", null, /* @__PURE__ */ import_react10.default.createElement("summary", null, t("reviewScope"), " \xB7 ", source.readerStatements.length, " ", t("readerWords"), " / ", source.savedRecords.length, " ", t("records")), /* @__PURE__ */ import_react10.default.createElement("p", null, source.bookTitle, " \xB7 ", new Date(source.since).toLocaleString(), " \u2192", " ", new Date(source.until).toLocaleString()), source.truncated && /* @__PURE__ */ import_react10.default.createElement("p", null, t("reviewTruncated")), /* @__PURE__ */ import_react10.default.createElement("p", null, t("reviewScopeHint")), /* @__PURE__ */ import_react10.default.createElement("details", null, /* @__PURE__ */ import_react10.default.createElement("summary", null, t("reviewMaterials")), /* @__PURE__ */ import_react10.default.createElement("div", { className: "arr-review-materials" }, /* @__PURE__ */ import_react10.default.createElement("h4", null, t("readerWords")), source.readerStatements.map((r) => /* @__PURE__ */ import_react10.default.createElement("blockquote", { key: r.id }, r.text)), /* @__PURE__ */ import_react10.default.createElement("h4", null, t("records")), source.savedRecords.map((r) => /* @__PURE__ */ import_react10.default.createElement("article", { key: r.id }, /* @__PURE__ */ import_react10.default.createElement("small", null, t(r.kind), " \xB7", " ", t(r.origin === "user" ? "myRecord" : "aiRecord")), /* @__PURE__ */ import_react10.default.createElement("p", { className: "recordBody" }, r.body || r.anchor?.quote))), /* @__PURE__ */ import_react10.default.createElement("h4", null, t("reviewAiReferences")), source.assistantSuggestions.map((r) => /* @__PURE__ */ import_react10.default.createElement("blockquote", { key: r.id }, r.text, r.interrupted && /* @__PURE__ */ import_react10.default.createElement("small", null, t("replyStopped")))), source.currentExcerpt && /* @__PURE__ */ import_react10.default.createElement(import_react10.default.Fragment, null, /* @__PURE__ */ import_react10.default.createElement("h4", null, source.currentExcerpt.title), /* @__PURE__ */ import_react10.default.createElement("pre", { className: "arr-prompt-text" }, source.currentExcerpt.text)))), /* @__PURE__ */ import_react10.default.createElement("label", null, t("reviewSince"), /* @__PURE__ */ import_react10.default.createElement(
+      "input",
+      {
+        type: "datetime-local",
+        value: localTime(since),
+        disabled: pending,
+        onChange: (e) => {
+          const date = new Date(e.target.value);
+          if (Number.isFinite(date.getTime()))
+            setSince(date.toISOString());
+        }
+      }
+    )), /* @__PURE__ */ import_react10.default.createElement("button", { disabled: pending, onClick: rebuild }, t("rebuildReview")), undo && /* @__PURE__ */ import_react10.default.createElement(
+      "button",
+      {
+        onClick: () => {
+          setBody(undo.body);
+          setSource(undo.source);
+          setContainsAI(undo.containsAI);
+          setSince(undo.since);
+          try {
+            localStorage.setItem(
+              key,
+              JSON.stringify({
+                body: undo.body,
+                since: undo.since,
+                containsAI: undo.containsAI
+              })
+            );
+          } catch {
+          }
+          setUndo(null);
+        }
+      },
+      t("restorePreviousDraft")
+    )), /* @__PURE__ */ import_react10.default.createElement("label", null, t("reviewDraft"), /* @__PURE__ */ import_react10.default.createElement(
+      "textarea",
+      {
+        rows: 15,
+        value: body,
+        onChange: (e) => edit(e.target.value)
+      }
+    )), /* @__PURE__ */ import_react10.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react10.default.createElement("button", { disabled: pending, onClick: generate }, t("generateReview")), pending && /* @__PURE__ */ import_react10.default.createElement(
+      "button",
+      {
+        onClick: () => rpc({
+          action: "spirit",
+          command: "cancel",
+          id: reviewId
+        }).catch((e) => setError(e.message))
+      },
+      t("stop")
+    )), /* @__PURE__ */ import_react10.default.createElement("details", null, /* @__PURE__ */ import_react10.default.createElement("summary", null, t("reviewModelPrompt")), /* @__PURE__ */ import_react10.default.createElement("pre", { className: "arr-prompt-text" }, REVIEW_PROMPT)), suggestion && /* @__PURE__ */ import_react10.default.createElement("section", { className: "card" }, /* @__PURE__ */ import_react10.default.createElement("h3", null, t("reviewAiDraft")), /* @__PURE__ */ import_react10.default.createElement(SpiritMessage, { text: suggestion }), /* @__PURE__ */ import_react10.default.createElement(
+      "button",
+      {
+        disabled: pending,
+        onClick: () => {
+          const next = body + "\n\n## " + t("reviewAiDraft") + "\n\n" + suggestion;
+          setContainsAI(true);
+          setBody(next);
+          try {
+            localStorage.setItem(
+              key,
+              JSON.stringify({
+                body: next,
+                since: source.since,
+                containsAI: true
+              })
+            );
+          } catch {
+          }
+        }
+      },
+      t("insertReviewSuggestion")
+    )), /* @__PURE__ */ import_react10.default.createElement("p", { className: "muted small" }, t("reviewNoTask")), /* @__PURE__ */ import_react10.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react10.default.createElement(
+      "button",
+      {
+        className: "primary",
+        disabled: pending || !body.trim(),
+        onClick: save
+      },
+      t("saveReview")
+    ), /* @__PURE__ */ import_react10.default.createElement("button", { onClick: close }, t("close")))), error && /* @__PURE__ */ import_react10.default.createElement("p", { className: "error", role: "alert" }, error));
+  }
+
+  // src/client/learning-traces.jsx
+  var import_react11 = __toESM(__require("react"), 1);
+
+  // src/shared/annotations.js
+  var ANNOTATION_COLORS = ["yellow", "green", "blue", "pink", "purple"];
+  var ANNOTATION_PALETTE = {
+    yellow: "#efd03b",
+    green: "#99dc82",
+    blue: "#97b9ff",
+    pink: "#fe9bb3",
+    purple: "#c5b0fb"
+  };
+  function annotationAppearance(record) {
+    const value = record?.annotation;
+    if (value && ["highlight", "underline", "none"].includes(value.style) && ANNOTATION_COLORS.includes(value.color))
+      return { ...value };
+    return { style: "underline", color: "yellow" };
+  }
+  function exactAnnotation(records, anchor) {
+    return records.filter(
+      (r) => !r.deletedAt && r.anchor?.chapterId === anchor?.chapterId && r.anchor?.start === anchor?.start && r.anchor?.end === anchor?.end && r.anchor?.quote === anchor?.quote
+    ).sort(compareRecords).at(-1) || null;
+  }
+  function compareRecords(a, b2) {
+    return String(a.updatedAt || a.createdAt || "").localeCompare(
+      String(b2.updatedAt || b2.createdAt || "")
+    ) || (a.revision || 0) - (b2.revision || 0) || String(a.id).localeCompare(String(b2.id));
+  }
+  function annotationSegments(records, chapterId, text) {
+    const matching = records.filter(
+      (r) => !r.deletedAt && r.anchor?.chapterId === chapterId && r.anchor.end > r.anchor.start && r.anchor.start >= 0 && r.anchor.end <= text.length && text.slice(r.anchor.start, r.anchor.end) === r.anchor.quote && annotationAppearance(r).style !== "none"
+    ).sort(compareRecords);
+    const edges = /* @__PURE__ */ new Map();
+    for (const r of matching) {
+      for (const [offset, add] of [
+        [r.anchor.start, true],
+        [r.anchor.end, false]
+      ]) {
+        if (!edges.has(offset)) edges.set(offset, []);
+        edges.get(offset).push({ r, add });
+      }
+    }
+    const points = [...edges.keys()].sort((a, b2) => a - b2), active = /* @__PURE__ */ new Map(), out = [];
+    for (let i = 0; i < points.length - 1; i++) {
+      const start = points[i], end = points[i + 1];
+      for (const { r, add } of edges.get(start)) {
+        if (add) active.set(r.id, r);
+        else active.delete(r.id);
+      }
+      if (!active.size || end <= start) continue;
+      const entries = [...active.values()].sort(compareRecords), top = entries.at(-1), appearance = annotationAppearance(top), recordIds = entries.map((r) => r.id);
+      const last = out.at(-1);
+      if (last && last.end === start && last.recordId === top.id && last.recordIds.join(",") === recordIds.join(","))
+        last.end = end;
+      else
+        out.push({
+          start,
+          end,
+          recordId: top.id,
+          recordIds,
+          annotation: appearance
+        });
+    }
+    return out;
+  }
+  function pdfAnnotationAt(records, chapterId, x2, y2) {
+    return records.filter(
+      (r) => !r.deletedAt && r.anchor?.chapterId === chapterId && annotationAppearance(r).style !== "none" && r.anchor.rects?.some(
+        (a) => x2 >= a.x && x2 <= a.x + a.width && y2 >= a.y && y2 <= a.y + a.height
+      )
+    ).sort(compareRecords).at(-1) || null;
+  }
+  function menuPosition(x2, y2, width, height, bounds) {
+    return {
+      left: Math.max(8, Math.min(x2, bounds.width - width - 8)),
+      top: Math.max(8, Math.min(y2, bounds.height - height - 8))
+    };
+  }
+
+  // src/shared/learning-records.js
+  function recordDay(value, zone = "UTC") {
+    const d = new Date(value);
+    if (!Number.isFinite(d.getTime())) return "";
+    let fmt;
+    try {
+      fmt = new Intl.DateTimeFormat("en-CA", {
+        timeZone: zone,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+      });
+    } catch {
+      fmt = new Intl.DateTimeFormat("en-CA", {
+        timeZone: "UTC",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+      });
+    }
+    const parts = Object.fromEntries(
+      fmt.formatToParts(d).map((x2) => [x2.type, x2.value])
+    );
+    return `${parts.year}-${parts.month}-${parts.day}`;
+  }
+  function filterLearningRecords(items, f = {}, books = []) {
+    const titles = new Map(books.map((b2) => [b2.id, b2.title]));
+    const q2 = String(f.query || "").trim().toLocaleLowerCase();
+    return items.filter((r) => {
+      if (!!r.deletedAt !== !!f.trash) return false;
+      if (f.bookId && r.bookId !== f.bookId) return false;
+      if (f.kind && r.kind !== f.kind) return false;
+      if (f.onlyUnwritten && (!r.anchor || r.body.trim() || r.anchor.pageOnly || r.anchor.end <= r.anchor.start || annotationAppearance(r).style === "none"))
+        return false;
+      if (f.onlyOpenQuestions && (r.kind !== "question" || r.questionState === "understood"))
+        return false;
+      const a = annotationAppearance(r);
+      if (f.color && (!r.anchor || r.anchor.pageOnly || r.anchor.end <= r.anchor.start))
+        return false;
+      if (f.color === "underline" && a.style !== "underline") return false;
+      if (f.color && f.color !== "underline" && (a.style !== "highlight" || a.color !== f.color))
+        return false;
+      const day = recordDay(r.createdAt, f.zone);
+      if (f.from && day < f.from) return false;
+      if (f.to && day > f.to) return false;
+      return !q2 || (r.body + " " + (r.anchor?.quote || "") + " " + (titles.get(r.bookId) || "")).toLocaleLowerCase().includes(q2);
+    }).sort((a, b2) => b2.createdAt.localeCompare(a.createdAt));
+  }
+
+  // src/client/learning-traces.jsx
+  function LearningTraces({
     items,
     data,
     query,
@@ -26612,65 +30445,659 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     t,
     date,
     open,
+    openAt,
     run,
     refresh,
-    setModal
+    setModal,
+    RecordCard: RecordCard2,
+    lang = "zh"
   }) {
-    const [trash, setTrash] = (0, import_react.useState)(false);
-    return /* @__PURE__ */ import_react.default.createElement("div", { className: "scroll page" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "toolbar" }, /* @__PURE__ */ import_react.default.createElement(
+    const [filters, setFilters] = (0, import_react11.useState)({
+      bookId: "",
+      kind: "",
+      color: "",
+      from: "",
+      to: "",
+      onlyUnwritten: false,
+      onlyOpenQuestions: false,
+      trash: false
+    }), [selected, setSelected] = (0, import_react11.useState)(/* @__PURE__ */ new Set()), [page, setPage] = (0, import_react11.useState)(0), [status, setStatus] = (0, import_react11.useState)("");
+    const zone = Intl.DateTimeFormat().resolvedOptions().timeZone, rows = filterLearningRecords(
+      items,
+      { ...filters, query, zone },
+      data.books
+    ), visible = rows.slice(page * 40, page * 40 + 40), selectedRows = rows.filter((r) => selected.has(r.id));
+    (0, import_react11.useEffect)(() => {
+      setSelected(/* @__PURE__ */ new Set());
+      setPage(0);
+      setStatus("");
+    }, [query, filters]);
+    (0, import_react11.useEffect)(
+      () => setPage((p) => Math.max(0, Math.min(p, Math.ceil(rows.length / 40) - 1))),
+      [rows.length]
+    );
+    function filter(key, value) {
+      setFilters((old) => ({
+        ...old,
+        [key]: value,
+        ...key === "kind" && value !== "question" ? { onlyOpenQuestions: false } : {},
+        ...key === "onlyOpenQuestions" && value ? { kind: "question" } : {}
+      }));
+    }
+    return /* @__PURE__ */ import_react11.default.createElement("div", { className: "scroll page arr-learning-traces" }, /* @__PURE__ */ import_react11.default.createElement("h2", null, t("traces")), /* @__PURE__ */ import_react11.default.createElement("div", { className: "arr-trace-filters" }, /* @__PURE__ */ import_react11.default.createElement(
       "input",
       {
-        placeholder: t("noteFilter"),
-        "aria-label": t("noteFilter"),
         value: query,
-        onChange: (e) => setQuery(e.target.value)
+        onChange: (e) => setQuery(e.target.value),
+        placeholder: t("noteFilter"),
+        "aria-label": t("noteFilter")
       }
-    ), /* @__PURE__ */ import_react.default.createElement("button", { "aria-selected": trash, onClick: () => setTrash(!trash) }, t("trash"))), items.filter(
-      (r) => !!r.deletedAt === trash && (r.body + " " + (r.anchor?.quote || "")).includes(query)
-    ).sort((a, b) => b.createdAt.localeCompare(a.createdAt)).map((r) => /* @__PURE__ */ import_react.default.createElement("div", { key: r.id, style: { maxWidth: 850, margin: "auto" } }, /* @__PURE__ */ import_react.default.createElement("button", { className: "link", onClick: () => open(r.bookId) }, data.books.find((b) => b.id === r.bookId)?.title || r.bookId), /* @__PURE__ */ import_react.default.createElement(
-      RecordCard,
+    ), /* @__PURE__ */ import_react11.default.createElement(
+      "select",
+      {
+        "aria-label": t("filterBook"),
+        value: filters.bookId,
+        onChange: (e) => filter("bookId", e.target.value)
+      },
+      /* @__PURE__ */ import_react11.default.createElement("option", { value: "" }, t("allBooks")),
+      data.books.map((b2) => /* @__PURE__ */ import_react11.default.createElement("option", { key: b2.id, value: b2.id }, b2.title))
+    ), /* @__PURE__ */ import_react11.default.createElement(
+      "select",
+      {
+        "aria-label": t("filterKind"),
+        value: filters.kind,
+        onChange: (e) => filter("kind", e.target.value)
+      },
+      /* @__PURE__ */ import_react11.default.createElement("option", { value: "" }, t("allKinds")),
+      ["highlight", "reflection", "question", "note", "ai", "review"].map(
+        (k2) => /* @__PURE__ */ import_react11.default.createElement("option", { key: k2, value: k2 }, t(k2))
+      )
+    ), /* @__PURE__ */ import_react11.default.createElement(
+      "select",
+      {
+        "aria-label": t("filterColor"),
+        value: filters.color,
+        onChange: (e) => filter("color", e.target.value)
+      },
+      /* @__PURE__ */ import_react11.default.createElement("option", { value: "" }, t("allColors")),
+      ANNOTATION_COLORS.map((c) => /* @__PURE__ */ import_react11.default.createElement("option", { key: c, value: c }, data.preferences?.annotationLabels?.[c] || t("ann_" + c))),
+      /* @__PURE__ */ import_react11.default.createElement("option", { value: "underline" }, t("underline"))
+    ), /* @__PURE__ */ import_react11.default.createElement("label", null, t("dateFrom"), /* @__PURE__ */ import_react11.default.createElement(
+      "input",
+      {
+        type: "date",
+        value: filters.from,
+        onChange: (e) => filter("from", e.target.value)
+      }
+    )), /* @__PURE__ */ import_react11.default.createElement("label", null, t("dateTo"), /* @__PURE__ */ import_react11.default.createElement(
+      "input",
+      {
+        type: "date",
+        value: filters.to,
+        onChange: (e) => filter("to", e.target.value)
+      }
+    ))), /* @__PURE__ */ import_react11.default.createElement("div", { className: "row arr-trace-flags" }, /* @__PURE__ */ import_react11.default.createElement("label", { className: "arr-check" }, /* @__PURE__ */ import_react11.default.createElement(
+      "input",
+      {
+        type: "checkbox",
+        checked: filters.onlyUnwritten,
+        onChange: (e) => filter("onlyUnwritten", e.target.checked)
+      }
+    ), t("onlyUnwritten")), /* @__PURE__ */ import_react11.default.createElement("label", { className: "arr-check" }, /* @__PURE__ */ import_react11.default.createElement(
+      "input",
+      {
+        type: "checkbox",
+        checked: filters.onlyOpenQuestions,
+        onChange: (e) => filter("onlyOpenQuestions", e.target.checked)
+      }
+    ), t("onlyOpenQuestions")), /* @__PURE__ */ import_react11.default.createElement(
+      "button",
+      {
+        "aria-selected": filters.trash,
+        onClick: () => filter("trash", !filters.trash)
+      },
+      t("trash")
+    ), /* @__PURE__ */ import_react11.default.createElement(
+      "button",
+      {
+        onClick: () => {
+          setFilters({
+            bookId: "",
+            kind: "",
+            color: "",
+            from: "",
+            to: "",
+            onlyUnwritten: false,
+            onlyOpenQuestions: false,
+            trash: false
+          });
+          setQuery("");
+        }
+      },
+      t("clearFilters")
+    )), /* @__PURE__ */ import_react11.default.createElement("div", { className: "row arr-trace-batch" }, /* @__PURE__ */ import_react11.default.createElement("span", null, rows.length, " ", t("records"), " \xB7 ", t("selectedCount"), " ", selectedRows.length), /* @__PURE__ */ import_react11.default.createElement(
+      "button",
+      {
+        onClick: () => {
+          if (rows.length > 1e3) {
+            setStatus(t("narrowSelection"));
+            return;
+          }
+          setSelected(
+            selectedRows.length === rows.length ? /* @__PURE__ */ new Set() : new Set(rows.map((r) => r.id))
+          );
+        }
+      },
+      t("selectFiltered")
+    ), /* @__PURE__ */ import_react11.default.createElement(
+      "button",
+      {
+        disabled: !selectedRows.length || filters.trash,
+        onClick: () => run(async () => {
+          const x2 = await rpc({
+            action: "exportRecords",
+            item: { ids: selectedRows.map((r) => r.id) },
+            language: lang
+          });
+          download(x2.text, x2.name, "text/markdown;charset=utf-8");
+        })
+      },
+      t("exportSelected")
+    )), status && /* @__PURE__ */ import_react11.default.createElement("p", { role: "status" }, status), filters.from && filters.to && filters.from > filters.to && /* @__PURE__ */ import_react11.default.createElement("p", { className: "error" }, t("dateRangeInvalid")), !rows.length && /* @__PURE__ */ import_react11.default.createElement("p", { className: "empty" }, t("noFilteredRecords")), visible.map((r) => /* @__PURE__ */ import_react11.default.createElement("div", { className: "arr-trace-entry", key: r.id }, /* @__PURE__ */ import_react11.default.createElement("div", { className: "row spread" }, /* @__PURE__ */ import_react11.default.createElement("button", { className: "link", onClick: () => open(r.bookId) }, data.books.find((b2) => b2.id === r.bookId)?.title || r.bookId), /* @__PURE__ */ import_react11.default.createElement("label", { className: "arr-check" }, /* @__PURE__ */ import_react11.default.createElement(
+      "input",
+      {
+        type: "checkbox",
+        checked: selected.has(r.id),
+        "aria-label": t("selectRecord"),
+        onChange: (e) => setSelected((old) => {
+          const next = new Set(old);
+          if (e.target.checked) next.add(r.id);
+          else next.delete(r.id);
+          return next;
+        })
+      }
+    ), t("selectRecord"))), /* @__PURE__ */ import_react11.default.createElement(
+      RecordCard2,
       {
         r,
+        labels: data.preferences?.annotationLabels,
         t,
         date,
-        onEdit: (r2) => setModal({
+        onSource: (anchor) => (openAt || open)(r.bookId, anchor),
+        onEdit: () => setModal({
           kind: "note",
-          bookId: r2.bookId,
-          record: r2,
-          type: r2.kind,
-          body: r2.body,
-          anchor: r2.anchor,
-          origin: r2.origin
+          bookId: r.bookId,
+          record: r,
+          type: r.kind,
+          body: r.body,
+          anchor: r.anchor,
+          origin: r.origin
         }),
-        onTrash: (r2) => run(async () => {
+        onQuestionState: (state) => run(async () => {
+          await rpc({
+            action: "questionState",
+            id: r.id,
+            revision: r.revision,
+            item: { state },
+            requestId: request()
+          });
+          await refresh();
+        }),
+        onTrash: () => run(async () => {
           await rpc({
             action: "trashRecord",
-            id: r2.id,
-            revision: r2.revision,
-            restore: !!r2.deletedAt,
+            id: r.id,
+            revision: r.revision,
+            restore: !!r.deletedAt,
             requestId: request()
           });
           await refresh();
         })
       }
-    ))));
+    ))), rows.length > 40 && /* @__PURE__ */ import_react11.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react11.default.createElement("button", { disabled: page === 0, onClick: () => setPage((p) => p - 1) }, t("previousPage")), /* @__PURE__ */ import_react11.default.createElement("span", null, page + 1, "/", Math.ceil(rows.length / 40)), /* @__PURE__ */ import_react11.default.createElement(
+      "button",
+      {
+        disabled: (page + 1) * 40 >= rows.length,
+        onClick: () => setPage((p) => p + 1)
+      },
+      t("nextPage")
+    )));
+  }
+
+  // src/client/annotation-labels.jsx
+  var import_react12 = __toESM(__require("react"), 1);
+  function AnnotationLabels({ data, t, run, refresh }) {
+    const [labels, setLabels] = (0, import_react12.useState)(
+      data.preferences?.annotationLabels || {}
+    ), [saved, setSaved] = (0, import_react12.useState)(false);
+    return /* @__PURE__ */ import_react12.default.createElement("section", { className: "card form", style: { marginTop: 20 } }, /* @__PURE__ */ import_react12.default.createElement("h2", null, t("colorNames")), /* @__PURE__ */ import_react12.default.createElement("p", { className: "muted" }, t("colorNamesHint")), ANNOTATION_COLORS.map((c) => /* @__PURE__ */ import_react12.default.createElement("label", { className: "row", key: c }, /* @__PURE__ */ import_react12.default.createElement(
+      "span",
+      {
+        className: "arr-annotation-badge",
+        style: { "--arr-dot": ANNOTATION_PALETTE[c] }
+      }
+    ), /* @__PURE__ */ import_react12.default.createElement("span", null, t("ann_" + c)), /* @__PURE__ */ import_react12.default.createElement(
+      "input",
+      {
+        value: labels[c] || "",
+        maxLength: 40,
+        placeholder: t("optionalColorName"),
+        onChange: (e) => {
+          setLabels((old) => ({ ...old, [c]: e.target.value }));
+          setSaved(false);
+        }
+      }
+    ))), /* @__PURE__ */ import_react12.default.createElement(
+      "button",
+      {
+        onClick: () => run(async () => {
+          await rpc({
+            action: "preferences",
+            item: { annotationLabels: labels },
+            requestId: request()
+          });
+          await refresh();
+          setSaved(true);
+        })
+      },
+      t("save")
+    ), saved && /* @__PURE__ */ import_react12.default.createElement("small", { role: "status" }, t("saved")));
+  }
+
+  // src/client/methodology-dialog.jsx
+  var import_react13 = __toESM(__require("react"), 1);
+  function MethodologyDialog({ m: m2, t, lang, close }) {
+    const method = m2.method, base = localMethod(method.prompt, lang), draftKey = "arr-method-dialog:" + m2.bookId + ":" + method.id;
+    const [draft, setDraft] = (0, import_react13.useState)(() => {
+      try {
+        return localStorage.getItem(draftKey) ?? m2.override ?? base;
+      } catch {
+        return m2.override ?? base;
+      }
+    }), [name, setName] = (0, import_react13.useState)(localMethod(method.name, lang)), [skip, setSkip] = (0, import_react13.useState)(!!m2.preference?.skip), [includeNotes, setIncludeNotes] = (0, import_react13.useState)(!!m2.includeNotes), [preview, setPreview] = (0, import_react13.useState)(null), [pending, setPending] = (0, import_react13.useState)(false), [error, setError] = (0, import_react13.useState)("");
+    const alive = (0, import_react13.useRef)(true), ready = !!preview && preview.template === draft && preview.source?.includeNotes === includeNotes;
+    (0, import_react13.useEffect)(() => {
+      alive.current = true;
+      return () => {
+        alive.current = false;
+      };
+    }, []);
+    (0, import_react13.useEffect)(() => {
+      const ac = new AbortController();
+      setPreview(null);
+      const timer = setTimeout(() => {
+        rpc(
+          {
+            action: "methodPreview",
+            bookId: m2.bookId,
+            chapterId: m2.chapterId,
+            anchor: m2.anchor,
+            method: method.id,
+            language: lang,
+            override: draft,
+            includeNotes
+          },
+          ac.signal
+        ).then(setPreview).catch((e) => {
+          if (e.name !== "AbortError") setError(localizeError(e.message, t));
+        });
+      }, 200);
+      return () => {
+        clearTimeout(timer);
+        ac.abort();
+      };
+    }, [draft, includeNotes, lang]);
+    async function apply2(mode) {
+      if (pending || !ready) return;
+      setPending(true);
+      setError("");
+      try {
+        let picked = method, override = draft === base ? null : draft;
+        if (mode !== "turn") {
+          const x2 = await rpc({
+            action: "saveMethod",
+            id: mode === "save" ? method.id : void 0,
+            revision: mode === "save" ? method.revision : void 0,
+            language: lang,
+            item: {
+              name: (mode === "new" && name.trim() === localMethod(method.name, lang) ? name.trim() + (lang === "zh" ? "\uFF08\u6211\u7684\u7248\u672C\uFF09" : " (my version)") : name.trim()) || localMethod(method.name, lang) + (lang === "zh" ? "\uFF08\u6211\u7684\u7248\u672C\uFF09" : " (my version)"),
+              description: localMethod(method.description, lang),
+              scenario: localMethod(method.scenario, lang),
+              usage: localMethod(method.usage, lang),
+              prompt: draft,
+              enabled: true
+            },
+            requestId: request()
+          });
+          picked = x2.method;
+          override = null;
+        }
+        const pref = await rpc({
+          action: "methodIntro",
+          id: picked.id,
+          item: { skip },
+          requestId: request()
+        });
+        try {
+          localStorage.removeItem(draftKey);
+        } catch {
+        }
+        if (!alive.current) return;
+        await m2.onApply({
+          method: picked,
+          override,
+          includeNotes,
+          preferences: pref.preferences
+        });
+        close();
+      } catch (e) {
+        setError(localizeError(e.message, t));
+      } finally {
+        setPending(false);
+      }
+    }
+    return /* @__PURE__ */ import_react13.default.createElement("div", { className: "arr-methodology-dialog form" }, /* @__PURE__ */ import_react13.default.createElement("h2", null, localMethod(method.name, lang), method.personalized && /* @__PURE__ */ import_react13.default.createElement("small", { className: "pill" }, t("personalVersion"))), /* @__PURE__ */ import_react13.default.createElement("p", { className: "muted" }, localMethod(method.description, lang)), /* @__PURE__ */ import_react13.default.createElement("p", { className: "muted small" }, t("methodDialogHint")), /* @__PURE__ */ import_react13.default.createElement("section", null, /* @__PURE__ */ import_react13.default.createElement("h3", null, t("methodScenario")), /* @__PURE__ */ import_react13.default.createElement("p", { className: "arr-method-instructions" }, localMethod(method.scenario, lang) || localMethod(method.description, lang))), /* @__PURE__ */ import_react13.default.createElement("section", null, /* @__PURE__ */ import_react13.default.createElement("h3", null, t("methodUsage")), /* @__PURE__ */ import_react13.default.createElement("p", { className: "arr-method-instructions" }, localMethod(method.usage, lang) || t("genericUsage"))), /* @__PURE__ */ import_react13.default.createElement("label", null, t("methodPrompt"), /* @__PURE__ */ import_react13.default.createElement(
+      "textarea",
+      {
+        rows: 10,
+        value: draft,
+        onChange: (e) => {
+          setDraft(e.target.value);
+          try {
+            localStorage.setItem(draftKey, e.target.value);
+          } catch {
+          }
+        }
+      }
+    )), /* @__PURE__ */ import_react13.default.createElement("div", { className: "row" }, ["book", "author", "chapter", "selection", "notes"].map((key) => /* @__PURE__ */ import_react13.default.createElement(
+      "button",
+      {
+        key,
+        onClick: () => {
+          const v2 = draft + " {{" + key + "}}";
+          setDraft(v2);
+          try {
+            localStorage.setItem(draftKey, v2);
+          } catch {
+          }
+        }
+      },
+      "{{" + key + "}}"
+    )), /* @__PURE__ */ import_react13.default.createElement(
+      "button",
+      {
+        onClick: () => {
+          setDraft(base);
+          try {
+            localStorage.removeItem(draftKey);
+          } catch {
+          }
+        }
+      },
+      t("resetPrompt")
+    )), /* @__PURE__ */ import_react13.default.createElement("label", { className: "arr-check" }, /* @__PURE__ */ import_react13.default.createElement(
+      "input",
+      {
+        type: "checkbox",
+        checked: includeNotes,
+        onChange: (e) => setIncludeNotes(e.target.checked)
+      }
+    ), t("includeNotes")), /* @__PURE__ */ import_react13.default.createElement("details", null, /* @__PURE__ */ import_react13.default.createElement("summary", null, t("effectivePrompt")), /* @__PURE__ */ import_react13.default.createElement("pre", { className: "arr-prompt-text" }, preview?.prompt || t("loading"))), /* @__PURE__ */ import_react13.default.createElement("details", null, /* @__PURE__ */ import_react13.default.createElement("summary", null, t("methodReferences")), /* @__PURE__ */ import_react13.default.createElement("p", null, m2.bookTitle, " \xB7 ", preview?.variables.chapter), m2.anchor?.quote && /* @__PURE__ */ import_react13.default.createElement("blockquote", null, m2.anchor.quote), /* @__PURE__ */ import_react13.default.createElement("p", { className: "muted small" }, t("contextHint"))), /* @__PURE__ */ import_react13.default.createElement("label", null, t("methodSaveName"), /* @__PURE__ */ import_react13.default.createElement(
+      "input",
+      {
+        value: name,
+        onChange: (e) => setName(e.target.value),
+        maxLength: 100
+      }
+    )), error && /* @__PURE__ */ import_react13.default.createElement("p", { className: "error", role: "alert" }, error), /* @__PURE__ */ import_react13.default.createElement("footer", { className: "arr-methodology-footer" }, /* @__PURE__ */ import_react13.default.createElement("label", { className: "arr-check" }, /* @__PURE__ */ import_react13.default.createElement(
+      "input",
+      {
+        type: "checkbox",
+        checked: skip,
+        onChange: (e) => setSkip(e.target.checked)
+      }
+    ), t("skipMethodIntro")), /* @__PURE__ */ import_react13.default.createElement("div", { className: "arr-methodology-actions" }, /* @__PURE__ */ import_react13.default.createElement(
+      "button",
+      {
+        className: "primary",
+        disabled: pending || !ready || !draft.trim(),
+        onClick: () => apply2("turn")
+      },
+      t("useThisMethod")
+    ), /* @__PURE__ */ import_react13.default.createElement(
+      "button",
+      {
+        disabled: pending || !ready || !draft.trim() || !name.trim(),
+        onClick: () => apply2("save")
+      },
+      t(method.builtin ? "savePersonalVersion" : "saveToMethod")
+    ), /* @__PURE__ */ import_react13.default.createElement(
+      "button",
+      {
+        disabled: pending || !ready || !draft.trim(),
+        onClick: () => apply2("new")
+      },
+      t("saveNewMethod")
+    ), /* @__PURE__ */ import_react13.default.createElement("button", { disabled: pending, onClick: close }, t("cancel")))));
+  }
+
+  // src/client/annotation-menu.jsx
+  var import_react14 = __toESM(__require("react"), 1);
+  function AnnotationSwatches({
+    value,
+    onChange,
+    t,
+    disabled = false,
+    labels = {}
+  }) {
+    return /* @__PURE__ */ import_react14.default.createElement(
+      "div",
+      {
+        className: "arr-annotation-colors",
+        role: "group",
+        "aria-label": t("annotationStyle")
+      },
+      ANNOTATION_COLORS.map((color) => /* @__PURE__ */ import_react14.default.createElement(
+        "button",
+        {
+          type: "button",
+          key: color,
+          className: "arr-color-dot",
+          style: { "--arr-dot": ANNOTATION_PALETTE[color] },
+          "aria-label": labels[color] || t("ann_" + color),
+          title: t("ann_" + color),
+          "aria-pressed": value?.style === "highlight" && value.color === color,
+          disabled,
+          onClick: () => onChange({ style: "highlight", color })
+        },
+        /* @__PURE__ */ import_react14.default.createElement("span", null)
+      )),
+      /* @__PURE__ */ import_react14.default.createElement(
+        "button",
+        {
+          type: "button",
+          className: "arr-underline-choice",
+          title: t("underline"),
+          "aria-label": t("underline"),
+          "aria-pressed": value?.style === "underline",
+          disabled,
+          onClick: () => onChange({ style: "underline", color: value?.color || "yellow" })
+        },
+        "U"
+      )
+    );
+  }
+  function AnnotationBadge({ value, t, labels = {} }) {
+    if (!value || value.style === "none") return null;
+    return /* @__PURE__ */ import_react14.default.createElement(
+      "span",
+      {
+        className: "arr-annotation-badge " + value.style,
+        style: { "--arr-dot": ANNOTATION_PALETTE[value.color] },
+        title: t(
+          value.style === "underline" ? "underline" : "ann_" + value.color
+        ),
+        "aria-label": t(
+          value.style === "underline" ? "underline" : "ann_" + value.color
+        )
+      },
+      value.style === "underline" ? "U" : ""
+    );
+  }
+  function AnnotationMenu({
+    menu,
+    bounds,
+    record,
+    t,
+    busy,
+    onStyle,
+    onNote,
+    onRemove,
+    onAsk,
+    onCopy,
+    onTranslate,
+    onSearch,
+    onClose,
+    history = {},
+    onUndo,
+    onRedo,
+    labels = {}
+  }) {
+    const ref = (0, import_react14.useRef)(null), prior = (0, import_react14.useRef)(document.activeElement), [position, setPosition] = (0, import_react14.useState)({ left: menu.x, top: menu.y }), context = true;
+    (0, import_react14.useLayoutEffect)(() => {
+      const el = ref.current;
+      if (!el) return;
+      setPosition(
+        menuPosition(menu.x, menu.y, el.offsetWidth, el.offsetHeight, bounds)
+      );
+      if (context) el.querySelector("button")?.focus({ preventScroll: true });
+    }, [menu.key, bounds.width, bounds.height, context]);
+    (0, import_react14.useEffect)(() => {
+      const doc = ref.current.ownerDocument;
+      function outside(e) {
+        if (!ref.current?.contains(e.target)) onClose();
+      }
+      function key(e) {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          onClose();
+          prior.current?.focus({ preventScroll: true });
+        }
+        if (context && ["ArrowDown", "ArrowUp", "Home", "End"].includes(e.key)) {
+          const buttons = [
+            ...ref.current.querySelectorAll("button:not(:disabled)")
+          ];
+          const i = buttons.indexOf(doc.activeElement);
+          const next = e.key === "Home" ? 0 : e.key === "End" ? buttons.length - 1 : (i + (e.key === "ArrowDown" ? 1 : -1) + buttons.length) % buttons.length;
+          e.preventDefault();
+          buttons[next]?.focus();
+        }
+      }
+      doc.addEventListener("pointerdown", outside, true);
+      doc.addEventListener("keydown", key);
+      return () => {
+        doc.removeEventListener("pointerdown", outside, true);
+        doc.removeEventListener("keydown", key);
+      };
+    }, [menu.key, context]);
+    return /* @__PURE__ */ import_react14.default.createElement(
+      "div",
+      {
+        ref,
+        className: "arr-annotation-menu is-context",
+        style: position,
+        role: "menu",
+        "aria-label": t("annotationActions"),
+        onPointerDown: (e) => {
+          e.stopPropagation();
+          if (e.pointerType === "mouse") e.preventDefault();
+        }
+      },
+      /* @__PURE__ */ import_react14.default.createElement(
+        AnnotationSwatches,
+        {
+          labels,
+          value: record ? annotationAppearance(record) : null,
+          onChange: onStyle,
+          t,
+          disabled: busy
+        }
+      ),
+      /* @__PURE__ */ import_react14.default.createElement("div", { className: "arr-annotation-items" }, /* @__PURE__ */ import_react14.default.createElement("button", { role: "menuitem", disabled: busy, onClick: onNote }, "\u25A4 ", /* @__PURE__ */ import_react14.default.createElement("span", null, t(record?.body?.trim() ? "editNote" : "addNote"))), /* @__PURE__ */ import_react14.default.createElement("button", { role: "menuitem", disabled: busy || !record, onClick: onRemove }, "\u2296", " ", /* @__PURE__ */ import_react14.default.createElement("span", null, t(
+        record && (record.body?.trim() || record.kind !== "highlight") ? "removeMarkKeepNote" : "removeAnnotation"
+      ))), /* @__PURE__ */ import_react14.default.createElement("hr", null), /* @__PURE__ */ import_react14.default.createElement(
+        "button",
+        {
+          role: "menuitem",
+          disabled: busy || !history.canUndo,
+          onClick: onUndo
+        },
+        "\u21B6 ",
+        /* @__PURE__ */ import_react14.default.createElement("span", null, t("undoAnnotation"))
+      ), /* @__PURE__ */ import_react14.default.createElement(
+        "button",
+        {
+          role: "menuitem",
+          disabled: busy || !history.canRedo,
+          onClick: onRedo
+        },
+        "\u21B7 ",
+        /* @__PURE__ */ import_react14.default.createElement("span", null, t("redoAnnotation"))
+      ), history.blocked && /* @__PURE__ */ import_react14.default.createElement("p", { className: "muted small" }, t("annotationHistoryChanged")), /* @__PURE__ */ import_react14.default.createElement("hr", null), /* @__PURE__ */ import_react14.default.createElement("button", { role: "menuitem", onClick: onAsk }, "\u2726 ", /* @__PURE__ */ import_react14.default.createElement("span", null, t("ask"))), /* @__PURE__ */ import_react14.default.createElement("button", { role: "menuitem", onClick: onTranslate }, "\u6587 ", /* @__PURE__ */ import_react14.default.createElement("span", null, t("translateSelection"))), /* @__PURE__ */ import_react14.default.createElement("button", { role: "menuitem", onClick: onSearch }, "\u2315 ", /* @__PURE__ */ import_react14.default.createElement("span", null, t("searchText"))), /* @__PURE__ */ import_react14.default.createElement("button", { role: "menuitem", onClick: onCopy }, "\u25A2 ", /* @__PURE__ */ import_react14.default.createElement("span", null, t("copySelection"))))
+    );
+  }
+
+  // src/client/forms.jsx
+  function RecordCard({
+    r,
+    t,
+    date,
+    onEdit,
+    onTrash,
+    onSource,
+    onQuestionState,
+    labels = {}
+  }) {
+    return /* @__PURE__ */ import_react15.default.createElement("article", { className: "card" }, /* @__PURE__ */ import_react15.default.createElement("div", { className: "row spread" }, /* @__PURE__ */ import_react15.default.createElement("span", { className: "pill" }, t(r.kind), /* @__PURE__ */ import_react15.default.createElement(
+      AnnotationBadge,
+      {
+        value: r.annotation || (r.anchor && !r.anchor.pageOnly ? annotationAppearance(r) : null),
+        t,
+        labels
+      }
+    )), /* @__PURE__ */ import_react15.default.createElement("span", { className: "muted small" }, date(r.createdAt))), r.anchor?.quote && /* @__PURE__ */ import_react15.default.createElement("blockquote", null, r.anchor.quote), r.kind === "review" ? /* @__PURE__ */ import_react15.default.createElement(SpiritMessage, { text: r.body }) : /* @__PURE__ */ import_react15.default.createElement("p", { className: "recordBody" }, r.body), r.kind === "question" && /* @__PURE__ */ import_react15.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react15.default.createElement("span", { className: "pill" }, t(
+      r.questionState === "understood" ? "questionUnderstood" : "questionOpen"
+    )), onQuestionState && !r.deletedAt && /* @__PURE__ */ import_react15.default.createElement(
+      "button",
+      {
+        onClick: () => onQuestionState(
+          r.questionState === "understood" ? "open" : "understood"
+        )
+      },
+      t(
+        r.questionState === "understood" ? "reopenQuestion" : "markUnderstood"
+      )
+    )), /* @__PURE__ */ import_react15.default.createElement("div", { className: "muted small" }, r.origin === "user" ? t("myRecord") : t("aiRecord")), /* @__PURE__ */ import_react15.default.createElement("div", { className: "row", style: { marginTop: 10 } }, r.anchor && onSource && /* @__PURE__ */ import_react15.default.createElement("button", { onClick: () => onSource(r.anchor) }, t("source")), onEdit && /* @__PURE__ */ import_react15.default.createElement("button", { onClick: () => onEdit(r) }, t("edit")), onTrash && /* @__PURE__ */ import_react15.default.createElement("button", { onClick: () => onTrash(r) }, t(r.deletedAt ? "restore" : "remove"))), r.history?.length > 0 && /* @__PURE__ */ import_react15.default.createElement("details", { style: { marginTop: 10 } }, /* @__PURE__ */ import_react15.default.createElement("summary", null, t("versions"), " (", r.history.length, ")"), r.history.map((v2, i) => /* @__PURE__ */ import_react15.default.createElement("div", { className: "card small", key: i }, /* @__PURE__ */ import_react15.default.createElement("div", null, date(v2.at), " ", /* @__PURE__ */ import_react15.default.createElement(AnnotationBadge, { value: v2.annotation, t })), v2.visualOnly ? /* @__PURE__ */ import_react15.default.createElement("small", { className: "muted" }, t("visualOnlyVersion")) : /* @__PURE__ */ import_react15.default.createElement("p", { className: "recordBody" }, v2.body)))));
+  }
+  function Traces(props) {
+    return /* @__PURE__ */ import_react15.default.createElement(LearningTraces, { ...props, RecordCard });
   }
   function Settings({ data, refresh, t, run, setModal }) {
-    const [s, setS] = (0, import_react.useState)(data.settings), [catalog, setCatalog] = (0, import_react.useState)(null);
-    (0, import_react.useEffect)(() => {
+    const [s, setS] = (0, import_react15.useState)(data.settings), [catalog, setCatalog] = (0, import_react15.useState)(null);
+    (0, import_react15.useEffect)(() => {
       rpc({ action: "spirit", command: "models" }).then(setCatalog).catch(() => {
       });
     }, []);
-    return /* @__PURE__ */ import_react.default.createElement("div", { className: "scroll page" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "settings" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "columns" }, /* @__PURE__ */ import_react.default.createElement("section", { className: "card form" }, /* @__PURE__ */ import_react.default.createElement("h2", null, t("settings")), /* @__PURE__ */ import_react.default.createElement("label", null, t("replyLanguage"), /* @__PURE__ */ import_react.default.createElement(
+    return /* @__PURE__ */ import_react15.default.createElement("div", { className: "scroll page" }, /* @__PURE__ */ import_react15.default.createElement("div", { className: "settings" }, /* @__PURE__ */ import_react15.default.createElement("div", { className: "columns" }, /* @__PURE__ */ import_react15.default.createElement("section", { className: "card form" }, /* @__PURE__ */ import_react15.default.createElement("h2", null, t("settings")), /* @__PURE__ */ import_react15.default.createElement("label", null, t("replyLanguage"), /* @__PURE__ */ import_react15.default.createElement(
       "select",
       {
         value: s.replyLanguage,
         onChange: (e) => setS({ ...s, replyLanguage: e.target.value })
       },
-      /* @__PURE__ */ import_react.default.createElement("option", { value: "auto" }, t("auto")),
-      /* @__PURE__ */ import_react.default.createElement("option", { value: "zh" }, "\u7B80\u4F53\u4E2D\u6587"),
-      /* @__PURE__ */ import_react.default.createElement("option", { value: "en" }, "English")
-    )), /* @__PURE__ */ import_react.default.createElement("label", null, t("model"), /* @__PURE__ */ import_react.default.createElement(
+      /* @__PURE__ */ import_react15.default.createElement("option", { value: "auto" }, t("auto")),
+      /* @__PURE__ */ import_react15.default.createElement("option", { value: "zh" }, "\u7B80\u4F53\u4E2D\u6587"),
+      /* @__PURE__ */ import_react15.default.createElement("option", { value: "en" }, "English")
+    )), /* @__PURE__ */ import_react15.default.createElement("label", null, t("model"), /* @__PURE__ */ import_react15.default.createElement(
       "select",
       {
         value: s.model ? JSON.stringify(s.model) : "",
@@ -26679,37 +31106,38 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           model: e.target.value ? JSON.parse(e.target.value) : null
         })
       },
-      /* @__PURE__ */ import_react.default.createElement("option", { value: "" }, t("defaultModel")),
-      catalog?.groups.map((g) => /* @__PURE__ */ import_react.default.createElement("optgroup", { key: g.id, label: g.name }, g.models.map((m) => /* @__PURE__ */ import_react.default.createElement(
+      /* @__PURE__ */ import_react15.default.createElement("option", { value: "" }, t("defaultModel")),
+      catalog?.groups.map((g2) => /* @__PURE__ */ import_react15.default.createElement("optgroup", { key: g2.id, label: g2.name }, g2.models.map((m2) => /* @__PURE__ */ import_react15.default.createElement(
         "option",
         {
-          key: m.id,
-          value: JSON.stringify({ provider: g.id, model: m.id })
+          key: m2.id,
+          value: JSON.stringify({ provider: g2.id, model: m2.id })
         },
-        m.name
+        m2.name
       ))))
     )), [
       ["fontSize", 14, 32, 1],
       ["lineHeight", 1.3, 2.6, 0.1],
       ["pageWidth", 480, 1e3, 20]
-    ].map(([k, min, max, step]) => /* @__PURE__ */ import_react.default.createElement("label", { key: k }, t(k), " \xB7 ", s[k], /* @__PURE__ */ import_react.default.createElement(
+    ].map(([k2, min, max, step]) => /* @__PURE__ */ import_react15.default.createElement("label", { key: k2 }, t(k2), " \xB7 ", s[k2], /* @__PURE__ */ import_react15.default.createElement(
       "input",
       {
         type: "range",
         min,
         max,
         step,
-        value: s[k],
-        onChange: (e) => setS({ ...s, [k]: Number(e.target.value) })
+        value: s[k2],
+        onChange: (e) => setS({ ...s, [k2]: Number(e.target.value) })
       }
-    ))), /* @__PURE__ */ import_react.default.createElement(
+    ))), /* @__PURE__ */ import_react15.default.createElement(
       "button",
       {
         className: "primary",
         onClick: () => run(async () => {
+          const { replyLength, ...settingsToSave } = s;
           await rpc({
             action: "settings",
-            item: s,
+            item: settingsToSave,
             revision: data.revision,
             requestId: request()
           });
@@ -26717,7 +31145,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         })
       },
       t("save")
-    )), /* @__PURE__ */ import_react.default.createElement("section", { className: "card form" }, /* @__PURE__ */ import_react.default.createElement("h2", null, t("settings")), /* @__PURE__ */ import_react.default.createElement("p", { className: "muted" }, t("backupHint")), [false, true].map((full) => /* @__PURE__ */ import_react.default.createElement(
+    )), /* @__PURE__ */ import_react15.default.createElement("section", { className: "card form" }, /* @__PURE__ */ import_react15.default.createElement("h2", null, t("settings")), /* @__PURE__ */ import_react15.default.createElement("p", { className: "muted" }, t("backupHint")), [false, true].map((full) => /* @__PURE__ */ import_react15.default.createElement(
       "button",
       {
         key: String(full),
@@ -26734,7 +31162,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         })
       },
       t(full ? "fullBackup" : "backup")
-    )), /* @__PURE__ */ import_react.default.createElement("label", null, t("restoreBackup"), /* @__PURE__ */ import_react.default.createElement(
+    )), /* @__PURE__ */ import_react15.default.createElement("label", null, t("restoreBackup"), /* @__PURE__ */ import_react15.default.createElement(
       "input",
       {
         type: "file",
@@ -26753,10 +31181,48 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             });
         }
       }
-    )), /* @__PURE__ */ import_react.default.createElement("h3", null, t("localRoot")), /* @__PURE__ */ import_react.default.createElement("code", { style: { overflowWrap: "anywhere" } }, data.root), /* @__PURE__ */ import_react.default.createElement("p", { className: "muted small" }, t("privacy"))))));
+    )), /* @__PURE__ */ import_react15.default.createElement(
+      "button",
+      {
+        onClick: () => run(async () => {
+          await rpc({
+            action: "preferences",
+            item: { methodIntro: {} },
+            requestId: request()
+          });
+          await refresh();
+        })
+      },
+      t("resetMethodIntros")
+    ), /* @__PURE__ */ import_react15.default.createElement("label", null, t("showTips"), /* @__PURE__ */ import_react15.default.createElement(
+      "select",
+      {
+        value: data.preferences?.tips || "all",
+        onChange: (e) => run(async () => {
+          await rpc({
+            action: "preferences",
+            item: { tips: e.target.value },
+            requestId: request()
+          });
+          await refresh();
+        })
+      },
+      /* @__PURE__ */ import_react15.default.createElement("option", { value: "all" }, t("allTips")),
+      /* @__PURE__ */ import_react15.default.createElement("option", { value: "necessary" }, t("necessaryTips")),
+      /* @__PURE__ */ import_react15.default.createElement("option", { value: "off" }, t("offTips"))
+    )), /* @__PURE__ */ import_react15.default.createElement("h3", null, t("localRoot")), /* @__PURE__ */ import_react15.default.createElement("code", { style: { overflowWrap: "anywhere" } }, data.root), /* @__PURE__ */ import_react15.default.createElement("p", { className: "muted small" }, t("privacy")))), /* @__PURE__ */ import_react15.default.createElement(AnnotationLabels, { data, t, run, refresh }), /* @__PURE__ */ import_react15.default.createElement(
+      LibrarySettings,
+      {
+        data,
+        t,
+        run,
+        refresh,
+        setModal
+      }
+    )));
   }
   function ModalContent({
-    modal: m,
+    modal: m2,
     t,
     lang,
     run,
@@ -26769,25 +31235,72 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     setInfo,
     data
   }) {
-    if (m.kind === "help") return /* @__PURE__ */ import_react.default.createElement("p", null, t("helpText"));
-    if (m.kind === "note")
-      return /* @__PURE__ */ import_react.default.createElement(
+    if (m2.kind === "help")
+      return /* @__PURE__ */ import_react15.default.createElement(
+        HelpCenter,
+        {
+          t,
+          lang,
+          run,
+          initialTopic: m2.topic || "start",
+          initialQuestion: m2.question || "",
+          onSample: async () => {
+            const x2 = await rpc({ action: "sample", requestId: request() });
+            await refresh();
+            close();
+            setTimeout(() => open(x2.book.id), 0);
+          }
+        }
+      );
+    if (m2.kind === "goto") return /* @__PURE__ */ import_react15.default.createElement(GoTo, { t, m: m2, close });
+    if (m2.kind === "readingReview")
+      return /* @__PURE__ */ import_react15.default.createElement(
+        ReadingReview,
+        {
+          m: m2,
+          t,
+          lang,
+          close,
+          saveNote,
+          labels: data.preferences?.annotationLabels
+        }
+      );
+    if (m2.kind === "methodology")
+      return /* @__PURE__ */ import_react15.default.createElement(MethodologyDialog, { m: m2, t, lang, close });
+    if (m2.kind === "note")
+      return /* @__PURE__ */ import_react15.default.createElement(
         NoteForm,
         {
-          key: m.record?.id || m.bookId + m.type,
-          m,
+          key: m2.record?.id || m2.bookId + m2.type,
+          m: m2,
           t,
           run,
           busy,
+          labels: data.preferences?.annotationLabels,
           saveNote
         }
       );
-    if (m.kind === "import")
-      return /* @__PURE__ */ import_react.default.createElement(ImportForm, { t, run, busy, refresh });
-    if (m.kind === "search")
-      return /* @__PURE__ */ import_react.default.createElement(SearchForm, { t, m, run, open, close });
-    if (m.kind === "restore")
-      return /* @__PURE__ */ import_react.default.createElement("div", { className: "form" }, /* @__PURE__ */ import_react.default.createElement("p", null, t("restoreWarning")), ["books", "records", "exercises", "conflicts"].map((k) => /* @__PURE__ */ import_react.default.createElement("div", { key: k }, m.summary[k], " ", t(k))), /* @__PURE__ */ import_react.default.createElement(
+    if (m2.kind === "import")
+      return /* @__PURE__ */ import_react15.default.createElement(
+        ImportWizard,
+        {
+          t,
+          run,
+          busy,
+          refresh,
+          close: () => {
+            setInfo(null);
+            close();
+          },
+          open,
+          initialPath: m2.initialPath || "",
+          libraryPath: data?.libraryPath || ""
+        }
+      );
+    if (m2.kind === "search")
+      return /* @__PURE__ */ import_react15.default.createElement(SearchForm, { t, m: m2, run, open, close });
+    if (m2.kind === "restore")
+      return /* @__PURE__ */ import_react15.default.createElement("div", { className: "form" }, /* @__PURE__ */ import_react15.default.createElement("p", null, t("restoreWarning")), ["books", "records", "exercises", "conflicts"].map((k2) => /* @__PURE__ */ import_react15.default.createElement("div", { key: k2 }, m2.summary[k2], " ", t(k2))), /* @__PURE__ */ import_react15.default.createElement(
         "button",
         {
           disabled: busy,
@@ -26795,7 +31308,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           onClick: () => run(async () => {
             await rpc({
               action: "restore",
-              data: m.bytes,
+              data: m2.bytes,
               confirm: true,
               requestId: request()
             });
@@ -26805,29 +31318,41 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         },
         t("confirmRestore")
       ));
-    if (m.kind === "meta")
-      return /* @__PURE__ */ import_react.default.createElement(MetaForm, { t, book: m.book, run, close, setInfo });
+    if (m2.kind === "meta")
+      return /* @__PURE__ */ import_react15.default.createElement(MetaForm, { t, book: m2.book, run, close, setInfo });
     return null;
   }
-  function NoteForm({ m, t, run, busy, saveNote }) {
-    const key = "arr-draft:" + m.bookId + ":" + (m.record?.id || "new");
-    const [body, setBody] = (0, import_react.useState)(() => {
+  function NoteForm({ m: m2, t, run, busy, saveNote, labels }) {
+    const key = "arr-draft:" + m2.bookId + ":" + (m2.record?.id || "new");
+    const [body, setBody] = (0, import_react15.useState)(() => {
       try {
-        return localStorage.getItem(key) ?? m.body ?? "";
+        return localStorage.getItem(key) ?? m2.body ?? "";
       } catch {
-        return m.body || "";
+        return m2.body || "";
       }
-    }), [kind, setKind] = (0, import_react.useState)(m.type || "reflection");
-    const rid = (0, import_react.useRef)(request());
-    return /* @__PURE__ */ import_react.default.createElement("div", { className: "form" }, m.anchor && /* @__PURE__ */ import_react.default.createElement("blockquote", null, m.anchor.quote), /* @__PURE__ */ import_react.default.createElement("label", null, t("notes"), /* @__PURE__ */ import_react.default.createElement(
+    }), [kind, setKind] = (0, import_react15.useState)(m2.type || "reflection"), [annotation, setAnnotation] = (0, import_react15.useState)(
+      m2.record ? annotationAppearance(m2.record) : m2.annotation || { style: "highlight", color: "yellow" }
+    );
+    const rid = (0, import_react15.useRef)(request());
+    return /* @__PURE__ */ import_react15.default.createElement("div", { className: "form" }, m2.anchor && /* @__PURE__ */ import_react15.default.createElement("blockquote", null, m2.anchor.quote), m2.anchor && !m2.anchor.pageOnly && /* @__PURE__ */ import_react15.default.createElement(
+      AnnotationSwatches,
+      {
+        value: annotation,
+        onChange: setAnnotation,
+        t,
+        labels
+      }
+    ), /* @__PURE__ */ import_react15.default.createElement("label", null, t("notes"), /* @__PURE__ */ import_react15.default.createElement(
       "select",
       {
         value: kind,
         onChange: (e) => setKind(e.target.value),
-        disabled: !!m.record
+        disabled: m2.record?.kind === "review"
       },
-      ["reflection", "question", "highlight", "note", "ai"].map((k) => /* @__PURE__ */ import_react.default.createElement("option", { key: k, value: k }, t(k)))
-    )), /* @__PURE__ */ import_react.default.createElement(
+      ["reflection", "question", "highlight", "note", "ai", "review"].map(
+        (k2) => /* @__PURE__ */ import_react15.default.createElement("option", { key: k2, value: k2 }, t(k2))
+      )
+    )), /* @__PURE__ */ import_react15.default.createElement(
       "textarea",
       {
         rows: 10,
@@ -26841,23 +31366,24 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           }
         }
       }
-    ), /* @__PURE__ */ import_react.default.createElement("span", { className: "muted small" }, t("draft")), /* @__PURE__ */ import_react.default.createElement(
+    ), /* @__PURE__ */ import_react15.default.createElement("span", { className: "muted small" }, t("draft")), /* @__PURE__ */ import_react15.default.createElement(
       "button",
       {
         className: "primary",
-        disabled: busy || !body.trim() && !m.anchor,
+        disabled: busy || !body.trim() && !m2.anchor,
         onClick: () => run(async () => {
           await saveNote({
-            id: m.record?.id,
-            bookId: m.bookId,
-            revision: m.record?.revision,
+            id: m2.record?.id,
+            bookId: m2.bookId,
+            revision: m2.record?.revision,
             requestId: rid.current,
             item: {
               kind,
               body,
-              anchor: m.anchor || null,
-              origin: m.origin || "user",
-              discussionId: m.discussionId || ""
+              anchor: m2.anchor || null,
+              annotation: m2.anchor && !m2.anchor.pageOnly ? annotation : void 0,
+              origin: m2.origin || "user",
+              discussionId: m2.discussionId || ""
             }
           });
           try {
@@ -26869,208 +31395,43 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       t("save")
     ));
   }
-  function ImportForm({ t, run, busy, refresh }) {
-    const [path, setPath] = (0, import_react.useState)(""), [files, setFiles] = (0, import_react.useState)([]), [result, setResult] = (0, import_react.useState)([]), [encoding, setEncoding] = (0, import_react.useState)("utf-8");
-    const stopped = (0, import_react.useRef)(false);
-    async function upload(list) {
-      stopped.current = false;
-      for (const f of list) {
-        if (stopped.current) break;
-        const id = request();
-        try {
-          const res = await fetch(
-            API + "/upload?name=" + encodeURIComponent(f.name) + "&encoding=" + encoding + "&requestId=" + id,
-            { method: "POST", body: f }
-          );
-          const v = await res.json();
-          if (!v.ok) throw new Error(v.error);
-          setResult((old) => [
-            ...old,
-            {
-              name: f.name,
-              state: v.value.duplicate ? t("duplicate") : t("saved")
-            }
-          ]);
-        } catch (e) {
-          setResult((old) => [
-            ...old,
-            { name: f.name, state: localizeError(e.message, t) }
-          ]);
-        }
-      }
-      await refresh();
-    }
-    return /* @__PURE__ */ import_react.default.createElement(
-      "div",
-      {
-        className: "form",
-        onDragOver: (e) => e.preventDefault(),
-        onDrop: (e) => {
-          e.preventDefault();
-          run(() => upload([...e.dataTransfer.files]));
-        }
-      },
-      /* @__PURE__ */ import_react.default.createElement("p", null, t("hint")),
-      /* @__PURE__ */ import_react.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react.default.createElement("label", null, t("chooseFiles"), /* @__PURE__ */ import_react.default.createElement(
-        "input",
-        {
-          disabled: busy,
-          type: "file",
-          accept: ".epub,.pdf,.txt,.md,.markdown",
-          multiple: true,
-          onChange: (e) => run(() => upload([...e.target.files]))
-        }
-      )), /* @__PURE__ */ import_react.default.createElement("label", null, t("chooseFolder"), /* @__PURE__ */ import_react.default.createElement(
-        "input",
-        {
-          disabled: busy,
-          type: "file",
-          webkitdirectory: "",
-          multiple: true,
-          onChange: (e) => run(
-            () => upload(
-              [...e.target.files].filter(
-                (f) => /\.(epub|pdf|txt|md|markdown)$/i.test(f.name)
-              )
-            )
-          )
-        }
-      ))),
-      /* @__PURE__ */ import_react.default.createElement("label", null, t("encoding"), /* @__PURE__ */ import_react.default.createElement("select", { value: encoding, onChange: (e) => setEncoding(e.target.value) }, /* @__PURE__ */ import_react.default.createElement("option", { value: "utf-8" }, "UTF-8 / Auto"), /* @__PURE__ */ import_react.default.createElement("option", { value: "gb18030" }, "GB18030 / GBK"), /* @__PURE__ */ import_react.default.createElement("option", { value: "big5" }, "Big5"))),
-      /* @__PURE__ */ import_react.default.createElement("label", null, t("path"), /* @__PURE__ */ import_react.default.createElement("input", { value: path, onChange: (e) => setPath(e.target.value) })),
-      /* @__PURE__ */ import_react.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          disabled: busy || !path.trim(),
-          onClick: () => run(
-            async () => setFiles((await rpc({ action: "scan", path })).items)
-          )
-        },
-        t("scan")
-      ), /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          disabled: busy || !path.trim(),
-          onClick: () => run(async () => {
-            const v = await rpc({
-              action: "importPath",
-              path,
-              encoding,
-              requestId: request()
-            });
-            setResult((old) => [
-              ...old,
-              {
-                name: v.book.title,
-                state: v.duplicate ? t("duplicate") : t("saved")
-              }
-            ]);
-            await refresh();
-          })
-        },
-        t("importPath")
-      )),
-      !!files.length && /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("p", { className: "muted" }, t("directoryHint")), /* @__PURE__ */ import_react.default.createElement("div", { className: "card", style: { maxHeight: 180, overflow: "auto" } }, files.map((f) => /* @__PURE__ */ import_react.default.createElement("div", { key: f.path }, /* @__PURE__ */ import_react.default.createElement(
-        "input",
-        {
-          type: "checkbox",
-          checked: f.selected !== false,
-          onChange: (e) => setFiles(
-            (old) => old.map(
-              (x) => x.path === f.path ? { ...x, selected: e.target.checked } : x
-            )
-          )
-        }
-      ), " ", f.name))), /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          disabled: busy,
-          onClick: () => run(async () => {
-            stopped.current = false;
-            for (const f of files.filter((f2) => f2.selected !== false)) {
-              if (stopped.current) break;
-              try {
-                const v = await rpc({
-                  action: "importPath",
-                  path: f.path,
-                  encoding,
-                  requestId: request()
-                });
-                setResult((old) => [
-                  ...old,
-                  {
-                    name: f.name,
-                    state: v.duplicate ? t("duplicate") : t("saved")
-                  }
-                ]);
-              } catch (e) {
-                setResult((old) => [
-                  ...old,
-                  { name: f.name, state: localizeError(e.message, t) }
-                ]);
-              }
-            }
-            await refresh();
-          })
-        },
-        t("importSelected")
-      )),
-      busy && /* @__PURE__ */ import_react.default.createElement(
-        "button",
-        {
-          onClick: () => {
-            stopped.current = true;
-          }
-        },
-        t("cancel")
-      ),
-      result.length > 0 && /* @__PURE__ */ import_react.default.createElement(
-        "div",
-        {
-          className: "card",
-          style: { maxHeight: 240, overflow: "auto" },
-          role: "status"
-        },
-        result.map((r, i) => /* @__PURE__ */ import_react.default.createElement("p", { key: i }, r.name, " \xB7 ", r.state))
-      )
-    );
-  }
-  function SearchForm({ t, m, run, open, close }) {
-    const [q, setQ] = (0, import_react.useState)(""), [items, setItems] = (0, import_react.useState)([]);
-    return /* @__PURE__ */ import_react.default.createElement("div", { className: "form" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react.default.createElement(
+  function SearchForm({ t, m: m2, run, open, close }) {
+    const [q2, setQ] = (0, import_react15.useState)(m2.query || ""), [items, setItems] = (0, import_react15.useState)([]);
+    return /* @__PURE__ */ import_react15.default.createElement("div", { className: "form" }, /* @__PURE__ */ import_react15.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react15.default.createElement(
       "input",
       {
         className: "grow",
-        value: q,
+        "data-autofocus": true,
+        value: q2,
         onChange: (e) => setQ(e.target.value),
         placeholder: t("searchText"),
         onKeyDown: (e) => {
           if (e.key === "Enter")
             run(
               async () => setItems(
-                (await rpc({ action: "search", query: q, id: m.bookId })).items
+                (await rpc({ action: "search", query: q2, id: m2.bookId })).items
               )
             );
         }
       }
-    ), /* @__PURE__ */ import_react.default.createElement(
+    ), /* @__PURE__ */ import_react15.default.createElement(
       "button",
       {
         onClick: () => run(
           async () => setItems(
-            (await rpc({ action: "search", query: q, id: m.bookId })).items
+            (await rpc({ action: "search", query: q2, id: m2.bookId })).items
           )
         )
       },
       t("searchText")
-    )), items.map((r, i) => /* @__PURE__ */ import_react.default.createElement(
+    )), items.map((r, i) => /* @__PURE__ */ import_react15.default.createElement(
       "button",
       {
         style: { textAlign: "left" },
         key: i,
         onClick: () => {
-          if (m.onJump) {
-            m.onJump(r);
+          if (m2.onJump) {
+            m2.onJump(r);
             close();
           } else {
             try {
@@ -27085,21 +31446,21 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           }
         }
       },
-      /* @__PURE__ */ import_react.default.createElement("b", null, r.bookTitle, " \xB7 ", r.chapterTitle),
-      /* @__PURE__ */ import_react.default.createElement("p", null, r.snippet)
+      /* @__PURE__ */ import_react15.default.createElement("b", null, r.bookTitle, " \xB7 ", r.chapterTitle),
+      /* @__PURE__ */ import_react15.default.createElement("p", null, r.snippet)
     )));
   }
-  function MetaForm({ t, book: b, run, close, setInfo }) {
-    const [title, setTitle] = (0, import_react.useState)(b.title), [author, setAuthor] = (0, import_react.useState)(b.author), [tags, setTags] = (0, import_react.useState)(b.tags.join(", ")), [status, setStatus] = (0, import_react.useState)(b.status);
-    return /* @__PURE__ */ import_react.default.createElement("div", { className: "form" }, /* @__PURE__ */ import_react.default.createElement("label", null, t("bookTitle"), /* @__PURE__ */ import_react.default.createElement("input", { value: title, onChange: (e) => setTitle(e.target.value) })), /* @__PURE__ */ import_react.default.createElement("label", null, t("author"), /* @__PURE__ */ import_react.default.createElement("input", { value: author, onChange: (e) => setAuthor(e.target.value) })), /* @__PURE__ */ import_react.default.createElement("label", null, t("tags"), /* @__PURE__ */ import_react.default.createElement("input", { value: tags, onChange: (e) => setTags(e.target.value) })), /* @__PURE__ */ import_react.default.createElement("label", null, t("status"), /* @__PURE__ */ import_react.default.createElement("select", { value: status, onChange: (e) => setStatus(e.target.value) }, ["want", "reading", "paused", "finished"].map((k) => /* @__PURE__ */ import_react.default.createElement("option", { key: k, value: k }, t(k))))), /* @__PURE__ */ import_react.default.createElement(
+  function MetaForm({ t, book: b2, run, close, setInfo }) {
+    const [title, setTitle] = (0, import_react15.useState)(b2.title), [author, setAuthor] = (0, import_react15.useState)(b2.author), [tags, setTags] = (0, import_react15.useState)(b2.tags.join(", ")), [status, setStatus] = (0, import_react15.useState)(b2.status), [sourcePath, setSourcePath] = (0, import_react15.useState)(b2.sourcePath || ""), [notice, setNotice] = (0, import_react15.useState)("");
+    return /* @__PURE__ */ import_react15.default.createElement("div", { className: "form" }, /* @__PURE__ */ import_react15.default.createElement("label", null, t("bookTitle"), /* @__PURE__ */ import_react15.default.createElement("input", { value: title, onChange: (e) => setTitle(e.target.value) })), /* @__PURE__ */ import_react15.default.createElement("label", null, t("author"), /* @__PURE__ */ import_react15.default.createElement("input", { value: author, onChange: (e) => setAuthor(e.target.value) })), /* @__PURE__ */ import_react15.default.createElement("label", null, t("tags"), /* @__PURE__ */ import_react15.default.createElement("input", { value: tags, onChange: (e) => setTags(e.target.value) })), /* @__PURE__ */ import_react15.default.createElement("label", null, t("status"), /* @__PURE__ */ import_react15.default.createElement("select", { value: status, onChange: (e) => setStatus(e.target.value) }, ["want", "reading", "paused", "finished"].map((k2) => /* @__PURE__ */ import_react15.default.createElement("option", { key: k2, value: k2 }, t(k2))))), /* @__PURE__ */ import_react15.default.createElement(
       "button",
       {
         className: "primary",
         onClick: () => run(async () => {
           await rpc({
             action: "saveBook",
-            id: b.id,
-            revision: b.revision,
+            id: b2.id,
+            revision: b2.revision,
             item: {
               title,
               author,
@@ -27108,19 +31469,52 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             },
             requestId: request()
           });
-          setInfo(await rpc({ action: "open", id: b.id }));
+          setInfo(await rpc({ action: "open", id: b2.id }));
           close();
         })
       },
       t("save")
-    ), /* @__PURE__ */ import_react.default.createElement("div", { className: "muted" }, b.format.toUpperCase(), " \xB7 ", Math.round(b.bytes / 1024), " KB", /* @__PURE__ */ import_react.default.createElement("br", null), b.hash), /* @__PURE__ */ import_react.default.createElement(
+    ), /* @__PURE__ */ import_react15.default.createElement("div", { className: "muted" }, b2.format.toUpperCase(), " \xB7 ", Math.round(b2.bytes / 1024), " KB", /* @__PURE__ */ import_react15.default.createElement("br", null), b2.hash), b2.format === "epub" && /* @__PURE__ */ import_react15.default.createElement(
+      "button",
+      {
+        onClick: () => run(async () => {
+          const x2 = await rpc({ action: "repairNavigation", id: b2.id });
+          setNotice(t(x2.repaired ? "repaired" : "navigationWarning"));
+          setInfo(await rpc({ action: "open", id: b2.id }));
+        })
+      },
+      t("repairContents")
+    ), /* @__PURE__ */ import_react15.default.createElement("label", null, t("relink"), /* @__PURE__ */ import_react15.default.createElement(
+      "input",
+      {
+        value: sourcePath,
+        onChange: (e) => setSourcePath(e.target.value),
+        placeholder: t("path")
+      }
+    )), /* @__PURE__ */ import_react15.default.createElement(
+      "button",
+      {
+        disabled: !sourcePath.trim(),
+        onClick: () => run(async () => {
+          await rpc({
+            action: "relinkBook",
+            id: b2.id,
+            path: sourcePath,
+            requestId: request()
+          });
+          setInfo(await rpc({ action: "open", id: b2.id }));
+          setNotice(t("saved"));
+        })
+      },
+      t("relink")
+    ), notice && /* @__PURE__ */ import_react15.default.createElement("p", { role: "status" }, notice), /* @__PURE__ */ import_react15.default.createElement(
       "button",
       {
         onClick: () => run(async () => {
           await rpc({
             action: "trashBook",
-            id: b.id,
-            revision: b.revision,
+            id: b2.id,
+            revision: b2.revision,
             requestId: request()
           });
           setInfo(null);
@@ -27131,278 +31525,808 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     ));
   }
 
-  // src/client/spirit.jsx
-  var import_react2 = __toESM(__require("react"), 1);
-  function SpiritPanel({
-    book,
-    chapters,
-    chapterId,
-    anchor,
-    t,
-    lang,
-    date,
-    run,
-    onUpdate,
-    exercises,
-    showNote,
-    onJump
-  }) {
-    const [selected, setSelected] = (0, import_react2.useState)(""), [view, setView] = (0, import_react2.useState)(null), [method, setMethod] = (0, import_react2.useState)("free"), [goal, setGoal] = (0, import_react2.useState)(""), [creating, setCreating] = (0, import_react2.useState)(false), [message, setMessage] = (0, import_react2.useState)(""), [sending, setSending] = (0, import_react2.useState)(false), [watchError, setWatchError] = (0, import_react2.useState)("");
-    const live = (0, import_react2.useRef)(null), sendId = (0, import_react2.useRef)(null), acRef = (0, import_react2.useRef)(null);
-    (0, import_react2.useEffect)(() => {
-      if (!selected && exercises.length)
-        setSelected(
-          [...exercises].sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))[0].id
-        );
-    }, [exercises]);
-    (0, import_react2.useEffect)(() => {
-      if (!selected) return;
+  // src/client/reading-dock.jsx
+  var import_react16 = __toESM(__require("react"), 1);
+  var KEY = "arr-reading-dock-width:v1";
+  var TOC_KEY = "arr-reading-toc-width:v1";
+  function useReadingDock(toc, onBeforeLayout) {
+    const containerRef = (0, import_react16.useRef)(null), [available, setAvailable] = (0, import_react16.useState)(1200), [preferred, setPreferred] = (0, import_react16.useState)(() => {
       try {
-        setMessage(localStorage.getItem("arr-message:" + selected) || "");
+        return Number(localStorage.getItem(KEY)) || 420;
+      } catch {
+        return 420;
+      }
+    }), [preferredToc, setPreferredToc] = (0, import_react16.useState)(() => {
+      try {
+        return Number(localStorage.getItem(TOC_KEY)) || 200;
+      } catch {
+        return 200;
+      }
+    }), [open, setOpen] = (0, import_react16.useState)(true), [expanded, setExpanded] = (0, import_react16.useState)(false);
+    (0, import_react16.useEffect)(() => {
+      const el = containerRef.current;
+      if (!el) return;
+      const observer = new ResizeObserver(() => setAvailable(el.clientWidth));
+      observer.observe(el);
+      setAvailable(el.clientWidth);
+      return () => observer.disconnect();
+    }, []);
+    const reservedToc = toc ? clampTocWidth(preferredToc, available, open ? 320 : 0) : 0, limits = panelLimits(available, reservedToc), width = clampPanelWidth(preferred, available, reservedToc), tocWidth = toc ? clampTocWidth(preferredToc, available, open ? width : 0) : 0, tocLimits = tocPanelLimits(available, open ? width : 0);
+    function setTocWidth(value) {
+      onBeforeLayout?.();
+      const next = clampTocWidth(value, available, open ? width : 0);
+      setPreferredToc(next);
+      try {
+        localStorage.setItem(TOC_KEY, String(next));
       } catch {
       }
-      let active = true;
-      const ac = new AbortController();
-      acRef.current = ac;
-      setView(null);
-      setWatchError("");
-      (async () => {
-        let v = await rpc(
-          { action: "spirit", command: "read", id: selected },
-          ac.signal
-        );
-        if (!active) return;
-        setView(v);
-        while (active && !ac.signal.aborted) {
-          v = await rpc(
-            {
-              action: "spirit",
-              command: "watch",
-              id: selected,
-              after: v.version
-            },
-            ac.signal
-          );
-          if (active) setView(v);
-        }
-      })().catch((e) => {
-        if (active && e.name !== "AbortError") setWatchError(e.message);
-      });
-      return () => {
-        active = false;
-        ac.abort();
-      };
-    }, [selected]);
-    (0, import_react2.useEffect)(() => {
-      live.current?.scrollIntoView({ block: "end" });
-    }, [view?.messages.length, view?.liveText]);
-    async function create() {
-      if (method !== "free" && !goal.trim()) throw new Error("GOAL_REQUIRED");
-      const v = await rpc({
-        action: "createExercise",
-        bookId: book.id,
-        method,
-        goal,
-        requestId: request()
-      });
-      if (goal.trim()) {
-        try {
-          localStorage.setItem("arr-message:" + v.exercise.id, goal);
-        } catch {
-        }
-      }
-      setSelected(v.exercise.id);
-      setCreating(false);
-      setGoal("");
-      await onUpdate();
     }
-    async function change(item) {
-      const v = await rpc({
-        action: "saveExercise",
-        id: selected,
-        revision: view.exercise.revision,
-        item,
-        requestId: request()
-      });
-      setView((old) => ({ ...old, exercise: v.exercise }));
-      await onUpdate();
-    }
-    async function send(override) {
-      const text = typeof override === "string" ? override : message;
-      if (sending || !text.trim()) return;
-      setSending(true);
+    function setWidth(value) {
+      onBeforeLayout?.();
+      const next = clampPanelWidth(value, available, tocWidth);
+      setPreferred(next);
       try {
-        const id = override ? request() : sendId.current || request();
-        if (!override) sendId.current = id;
-        const v = await rpc({
-          action: "spirit",
-          command: "send",
-          id: selected,
-          text,
-          anchor,
-          chapterId,
-          language: lang,
-          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-          requestId: id
-        });
-        setView(v);
-        if (!override) {
-          setMessage("");
-          sendId.current = null;
-          try {
-            localStorage.removeItem("arr-message:" + selected);
-          } catch {
-          }
-        }
-      } finally {
-        setSending(false);
+        localStorage.setItem(KEY, String(next));
+      } catch {
       }
     }
-    function renderedText(text) {
-      return text.split(/(\[c\d+\])/g).map((part, i) => {
-        const m = part.match(/^\[(c\d+)\]$/), c = m && view?.exercise.citations?.includes(m[1]) && chapters.find((c2) => c2.id === m[1]);
-        return c ? /* @__PURE__ */ import_react2.default.createElement(
-          "button",
-          {
-            className: "small link",
-            key: i,
-            title: c.title,
-            onClick: () => onJump({ chapterId: c.id, start: 0, end: 1 })
-          },
-          part
-        ) : /* @__PURE__ */ import_react2.default.createElement(import_react2.default.Fragment, { key: i }, part);
-      });
+    return {
+      containerRef,
+      open,
+      setOpen: (value) => {
+        onBeforeLayout?.();
+        setOpen(value);
+      },
+      expanded,
+      setExpanded: (value) => {
+        onBeforeLayout?.();
+        setExpanded(value);
+      },
+      width,
+      setWidth,
+      tocWidth,
+      tocPanel: { width: tocWidth, setWidth: setTocWidth, ...tocLimits },
+      ...limits
+    };
+  }
+  function DockResizer({
+    dock,
+    label,
+    edge = "left",
+    defaultWidth = 420,
+    className = ""
+  }) {
+    const drag = (0, import_react16.useRef)(null), [active, setActive] = (0, import_react16.useState)(false);
+    function finish() {
+      const d = drag.current;
+      if (d) {
+        d.body.style.cursor = d.cursor;
+        d.body.style.userSelect = d.select;
+        drag.current = null;
+      }
+      setActive(false);
     }
-    if (creating || !selected)
-      return /* @__PURE__ */ import_react2.default.createElement("div", { className: "sidebody form" }, /* @__PURE__ */ import_react2.default.createElement("p", { className: "muted" }, t("noExercise")), /* @__PURE__ */ import_react2.default.createElement("div", { className: "methodlist" }, ["free", "hunt", "feynman", "debate"].map((k) => /* @__PURE__ */ import_react2.default.createElement(
-        "button",
-        {
-          key: k,
-          "aria-selected": method === k,
-          onClick: () => setMethod(k)
-        },
-        /* @__PURE__ */ import_react2.default.createElement("b", null, t(k)),
-        /* @__PURE__ */ import_react2.default.createElement("span", { className: "muted small" }, t(k + "Desc"))
-      ))), /* @__PURE__ */ import_react2.default.createElement("label", null, t("goal"), /* @__PURE__ */ import_react2.default.createElement("textarea", { value: goal, onChange: (e) => setGoal(e.target.value) })), /* @__PURE__ */ import_react2.default.createElement("button", { className: "primary", onClick: () => run(create) }, t("create")), selected && /* @__PURE__ */ import_react2.default.createElement("button", { onClick: () => setCreating(false) }, t("cancel")));
-    const x = view?.exercise;
-    return /* @__PURE__ */ import_react2.default.createElement(import_react2.default.Fragment, null, /* @__PURE__ */ import_react2.default.createElement(
+    (0, import_react16.useEffect)(
+      () => () => {
+        const d = drag.current;
+        if (d) {
+          d.body.style.cursor = d.cursor;
+          d.body.style.userSelect = d.select;
+        }
+      },
+      []
+    );
+    return /* @__PURE__ */ import_react16.default.createElement(
       "div",
       {
-        style: {
-          padding: 12,
-          borderBottom: "1px solid var(--dsw-alias-border-l1)"
-        }
-      },
-      /* @__PURE__ */ import_react2.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react2.default.createElement(
-        "select",
-        {
-          className: "grow",
-          value: selected,
-          onChange: (e) => setSelected(e.target.value),
-          "aria-label": t("viewExercise")
+        className: "arr-dock-resizer " + className + (active ? " is-dragging" : ""),
+        role: "separator",
+        "aria-orientation": "vertical",
+        "aria-label": label,
+        "aria-valuemin": dock.min,
+        "aria-valuemax": dock.max,
+        "aria-valuenow": Math.round(dock.width),
+        tabIndex: 0,
+        title: label,
+        onPointerDown: (e) => {
+          if (e.button !== 0) return;
+          e.preventDefault();
+          e.currentTarget.setPointerCapture(e.pointerId);
+          const body = e.currentTarget.ownerDocument.body;
+          drag.current = {
+            x: e.clientX,
+            width: dock.width,
+            body,
+            cursor: body.style.cursor,
+            select: body.style.userSelect
+          };
+          body.style.cursor = "col-resize";
+          body.style.userSelect = "none";
+          setActive(true);
         },
-        exercises.map((e) => /* @__PURE__ */ import_react2.default.createElement("option", { key: e.id, value: e.id }, t(e.method), " \xB7 ", e.goal || date(e.createdAt)))
-      ), /* @__PURE__ */ import_react2.default.createElement("button", { onClick: () => setCreating(true) }, "\uFF0B")),
-      x && /* @__PURE__ */ import_react2.default.createElement(import_react2.default.Fragment, null, /* @__PURE__ */ import_react2.default.createElement("p", { className: "small" }, x.goal), /* @__PURE__ */ import_react2.default.createElement("label", { className: "small" }, t("stage"), /* @__PURE__ */ import_react2.default.createElement(
-        "select",
-        {
-          value: Math.min(x.stage, stageNames[x.method][lang].length - 1),
-          onChange: (e) => run(() => change({ stage: Number(e.target.value) }))
+        onPointerMove: (e) => {
+          if (drag.current)
+            dock.setWidth(
+              drag.current.width + (edge === "right" ? e.clientX - drag.current.x : drag.current.x - e.clientX)
+            );
         },
-        stageNames[x.method][lang].map((s, i) => /* @__PURE__ */ import_react2.default.createElement("option", { key: i, value: i }, i + 1, ". ", s))
-      )), /* @__PURE__ */ import_react2.default.createElement("div", { className: "row small", style: { marginTop: 8 } }, /* @__PURE__ */ import_react2.default.createElement("span", { className: "pill" }, t(x.status === "paused" ? "paused" : x.status)), /* @__PURE__ */ import_react2.default.createElement(
-        "button",
-        {
-          onClick: () => run(
-            () => change({
-              status: x.status === "active" ? "paused" : "active"
-            })
-          )
+        onPointerUp: (e) => {
+          finish();
+          if (e.currentTarget.hasPointerCapture(e.pointerId))
+            e.currentTarget.releasePointerCapture(e.pointerId);
         },
-        t(x.status === "active" ? "pause" : "resume")
-      ), /* @__PURE__ */ import_react2.default.createElement(
-        "button",
-        {
-          disabled: x.status === "completed",
-          onClick: () => run(() => change({ status: "completed" }))
-        },
-        t("finish")
-      ), /* @__PURE__ */ import_react2.default.createElement(
-        "button",
-        {
-          disabled: view.busy || x.status !== "active",
-          onClick: () => run(() => send(t("recapRequest")))
-        },
-        t("summarize")
-      )))
-    ), /* @__PURE__ */ import_react2.default.createElement("div", { className: "sidebody" }, watchError && /* @__PURE__ */ import_react2.default.createElement("div", { role: "alert", className: "error" }, watchError, /* @__PURE__ */ import_react2.default.createElement(
-      "button",
-      {
-        onClick: () => {
-          setSelected("");
-          setTimeout(() => setSelected(selected), 0);
-        }
-      },
-      t("retry")
-    )), view?.error && /* @__PURE__ */ import_react2.default.createElement("p", { className: "error" }, view.error), !view ? /* @__PURE__ */ import_react2.default.createElement("p", null, t("loading")) : /* @__PURE__ */ import_react2.default.createElement(import_react2.default.Fragment, null, view.messages.map((m) => /* @__PURE__ */ import_react2.default.createElement("article", { key: m.id, className: "message " + m.role }, /* @__PURE__ */ import_react2.default.createElement("div", { className: "row spread small muted" }, /* @__PURE__ */ import_react2.default.createElement("b", null, m.role === "user" ? t("myRecord") : t("spirit")), /* @__PURE__ */ import_react2.default.createElement("span", null, date(m.time))), /* @__PURE__ */ import_react2.default.createElement("div", { className: "messageBody" }, renderedText(m.text)), m.role === "assistant" && /* @__PURE__ */ import_react2.default.createElement(
-      "button",
-      {
-        className: "small",
-        style: { marginTop: 10 },
-        onClick: () => showNote(book.id, "ai", null, m.text, "ai", selected)
-      },
-      t("saveReply")
-    ))), view.liveText && /* @__PURE__ */ import_react2.default.createElement("div", { className: "message" }, /* @__PURE__ */ import_react2.default.createElement("b", null, t("spirit")), /* @__PURE__ */ import_react2.default.createElement("div", { className: "messageBody" }, renderedText(view.liveText))), view.outcome && view.outcome.kind !== "completed" && /* @__PURE__ */ import_react2.default.createElement("p", { className: "error" }, view.outcome.error?.message || view.outcome.kind), /* @__PURE__ */ import_react2.default.createElement("div", { ref: live }))), /* @__PURE__ */ import_react2.default.createElement("div", { className: "compose" }, /* @__PURE__ */ import_react2.default.createElement("details", { className: "small muted" }, /* @__PURE__ */ import_react2.default.createElement("summary", null, t("scope"), " \xB7 ", t(anchor ? "selection" : "noSelection")), /* @__PURE__ */ import_react2.default.createElement("p", null, t("contextHint")), anchor && /* @__PURE__ */ import_react2.default.createElement("blockquote", null, anchor.quote)), x && x.status !== "active" && /* @__PURE__ */ import_react2.default.createElement("p", { className: "small muted" }, t("pausedHint")), /* @__PURE__ */ import_react2.default.createElement(
-      "textarea",
-      {
-        rows: 3,
-        value: message,
-        disabled: x?.status !== "active",
-        placeholder: t("message"),
-        onChange: (e) => {
-          setMessage(e.target.value);
-          sendId.current = null;
-          try {
-            localStorage.setItem("arr-message:" + selected, e.target.value);
-          } catch {
-          }
-        },
+        onPointerCancel: finish,
+        onLostPointerCapture: finish,
+        onDoubleClick: () => dock.setWidth(defaultWidth),
         onKeyDown: (e) => {
-          if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+          const step = e.shiftKey ? 50 : 20;
+          if (e.key === "ArrowLeft") {
             e.preventDefault();
-            run(send);
+            dock.setWidth(dock.width + (edge === "right" ? -step : step));
+          }
+          if (e.key === "ArrowRight") {
+            e.preventDefault();
+            dock.setWidth(dock.width + (edge === "right" ? step : -step));
+          }
+          if (e.key === "Home") {
+            e.preventDefault();
+            dock.setWidth(dock.min);
+          }
+          if (e.key === "End") {
+            e.preventDefault();
+            dock.setWidth(dock.max);
+          }
+          if (e.key === "Enter") {
+            e.preventDefault();
+            dock.setWidth(defaultWidth);
           }
         }
       }
-    ), /* @__PURE__ */ import_react2.default.createElement("div", { className: "row spread", style: { marginTop: 7 } }, /* @__PURE__ */ import_react2.default.createElement("span", { className: "small muted" }, "\u2318 / Ctrl + Enter"), view?.busy ? /* @__PURE__ */ import_react2.default.createElement(
-      "button",
-      {
-        onClick: () => run(
-          async () => setView(
-            await rpc({
-              action: "spirit",
-              command: "cancel",
-              id: selected
-            })
-          )
+    );
+  }
+
+  // src/client/reading-keys.js
+  var import_react17 = __require("react");
+  function useReadingKeys(actions) {
+    const refs = (0, import_react17.useRef)(actions);
+    refs.current = actions;
+    const [overrides, setOverrides] = (0, import_react17.useState)(() => {
+      try {
+        return JSON.parse(localStorage.getItem(KEY_STORE) || "{}");
+      } catch {
+        return {};
+      }
+    });
+    (0, import_react17.useEffect)(() => {
+      const update = () => {
+        try {
+          setOverrides(JSON.parse(localStorage.getItem(KEY_STORE) || "{}"));
+        } catch {
+        }
+      };
+      window.addEventListener("arr-shortcuts-change", update);
+      window.addEventListener("storage", update);
+      return () => {
+        window.removeEventListener("arr-shortcuts-change", update);
+        window.removeEventListener("storage", update);
+      };
+    }, []);
+    return (e) => {
+      const target = e.target;
+      const editable = target.isContentEditable || !!target.closest('input,textarea,select,[contenteditable="true"]'), modal = !!target.closest('[role="dialog"]');
+      const id = resolveShortcut(e.nativeEvent, { editable, modal, overrides });
+      if (id && refs.current[id]) {
+        e.preventDefault();
+        e.stopPropagation();
+        refs.current[id](e);
+      }
+    };
+  }
+
+  // src/client/reading-position.jsx
+  var import_react19 = __require("react");
+
+  // src/client/reader-selection.jsx
+  var import_react18 = __require("react");
+
+  // src/shared/selection-anchors.js
+  var ignored = /[\s\u200b\ufeff\u00ad]/u;
+  function compact(value) {
+    const indexes = [];
+    let text = "";
+    for (let i = 0; i < value.length; i++)
+      if (!ignored.test(value[i])) {
+        text += value[i];
+        indexes.push(i);
+      }
+    return { text, indexes };
+  }
+  function compactLength(value) {
+    let n = 0;
+    for (const c of value) if (!ignored.test(c)) n += c.length;
+    return n;
+  }
+  function selectionAnchor({ chapterId, canonical, domText, start, end }) {
+    if (!Number.isInteger(start) || !Number.isInteger(end) || start < 0 || end <= start || end > domText.length)
+      return null;
+    const selected = domText.slice(start, end);
+    if (!selected.trim() || selected.length > 2e4) return null;
+    if (domText === canonical) return { chapterId, start, end, quote: selected };
+    const source = compact(canonical), dom = compact(domText), wanted = compact(selected).text;
+    if (!wanted) return null;
+    let at;
+    if (source.text === dom.text) {
+      at = compactLength(domText.slice(0, start));
+    } else {
+      const prefix = compact(
+        domText.slice(Math.max(0, start - 120), start)
+      ).text.slice(-50), suffix = compact(domText.slice(end, end + 120)).text.slice(0, 50);
+      const candidates = [];
+      let p = source.text.indexOf(wanted), limit = 0;
+      while (p >= 0 && limit++ < 500) {
+        let score = 0;
+        if (prefix && source.text.slice(Math.max(0, p - prefix.length), p) === prefix)
+          score += prefix.length;
+        if (suffix && source.text.slice(
+          p + wanted.length,
+          p + wanted.length + suffix.length
+        ) === suffix)
+          score += suffix.length;
+        candidates.push({ at: p, score });
+        p = source.text.indexOf(wanted, p + 1);
+      }
+      if (!candidates.length || limit >= 500) return null;
+      candidates.sort((a, b2) => b2.score - a.score);
+      if (candidates.length > 1 && (candidates[0].score < 8 || candidates[0].score === candidates[1].score))
+        return null;
+      at = candidates[0].at;
+    }
+    const last = at + wanted.length - 1;
+    if (source.text.slice(at, at + wanted.length) !== wanted || source.indexes[at] === void 0 || source.indexes[last] === void 0)
+      return null;
+    const from = source.indexes[at], to = source.indexes[last] + 1, quote = canonical.slice(from, to);
+    if (quote.length > 2e4) return null;
+    return { chapterId, start: from, end: to, quote };
+  }
+  function annotationPaintKey(records, chapterId) {
+    return JSON.stringify(
+      records.filter((r) => !r.deletedAt && r.anchor?.chapterId === chapterId).map((r) => [
+        r.id,
+        r.anchor.start,
+        r.anchor.end,
+        r.anchor.quote,
+        r.annotation?.style || "underline",
+        r.annotation?.color || "yellow"
+      ]).sort((a, b2) => String(a[0]).localeCompare(String(b2[0])))
+    );
+  }
+  function canonicalOffset(domText, canonical, offset) {
+    if (domText === canonical) return offset;
+    const a = compact(domText), b2 = compact(canonical);
+    if (a.text !== b2.text) return null;
+    return b2.indexes[Math.min(b2.indexes.length - 1, compactLength(domText.slice(0, offset)))] ?? 0;
+  }
+
+  // src/client/reader-selection.jsx
+  function ownedSelectionRange(root) {
+    const sel = root?.ownerDocument.defaultView.getSelection();
+    if (!root || !sel || sel.isCollapsed || !sel.rangeCount || !root.contains(sel.anchorNode) && !root.contains(sel.focusNode))
+      return null;
+    const original = sel.getRangeAt(0);
+    if (!original.intersectsNode(root)) return null;
+    const range = original.cloneRange(), contents = root.ownerDocument.createRange();
+    contents.selectNodeContents(root);
+    if (range.compareBoundaryPoints(Range.START_TO_START, contents) < 0)
+      range.setStart(contents.startContainer, contents.startOffset);
+    if (range.compareBoundaryPoints(Range.END_TO_END, contents) > 0)
+      range.setEnd(contents.endContainer, contents.endOffset);
+    return range.collapsed ? null : range;
+  }
+  function domRangeOffsets(root, range) {
+    const before = root.ownerDocument.createRange();
+    before.selectNodeContents(root);
+    before.setEnd(range.startContainer, range.startOffset);
+    const start = before.toString().length;
+    before.setEnd(range.endContainer, range.endOffset);
+    return { start, end: before.toString().length };
+  }
+  function readSelectionAnchor(root, chapter) {
+    const range = ownedSelectionRange(root);
+    if (!range || !chapter) return null;
+    const bounds = domRangeOffsets(root, range), anchor = selectionAnchor({
+      chapterId: chapter.id,
+      canonical: chapter.text,
+      domText: root.textContent,
+      ...bounds
+    });
+    return anchor ? { anchor, rect: range.getBoundingClientRect(), range } : null;
+  }
+  function useReaderSelection({
+    root,
+    chapter,
+    enabled,
+    onSelection,
+    menu,
+    holdSelection
+  }) {
+    const latest = (0, import_react18.useRef)(null);
+    latest.current = { root, chapter, enabled, onSelection, menu, holdSelection };
+    (0, import_react18.useEffect)(() => {
+      if (!enabled) return;
+      const doc = root.current?.ownerDocument || document;
+      let dragging = false, release = null, timer = null, frame = null;
+      function capture() {
+        const p = latest.current;
+        if (!p.enabled || !p.root.current || dragging || p.menu?.mode === "context")
+          return;
+        const found = readSelectionAnchor(p.root.current, p.chapter);
+        if (!found) return;
+        const old = p.menu?.anchor;
+        if (old && old.chapterId === found.anchor.chapterId && old.start === found.anchor.start && old.end === found.anchor.end)
+          return;
+        p.onSelection(found.anchor, {
+          clientX: found.rect.left,
+          clientY: found.rect.bottom + 8
+        });
+      }
+      function schedule() {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          cancelAnimationFrame(frame);
+          frame = requestAnimationFrame(capture);
+        }, 60);
+      }
+      function down(e) {
+        if (!latest.current.enabled || !latest.current.root.current?.contains(e.target) || e.button !== 0)
+          return;
+        dragging = true;
+        release?.();
+        release = latest.current.holdSelection?.();
+      }
+      function up() {
+        if (!dragging) return;
+        dragging = false;
+        release?.();
+        release = null;
+        clearTimeout(timer);
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(capture);
+      }
+      function change() {
+        if (!dragging) schedule();
+      }
+      function blur() {
+        dragging = false;
+        release?.();
+        release = null;
+      }
+      doc.addEventListener("pointerdown", down, true);
+      doc.addEventListener("pointerup", up, true);
+      doc.addEventListener("pointercancel", blur, true);
+      doc.addEventListener("selectionchange", change);
+      doc.defaultView.addEventListener("blur", blur);
+      return () => {
+        clearTimeout(timer);
+        cancelAnimationFrame(frame);
+        release?.();
+        doc.removeEventListener("pointerdown", down, true);
+        doc.removeEventListener("pointerup", up, true);
+        doc.removeEventListener("pointercancel", blur, true);
+        doc.removeEventListener("selectionchange", change);
+        doc.defaultView.removeEventListener("blur", blur);
+      };
+    }, [chapter?.id, enabled]);
+  }
+
+  // src/shared/reading-position.js
+  function textLocation(chapterId, text, offset, delta = 0) {
+    const at = Math.max(
+      0,
+      Math.min(Math.max(0, text.length - 1), Math.floor(Number(offset) || 0))
+    );
+    return {
+      mode: "text",
+      chapterId,
+      textOffset: at,
+      quote: text.slice(at, at + 100),
+      prefix: text.slice(Math.max(0, at - 40), at),
+      suffix: text.slice(at + 100, at + 140),
+      delta: Math.max(-200, Math.min(200, Number(delta) || 0))
+    };
+  }
+  function resolveTextLocation(text, location) {
+    if (!location || location.mode !== "text") return null;
+    const at = Math.max(
+      0,
+      Math.min(text.length, Math.floor(location.textOffset || 0))
+    );
+    if (location.quote && text.slice(at, at + location.quote.length) === location.quote && (!location.prefix || text.slice(Math.max(0, at - location.prefix.length), at) === location.prefix) && (!location.suffix || text.slice(
+      at + location.quote.length,
+      at + location.quote.length + location.suffix.length
+    ) === location.suffix))
+      return at;
+    if (!location.quote) return Math.min(at, Math.max(0, text.length - 1));
+    let best = null, score = -Infinity, pos = text.indexOf(location.quote), count = 0;
+    while (pos >= 0 && count++ < 500) {
+      let s = -Math.abs(pos - at) / Math.max(1, text.length);
+      if (location.prefix && text.slice(Math.max(0, pos - location.prefix.length), pos) === location.prefix)
+        s += 4;
+      if (location.suffix && text.slice(
+        pos + location.quote.length,
+        pos + location.quote.length + location.suffix.length
+      ) === location.suffix)
+        s += 4;
+      if (s > score) {
+        best = pos;
+        score = s;
+      }
+      pos = text.indexOf(location.quote, pos + 1);
+    }
+    return best;
+  }
+  function pdfLocation(chapterId, scrollTop, scrollHeight, clientHeight, scrollLeft = 0, scrollWidth = 0, clientWidth = 0) {
+    return {
+      mode: "pdf",
+      chapterId,
+      fraction: Math.max(
+        0,
+        Math.min(1, scrollTop / Math.max(1, scrollHeight - clientHeight))
+      ),
+      xFraction: Math.max(
+        0,
+        Math.min(1, scrollLeft / Math.max(1, scrollWidth - clientWidth))
+      )
+    };
+  }
+  function locationScroll(location, scrollHeight, clientHeight) {
+    return Math.max(0, scrollHeight - clientHeight) * Math.max(0, Math.min(1, location?.fraction || 0));
+  }
+
+  // src/client/reading-position.jsx
+  function rangeForOffset(root, start, end = start + 1) {
+    const walk = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    let at = 0, node, from, to;
+    while (node = walk.nextNode()) {
+      const next = at + node.textContent.length;
+      if (!from && start >= at && start < next) from = [node, start - at];
+      if (end > at && end <= next) {
+        to = [node, end - at];
+        break;
+      }
+      at = next;
+    }
+    if (!from) return null;
+    const range = document.createRange();
+    range.setStart(...from);
+    range.setEnd(
+      ...to || [from[0], Math.min(from[0].textContent.length, from[1] + 1)]
+    );
+    return range;
+  }
+  function visibleTextOffset(root, body) {
+    const box = body.getBoundingClientRect(), proseBox = root.getBoundingClientRect(), x2 = Math.max(proseBox.left + 5, box.left + 5), y2 = Math.max(box.top + 12, proseBox.top + 2);
+    let range = document.caretRangeFromPoint?.(x2, y2);
+    if (!range && document.caretPositionFromPoint) {
+      const p = document.caretPositionFromPoint(x2, y2);
+      if (p) {
+        range = document.createRange();
+        range.setStart(p.offsetNode, p.offset);
+        range.collapse();
+      }
+    }
+    if (range && root.contains(range.startContainer) && range.startContainer.nodeType === Node.TEXT_NODE) {
+      const before = document.createRange();
+      before.selectNodeContents(root);
+      before.setEnd(range.startContainer, range.startOffset);
+      return {
+        offset: before.toString().length,
+        delta: range.getBoundingClientRect().top - box.top
+      };
+    }
+    const walk = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    let node, at = 0;
+    while (node = walk.nextNode()) {
+      const r = document.createRange();
+      r.selectNodeContents(node);
+      const rect = r.getBoundingClientRect();
+      if (node.textContent.trim() && rect.bottom > box.top + 8 && rect.top < box.bottom) {
+        let lo = 0, hi = Math.max(0, node.textContent.length - 1);
+        while (lo < hi) {
+          const mid = Math.floor((lo + hi) / 2);
+          r.setStart(node, mid);
+          r.setEnd(node, Math.min(node.textContent.length, mid + 1));
+          if (r.getBoundingClientRect().bottom > box.top + 8) hi = mid;
+          else lo = mid + 1;
+        }
+        r.setStart(node, lo);
+        r.setEnd(node, Math.min(node.textContent.length, lo + 1));
+        return {
+          offset: at + lo,
+          delta: r.getBoundingClientRect().top - box.top
+        };
+      }
+      at += node.textContent.length;
+    }
+    return { offset: 0, delta: 0 };
+  }
+  function useReadingPosition({
+    book,
+    chapter,
+    body,
+    prose,
+    pdf,
+    onError,
+    activeSelection = false
+  }) {
+    const pdfRenders = (0, import_react19.useRef)(0), selectionLocks = (0, import_react19.useRef)(0);
+    const latest = (0, import_react19.useRef)(null), cache = (0, import_react19.useRef)(/* @__PURE__ */ new Map()), restoring = (0, import_react19.useRef)(false), raf = (0, import_react19.useRef)(0), lastSaved = (0, import_react19.useRef)(""), flashTimer = (0, import_react19.useRef)(null), lastFailure = (0, import_react19.useRef)(0), saveTimer = (0, import_react19.useRef)(null);
+    latest.current = {
+      book,
+      chapter,
+      body,
+      prose,
+      pdf,
+      onError,
+      activeSelection
+    };
+    function isSelecting() {
+      return selectionLocks.current > 0 || latest.current.activeSelection || !!ownedSelectionRange(
+        latest.current.prose.current || latest.current.body.current
+      );
+    }
+    function holdSelection() {
+      selectionLocks.current++;
+      let released = false;
+      return () => {
+        if (!released) {
+          released = true;
+          selectionLocks.current = Math.max(0, selectionLocks.current - 1);
+        }
+      };
+    }
+    function remember(forLayout = false) {
+      const { chapter: c, body: b2, prose: p, pdf: pdf2 } = latest.current, el = b2.current;
+      if (!c || !el || !el.clientHeight || restoring.current || pdfRenders.current > 0 || isSelecting())
+        return cache.current.get(c?.id) || null;
+      if (forLayout && cache.current.has(c.id)) return cache.current.get(c.id);
+      let location;
+      if (pdf2)
+        location = pdfLocation(
+          c.id,
+          el.scrollTop,
+          el.scrollHeight,
+          el.clientHeight,
+          el.scrollLeft,
+          el.scrollWidth,
+          el.clientWidth
+        );
+      else if (p.current) {
+        const found = visibleTextOffset(p.current, el);
+        const offset = canonicalOffset(
+          p.current.textContent,
+          c.text,
+          found.offset
+        );
+        if (offset === null) return cache.current.get(c.id) || null;
+        location = textLocation(c.id, c.text, offset, found.delta);
+      }
+      if (location)
+        cache.current.set(c.id, {
+          chapterId: c.id,
+          offset: el.scrollTop,
+          location
+        });
+      return cache.current.get(c.id) || null;
+    }
+    function fallback(id) {
+      const p = latest.current.book.progress;
+      return cache.current.get(id) || {
+        chapterId: id,
+        offset: p.chapterId === id ? p.offset : 0,
+        location: p.chapterId === id ? p.location : null
+      };
+    }
+    async function save(id, offset) {
+      const c = latest.current.chapter;
+      let snap = c?.id === id ? remember() : null;
+      snap = snap || fallback(id);
+      if (Number.isFinite(offset) && !snap.location) snap = { ...snap, offset };
+      const sig = JSON.stringify(snap);
+      if (lastSaved.current === sig) return;
+      try {
+        await rpc({
+          action: "progress",
+          id: latest.current.book.id,
+          chapterId: id,
+          offset: snap.offset,
+          item: { location: snap.location || void 0 },
+          requestId: request()
+        });
+      } catch (e) {
+        lastFailure.current = Date.now();
+        e.retry = () => save(id, offset);
+        throw e;
+      }
+      lastSaved.current = sig;
+    }
+    function restore(snapshot) {
+      const { chapter: c, body: b2, prose: p, pdf: pdf2 } = latest.current, el = b2.current;
+      if (!c || !el || !el.clientHeight || isSelecting()) return;
+      const snap = snapshot || fallback(c.id), loc = snap.location;
+      restoring.current = true;
+      if (pdf2) {
+        el.scrollTop = loc?.mode === "pdf" ? locationScroll(loc, el.scrollHeight, el.clientHeight) : snap.offset || 0;
+        if (loc?.mode === "pdf")
+          el.scrollLeft = loc.xFraction * Math.max(0, el.scrollWidth - el.clientWidth);
+      } else if (p.current && loc?.mode === "text") {
+        const at = resolveTextLocation(c.text, loc), r = at === null ? null : rangeForOffset(p.current, at);
+        if (r)
+          el.scrollTop += r.getBoundingClientRect().top - el.getBoundingClientRect().top - loc.delta;
+        else el.scrollTop = snap.offset || 0;
+      } else el.scrollTop = snap.offset || 0;
+      cancelAnimationFrame(raf.current);
+      raf.current = requestAnimationFrame(() => {
+        restoring.current = false;
+        if (loc && loc.mode === (pdf2 ? "pdf" : "text"))
+          cache.current.set(c.id, {
+            chapterId: c.id,
+            offset: el.scrollTop,
+            location: loc
+          });
+        else remember();
+        clearTimeout(saveTimer.current);
+        saveTimer.current = setTimeout(
+          () => Date.now() - lastFailure.current > 1e4 ? save(c.id).catch((e) => latest.current.onError?.(e)) : null,
+          400
+        );
+      });
+    }
+    function flash(anchor) {
+      const root = latest.current.prose.current;
+      if (!root) return;
+      const r = rangeForOffset(
+        root,
+        Math.min(
+          anchor.start,
+          Math.max(0, latest.current.chapter.text.length - 1)
+        ),
+        Math.min(
+          anchor.end || anchor.start + 1,
+          latest.current.chapter.text.length
         )
-      },
-      t("stop")
-    ) : /* @__PURE__ */ import_react2.default.createElement(
-      "button",
-      {
-        className: "primary",
-        disabled: sending || !message.trim() || x?.status !== "active",
-        onClick: () => run(send)
-      },
-      t("send")
-    ))));
+      );
+      if (!r) return;
+      const el = latest.current.body.current;
+      restoring.current = true;
+      el.scrollTop += r.getBoundingClientRect().top - el.getBoundingClientRect().top - el.clientHeight * 0.25;
+      if (globalThis.CSS?.highlights && globalThis.Highlight) {
+        CSS.highlights.set("arr-reading-jump", new Highlight(r));
+        clearTimeout(flashTimer.current);
+        flashTimer.current = setTimeout(
+          () => CSS.highlights.delete("arr-reading-jump"),
+          2200
+        );
+      }
+      raf.current = requestAnimationFrame(() => {
+        restoring.current = false;
+        remember();
+      });
+    }
+    (0, import_react19.useEffect)(() => {
+      const el = body.current;
+      if (!el) return;
+      let lastW = el.clientWidth, lastH = el.clientHeight;
+      const observer = new ResizeObserver(() => {
+        const w2 = el.clientWidth, h = el.clientHeight;
+        if (!w2 || !h) {
+          lastW = lastH = 0;
+          return;
+        }
+        if (w2 !== lastW || h !== lastH) {
+          lastW = w2;
+          lastH = h;
+          restore();
+        }
+      });
+      observer.observe(el);
+      function flush() {
+        const c = latest.current.chapter, snap = c ? cache.current.get(c.id) : null;
+        if (!snap || lastSaved.current === JSON.stringify(snap)) return;
+        fetch(API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "progress",
+            id: latest.current.book.id,
+            chapterId: snap.chapterId,
+            offset: snap.offset,
+            item: { location: snap.location },
+            requestId: request()
+          }),
+          keepalive: true
+        }).catch(() => {
+        });
+      }
+      window.addEventListener("pagehide", flush);
+      return () => {
+        flush();
+        window.removeEventListener("pagehide", flush);
+        clearTimeout(saveTimer.current);
+        observer.disconnect();
+        cancelAnimationFrame(raf.current);
+        clearTimeout(flashTimer.current);
+        globalThis.CSS?.highlights?.delete("arr-reading-jump");
+      };
+    }, []);
+    function hold() {
+      pdfRenders.current++;
+      let released = false;
+      return () => {
+        if (!released) {
+          released = true;
+          pdfRenders.current = Math.max(0, pdfRenders.current - 1);
+        }
+      };
+    }
+    return {
+      holdSelection,
+      isSelecting,
+      hold,
+      remember,
+      save,
+      restore,
+      flash,
+      current: (id) => fallback(id),
+      isRestoring: () => restoring.current || pdfRenders.current > 0
+    };
+  }
+
+  // src/client/annotation-dom.js
+  function renderAnnotations(root, records, chapterId, canonical = root.textContent) {
+    const domText = root.textContent;
+    if (domText !== canonical)
+      records = records.map((r) => {
+        if (!r.anchor || r.anchor.chapterId !== chapterId) return r;
+        const mapped = selectionAnchor({
+          chapterId,
+          canonical: domText,
+          domText: canonical,
+          start: r.anchor.start,
+          end: r.anchor.end
+        });
+        return mapped ? { ...r, anchor: mapped } : { ...r, deletedAt: r.deletedAt || "unmapped" };
+      });
+    const intervals = annotationSegments(records, chapterId, root.textContent);
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), segments = [];
+    let node, at = 0;
+    while (node = walker.nextNode()) {
+      const end = at + node.textContent.length;
+      for (const entry of intervals) {
+        const from = Math.max(at, entry.start), to = Math.min(end, entry.end);
+        if (from < to)
+          segments.push({ node, start: from - at, end: to - at, entry });
+      }
+      at = end;
+    }
+    for (const { node: node2, start, end, entry } of segments.reverse()) {
+      const range = document.createRange();
+      range.setStart(node2, start);
+      range.setEnd(node2, end);
+      const mark = document.createElement("mark");
+      mark.className = "arr-text-annotation";
+      mark.dataset.annotationStyle = entry.annotation.style;
+      mark.dataset.annotationColor = entry.annotation.color;
+      mark.dataset.recordId = entry.recordId;
+      mark.dataset.recordIds = JSON.stringify(entry.recordIds);
+      range.surroundContents(mark);
+    }
   }
 
   // src/client/reader.jsx
   GlobalWorkerOptions.workerSrc = API + "/pdf.worker.mjs";
   function safeHtml(html) {
-    const d = new DOMParser().parseFromString(html, "text/html");
+    const d = new DOMParser().parseFromString("", "text/html"), fragment = d.createElement("div");
+    fragment.innerHTML = html;
     const tags = /* @__PURE__ */ new Set([
       "P",
       "DIV",
@@ -27443,7 +32367,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       "DT",
       "DD"
     ]);
-    for (const e of [...d.body.querySelectorAll("*")]) {
+    for (const e of [...fragment.querySelectorAll("*")]) {
       if (!tags.has(e.tagName)) {
         e.remove();
         continue;
@@ -27458,13 +32382,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         e.removeAttribute(a.name);
       }
     }
-    return d.body.innerHTML;
-  }
-  function offsetAt(root, node, offset) {
-    const range = document.createRange();
-    range.selectNodeContents(root);
-    range.setEnd(node, offset);
-    return range.toString().length;
+    return fragment.innerHTML;
   }
   function rangeAt(root, start, end) {
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
@@ -27486,6 +32404,8 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
   }
   function Reader({
     info: info2,
+    chrome,
+    notices,
     setInfo,
     settings,
     t,
@@ -27495,32 +32415,91 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     showNote,
     busy,
     back,
-    setModal
+    setModal,
+    preferences = {},
+    onNavigate
   }) {
-    const b = info2.book;
-    const [chapterId, setChapterId] = (0, import_react3.useState)(b.progress.chapterId || "c0"), [chapter, setChapter] = (0, import_react3.useState)(null), [side, setSide] = (0, import_react3.useState)("spirit"), [toc, setToc] = (0, import_react3.useState)(true), [selection, setSelection] = (0, import_react3.useState)(null), [jump, setJump] = (0, import_react3.useState)(null), [pdfMode, setPdfMode] = (0, import_react3.useState)(true), [zoom, setZoom] = (0, import_react3.useState)(1), [threadId, setThreadId] = (0, import_react3.useState)(""), [fontSize, setFontSize] = (0, import_react3.useState)(settings.fontSize);
-    const body = (0, import_react3.useRef)(null), prose = (0, import_react3.useRef)(null), timer = (0, import_react3.useRef)(null), chapterRef = (0, import_react3.useRef)(chapterId), infoRef = (0, import_react3.useRef)(info2), seq = (0, import_react3.useRef)(0);
+    const b2 = info2.book;
+    const [chapterId, setChapterId] = (0, import_react20.useState)(b2.progress.chapterId || "c0"), [chapter, setChapter] = (0, import_react20.useState)(null), [side, setSide] = (0, import_react20.useState)("spirit"), [toc, setToc] = (0, import_react20.useState)(true), [selection, setSelection] = (0, import_react20.useState)(null), [annotationMenu, setAnnotationMenu] = (0, import_react20.useState)(null), [annotationHistory, setAnnotationHistory] = (0, import_react20.useState)({
+      canUndo: false,
+      canRedo: false
+    }), [chatSeed, setChatSeed] = (0, import_react20.useState)(""), [jump, setJump] = (0, import_react20.useState)(null), [pdfMode, setPdfMode] = (0, import_react20.useState)(true), [zoom, updateZoom] = (0, import_react20.useState)(1), [focusSignal, setFocusSignal] = (0, import_react20.useState)(0), [fontSize, updateFontSize] = (0, import_react20.useState)(settings.fontSize), [focusMode, updateFocusMode] = (0, import_react20.useState)(() => {
+      try {
+        return localStorage.getItem("arr-reader-focus") === "true";
+      } catch {
+        return false;
+      }
+    }), [returns, setReturns] = (0, import_react20.useState)([]), [discussionId, setDiscussionId] = (0, import_react20.useState)(""), [discussionModel, setDiscussionModel] = (0, import_react20.useState)(null), [sessionSince] = (0, import_react20.useState)(() => (/* @__PURE__ */ new Date()).toISOString());
+    const positionApi = (0, import_react20.useRef)(null);
+    const dock = useReadingDock(toc, () => positionApi.current?.remember(true));
+    function setFontSize(value) {
+      positionApi.current?.remember(true);
+      updateFontSize(value);
+    }
+    function setZoom(value) {
+      positionApi.current?.remember(true);
+      updateZoom(value);
+    }
+    function toggleFocus() {
+      positionApi.current?.remember(true);
+      updateFocusMode((value) => {
+        try {
+          localStorage.setItem("arr-reader-focus", String(!value));
+        } catch {
+        }
+        return !value;
+      });
+    }
+    function openReview() {
+      setModal({
+        kind: "readingReview",
+        bookId: b2.id,
+        chapterId,
+        discussionId: discussionId || info2.exercises?.[0]?.id || "",
+        since: sessionSince,
+        location: positionApi.current?.remember(true)?.location || null,
+        model: discussionModel,
+        onUpdate: update
+      });
+    }
+    function openSpirit() {
+      dock.setOpen(true);
+      setSide("spirit");
+      setFocusSignal((x2) => x2 + 1);
+    }
+    const body = (0, import_react20.useRef)(null), prose = (0, import_react20.useRef)(null), timer = (0, import_react20.useRef)(null), chapterRef = (0, import_react20.useRef)(chapterId), infoRef = (0, import_react20.useRef)(info2), seq = (0, import_react20.useRef)(0), renderedChapter = (0, import_react20.useRef)(null), appliedJump = (0, import_react20.useRef)(null);
+    const position = useReadingPosition({
+      book: b2,
+      chapter,
+      body,
+      prose,
+      pdf: b2.format === "pdf" && pdfMode,
+      onError: (e) => run(() => Promise.reject(e)),
+      activeSelection: !!annotationMenu
+    });
+    positionApi.current = position;
     infoRef.current = info2;
     chapterRef.current = chapterId;
-    (0, import_react3.useEffect)(() => {
+    (0, import_react20.useEffect)(() => {
       let alive = true;
       setChapter(null);
       setSelection(null);
-      rpc({ action: "chapter", id: b.id, chapterId }).then((v) => {
-        if (alive) setChapter(v.chapter);
+      setAnnotationMenu(null);
+      rpc({ action: "chapter", id: b2.id, chapterId }).then((v2) => {
+        if (alive) setChapter(v2.chapter);
       }).catch((e) => run(() => Promise.reject(e)));
       return () => {
         alive = false;
       };
     }, [chapterId]);
-    (0, import_react3.useEffect)(() => {
+    (0, import_react20.useEffect)(() => {
       try {
-        const x = JSON.parse(
-          sessionStorage.getItem("arr-jump:" + b.id) || "null"
+        const x2 = JSON.parse(
+          sessionStorage.getItem("arr-jump:" + b2.id) || "null"
         );
-        if (x) {
-          sessionStorage.removeItem("arr-jump:" + b.id);
-          go(x);
+        if (x2) {
+          sessionStorage.removeItem("arr-jump:" + b2.id);
+          go(x2);
         }
       } catch {
       }
@@ -27528,15 +32507,11 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         clearTimeout(timer.current);
       };
     }, []);
-    const saveProgress = (id, offset) => rpc({
-      action: "progress",
-      id: b.id,
-      chapterId: id,
-      offset,
-      requestId: request()
-    });
+    const saveProgress = (id, offset) => position.save(id, offset);
     function scheduleProgress() {
       clearTimeout(timer.current);
+      if (position.isRestoring()) return;
+      position.remember();
       const id = chapterRef.current, offset = body.current?.scrollTop || 0;
       timer.current = setTimeout(
         () => saveProgress(id, offset).catch((e) => run(() => Promise.reject(e))),
@@ -27550,256 +32525,740 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       });
       setChapterId(id);
     }
-    function go(anchor) {
+    function go(anchor, remember = true) {
+      const origin = position.remember() || position.current(chapterId);
+      if (remember) setReturns((old) => [...old, origin].slice(-10));
       setSelection(null);
+      setAnnotationMenu(null);
+      window.getSelection()?.removeAllRanges();
       setJump({ ...anchor, key: ++seq.current });
       setChapterId(anchor.chapterId);
     }
-    (0, import_react3.useEffect)(() => {
-      if (!chapter || !prose.current || b.format === "pdf" && pdfMode) return;
-      prose.current.innerHTML = safeHtml(chapter.html);
-      const intervals = info2.records.filter(
-        (r) => !r.deletedAt && r.anchor?.chapterId === chapter.id && r.anchor.end > r.anchor.start && prose.current.textContent.slice(r.anchor.start, r.anchor.end) === r.anchor.quote
-      ).map((r) => [r.anchor.start, r.anchor.end]).sort((a, b2) => a[0] - b2[0]);
-      const merged = [];
-      for (const [start, end] of intervals) {
-        const last = merged.at(-1);
-        if (last && start <= last[1]) last[1] = Math.max(last[1], end);
-        else merged.push([start, end]);
-      }
-      const walker = document.createTreeWalker(
-        prose.current,
-        NodeFilter.SHOW_TEXT
-      ), segments = [];
-      let node, at = 0;
-      while (node = walker.nextNode()) {
-        const end = at + node.textContent.length;
-        for (const [s, e] of merged) {
-          const from = Math.max(at, s), to = Math.min(end, e);
-          if (from < to) segments.push({ node, start: from - at, end: to - at });
+    const paintKey = (0, import_react20.useMemo)(
+      () => annotationPaintKey(info2.records, chapterId),
+      [info2.records, chapterId]
+    );
+    (0, import_react20.useEffect)(() => {
+      if (!chapter || !prose.current || b2.format === "pdf" && pdfMode) return;
+      const sameChapter = renderedChapter.current === chapter.id, offset = body.current?.scrollTop || 0;
+      const root = prose.current, selected = ownedSelectionRange(root), saved = selected ? domRangeOffsets(root, selected) : null;
+      root.innerHTML = safeHtml(chapter.html);
+      renderAnnotations(root, infoRef.current.records, chapter.id, chapter.text);
+      if (saved) {
+        const range = rangeAt(root, saved.start, saved.end);
+        if (range) {
+          const selection2 = window.getSelection();
+          selection2.removeAllRanges();
+          selection2.addRange(range);
         }
-        at = end;
+      } else if (sameChapter && body.current) {
+        body.current.scrollTop = offset;
+        position.remember();
+      } else position.restore();
+      renderedChapter.current = chapter.id;
+    }, [chapter, paintKey, pdfMode]);
+    (0, import_react20.useLayoutEffect)(() => {
+      if (chapter && prose.current && !(b2.format === "pdf" && pdfMode))
+        position.restore();
+    }, [fontSize, settings.lineHeight, settings.pageWidth, pdfMode]);
+    (0, import_react20.useEffect)(() => {
+      if (!chapter || !prose.current || b2.format === "pdf" && pdfMode || !jump || jump.chapterId !== chapter.id || appliedJump.current === jump.key)
+        return;
+      if (jump.location || jump.restorePosition)
+        position.restore({ location: jump.location, offset: jump.offset || 0 });
+      else position.flash(jump);
+      appliedJump.current = jump.key;
+    }, [chapter, jump, pdfMode]);
+    function currentAnchor() {
+      return readSelectionAnchor(prose.current, chapter);
+    }
+    useReaderSelection({
+      root: prose,
+      chapter,
+      enabled: !!chapter && !(b2.format === "pdf" && pdfMode),
+      onSelection: trackSelection,
+      menu: annotationMenu,
+      holdSelection: position.holdSelection
+    });
+    function trackSelection(anchor) {
+      setSelection(
+        (old) => old && old.chapterId === anchor.chapterId && old.start === anchor.start && old.end === anchor.end && old.quote === anchor.quote ? old : anchor
+      );
+    }
+    (0, import_react20.useEffect)(() => {
+      let active = true;
+      const ac = new AbortController();
+      rpc(
+        { action: "annotationState", bookId: b2.id, item: { summaryOnly: true } },
+        ac.signal
+      ).then((x2) => {
+        if (active) setAnnotationHistory(x2.history);
+      }).catch((e) => {
+        if (active && e.name !== "AbortError") run(() => Promise.reject(e));
+      });
+      return () => {
+        active = false;
+        ac.abort();
+      };
+    }, [b2.id, info2.records]);
+    function showAnnotation(anchor, { clientX, clientY, mode = null, recordId } = {}) {
+      if (!anchor || mode !== "context") return;
+      const bounds = dock.containerRef.current.getBoundingClientRect();
+      setSelection(anchor);
+      setAnnotationMenu({
+        key: ++seq.current,
+        anchor,
+        recordId: recordId || exactAnnotation(infoRef.current.records, anchor)?.id || "",
+        mode,
+        x: (clientX ?? bounds.left + 30) - bounds.left,
+        y: (clientY ?? bounds.top + 60) - bounds.top
+      });
+    }
+    function capture(e) {
+      if (e?.button === 2) return;
+      const a = currentAnchor();
+      if (a)
+        showAnnotation(a.anchor, {
+          clientX: a.rect.left,
+          clientY: a.rect.bottom + 8
+        });
+    }
+    function contextAnnotation(e) {
+      if (!prose.current?.contains(e.target)) return;
+      const mark = e.target.closest("[data-record-id]"), r = mark && infoRef.current.records.find(
+        (r2) => r2.id === mark.dataset.recordId && !r2.deletedAt
+      );
+      const native = currentAnchor(), range = window.getSelection()?.rangeCount ? window.getSelection().getRangeAt(0) : null, inside = native && range && [...range.getClientRects()].some(
+        (a) => e.clientX >= a.left && e.clientX <= a.right && e.clientY >= a.top && e.clientY <= a.bottom
+      );
+      const anchor = inside ? native.anchor : r?.anchor;
+      if (anchor) {
+        e.preventDefault();
+        showAnnotation(anchor, {
+          clientX: e.clientX,
+          clientY: e.clientY,
+          mode: "context",
+          recordId: inside ? exactAnnotation(infoRef.current.records, anchor)?.id : r?.id
+        });
       }
-      for (const s of segments.reverse()) {
-        const range = document.createRange();
-        range.setStart(s.node, s.start);
-        range.setEnd(s.node, s.end);
-        range.surroundContents(document.createElement("mark"));
+    }
+    function closeAnnotation(clear = false) {
+      setAnnotationMenu(null);
+      if (clear) {
+        setSelection(null);
+        window.getSelection()?.removeAllRanges();
+        body.current?.focus({ preventScroll: true });
       }
-      if (jump && jump.chapterId === chapter.id) {
-        const r = rangeAt(prose.current, jump.start, jump.end);
-        r?.startContainer.parentElement?.scrollIntoView({ block: "center" });
-      } else if (body.current)
-        body.current.scrollTop = chapter.id === b.progress.chapterId ? b.progress.offset : 0;
-    }, [chapter, info2.records, fontSize, jump, pdfMode]);
-    function capture() {
-      if (!prose.current || !chapter) return;
-      const s = window.getSelection();
-      if (!s || !s.rangeCount || s.isCollapsed) return;
-      const r = s.getRangeAt(0);
-      if (!prose.current.contains(r.commonAncestorContainer)) return;
-      const start = offsetAt(prose.current, r.startContainer, r.startOffset), end = offsetAt(prose.current, r.endContainer, r.endOffset), quote = chapter.text.slice(start, end);
-      if (quote && quote.length <= 2e4)
-        setSelection({ chapterId: chapter.id, start, end, quote });
+    }
+    async function refreshAnnotations() {
+      const result = await rpc({ action: "annotationState", bookId: b2.id });
+      setAnnotationHistory(result.history);
+      setInfo(
+        (old) => old?.book.id === b2.id ? { ...old, records: result.items } : old
+      );
+    }
+    async function styleAnnotation(appearance) {
+      const menu = annotationMenu;
+      if (!menu || busy) return;
+      const r = infoRef.current.records.find(
+        (r2) => r2.id === menu.recordId && !r2.deletedAt
+      ), requestId = request();
+      await run(async () => {
+        const result = await rpc({
+          action: "annotationAction",
+          bookId: b2.id,
+          id: r?.id,
+          revision: r?.revision,
+          item: {
+            operation: "style",
+            anchor: r ? void 0 : menu.anchor,
+            annotation: appearance
+          },
+          requestId
+        });
+        setAnnotationHistory(result.history);
+        try {
+          localStorage.setItem("arr-last-annotation", JSON.stringify(appearance));
+        } catch {
+        }
+        closeAnnotation(true);
+        await refreshAnnotations();
+      });
+    }
+    function noteAnnotation() {
+      const menu = annotationMenu;
+      if (!menu) return;
+      const record = infoRef.current.records.find(
+        (r) => r.id === menu.recordId && !r.deletedAt
+      );
+      setModal({
+        kind: "note",
+        bookId: b2.id,
+        record,
+        type: record?.kind || "note",
+        body: record?.body || "",
+        anchor: menu.anchor,
+        annotation: record ? annotationAppearance(record) : { style: "highlight", color: "yellow" },
+        origin: record?.origin || "user"
+      });
+      closeAnnotation();
+    }
+    async function removeAnnotation() {
+      const r = infoRef.current.records.find(
+        (r2) => r2.id === annotationMenu?.recordId && !r2.deletedAt
+      );
+      if (!r || busy) return;
+      const requestId = request();
+      await run(async () => {
+        const result = await rpc({
+          action: "annotationAction",
+          bookId: b2.id,
+          id: r.id,
+          revision: r.revision,
+          item: { operation: "remove" },
+          requestId
+        });
+        setAnnotationHistory(result.history);
+        closeAnnotation(true);
+        await refreshAnnotations();
+      });
+    }
+    async function replayAnnotation(direction) {
+      if (busy || !(direction === "undo" ? annotationHistory.canUndo : annotationHistory.canRedo))
+        return;
+      const requestId = request();
+      await run(async () => {
+        const result = await rpc({
+          action: "annotationReplay",
+          bookId: b2.id,
+          item: {
+            direction,
+            expectedId: direction === "undo" ? annotationHistory.undoId : annotationHistory.redoId
+          },
+          requestId
+        });
+        setAnnotationHistory(result.history);
+        closeAnnotation(true);
+        await refreshAnnotations();
+      });
     }
     async function update() {
-      setInfo(await rpc({ action: "open", id: b.id }));
+      setInfo(await rpc({ action: "open", id: b2.id }));
     }
     const allRecords = info2.records.filter((r) => !r.deletedAt), chapterIndex = info2.chapters.findIndex((c) => c.id === chapterId);
-    return /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, /* @__PURE__ */ import_react3.default.createElement("div", { className: "readbar row spread" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react3.default.createElement(
-      "button",
-      {
-        onClick: () => {
-          clearTimeout(timer.current);
-          run(async () => {
-            await saveProgress(chapterId, body.current?.scrollTop || 0);
-            back();
-          });
-        }
+    function pageStep(direction) {
+      const el = body.current;
+      if (!el) return;
+      const edge = direction > 0 ? el.scrollTop + el.clientHeight >= el.scrollHeight - 3 : el.scrollTop <= 2;
+      if (edge) {
+        const next = chapterIndex + direction;
+        if (info2.chapters[next]) changeChapter(info2.chapters[next].id);
+      } else
+        el.scrollBy({
+          top: direction * el.clientHeight * 0.88,
+          behavior: "auto"
+        });
+    }
+    function returnReading() {
+      const last = returns.at(-1);
+      if (!last) return;
+      setReturns((old) => old.slice(0, -1));
+      go({ ...last, chapterId: last.chapterId, restorePosition: true }, false);
+    }
+    const historyKeys = useReadingKeys({
+      undoAnnotation: () => replayAnnotation("undo"),
+      redoAnnotation: () => replayAnnotation("redo")
+    });
+    const keys = useReadingKeys({
+      undoAnnotation: () => replayAnnotation("undo"),
+      redoAnnotation: () => replayAnnotation("redo"),
+      focus: toggleFocus,
+      returnReading,
+      down: () => body.current?.scrollBy({ top: 50 }),
+      up: () => body.current?.scrollBy({ top: -50 }),
+      forward: (e) => {
+        if (b2.format === "pdf" && zoom > 1 && e.code === "ArrowRight")
+          body.current?.scrollBy({ left: 80 });
+        else pageStep(1);
       },
-      t("back")
-    ), /* @__PURE__ */ import_react3.default.createElement("button", { "aria-selected": toc, onClick: () => setToc(!toc) }, t("contents")), /* @__PURE__ */ import_react3.default.createElement("b", null, b.title), /* @__PURE__ */ import_react3.default.createElement("span", { className: "pill" }, t(b.status))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react3.default.createElement(
-      "button",
-      {
-        onClick: () => setModal({ kind: "search", bookId: b.id, onJump: go })
+      backward: (e) => {
+        if (b2.format === "pdf" && zoom > 1 && e.code === "ArrowLeft")
+          body.current?.scrollBy({ left: -80 });
+        else pageStep(-1);
       },
-      t("searchText")
-    ), /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => setModal({ kind: "meta", book: b }) }, t("metadata")), /* @__PURE__ */ import_react3.default.createElement(
-      "button",
-      {
-        onClick: () => run(async () => {
-          const v = await rpc({ action: "export", id: b.id });
-          download(v.text, v.name, "text/markdown;charset=utf-8");
-        })
+      start: () => body.current?.scrollTo({ top: 0 }),
+      end: () => body.current?.scrollTo({ top: body.current.scrollHeight }),
+      find: () => setModal({ kind: "search", bookId: b2.id, onJump: go }),
+      goto: () => setModal({ kind: "goto", chapters: info2.chapters, onJump: go }),
+      toc: () => {
+        position.remember();
+        setToc(!toc);
       },
-      t("export")
-    ))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "reader" }, toc && /* @__PURE__ */ import_react3.default.createElement("aside", { className: "toc" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "muted small" }, t("contents"), " \xB7 ", info2.chapters.length), info2.chapters.map((c) => /* @__PURE__ */ import_react3.default.createElement(
-      "button",
+      ask: openSpirit,
+      note: () => showNote(b2.id, "reflection", selection),
+      bookmark: () => showNote(
+        b2.id,
+        "note",
+        b2.format === "pdf" ? { chapterId, start: 0, end: 0, quote: "", pageOnly: true } : null,
+        "\u{1F516} " + (chapter?.title || b2.title)
+      ),
+      bigger: () => b2.format === "pdf" ? setZoom(Math.min(2, zoom + 0.1)) : setFontSize(Math.min(32, fontSize + 1)),
+      smaller: () => b2.format === "pdf" ? setZoom(Math.max(0.5, zoom - 0.1)) : setFontSize(Math.max(14, fontSize - 1)),
+      help: () => setModal({ kind: "help", topic: "keys" })
+    });
+    return /* @__PURE__ */ import_react20.default.createElement(
+      "div",
       {
-        key: c.id,
-        "aria-selected": c.id === chapterId,
-        onClick: () => changeChapter(c.id)
-      },
-      b.format === "pdf" ? t("pdfLabel") + " " + (c.index + 1) : c.title
-    ))), /* @__PURE__ */ import_react3.default.createElement("main", { className: "reading" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "readbar row spread" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react3.default.createElement(
-      "button",
-      {
-        disabled: chapterIndex <= 0,
-        onClick: () => changeChapter(info2.chapters[chapterIndex - 1].id)
-      },
-      t("prev")
-    ), /* @__PURE__ */ import_react3.default.createElement("span", { className: "small" }, chapterIndex + 1, " / ", info2.chapters.length), /* @__PURE__ */ import_react3.default.createElement(
-      "button",
-      {
-        disabled: chapterIndex >= info2.chapters.length - 1,
-        onClick: () => changeChapter(info2.chapters[chapterIndex + 1].id)
-      },
-      t("next")
-    )), /* @__PURE__ */ import_react3.default.createElement("div", { className: "row" }, b.format === "pdf" ? /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => setPdfMode(!pdfMode) }, t(pdfMode ? "textMode" : "pageMode")), /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => setZoom(Math.max(0.5, zoom - 0.15)) }, "\u2212"), /* @__PURE__ */ import_react3.default.createElement("span", null, Math.round(zoom * 100), "%"), /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => setZoom(Math.min(2, zoom + 0.15)) }, "+")) : /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, /* @__PURE__ */ import_react3.default.createElement(
-      "button",
-      {
-        onClick: () => setFontSize(Math.max(14, fontSize - 1))
-      },
-      "A\u2212"
-    ), /* @__PURE__ */ import_react3.default.createElement("span", null, fontSize), /* @__PURE__ */ import_react3.default.createElement(
-      "button",
-      {
-        onClick: () => setFontSize(Math.min(32, fontSize + 1))
-      },
-      "A+"
-    )))), selection && /* @__PURE__ */ import_react3.default.createElement("div", { className: "selection" }, /* @__PURE__ */ import_react3.default.createElement("blockquote", null, selection.quote), /* @__PURE__ */ import_react3.default.createElement("div", { className: "row" }, ["highlight", "reflection", "question"].map((k) => /* @__PURE__ */ import_react3.default.createElement("button", { key: k, onClick: () => showNote(b.id, k, selection) }, t(k))), /* @__PURE__ */ import_react3.default.createElement(
-      "button",
-      {
-        className: "primary",
-        onClick: () => {
-          setSide("spirit");
-        }
-      },
-      t("ask")
-    ), /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => setSelection(null) }, t("clearSelection")))), /* @__PURE__ */ import_react3.default.createElement("div", { className: "body", ref: body, onScroll: scheduleProgress }, !chapter ? /* @__PURE__ */ import_react3.default.createElement("p", null, t("loading")) : b.format === "pdf" && pdfMode ? /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, /* @__PURE__ */ import_react3.default.createElement(
-      PdfPage,
-      {
-        book: b,
-        chapter,
-        pageIndex: chapter.index,
-        zoom,
-        t,
-        onError: (e) => run(() => Promise.reject(e)),
-        onSelect: setSelection,
-        records: allRecords,
-        jump
-      }
-    ), /* @__PURE__ */ import_react3.default.createElement("div", { className: "row", style: { marginTop: 14 } }, /* @__PURE__ */ import_react3.default.createElement(
-      "button",
-      {
-        onClick: () => showNote(
-          b.id,
-          "note",
-          {
-            chapterId: chapter.id,
-            start: 0,
-            end: 0,
-            quote: "",
-            pageOnly: true
-          },
-          t("pdfLabel") + " " + (chapter.index + 1)
-        )
-      },
-      t("bookmark")
-    ), b.hasText && /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => setPdfMode(false) }, t("textMode"))), !b.hasText && /* @__PURE__ */ import_react3.default.createElement("p", { className: "muted" }, t("scanned"))) : /* @__PURE__ */ import_react3.default.createElement(
-      "article",
-      {
-        ref: prose,
-        className: "prose",
-        onMouseUp: capture,
-        onKeyUp: capture,
+        className: "arr-reading-shell" + (dock.open ? " is-dock-open" : "") + (focusMode ? " is-focused" : ""),
+        onKeyDownCapture: (e) => {
+          if (e.target.closest(".arr-reading-workspace,.arr-annotation-menu"))
+            historyKeys(e);
+        },
+        ref: dock.containerRef,
         style: {
-          fontSize: fontSize + "px",
-          lineHeight: settings.lineHeight,
-          maxWidth: settings.pageWidth
+          "--arr-side-width": dock.width + "px",
+          "--arr-toc-width": dock.tocWidth + "px"
         }
-      }
-    )), /* @__PURE__ */ import_react3.default.createElement("footer", { className: "footer" }, chapter?.title, " \xB7 ", t("selectHint"))), /* @__PURE__ */ import_react3.default.createElement("aside", { className: "side" }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "row sidetabs" }, ["spirit", "notes", "history"].map((k) => /* @__PURE__ */ import_react3.default.createElement(
-      "button",
-      {
-        key: k,
-        "aria-selected": side === k,
-        onClick: () => setSide(k)
       },
-      t(k),
-      k === "notes" ? " \xB7 " + allRecords.length : ""
-    ))), side === "spirit" ? /* @__PURE__ */ import_react3.default.createElement(
-      SpiritPanel,
-      {
-        key: b.id,
-        book: b,
-        chapters: info2.chapters,
-        chapterId,
-        anchor: selection,
-        t,
-        lang,
-        date,
-        run,
-        onUpdate: update,
-        exercises: info2.exercises,
-        showNote,
-        onJump: go
-      }
-    ) : /* @__PURE__ */ import_react3.default.createElement("div", { className: "sidebody" }, side === "notes" ? /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => showNote(b.id, "note") }, t("newNote")), /* @__PURE__ */ import_react3.default.createElement("div", { style: { marginTop: 14 } }, allRecords.length ? allRecords.sort((a, b2) => b2.createdAt.localeCompare(a.createdAt)).map((r) => /* @__PURE__ */ import_react3.default.createElement(
-      RecordCard,
-      {
-        key: r.id,
-        r,
-        t,
-        date,
-        onSource: go,
-        onEdit: (r2) => setModal({
-          kind: "note",
-          record: r2,
-          bookId: b.id,
-          type: r2.kind,
-          body: r2.body,
-          anchor: r2.anchor,
-          origin: r2.origin
-        }),
-        onTrash: (r2) => run(async () => {
-          await rpc({
-            action: "trashRecord",
-            id: r2.id,
-            revision: r2.revision,
-            requestId: request()
-          });
-          await update();
-        })
-      }
-    )) : /* @__PURE__ */ import_react3.default.createElement("p", { className: "muted" }, t("noNotes")))) : /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, /* @__PURE__ */ import_react3.default.createElement("div", { className: "card" }, /* @__PURE__ */ import_react3.default.createElement("b", null, t("history"), " \xB7 #", b.progress.pass), /* @__PURE__ */ import_react3.default.createElement("p", null, date(b.createdAt)), /* @__PURE__ */ import_react3.default.createElement("p", { className: "muted" }, t("newPassHint")), /* @__PURE__ */ import_react3.default.createElement(
-      "button",
-      {
-        onClick: () => run(async () => {
-          await rpc({
-            action: "newPass",
-            id: b.id,
-            revision: b.revision,
-            requestId: request()
-          });
-          await update();
-          setChapterId("c0");
-        })
-      },
-      t("newPass")
-    )), [
-      ...allRecords.map((r) => ({
-        at: r.createdAt,
-        label: t(r.kind),
-        body: r.body || r.anchor?.quote,
-        anchor: r.anchor
-      })),
-      ...info2.exercises.map((x) => ({
-        at: x.createdAt,
-        label: t(x.method),
-        body: x.goal
-      }))
-    ].sort((a, b2) => b2.at.localeCompare(a.at)).map((x, i) => /* @__PURE__ */ import_react3.default.createElement("div", { className: "card", key: i }, /* @__PURE__ */ import_react3.default.createElement("div", { className: "small muted" }, date(x.at)), /* @__PURE__ */ import_react3.default.createElement("b", null, x.label), /* @__PURE__ */ import_react3.default.createElement("p", null, x.body), x.anchor && /* @__PURE__ */ import_react3.default.createElement("button", { onClick: () => go(x.anchor) }, t("source")))))))));
+      /* @__PURE__ */ import_react20.default.createElement(
+        "section",
+        {
+          className: "arr-reading-workspace",
+          hidden: dock.open && dock.expanded
+        },
+        !focusMode && chrome,
+        notices,
+        /* @__PURE__ */ import_react20.default.createElement("div", { className: "readbar row spread arr-bookbar" }, /* @__PURE__ */ import_react20.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react20.default.createElement(
+          "button",
+          {
+            onClick: () => {
+              clearTimeout(timer.current);
+              run(async () => {
+                await saveProgress(chapterId, body.current?.scrollTop || 0);
+                back();
+              });
+            }
+          },
+          t("back")
+        ), /* @__PURE__ */ import_react20.default.createElement(
+          "button",
+          {
+            "aria-selected": toc,
+            onClick: () => {
+              position.remember();
+              setToc(!toc);
+            }
+          },
+          t("contents")
+        ), /* @__PURE__ */ import_react20.default.createElement("b", { className: "arr-book-heading", title: b2.title }, b2.title), /* @__PURE__ */ import_react20.default.createElement("span", { className: "pill" }, t(b2.status))), /* @__PURE__ */ import_react20.default.createElement("div", { className: "row" }, focusMode && /* @__PURE__ */ import_react20.default.createElement("div", { className: "arr-focus-chapters" }, /* @__PURE__ */ import_react20.default.createElement(
+          "button",
+          {
+            disabled: chapterIndex <= 0,
+            onClick: () => changeChapter(info2.chapters[chapterIndex - 1].id)
+          },
+          "\u2039"
+        ), /* @__PURE__ */ import_react20.default.createElement("span", null, chapterIndex + 1, "/", info2.chapters.length), /* @__PURE__ */ import_react20.default.createElement(
+          "button",
+          {
+            disabled: chapterIndex >= info2.chapters.length - 1,
+            onClick: () => changeChapter(info2.chapters[chapterIndex + 1].id)
+          },
+          "\u203A"
+        ), returns.length > 0 && /* @__PURE__ */ import_react20.default.createElement("button", { onClick: returnReading }, t("returnToReading"))), /* @__PURE__ */ import_react20.default.createElement(
+          "button",
+          {
+            onClick: () => setModal({ kind: "search", bookId: b2.id, onJump: go })
+          },
+          t("searchText")
+        ), /* @__PURE__ */ import_react20.default.createElement("button", { onClick: () => setModal({ kind: "meta", book: b2 }) }, t("metadata")), /* @__PURE__ */ import_react20.default.createElement(
+          "button",
+          {
+            onClick: () => run(async () => {
+              const v2 = await rpc({ action: "export", id: b2.id });
+              download(v2.text, v2.name, "text/markdown;charset=utf-8");
+            })
+          },
+          t("export")
+        ), /* @__PURE__ */ import_react20.default.createElement("div", { className: "arr-history-buttons" }, /* @__PURE__ */ import_react20.default.createElement(
+          "button",
+          {
+            title: t(
+              annotationHistory.blocked && !annotationHistory.canUndo ? "annotationHistoryChanged" : "undoAnnotation"
+            ),
+            "aria-label": t("undoAnnotation"),
+            disabled: busy || !annotationHistory.canUndo,
+            onClick: () => replayAnnotation("undo")
+          },
+          "\u21B6"
+        ), /* @__PURE__ */ import_react20.default.createElement(
+          "button",
+          {
+            title: t("redoAnnotation"),
+            "aria-label": t("redoAnnotation"),
+            disabled: busy || !annotationHistory.canRedo,
+            onClick: () => replayAnnotation("redo")
+          },
+          "\u21B7"
+        )), /* @__PURE__ */ import_react20.default.createElement(
+          "button",
+          {
+            className: "arr-focus-toggle",
+            "aria-pressed": focusMode,
+            onClick: toggleFocus
+          },
+          t(focusMode ? "exitFocus" : "focusReading")
+        ), /* @__PURE__ */ import_react20.default.createElement(
+          "details",
+          {
+            className: "arr-reader-more",
+            onBlur: (e) => {
+              if (!e.currentTarget.contains(e.relatedTarget))
+                e.currentTarget.open = false;
+            },
+            onKeyDown: (e) => {
+              if (e.key === "Escape") {
+                e.currentTarget.open = false;
+                e.currentTarget.querySelector("summary")?.focus();
+                e.stopPropagation();
+              }
+            }
+          },
+          /* @__PURE__ */ import_react20.default.createElement("summary", null, t("more")),
+          /* @__PURE__ */ import_react20.default.createElement("div", null, /* @__PURE__ */ import_react20.default.createElement("button", { onClick: openReview }, t("readingReview")), /* @__PURE__ */ import_react20.default.createElement(
+            "button",
+            {
+              onClick: () => setModal({ kind: "search", bookId: b2.id, onJump: go })
+            },
+            t("searchText")
+          ), /* @__PURE__ */ import_react20.default.createElement("button", { onClick: () => setModal({ kind: "meta", book: b2 }) }, t("metadata")), /* @__PURE__ */ import_react20.default.createElement(
+            "button",
+            {
+              onClick: () => run(async () => {
+                const v2 = await rpc({ action: "export", id: b2.id });
+                download(v2.text, v2.name, "text/markdown;charset=utf-8");
+              })
+            },
+            t("export")
+          ), /* @__PURE__ */ import_react20.default.createElement("button", { onClick: () => onNavigate?.("traces") }, t("traces")), /* @__PURE__ */ import_react20.default.createElement("button", { onClick: () => onNavigate?.("methodLibrary") }, t("methodLibrary")), /* @__PURE__ */ import_react20.default.createElement("button", { onClick: () => onNavigate?.("settings") }, t("settings")), /* @__PURE__ */ import_react20.default.createElement("button", { onClick: () => setModal({ kind: "help" }) }, t("help")), /* @__PURE__ */ import_react20.default.createElement("button", { onClick: () => setModal({ kind: "import" }) }, t("import")), /* @__PURE__ */ import_react20.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react20.default.createElement(
+            "button",
+            {
+              onClick: () => b2.format === "pdf" && pdfMode ? setZoom(Math.max(0.5, zoom - 0.1)) : setFontSize(Math.max(14, fontSize - 1))
+            },
+            "A\u2212"
+          ), /* @__PURE__ */ import_react20.default.createElement("span", null, b2.format === "pdf" && pdfMode ? Math.round(zoom * 100) + "%" : fontSize), /* @__PURE__ */ import_react20.default.createElement(
+            "button",
+            {
+              onClick: () => b2.format === "pdf" && pdfMode ? setZoom(Math.min(2, zoom + 0.1)) : setFontSize(Math.min(32, fontSize + 1))
+            },
+            "A+"
+          )))
+        ), /* @__PURE__ */ import_react20.default.createElement(
+          "button",
+          {
+            className: "arr-spirit-toggle",
+            "aria-expanded": dock.open,
+            onClick: () => dock.open ? dock.setOpen(false) : openSpirit()
+          },
+          /* @__PURE__ */ import_react20.default.createElement(SpiritAvatar, { size: 25 }),
+          t("spirit")
+        ))),
+        /* @__PURE__ */ import_react20.default.createElement("div", { className: "reader" }, toc && /* @__PURE__ */ import_react20.default.createElement(
+          "aside",
+          {
+            className: "toc arr-toc-pane",
+            hidden: dock.open && dock.expanded
+          },
+          /* @__PURE__ */ import_react20.default.createElement("div", { className: "arr-toc-scroll" }, /* @__PURE__ */ import_react20.default.createElement("div", { className: "muted small" }, t("contents"), " \xB7 ", info2.chapters.length), (info2.toc || info2.chapters.map((c) => ({
+            id: c.id,
+            title: c.title,
+            chapterId: c.id,
+            depth: 0,
+            textOffset: 0
+          }))).map((c) => /* @__PURE__ */ import_react20.default.createElement(
+            "button",
+            {
+              key: c.id,
+              style: { paddingLeft: 8 + (c.depth || 0) * 13 },
+              "aria-selected": c.chapterId === chapterId,
+              title: c.title,
+              onClick: () => go({
+                chapterId: c.chapterId,
+                start: c.textOffset || 0,
+                end: (c.textOffset || 0) + 1
+              })
+            },
+            b2.format === "pdf" ? t("pdfLabel") + " " + (Number(c.chapterId.slice(1)) + 1) : c.title
+          )), info2.navigationWarning && /* @__PURE__ */ import_react20.default.createElement("p", { className: "muted small" }, t("navigationWarning"))),
+          /* @__PURE__ */ import_react20.default.createElement(
+            DockResizer,
+            {
+              dock: dock.tocPanel,
+              label: t("resizeContents"),
+              edge: "right",
+              defaultWidth: 200,
+              className: "arr-toc-resizer"
+            }
+          )
+        ), /* @__PURE__ */ import_react20.default.createElement("main", { className: "reading", hidden: dock.open && dock.expanded }, /* @__PURE__ */ import_react20.default.createElement("div", { className: "readbar row spread arr-chapterbar" }, /* @__PURE__ */ import_react20.default.createElement("div", { className: "row" }, returns.length > 0 && /* @__PURE__ */ import_react20.default.createElement("button", { onClick: returnReading }, t("returnToReading")), /* @__PURE__ */ import_react20.default.createElement(
+          "button",
+          {
+            disabled: chapterIndex <= 0,
+            onClick: () => changeChapter(info2.chapters[chapterIndex - 1].id)
+          },
+          t("prev")
+        ), /* @__PURE__ */ import_react20.default.createElement("span", { className: "small" }, chapterIndex + 1, " / ", info2.chapters.length), /* @__PURE__ */ import_react20.default.createElement(
+          "button",
+          {
+            disabled: chapterIndex >= info2.chapters.length - 1,
+            onClick: () => changeChapter(info2.chapters[chapterIndex + 1].id)
+          },
+          t("next")
+        )), /* @__PURE__ */ import_react20.default.createElement("div", { className: "row" }, b2.format === "pdf" ? /* @__PURE__ */ import_react20.default.createElement(import_react20.default.Fragment, null, /* @__PURE__ */ import_react20.default.createElement("button", { onClick: () => setPdfMode(!pdfMode) }, t(pdfMode ? "textMode" : "pageMode")), /* @__PURE__ */ import_react20.default.createElement("button", { onClick: () => setZoom(Math.max(0.5, zoom - 0.15)) }, "\u2212"), /* @__PURE__ */ import_react20.default.createElement("span", null, Math.round(zoom * 100), "%"), /* @__PURE__ */ import_react20.default.createElement("button", { onClick: () => setZoom(Math.min(2, zoom + 0.15)) }, "+")) : /* @__PURE__ */ import_react20.default.createElement(import_react20.default.Fragment, null, /* @__PURE__ */ import_react20.default.createElement(
+          "button",
+          {
+            onClick: () => b2.format === "pdf" && pdfMode ? setZoom(Math.max(0.5, zoom - 0.1)) : setFontSize(Math.max(14, fontSize - 1))
+          },
+          "A\u2212"
+        ), /* @__PURE__ */ import_react20.default.createElement("span", null, b2.format === "pdf" && pdfMode ? Math.round(zoom * 100) + "%" : fontSize), /* @__PURE__ */ import_react20.default.createElement(
+          "button",
+          {
+            onClick: () => b2.format === "pdf" && pdfMode ? setZoom(Math.min(2, zoom + 0.1)) : setFontSize(Math.min(32, fontSize + 1))
+          },
+          "A+"
+        )))), /* @__PURE__ */ import_react20.default.createElement(
+          "div",
+          {
+            className: "body",
+            ref: body,
+            tabIndex: 0,
+            "aria-label": t("reading"),
+            onKeyDown: keys,
+            onScroll: () => {
+              scheduleProgress();
+              if (!position.isSelecting()) setAnnotationMenu(null);
+            }
+          },
+          !chapter ? /* @__PURE__ */ import_react20.default.createElement("p", null, t("loading")) : b2.format === "pdf" && pdfMode ? /* @__PURE__ */ import_react20.default.createElement(import_react20.default.Fragment, null, /* @__PURE__ */ import_react20.default.createElement(
+            PdfPage,
+            {
+              book: b2,
+              chapter,
+              pageIndex: chapter.index,
+              zoom,
+              t,
+              onError: (e) => run(() => Promise.reject(e)),
+              onSelect: (anchor, position2) => position2?.mode === "context" ? showAnnotation(anchor, position2) : trackSelection(anchor),
+              records: allRecords,
+              jump,
+              selectionMenu: annotationMenu,
+              holdSelection: position.holdSelection,
+              onRenderStart: position.hold,
+              onRendered: () => {
+                if ((jump?.location || jump?.restorePosition) && jump.chapterId === chapterId && appliedJump.current !== jump.key) {
+                  position.restore({
+                    location: jump.location,
+                    offset: jump.offset || 0
+                  });
+                  appliedJump.current = jump.key;
+                } else position.restore();
+              }
+            }
+          ), /* @__PURE__ */ import_react20.default.createElement("div", { className: "row", style: { marginTop: 14 } }, /* @__PURE__ */ import_react20.default.createElement(
+            "button",
+            {
+              onClick: () => showNote(
+                b2.id,
+                "note",
+                {
+                  chapterId: chapter.id,
+                  start: 0,
+                  end: 0,
+                  quote: "",
+                  pageOnly: true
+                },
+                t("pdfLabel") + " " + (chapter.index + 1)
+              )
+            },
+            t("bookmark")
+          ), b2.hasText && /* @__PURE__ */ import_react20.default.createElement("button", { onClick: () => setPdfMode(false) }, t("textMode"))), !b2.hasText && /* @__PURE__ */ import_react20.default.createElement("p", { className: "muted" }, t("scanned"))) : /* @__PURE__ */ import_react20.default.createElement(
+            "article",
+            {
+              ref: prose,
+              className: "prose",
+              onContextMenu: contextAnnotation,
+              style: {
+                fontSize: fontSize + "px",
+                lineHeight: settings.lineHeight,
+                maxWidth: settings.pageWidth
+              }
+            }
+          )
+        ), /* @__PURE__ */ import_react20.default.createElement("footer", { className: "footer" }, chapter?.title, " \xB7 ", t("selectHint"))))
+      ),
+      /* @__PURE__ */ import_react20.default.createElement(
+        "aside",
+        {
+          className: "side arr-reading-dock" + (dock.expanded ? " is-expanded" : ""),
+          hidden: !dock.open,
+          "aria-label": t("spirit")
+        },
+        !dock.expanded && /* @__PURE__ */ import_react20.default.createElement(DockResizer, { dock, label: t("resizeSpirit") }),
+        /* @__PURE__ */ import_react20.default.createElement("div", { className: "arr-dock-inner" }, /* @__PURE__ */ import_react20.default.createElement("div", { className: "arr-dock-header" }, /* @__PURE__ */ import_react20.default.createElement("div", { className: "arr-dock-heading" }, /* @__PURE__ */ import_react20.default.createElement(SpiritAvatar, { size: 36 }), /* @__PURE__ */ import_react20.default.createElement("strong", null, t("spirit"))), /* @__PURE__ */ import_react20.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react20.default.createElement(
+          "button",
+          {
+            className: "arr-icon-button",
+            title: t(dock.expanded ? "restoreDock" : "expandDock"),
+            "aria-label": t(dock.expanded ? "restoreDock" : "expandDock"),
+            "aria-pressed": dock.expanded,
+            onClick: () => dock.setExpanded(!dock.expanded)
+          },
+          dock.expanded ? "\u2199" : "\u2197"
+        ), /* @__PURE__ */ import_react20.default.createElement(
+          "button",
+          {
+            className: "arr-icon-button",
+            title: t("closeSpirit"),
+            "aria-label": t("closeSpirit"),
+            onClick: () => dock.setOpen(false)
+          },
+          "\xD7"
+        ))), /* @__PURE__ */ import_react20.default.createElement("div", { className: "row sidetabs arr-dock-tabs" }, ["spirit", "notes", "history"].map((k2) => /* @__PURE__ */ import_react20.default.createElement(
+          "button",
+          {
+            key: k2,
+            "aria-selected": side === k2,
+            onClick: () => setSide(k2)
+          },
+          t(k2),
+          k2 === "notes" ? " \xB7 " + allRecords.length : ""
+        ))), /* @__PURE__ */ import_react20.default.createElement("div", { className: "arr-chat-content", hidden: side !== "spirit" }, /* @__PURE__ */ import_react20.default.createElement(
+          SpiritPanel,
+          {
+            key: b2.id,
+            book: b2,
+            chapters: info2.chapters,
+            chapterId,
+            anchor: selection,
+            t,
+            lang,
+            date,
+            run,
+            onUpdate: update,
+            exercises: info2.exercises,
+            showNote,
+            onJump: go,
+            focusSignal,
+            onDiscussionChange: setDiscussionId,
+            onModelChange: setDiscussionModel,
+            getReadingLocation: () => position.remember()?.location,
+            onReview: openReview,
+            initialMessage: chatSeed,
+            onMethodDialog: (data) => setModal({ kind: "methodology", ...data }),
+            onHelp: (topic) => setModal({ kind: "help", topic })
+          }
+        )), side !== "spirit" && /* @__PURE__ */ import_react20.default.createElement("div", { className: "sidebody" }, side === "notes" ? /* @__PURE__ */ import_react20.default.createElement(import_react20.default.Fragment, null, /* @__PURE__ */ import_react20.default.createElement("button", { onClick: () => showNote(b2.id, "note") }, t("newNote")), /* @__PURE__ */ import_react20.default.createElement("div", { style: { marginTop: 14 } }, allRecords.length ? allRecords.sort((a, b3) => b3.createdAt.localeCompare(a.createdAt)).map((r) => /* @__PURE__ */ import_react20.default.createElement(
+          RecordCard,
+          {
+            key: r.id,
+            r,
+            labels: preferences.annotationLabels,
+            t,
+            date,
+            onSource: go,
+            onEdit: (r2) => setModal({
+              kind: "note",
+              record: r2,
+              bookId: b2.id,
+              type: r2.kind,
+              body: r2.body,
+              anchor: r2.anchor,
+              origin: r2.origin
+            }),
+            onTrash: (r2) => run(async () => {
+              await rpc({
+                action: "trashRecord",
+                id: r2.id,
+                revision: r2.revision,
+                requestId: request()
+              });
+              await update();
+            })
+          }
+        )) : /* @__PURE__ */ import_react20.default.createElement("p", { className: "muted" }, t("noNotes")))) : /* @__PURE__ */ import_react20.default.createElement(import_react20.default.Fragment, null, /* @__PURE__ */ import_react20.default.createElement("div", { className: "card" }, /* @__PURE__ */ import_react20.default.createElement("b", null, t("history"), " \xB7 #", b2.progress.pass), /* @__PURE__ */ import_react20.default.createElement("p", null, date(b2.createdAt)), /* @__PURE__ */ import_react20.default.createElement("p", { className: "muted" }, t("newPassHint")), /* @__PURE__ */ import_react20.default.createElement(
+          "button",
+          {
+            onClick: () => run(async () => {
+              await rpc({
+                action: "newPass",
+                id: b2.id,
+                revision: b2.revision,
+                requestId: request()
+              });
+              await update();
+              setChapterId("c0");
+            })
+          },
+          t("newPass")
+        )), [
+          ...allRecords.map((r) => ({
+            at: r.createdAt,
+            label: t(r.kind),
+            body: r.body || r.anchor?.quote,
+            anchor: r.anchor
+          })),
+          ...info2.exercises.map((x2) => ({
+            at: x2.createdAt,
+            label: t(x2.method),
+            body: x2.title || x2.goal
+          }))
+        ].sort((a, b3) => b3.at.localeCompare(a.at)).map((x2, i) => /* @__PURE__ */ import_react20.default.createElement("div", { className: "card", key: i }, /* @__PURE__ */ import_react20.default.createElement("div", { className: "small muted" }, date(x2.at)), /* @__PURE__ */ import_react20.default.createElement("b", null, x2.label), /* @__PURE__ */ import_react20.default.createElement("p", null, x2.body), x2.anchor && /* @__PURE__ */ import_react20.default.createElement("button", { onClick: () => go(x2.anchor) }, t("source")))))))
+      ),
+      annotationMenu && /* @__PURE__ */ import_react20.default.createElement(
+        AnnotationMenu,
+        {
+          labels: preferences.annotationLabels,
+          menu: annotationMenu,
+          bounds: {
+            width: dock.containerRef.current?.clientWidth || 900,
+            height: dock.containerRef.current?.clientHeight || 700
+          },
+          record: info2.records.find((r) => r.id === annotationMenu.recordId),
+          t,
+          busy,
+          onStyle: styleAnnotation,
+          onNote: noteAnnotation,
+          onRemove: removeAnnotation,
+          history: annotationHistory,
+          onUndo: () => replayAnnotation("undo"),
+          onRedo: () => replayAnnotation("redo"),
+          onClose: closeAnnotation,
+          onAsk: () => {
+            closeAnnotation();
+            openSpirit();
+          },
+          onCopy: () => run(async () => {
+            await navigator.clipboard.writeText(annotationMenu.anchor.quote);
+            closeAnnotation();
+          }),
+          onTranslate: () => {
+            setChatSeed(
+              (lang === "zh" ? "\u8BF7\u7FFB\u8BD1\u8FD9\u6BB5\u539F\u6587\uFF0C\u5E76\u7ED3\u5408\u4E0A\u4E0B\u6587\u8BF4\u660E\uFF1A\n" : "Please translate and explain this passage in context:\n") + annotationMenu.anchor.quote
+            );
+            closeAnnotation();
+            openSpirit();
+          },
+          onSearch: () => {
+            setModal({
+              kind: "search",
+              bookId: b2.id,
+              query: annotationMenu.anchor.quote,
+              onJump: go
+            });
+            closeAnnotation();
+          }
+        }
+      )
+    );
   }
   function PdfPage({
     book,
@@ -27810,10 +33269,23 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     onError,
     onSelect,
     records,
-    jump
+    jump,
+    onRendered,
+    onRenderStart,
+    selectionMenu,
+    holdSelection
   }) {
-    const host = (0, import_react3.useRef)(null), canvas = (0, import_react3.useRef)(null), layer = (0, import_react3.useRef)(null), docRef = (0, import_react3.useRef)(null), [ready, setReady] = (0, import_react3.useState)(false), [loading, setLoading] = (0, import_react3.useState)(true), [size, setSize] = (0, import_react3.useState)({ width: 0, height: 0 });
-    (0, import_react3.useEffect)(() => {
+    const host = (0, import_react20.useRef)(null), canvas = (0, import_react20.useRef)(null), layer = (0, import_react20.useRef)(null), docRef = (0, import_react20.useRef)(null), [ready, setReady] = (0, import_react20.useState)(false), [loading, setLoading] = (0, import_react20.useState)(true), [size, setSize] = (0, import_react20.useState)({ width: 0, height: 0 }), [availableWidth, setAvailableWidth] = (0, import_react20.useState)(0), lastPdfJump = (0, import_react20.useRef)(null);
+    (0, import_react20.useEffect)(() => {
+      const el = host.current?.parentElement;
+      if (!el) return;
+      const observer = new ResizeObserver(
+        () => setAvailableWidth(el.clientWidth)
+      );
+      observer.observe(el);
+      return () => observer.disconnect();
+    }, []);
+    (0, import_react20.useEffect)(() => {
       let alive = true;
       const task = getDocument({
         url: API + "/original?id=" + encodeURIComponent(book.id),
@@ -27835,10 +33307,11 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         task.destroy();
       };
     }, [book.id]);
-    (0, import_react3.useEffect)(() => {
+    (0, import_react20.useEffect)(() => {
       if (!ready) return;
       let cancelled = false, render = null, textLayer = null;
       setLoading(true);
+      const releasePosition = onRenderStart?.();
       (async () => {
         const p = await docRef.current.getPage(pageIndex + 1);
         if (cancelled) return;
@@ -27872,77 +33345,574 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           viewport: vp
         });
         await textLayer.render();
-        if (!cancelled) setLoading(false);
+        if (!cancelled) {
+          setLoading(false);
+          releasePosition?.();
+          onRendered?.();
+        }
       })().catch((e) => {
         if (!cancelled && e.name !== "RenderingCancelledException" && e.name !== "AbortException")
           onError(e);
+        releasePosition?.();
       });
       return () => {
         cancelled = true;
+        releasePosition?.();
         render?.cancel();
         textLayer?.cancel();
       };
-    }, [ready, pageIndex, zoom]);
-    function capture() {
-      const s = window.getSelection();
-      if (!s || !s.rangeCount || s.isCollapsed) return;
-      const r = s.getRangeAt(0);
-      if (!layer.current.contains(r.commonAncestorContainer)) return;
-      const quote = s.toString(), compact = quote.replace(/\s/g, "");
-      if (!compact || compact.length > 2e4) return;
-      const chars = [], indices = [];
-      for (let i = 0; i < chapter.text.length; i++)
-        if (!/\s/.test(chapter.text[i])) {
-          chars.push(chapter.text[i]);
-          indices.push(i);
-        }
-      const prefix = offsetAt(layer.current, r.startContainer, r.startOffset);
-      const preRange = document.createRange();
-      preRange.selectNodeContents(layer.current);
-      preRange.setEnd(r.startContainer, r.startOffset);
-      const at = preRange.toString().replace(/\s/g, "").length;
-      const all = chars.join("");
-      let idx = all.indexOf(compact, Math.max(0, at - 3));
-      if (idx < 0) idx = all.indexOf(compact);
-      if (idx < 0) return;
-      const start = indices[idx], end = indices[idx + compact.length - 1] + 1;
-      const box = host.current.getBoundingClientRect(), rects = [...r.getClientRects()].filter((x) => x.width > 0 && x.height > 0).slice(0, 300).map((x) => ({
-        x: Math.max(0, Math.min(1, (x.x - box.x) / box.width)),
-        y: Math.max(0, Math.min(1, (x.y - box.y) / box.height)),
-        width: Math.max(0, Math.min(1, x.width / box.width)),
-        height: Math.max(0, Math.min(1, x.height / box.height))
+    }, [ready, pageIndex, zoom, availableWidth]);
+    (0, import_react20.useEffect)(() => {
+      if (loading || !jump || jump.chapterId !== chapter.id || lastPdfJump.current === jump.key || jump.location || jump.restorePosition)
+        return;
+      lastPdfJump.current = jump.key;
+      const body = host.current.parentElement;
+      let r;
+      if (jump.rects?.length) {
+        body.scrollTop += host.current.getBoundingClientRect().top - body.getBoundingClientRect().top + jump.rects[0].y * size.height - body.clientHeight * 0.25;
+      } else {
+        const compact2 = chapter.text.slice(0, jump.start || 0).replace(/\s/g, "").length, layerText = layer.current.textContent;
+        let count = 0, offset = 0;
+        for (; offset < layerText.length && count < compact2; offset++)
+          if (!/\s/.test(layerText[offset])) count++;
+        r = rangeForOffset(
+          layer.current,
+          offset,
+          offset + Math.max(1, (jump.quote || "").replace(/\s/g, "").length)
+        );
+        if (r)
+          body.scrollTop += r.getBoundingClientRect().top - body.getBoundingClientRect().top - body.clientHeight * 0.25;
+      }
+      if (r && globalThis.CSS?.highlights && globalThis.Highlight) {
+        CSS.highlights.set("arr-reading-jump", new Highlight(r));
+        const timer = setTimeout(
+          () => CSS.highlights.delete("arr-reading-jump"),
+          2200
+        );
+        return () => {
+          clearTimeout(timer);
+          CSS.highlights.delete("arr-reading-jump");
+        };
+      }
+    }, [loading, jump, size]);
+    useReaderSelection({
+      root: layer,
+      chapter,
+      enabled: ready && !loading,
+      menu: selectionMenu,
+      holdSelection,
+      onSelection: () => capture()
+    });
+    function capture(event) {
+      if (event?.button === 2) return;
+      const found = readSelectionAnchor(layer.current, chapter);
+      if (!found) return;
+      const box = host.current.getBoundingClientRect();
+      if (!box.width || !box.height) return;
+      const rects = [...found.range.getClientRects()].filter((r) => r.width > 0 && r.height > 0).slice(0, 300).map((r) => ({
+        x: Math.max(0, Math.min(1, (r.x - box.x) / box.width)),
+        y: Math.max(0, Math.min(1, (r.y - box.y) / box.height)),
+        width: Math.max(0, Math.min(1, r.width / box.width)),
+        height: Math.max(0, Math.min(1, r.height / box.height))
       }));
-      onSelect({
-        chapterId: chapter.id,
-        start,
-        end,
-        quote: chapter.text.slice(start, end),
-        rects
+      const anchor = { ...found.anchor, rects };
+      onSelect(anchor, {
+        clientX: found.rect.left,
+        clientY: found.rect.bottom + 8
       });
+      return anchor;
     }
-    const marks = records.filter((r) => r.anchor?.chapterId === chapter.id).flatMap((r) => r.anchor.rects || []);
-    return /* @__PURE__ */ import_react3.default.createElement(import_react3.default.Fragment, null, /* @__PURE__ */ import_react3.default.createElement("div", { className: "pdfbox", ref: host }, /* @__PURE__ */ import_react3.default.createElement("canvas", { ref: canvas }), /* @__PURE__ */ import_react3.default.createElement(
+    const marks = records.filter(
+      (r) => !r.deletedAt && r.anchor?.chapterId === chapter.id && annotationAppearance(r).style !== "none"
+    ).flatMap(
+      (record) => (record.anchor.rects || []).map((rect) => ({
+        ...rect,
+        recordId: record.id,
+        annotation: annotationAppearance(record)
+      }))
+    );
+    return /* @__PURE__ */ import_react20.default.createElement(import_react20.default.Fragment, null, /* @__PURE__ */ import_react20.default.createElement(
       "div",
       {
-        className: "pdftext",
-        ref: layer,
-        onMouseUp: capture,
-        onKeyUp: capture
-      }
-    ), marks.map((r, i) => /* @__PURE__ */ import_react3.default.createElement(
-      "div",
-      {
-        key: i,
-        className: "pdfmark",
-        style: {
-          left: r.x * size.width,
-          top: r.y * size.height,
-          width: r.width * size.width,
-          height: r.height * size.height
+        className: "pdfbox",
+        ref: host,
+        onContextMenu: (e) => {
+          const box = host.current.getBoundingClientRect(), record = pdfAnnotationAt(
+            records,
+            chapter.id,
+            (e.clientX - box.left) / box.width,
+            (e.clientY - box.top) / box.height
+          );
+          if (record) {
+            e.preventDefault();
+            onSelect(record.anchor, {
+              clientX: e.clientX,
+              clientY: e.clientY,
+              mode: "context",
+              recordId: record.id
+            });
+          } else {
+            const native = window.getSelection(), range = native?.rangeCount && !native.isCollapsed ? native.getRangeAt(0) : null;
+            if (!range || ![...range.getClientRects()].some(
+              (a) => e.clientX >= a.left && e.clientX <= a.right && e.clientY >= a.top && e.clientY <= a.bottom
+            ))
+              return;
+            const anchor = capture();
+            if (anchor) {
+              e.preventDefault();
+              onSelect(anchor, {
+                clientX: e.clientX,
+                clientY: e.clientY,
+                mode: "context"
+              });
+            }
+          }
         }
-      }
-    ))), loading && /* @__PURE__ */ import_react3.default.createElement("p", null, t("loading")));
+      },
+      /* @__PURE__ */ import_react20.default.createElement("canvas", { ref: canvas }),
+      /* @__PURE__ */ import_react20.default.createElement("div", { className: "pdftext", ref: layer }),
+      marks.map((r, i) => /* @__PURE__ */ import_react20.default.createElement(
+        "div",
+        {
+          key: i,
+          className: "pdfmark arr-pdf-annotation",
+          "data-annotation-style": r.annotation.style,
+          "data-annotation-color": r.annotation.color,
+          style: {
+            left: r.x * size.width,
+            top: r.y * size.height,
+            width: r.width * size.width,
+            height: r.height * size.height
+          }
+        }
+      ))
+    ), loading && /* @__PURE__ */ import_react20.default.createElement("p", null, t("loading")));
   }
+
+  // src/client/spirit-copy.js
+  var spiritCopy = {
+    freeShort: ["\u81EA\u7531\u804A", "Chat"],
+    huntShort: ["\u72E9\u730E\u6CD5", "Explore"],
+    feynmanShort: ["\u8D39\u66FC\u6CD5", "Teach-back"],
+    debateShort: ["\u8FA9\u8BBA\u6CD5", "Debate"],
+    readingMode: ["\u9605\u8BFB\u65B9\u6CD5\uFF0C\u968F\u65F6\u5207\u6362", "Reading approach, switch anytime"],
+    discussionHistory: ["\u4EE5\u524D\u7684\u8BA8\u8BBA", "Past discussions"],
+    noDiscussions: [
+      "\u8FD8\u6CA1\u6709\u8BA8\u8BBA\uFF0C\u60F3\u5230\u4EC0\u4E48\u5C31\u76F4\u63A5\u804A\u3002",
+      "No discussions yet. Start whenever a thought comes."
+    ],
+    newDiscussion: ["\u65B0\u5EFA\u8BA8\u8BBA", "New discussion"],
+    spiritWelcome: ["\u6211\u662F\u4E66\u866B\uFF0C\u966A\u4F60\u6162\u6162\u8BFB", "I\u2019m Bookworm. Let\u2019s read together."],
+    spiritWelcomeHint: [
+      "\u4E0D\u7528\u5148\u60F3\u597D\u95EE\u9898\u3002\u8BFB\u5230\u4E0D\u61C2\u3001\u597D\u5947\u6216\u6709\u5171\u9E23\u7684\u5730\u65B9\uFF0C\u968F\u65F6\u548C\u6211\u804A\uFF1B\u9009\u4E00\u79CD\u65B9\u6CD5\uFF0C\u4E5F\u53EF\u4EE5\u76F4\u63A5\u5F00\u59CB\u3002",
+      "No goal needed. Share a puzzling passage, a curiosity or a thought. Choose an approach whenever it helps."
+    ],
+    spiritMessagePlaceholder: [
+      "\u60F3\u5230\u4EC0\u4E48\uFF0C\u6216\u60F3\u4E00\u8D77\u8BFB\u54EA\u4E00\u6BB5\u2026\u2026",
+      "A thought, a question, or a passage to explore\u2026"
+    ],
+    spiritThinking: ["\u4E66\u866B\u6B63\u5728\u9605\u8BFB\u4E0E\u601D\u8003\u2026", "Bookworm is reading and thinking\u2026"],
+    replyStopped: [
+      "\u672C\u8F6E\u56DE\u590D\u5DF2\u505C\u6B62\uFF0C\u53EF\u4EE5\u7EE7\u7EED\u804A\u3002",
+      "This reply stopped. You can continue the discussion."
+    ],
+    readTogether: ["\u966A\u6211\u8BFB\u5F53\u524D\u5185\u5BB9", "Read this with me"],
+    explainPassage: ["\u804A\u804A\u8FD9\u6BB5", "Explore this passage"],
+    freeStarter: [
+      "\u8BF7\u966A\u6211\u8BFB\u5F53\u524D\u9009\u6BB5\u6216\u7AE0\u8282\uFF0C\u5148\u7528\u6613\u61C2\u7684\u8BDD\u8BF4\u660E\u5176\u4E2D\u503C\u5F97\u6CE8\u610F\u7684\u5185\u5BB9\uFF0C\u518D\u81EA\u7136\u548C\u6211\u804A\u3002",
+      "Read the current passage or chapter with me. Explain the key ideas simply, then discuss them naturally."
+    ],
+    huntStarter: [
+      "\u6211\u6682\u65F6\u6CA1\u6709\u660E\u786E\u7684\u95EE\u9898\u3002\u8BF7\u7528\u72E9\u730E\u6CD5\u966A\u6211\u8BFB\u5F53\u524D\u5185\u5BB9\uFF0C\u4ECE\u539F\u6587\u91CC\u627E\u4E00\u4E2A\u503C\u5F97\u8FFD\u5BFB\u7684\u7EBF\u7D22\uFF0C\u5E2E\u52A9\u6211\u53D1\u73B0\u5174\u8DA3\u548C\u8054\u7CFB\uFF0C\u4E0D\u7528\u5148\u95EE\u6211\u7684\u76EE\u6807\u3002",
+      "I do not have a specific question yet. Explore the current text with me: find a meaningful lead in the passage, without requiring a goal first."
+    ],
+    feynmanStarter: [
+      "\u8BF7\u7528\u8D39\u66FC\u6CD5\u966A\u6211\u7406\u89E3\u5F53\u524D\u5185\u5BB9\u3002\u5148\u5E2E\u6211\u770B\u61C2\u4E00\u4E2A\u5173\u952E\u6982\u5FF5\uFF0C\u518D\u6839\u636E\u6211\u7684\u7406\u89E3\u9080\u8BF7\u6211\u7528\u81EA\u5DF1\u7684\u8BDD\u8BF4\u8BF4\uFF0C\u4E0D\u8981\u4E00\u5F00\u59CB\u5C31\u8003\u6211\u3002",
+      "Help me understand this passage with teach-back. Explain a key idea first, then invite me to describe it in my own words when ready."
+    ],
+    debateStarter: [
+      "\u8BF7\u7528\u8FA9\u8BBA\u6CD5\u966A\u6211\u770B\u5F53\u524D\u5185\u5BB9\uFF0C\u5148\u51C6\u786E\u63D0\u53D6\u4F5C\u8005\u7684\u4E00\u4E2A\u89C2\u70B9\uFF0C\u518D\u6BD4\u8F83\u652F\u6301\u7406\u7531\u3001\u53CD\u4F8B\u4E0E\u9002\u7528\u6761\u4EF6\uFF0C\u5E2E\u52A9\u6211\u5F62\u6210\u81EA\u5DF1\u7684\u5224\u65AD\u3002",
+      "Examine the current passage through debate. Identify the author\u2019s claim, then compare its support, counterexamples and conditions."
+    ],
+    explainStarter: [
+      "\u8FD9\u6BB5\u8BDD\u53EF\u4EE5\u600E\u4E48\u7406\u89E3\uFF1F",
+      "How can I understand this passage?"
+    ],
+    hunt: ["\u72E9\u730E\u6CD5 \xB7 \u53D1\u73B0\u7EBF\u7D22", "Question-led exploration"],
+    huntDesc: [
+      "\u4ECE\u773C\u524D\u7684\u6BB5\u843D\u53D1\u73B0\u7EBF\u7D22\u548C\u8054\u7CFB\uFF0C\u95EE\u9898\u5728\u9605\u8BFB\u4E2D\u6162\u6162\u5F62\u6210\u3002",
+      "Discover leads and connections in the passage; questions can emerge as you read."
+    ],
+    feynmanDesc: [
+      "\u5148\u4E00\u8D77\u770B\u61C2\uFF0C\u518D\u8BD5\u7740\u7528\u81EA\u5DF1\u7684\u8BDD\u89E3\u91CA\uFF0C\u968F\u65F6\u53EF\u4EE5\u8BF7\u6C42\u63D0\u793A\u3002",
+      "Understand together, then explain in your own words. Ask for a hint whenever needed."
+    ],
+    debateDesc: [
+      "\u4ECE\u539F\u6587\u63D0\u53D6\u89C2\u70B9\uFF0C\u770B\u770B\u4F9D\u636E\u3001\u53CD\u4F8B\u548C\u6761\u4EF6\uFF0C\u6162\u6162\u5F62\u6210\u81EA\u5DF1\u7684\u5224\u65AD\u3002",
+      "Explore a claim, its evidence and limits, then form your own judgment."
+    ],
+    freeDesc: [
+      "\u60F3\u5230\u4EC0\u4E48\u5C31\u804A\u4EC0\u4E48\uFF0C\u89E3\u91CA\u3001\u7FFB\u8BD1\u548C\u611F\u609F\u90FD\u53EF\u4EE5\u3002",
+      "Talk about any thought: explanations, translations and reflections are welcome."
+    ],
+    resizeSpirit: [
+      "\u62D6\u52A8\u8C03\u6574\u4FA7\u680F\u5BBD\u5EA6\uFF1B\u5DE6\u53F3\u952E\u5FAE\u8C03\uFF0C\u53CC\u51FB\u6216 Enter \u6062\u590D\u9ED8\u8BA4",
+      "Drag to resize; use arrow keys to adjust, double-click or Enter to reset"
+    ],
+    expandDock: ["\u5C55\u5F00\u4FA7\u680F", "Expand panel"],
+    restoreDock: ["\u6062\u590D\u9605\u8BFB\u5E03\u5C40", "Restore reading layout"],
+    closeSpirit: ["\u6536\u8D77\u4E66\u866B\u4FA7\u680F", "Close Bookworm panel"],
+    sendKeys: [
+      "Enter \u53D1\u9001 \xB7 Shift+Enter \u6362\u884C",
+      "Enter to send \xB7 Shift+Enter for newline"
+    ],
+    roomDefaultModel: ["\u8DDF\u968F\u4E66\u623F\u8BBE\u7F6E / DSH \u9ED8\u8BA4", "Reading-room / DSH default"],
+    refreshModels: ["\u5237\u65B0\u6A21\u578B\u5217\u8868", "Refresh model list"],
+    currentReading: ["\u5F53\u524D\u9605\u8BFB\u5185\u5BB9", "Current reading"],
+    noExercise: [
+      "\u60F3\u5230\u4EC0\u4E48\u5C31\u76F4\u63A5\u804A\uFF0C\u65B9\u6CD5\u53EF\u4EE5\u968F\u65F6\u5207\u6362\u3002",
+      "Start with any thought and switch methods anytime."
+    ],
+    helpText: [
+      "\u5BFC\u5165\u4E66\u7C4D\u540E\uFF0C\u9009\u4E2D\u539F\u6587\u6216\u76F4\u63A5\u5728\u4E66\u866B\u8F93\u5165\u6846\u63D0\u95EE\u3002\u56DB\u79CD\u9605\u8BFB\u65B9\u5F0F\u968F\u65F6\u5207\u6362\uFF0C\u65E0\u9700\u63D0\u524D\u586B\u5199\u76EE\u6807\u3002\u62D6\u52A8\u4FA7\u680F\u5DE6\u8FB9\u7F18\u8C03\u5BBD\uFF0C\u53F3\u4E0A\u89D2\u53EF\u5C55\u5F00\u6216\u6536\u8D77\uFF1B\u6A21\u578B\u9009\u62E9\u5728\u8F93\u5165\u6846\u5E95\u90E8\u3002\u7B14\u8BB0\u548C\u8BA8\u8BBA\u6309\u65E5\u671F\u4FDD\u7559\uFF0C\u8BBE\u7F6E\u4E2D\u53EF\u5BFC\u51FA\u5907\u4EFD\u3002",
+      "Import a book, select a passage or type directly to Bookworm. Switch reading approaches anytime, with no goal form. Drag the panel\u2019s left edge to resize; expand or close it from the header. Choose a model inside the composer. Notes and discussions retain their dates and can be backed up in Settings."
+    ]
+  };
+
+  // src/client/spirit.css
+  var spirit_default = '.arr .arr-reading-shell {\n  display: flex;\n  flex: 1;\n  min-height: 0;\n  min-width: 0;\n  width: 100%;\n  height: 100%;\n  overflow: hidden;\n  align-items: stretch;\n}\n.arr .arr-reading-workspace {\n  display: flex;\n  flex: 1 1 0;\n  flex-direction: column;\n  min-width: 0;\n  min-height: 0;\n  overflow: hidden;\n}\n.arr .arr-reading-workspace[hidden] {\n  display: none !important;\n}\n.arr .arr-reading-workspace > .reader {\n  flex: 1;\n  min-height: 0;\n  min-width: 0;\n}\n.arr .arr-reading-workspace > .head {\n  padding: 18px 22px 12px;\n}\n.arr .arr-reading-workspace > .readbar {\n  padding: 10px 16px;\n  gap: 10px;\n  flex: none;\n}\n.arr .arr-reading-workspace > .readbar > .row:first-child {\n  flex: 1 1 300px;\n  min-width: 0;\n}\n.arr .arr-reading-workspace .arr-book-heading {\n  flex: 1;\n  min-width: 80px;\n  max-width: 100%;\n}\n.arr .arr-reading-shell > .arr-reading-dock {\n  height: 100%;\n  align-self: stretch;\n  border-left: 1px solid var(--dsw-alias-border-l1);\n}\n.arr .arr-reading-shell > .arr-reading-dock .arr-dock-header {\n  min-height: 64px;\n  padding: 14px 18px;\n}\n.arr .toc.arr-toc-pane {\n  position: relative;\n  flex: 0 0 var(--arr-toc-width, 200px);\n  width: var(--arr-toc-width, 200px);\n  min-width: 0;\n  max-width: none;\n  padding: 0;\n  overflow: visible;\n}\n.arr .arr-toc-scroll {\n  width: calc(100% - 6px);\n  height: 100%;\n  min-height: 0;\n  overflow: auto;\n  padding: 14px;\n  scrollbar-gutter: stable;\n}\n.arr .arr-toc-pane > .arr-toc-resizer {\n  left: auto;\n  right: -6px;\n}\n.arr .side.arr-reading-dock {\n  position: relative;\n  flex: 0 0 var(--arr-side-width, 420px);\n  width: var(--arr-side-width, 420px);\n  min-width: 0;\n  max-width: none;\n  resize: none;\n  overflow: visible;\n  background: var(--dsw-alias-bg-base);\n}\n.arr .arr-reading-dock[hidden],\n.arr .reading[hidden],\n.arr .toc[hidden],\n.arr .arr-chat-content[hidden] {\n  display: none !important;\n}\n.arr .arr-reading-dock.is-expanded {\n  flex: 1 1 100%;\n  width: 100%;\n}\n.arr .arr-dock-inner {\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  min-height: 0;\n  overflow: hidden;\n}\n.arr .arr-dock-header {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 12px;\n  padding: 14px 16px 10px;\n  flex: none;\n}\n.arr .arr-dock-heading {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  font-size: 16px;\n}\n.arr .arr-spirit-avatar {\n  display: block;\n  object-fit: contain;\n  border-radius: 50%;\n  flex: none;\n}\n.arr .arr-icon-button {\n  padding: 4px 7px;\n  border: 0;\n  background: transparent;\n  min-width: 28px;\n  border-radius: 6px;\n  font-size: 18px;\n  color: var(--dsw-alias-label-secondary);\n}\n.arr .arr-dock-tabs {\n  padding: 0 14px 10px;\n  gap: 6px;\n  border-bottom: 1px solid var(--dsw-alias-border-l1);\n}\n.arr .arr-dock-tabs button {\n  border: 0;\n  background: transparent;\n  color: var(--dsw-alias-label-secondary);\n  padding: 5px 10px;\n}\n.arr .arr-dock-tabs button[aria-selected="true"] {\n  color: var(--dsw-alias-label-primary);\n  background: var(--dsw-alias-bg-layer-2);\n  font-weight: 600;\n}\n.arr .arr-dock-resizer {\n  position: absolute;\n  inset: 0 auto 0 -6px;\n  width: 12px;\n  z-index: 8;\n  cursor: col-resize;\n  touch-action: none;\n}\n.arr .arr-dock-resizer:after {\n  content: "";\n  position: absolute;\n  left: 5px;\n  width: 2px;\n  top: 0;\n  bottom: 0;\n  background: transparent;\n}\n.arr .arr-dock-resizer:hover:after,\n.arr .arr-dock-resizer:focus-visible:after,\n.arr .arr-dock-resizer.is-dragging:after {\n  background: var(--dsw-alias-brand-primary);\n}\n.arr .arr-dock-resizer:focus-visible {\n  outline: 1px solid var(--dsw-alias-brand-primary);\n  outline-offset: -3px;\n}\n.arr .arr-chat-content {\n  display: flex;\n  flex-direction: column;\n  min-height: 0;\n  flex: 1;\n}\n.arr .arr-chat-tools {\n  flex: none;\n  padding: 10px 14px 8px;\n}\n.arr .arr-method-switch {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 4px;\n}\n.arr .arr-method-switch button {\n  border: 1px solid transparent;\n  background: transparent;\n  color: var(--dsw-alias-label-secondary);\n  padding: 5px 8px;\n  font-size: 13px;\n}\n.arr .arr-method-switch button[aria-pressed="true"] {\n  color: var(--dsw-alias-label-primary);\n  border-color: var(--dsw-alias-border-l2);\n  background: var(--dsw-alias-bg-layer-2);\n  font-weight: 600;\n}\n.arr .arr-method-hint {\n  font-size: 12px;\n  color: var(--dsw-alias-label-secondary);\n  line-height: 1.7;\n  margin: 8px 0 0;\n}\n.arr .arr-thread-list {\n  margin-top: 10px;\n  max-height: 260px;\n  overflow: auto;\n  border: 1px solid var(--dsw-alias-border-l1);\n  border-radius: 8px;\n  padding: 8px;\n}\n.arr .arr-thread-list button {\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  width: 100%;\n  gap: 3px;\n  text-align: left;\n  border: 0;\n  background: transparent;\n  margin: 4px 0;\n}\n.arr .arr-thread-list button span {\n  max-width: 100%;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.arr .arr-thread-list button[aria-pressed="true"] {\n  background: var(--dsw-alias-bg-layer-2);\n}\n.arr .arr-thread-list small {\n  color: var(--dsw-alias-label-secondary);\n}\n.arr .arr-chat-scroll {\n  min-height: 0;\n  flex: 1;\n  overflow: auto;\n  padding: 12px 18px 24px;\n  scrollbar-gutter: stable;\n}\n.arr .arr-chat-welcome {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  text-align: center;\n  padding: 30px 12px 16px;\n  gap: 12px;\n  color: var(--dsw-alias-label-secondary);\n}\n.arr .arr-chat-welcome h3 {\n  font-size: 18px;\n  color: var(--dsw-alias-label-primary);\n  margin: 0;\n}\n.arr .arr-chat-welcome p {\n  line-height: 1.8;\n  max-width: 400px;\n  margin: 0;\n}\n.arr .arr-starters {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 8px;\n  justify-content: center;\n  margin-top: 12px;\n}\n.arr .arr-starters button {\n  font-size: 13px;\n  padding: 8px 12px;\n  background: var(--dsw-alias-bg-layer-1);\n}\n.arr .arr-chat-message {\n  padding: 12px 0;\n  margin: 0 0 16px;\n  overflow-wrap: anywhere;\n  font-size: 14px;\n  line-height: 1.85;\n}\n.arr .arr-chat-message.user {\n  margin-left: 24px;\n  padding: 12px 15px;\n  background: var(--dsw-alias-bg-layer-1);\n  border-radius: 12px;\n}\n.arr .arr-message-author {\n  display: flex;\n  gap: 8px;\n  align-items: center;\n  margin-bottom: 10px;\n  font-size: 13px;\n}\n.arr .arr-message-meta {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 6px;\n  flex-wrap: wrap;\n  font-size: 11px;\n  color: var(--dsw-alias-label-secondary);\n  margin-top: 12px;\n}\n.arr .arr-message-meta button {\n  font-size: 11px;\n  border: 0;\n  padding: 3px 5px;\n  background: transparent;\n  color: var(--dsw-alias-label-secondary);\n}\n.arr .arr-chat-markdown {\n  overflow-wrap: anywhere;\n}\n.arr .arr-chat-markdown p {\n  margin: 0 0 0.85em;\n}\n.arr .arr-chat-markdown p:last-child {\n  margin-bottom: 0;\n}\n.arr .arr-chat-markdown ul,\n.arr .arr-chat-markdown ol {\n  padding-left: 1.5em;\n  margin: 0.7em 0;\n}\n.arr .arr-chat-markdown pre {\n  padding: 12px;\n  overflow: auto;\n  white-space: pre-wrap;\n  background: var(--dsw-alias-bg-layer-2);\n  border-radius: 6px;\n  font-size: 12px;\n}\n.arr .arr-chat-markdown table {\n  display: block;\n  max-width: 100%;\n  overflow: auto;\n  border-collapse: collapse;\n}\n.arr .arr-chat-markdown td,\n.arr .arr-chat-markdown th {\n  padding: 6px;\n  border: 1px solid var(--dsw-alias-border-l1);\n}\n.arr .arr-chat-markdown a {\n  color: var(--dsw-alias-brand-primary);\n}\n.arr .arr-chat-markdown h1,\n.arr .arr-chat-markdown h2,\n.arr .arr-chat-markdown h3 {\n  font-size: 16px;\n  margin: 15px 0 8px;\n}\n.arr .arr-chat-markdown .arr-citation {\n  display: inline;\n  padding: 0 4px;\n  margin: 0 2px;\n  font-size: 11px;\n  color: var(--dsw-alias-brand-primary);\n  background: var(--dsw-alias-bg-layer-2);\n  border: 0;\n}\n.arr .arr-chat-compose {\n  padding: 10px 14px 14px;\n  flex: none;\n}\n.arr .arr-compose-box {\n  border: 1px solid var(--dsw-alias-border-l2);\n  border-radius: 12px;\n  padding: 10px 11px;\n  background: var(--dsw-alias-bg-base);\n}\n.arr .arr-compose-box:focus-within {\n  border-color: var(--dsw-alias-brand-primary);\n}\n.arr .arr-compose-box textarea {\n  border: 0;\n  background: transparent;\n  width: 100%;\n  min-height: 82px;\n  max-height: 250px;\n  resize: vertical;\n  padding: 4px;\n  outline: none;\n  line-height: 1.7;\n}\n.arr .arr-compose-box textarea:focus-visible {\n  outline: none;\n}\n.arr .arr-compose-bottom {\n  display: flex;\n  align-items: center;\n  gap: 7px;\n  flex-wrap: wrap;\n  margin-top: 8px;\n}\n.arr .arr-key-hint {\n  color: var(--dsw-alias-label-secondary);\n  font-size: 11px;\n  white-space: nowrap;\n}\n.arr .arr-compose-actions {\n  display: flex;\n  align-items: center;\n  gap: 5px;\n  min-width: 0;\n  flex: 1 1 220px;\n  justify-content: flex-end;\n  margin-left: auto;\n}\n.arr .arr-model-picker {\n  display: flex;\n  position: relative;\n  align-items: center;\n  gap: 5px;\n  min-width: 60px;\n  max-width: 260px;\n  color: var(--dsw-alias-label-secondary);\n  font-size: 12px;\n  padding: 5px 2px;\n  cursor: pointer;\n}\n.arr .arr-model-picker > span:first-child {\n  min-width: 0;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.arr .arr-model-picker select {\n  position: absolute;\n  inset: 0;\n  opacity: 0;\n  width: 100%;\n  cursor: pointer;\n}\n.arr .arr-model-picker:focus-within {\n  outline: 2px solid var(--dsw-alias-brand-primary);\n  border-radius: 4px;\n}\n.arr .arr-send {\n  color: var(--dsw-alias-brand-primary);\n  border-color: var(--dsw-alias-border-l2);\n  background: var(--dsw-alias-bg-layer-1);\n  white-space: nowrap;\n}\n.arr .arr-chat-foot {\n  display: flex;\n  align-items: flex-start;\n  justify-content: space-between;\n  gap: 8px;\n  margin-top: 9px;\n  color: var(--dsw-alias-label-secondary);\n  font-size: 11px;\n}\n.arr .arr-chat-foot details {\n  min-width: 0;\n}\n.arr .arr-chat-foot summary {\n  cursor: pointer;\n}\n.arr .arr-chat-foot button {\n  border: 0;\n  background: transparent;\n  color: inherit;\n  padding: 0;\n  font-size: 11px;\n  white-space: nowrap;\n}\n.arr .arr-compose-quote {\n  font-size: 12px;\n  margin: 0 0 8px;\n  color: var(--dsw-alias-label-secondary);\n}\n.arr .arr-compose-quote blockquote {\n  max-height: 110px;\n  overflow: auto;\n}\n.arr .arr-chat-status {\n  font-size: 12px;\n  color: var(--dsw-alias-label-secondary);\n}\n.arr .arr-chat-error {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 8px;\n  padding: 8px 14px;\n  color: var(--dsw-alias-state-error-primary);\n  font-size: 12px;\n}\n.arr .arr-spirit-toggle {\n  display: flex;\n  align-items: center;\n  gap: 6px;\n}\n.arr .reading {\n  min-width: 280px;\n}\n.arr .arr-dock-inner > .sidebody {\n  flex: 1;\n  min-height: 0;\n}\n.arr button[aria-selected="true"] .muted {\n  color: inherit;\n  opacity: 0.86;\n}\n';
+
+  // src/client/upgrade-copy.js
+  var upgradeCopy = {
+    resizeContents: [
+      "\u62D6\u52A8\u8C03\u6574\u76EE\u5F55\u5BBD\u5EA6\uFF1B\u5DE6\u53F3\u952E\u5FAE\u8C03\uFF0C\u53CC\u51FB\u6216 Enter \u6062\u590D\u9ED8\u8BA4",
+      "Drag to resize contents; arrow keys adjust, double-click or Enter resets"
+    ],
+    openLocation: ["\u5728\u6587\u4EF6\u7BA1\u7406\u5668\u4E2D\u6253\u5F00", "Open in file manager"],
+    moveUp: ["\u4E0A\u79FB", "Move up"],
+    moveDown: ["\u4E0B\u79FB", "Move down"],
+    spirit: ["\u4E66\u866B", "Bookworm"],
+    spiritWelcome: ["\u6211\u662F\u4E66\u866B\uFF0C\u966A\u4F60\u6162\u6162\u8BFB", "I\u2019m Bookworm. Let\u2019s read together."],
+    ask: ["\u95EE\u4E66\u866B", "Ask Bookworm"],
+    feynman: ["\u8D39\u66FC\u6CD5 \xB7 \u8BB2\u7ED9\u4E66\u866B\u542C", "Teach-back"],
+    model: ["\u4E66\u866B\u4F7F\u7528\u7684\u6A21\u578B", "Bookworm model"],
+    replyLanguage: ["\u4E66\u866B\u56DE\u590D\u8BED\u8A00", "Reply language"],
+    importFiles: ["\u5BFC\u5165\u6587\u4EF6", "Import files"],
+    importFolder: ["\u6279\u91CF\u5BFC\u5165\u6587\u4EF6\u5939", "Import a folder"],
+    linkFolder: ["\u5173\u8054\u73B0\u6709\u6587\u4EF6\u5939", "Link a folder"],
+    includeSubfolders: ["\u5305\u542B\u5B50\u6587\u4EF6\u5939", "Include subfolders"],
+    checkOnOpen: ["\u8FDB\u5165\u4E66\u623F\u65F6\u68C0\u67E5\u65B0\u589E\u4E66\u7C4D", "Check for new books when opening"],
+    advanced: ["\u9AD8\u7EA7\u9009\u9879", "Advanced"],
+    chooseDirectory: ["\u9009\u62E9\u76EE\u5F55", "Choose directory"],
+    scanPreview: ["\u626B\u63CF\u5E76\u9884\u89C8", "Scan & preview"],
+    importDone: ["\u5BFC\u5165\u5B8C\u6210", "Import complete"],
+    startReading: ["\u5F00\u59CB\u9605\u8BFB", "Start reading"],
+    viewImported: ["\u67E5\u770B\u5DF2\u5BFC\u5165\u4E66\u7C4D", "View imported books"],
+    continueImport: ["\u7EE7\u7EED\u5BFC\u5165", "Import more"],
+    successCount: ["\u6210\u529F", "Imported"],
+    duplicateCount: ["\u91CD\u590D", "Duplicates"],
+    failedCount: ["\u5931\u8D25", "Failed"],
+    openBook: ["\u6253\u5F00\u4E66\u7C4D", "Open book"],
+    retryFailed: ["\u91CD\u8BD5\u5931\u8D25\u9879", "Retry failures"],
+    managedHint: [
+      "\u590D\u5236\u539F\u4E66\u5230\u4E3B\u4E66\u5E93\uFF1B\u4E0D\u4F1A\u4FEE\u6539\u539F\u6587\u4EF6\u3002",
+      "Copy originals into the library; source files stay unchanged."
+    ],
+    linkedHint: [
+      "\u539F\u4E66\u7559\u5728\u73B0\u6709\u76EE\u5F55\uFF0C\u4E0D\u91CD\u590D\u590D\u5236\u3002",
+      "Keep originals in this folder without a second copy."
+    ],
+    selectFolderHint: [
+      "\u5148\u9009\u62E9\u76EE\u5F55\uFF0C\u626B\u63CF\u540E\u52FE\u9009\u8981\u52A0\u5165\u7684\u56FE\u4E66\u3002",
+      "Choose a folder, scan it, then select books to add."
+    ],
+    emptyScan: ["\u6CA1\u6709\u627E\u5230\u652F\u6301\u7684\u7535\u5B50\u4E66\u3002", "No supported ebooks found."],
+    libraryFiles: ["\u4E66\u5E93\u4E0E\u6587\u4EF6", "Library & files"],
+    libraryLocation: ["\u4E3B\u4E66\u5E93\u4F4D\u7F6E", "Managed library location"],
+    changeLocation: ["\u66F4\u6539\u4E66\u5E93\u4F4D\u7F6E", "Change library location"],
+    migrationHint: [
+      "\u5148\u590D\u5236\u5E76\u6821\u9A8C\uFF0C\u6210\u529F\u540E\u5207\u6362\uFF1B\u65E7\u6587\u4EF6\u4FDD\u7559\u3002\u7B14\u8BB0\u4E0E\u8BA8\u8BBA\u4ECD\u7531 DSH \u7BA1\u7406\u3002",
+      "Copy and verify before switching; old files remain. Notes and discussions stay in DSH."
+    ],
+    confirmMigration: ["\u590D\u5236\u6821\u9A8C\u5E76\u5207\u6362", "Copy, verify & switch"],
+    linkedDirectories: ["\u5173\u8054\u76EE\u5F55", "Linked folders"],
+    rescan: ["\u91CD\u65B0\u626B\u63CF", "Rescan"],
+    scanLibrary: ["\u626B\u63CF\u4E3B\u4E66\u5E93", "Scan managed library"],
+    removeLink: ["\u53D6\u6D88\u5173\u8054", "Remove link"],
+    relink: ["\u91CD\u65B0\u5B9A\u4F4D\u539F\u4E66", "Relocate original"],
+    repairContents: ["\u4FEE\u590D\u76EE\u5F55", "Repair contents"],
+    repaired: [
+      "\u76EE\u5F55\u5DF2\u66F4\u65B0\uFF0C\u6B63\u6587\u4E0E\u6279\u6CE8\u4FDD\u7559\u3002",
+      "Contents updated; source text and annotations kept."
+    ],
+    navigationWarning: [
+      "\u76EE\u5F55\u672A\u80FD\u5B89\u5168\u4FEE\u590D\uFF0C\u539F\u6587\u4E0E\u7B14\u8BB0\u5DF2\u4FDD\u7559\u3002",
+      "Contents could not be safely repaired; text and notes were kept."
+    ],
+    readingLocation: ["\u9605\u8BFB\u4F4D\u7F6E", "Reading location"],
+    goTo: ["\u8DF3\u8F6C", "Go"],
+    chapterNumber: ["\u7AE0\u8282 / \u6587\u4EF6\u9875\u5E8F\u53F7", "Chapter / file-page number"],
+    methodLibrary: ["\u65B9\u6CD5\u5E93", "Method library"],
+    moreMethods: ["\u66F4\u591A\u65B9\u6CD5", "More methods"],
+    methodName: ["\u65B9\u6CD5\u540D\u79F0", "Method name"],
+    methodDescription: ["\u7B80\u4ECB\uFF08\u53EF\u9009\uFF09", "Description (optional)"],
+    methodPrompt: ["\u5B8C\u6574\u63D0\u793A\u8BCD", "Full prompt"],
+    newMethod: ["\u65B0\u5EFA\u65B9\u6CD5", "New method"],
+    copyMethod: ["\u590D\u5236\u4E3A\u6211\u7684\u65B9\u6CD5", "Copy as my method"],
+    disableMethod: ["\u505C\u7528", "Disable"],
+    enableMethod: ["\u542F\u7528", "Enable"],
+    promptFull: ["\u5B8C\u6574\u5C55\u5F00", "Full"],
+    promptCompact: ["\u7B80\u6D01\u663E\u793A", "Compact"],
+    promptHidden: ["\u9690\u85CF\u6B63\u6587", "Hidden"],
+    promptDisplay: ["\u63D0\u793A\u8BCD\u663E\u793A", "Prompt display"],
+    editThisPrompt: ["\u4EC5\u7F16\u8F91\u672C\u6B21", "Edit this turn"],
+    saveAsMethod: ["\u53E6\u5B58\u4E3A\u6211\u7684\u65B9\u6CD5", "Save as my method"],
+    resetPrompt: ["\u6062\u590D\u65B9\u6CD5\u539F\u6587", "Reset prompt"],
+    includeNotes: ["\u4F7F\u7528\u672C\u4E66\u5DF2\u4FDD\u5B58\u7B14\u8BB0", "Include saved notes from this book"],
+    promptHint: [
+      "\u9009\u62E9\u65B9\u6CD5\u4E0D\u4F1A\u53D1\u9001\u3002\u4EE5\u4E0B\u662F\u672C\u8F6E\u5B9E\u9645\u4F7F\u7528\u7684\u65B9\u6CD5\u6307\u4EE4\uFF1B\u53D1\u9001\u540E\u4FDD\u7559\u7248\u672C\u3002",
+      "Selecting a method sends nothing. This is the instruction used for the next turn; its version is retained."
+    ],
+    learnMethod: ["\u4E86\u89E3\u8FD9\u4E2A\u65B9\u6CD5", "About this method"],
+    copyPrompt: ["\u590D\u5236\u63D0\u793A\u8BCD", "Copy prompt"],
+    importMethods: ["\u5BFC\u5165\u65B9\u6CD5 JSON", "Import methods JSON"],
+    exportMethods: ["\u5BFC\u51FA\u6211\u7684\u65B9\u6CD5", "Export my methods"],
+    insertVariable: ["\u63D2\u5165\u53D8\u91CF", "Insert variable"],
+    suggestMethod: [
+      "\u8BA9\u4E66\u866B\u5EFA\u8BAE\u540D\u79F0\u548C\u7B80\u4ECB",
+      "Ask Bookworm for a name & description"
+    ],
+    suggestionHint: [
+      "\u4E66\u866B\u4F1A\u7ED9\u51FA\u8349\u7A3F\uFF0C\u4F60\u518D\u590D\u5236\u5E76\u4FDD\u5B58\uFF0C\u539F\u63D0\u793A\u8BCD\u4E0D\u4F1A\u88AB\u81EA\u52A8\u6539\u5199\u3002",
+      "Bookworm suggests a draft for you to copy and save; your prompt is not rewritten automatically."
+    ],
+    help: ["\u4F7F\u7528\u8BF4\u660E", "User guide"],
+    helpSearch: ["\u641C\u7D22\u4F7F\u7528\u8BF4\u660E\u2026", "Search the guide\u2026"],
+    helpBookworm: ["\u8BA9\u4E66\u866B\u89E3\u91CA", "Ask Bookworm"],
+    helpTopic: ["\u8BF4\u660E\u7AE0\u8282", "Guide section"],
+    quickStart: ["\u65B0\u7528\u6237\u4ECE\u8FD9\u91CC\u5F00\u59CB", "New here? Start here"],
+    trySample: ["\u4F53\u9A8C\u793A\u4F8B", "Try a sample"],
+    skipGuide: ["\u5148\u81EA\u5DF1\u63A2\u7D22", "Explore on my own"],
+    showTips: ["\u65B0\u624B\u63D0\u793A", "Onboarding tips"],
+    allTips: ["\u663E\u793A\u65B0\u624B\u63D0\u793A", "Show tips"],
+    necessaryTips: ["\u53EA\u663E\u793A\u5FC5\u8981\u63D0\u793A", "Essential only"],
+    offTips: ["\u5173\u95ED\u4E3B\u52A8\u63D0\u793A", "No proactive tips"],
+    shortcuts: ["\u9605\u8BFB\u5FEB\u6377\u952E", "Reading shortcuts"],
+    shortcutAction: ["\u64CD\u4F5C", "Action"],
+    shortcutKeys: ["\u5F53\u524D\u952E\u4F4D", "Current keys"],
+    recordKey: ["\u5F55\u5236\u952E\u4F4D", "Record shortcut"],
+    pressKey: ["\u6309\u4E0B\u5FEB\u6377\u952E\u2026", "Press a shortcut\u2026"],
+    disableKey: ["\u505C\u7528", "Unbind"],
+    resetKeys: ["\u6062\u590D\u9ED8\u8BA4", "Reset defaults"],
+    shortcutConflict: [
+      "\u952E\u4F4D\u51B2\u7A81\u6216\u4E3A\u7CFB\u7EDF\u4FDD\u7559\uFF0C\u8BF7\u6362\u4E00\u4E2A\u7EC4\u5408\u3002",
+      "Shortcut conflicts or is reserved. Choose another."
+    ],
+    keyboardScope: [
+      "\u4EC5\u5728\u9605\u8BFB\u6B63\u6587\u83B7\u5F97\u7126\u70B9\u65F6\u751F\u6548\uFF1B\u8F93\u5165\u6846\u548C\u5F39\u7A97\u4FDD\u7559\u81EA\u5DF1\u7684\u952E\u76D8\u884C\u4E3A\u3002",
+      "Active only when the reading body is focused; inputs and dialogs keep their own keys."
+    ],
+    unknownMethod: ["\u5386\u53F2\u65B9\u6CD5", "Historical method"],
+    usageHelp: ["\u4F7F\u7528\u5E2E\u52A9", "Usage help"],
+    error_PROMPT_CHANGED: [
+      "\u65B9\u6CD5\u6216\u53C2\u8003\u5185\u5BB9\u5DF2\u53D8\u5316\uFF0C\u8BF7\u786E\u8BA4\u66F4\u65B0\u540E\u7684\u63D0\u793A\u8BCD\u518D\u53D1\u9001\u3002",
+      "The method or source changed. Review the updated prompt and retry."
+    ]
+  };
+
+  // src/client/interaction-copy.js
+  var interactionCopy = {
+    annotationHistoryChanged: [
+      "\u90E8\u5206\u65E7\u6807\u6CE8\u5DF2\u5728\u5176\u4ED6\u5165\u53E3\u4FEE\u6539\uFF0C\u4E0D\u80FD\u64A4\u9500\u6216\u91CD\u505A\u8FD9\u4E9B\u65E7\u64CD\u4F5C\u3002",
+      "Some older marks changed elsewhere; those actions cannot be undone or redone."
+    ],
+    undoAnnotation: ["\u64A4\u9500\u4E0A\u4E00\u6B65\u6807\u6CE8", "Undo annotation"],
+    redoAnnotation: ["\u91CD\u505A\u6807\u6CE8", "Redo annotation"],
+    markCreate: ["\u65B0\u589E\u6807\u6CE8", "Create annotation"],
+    markStyle: ["\u66F4\u6539\u6807\u6CE8", "Change annotation"],
+    markRemove: ["\u79FB\u9664\u6807\u6CE8", "Remove annotation"],
+    visualOnlyVersion: [
+      "\u4EC5\u6807\u6CE8\u5916\u89C2\u53D8\u66F4\uFF0C\u6B63\u6587\u672A\u6539\u52A8",
+      "Annotation appearance only; note text unchanged"
+    ],
+    resetMethodIntros: [
+      "\u6062\u590D\u5168\u90E8\u65B9\u6CD5\u7684\u9996\u6B21\u4F7F\u7528\u8BF4\u660E",
+      "Reset all first-use introductions"
+    ],
+    favoriteMethod: ["\u6536\u85CF\u65B9\u6CD5", "Favorite method"],
+    unfavoriteMethod: ["\u53D6\u6D88\u6536\u85CF", "Unfavorite method"],
+    methodSaveName: ["\u4FDD\u5B58\u6216\u53E6\u5B58\u65F6\u4F7F\u7528\u7684\u540D\u79F0", "Name used when saving"],
+    methodLibrary: ["\u8BFB\u4E66\u65B9\u6CD5\u8BBA", "Reading methodologies"],
+    methodologies: ["\u8BFB\u4E66\u65B9\u6CD5\u8BBA", "Reading methodologies"],
+    methodologyChoose: ["\u9009\u62E9\u8BFB\u4E66\u65B9\u6CD5\u8BBA", "Choose a methodology"],
+    methodSearch: ["\u641C\u7D22\u540D\u79F0\u6216\u7528\u9014\u2026", "Search names or use cases\u2026"],
+    currentMethod: ["\u5F53\u524D\u65B9\u6CD5", "Current method"],
+    viewEdit: ["\u67E5\u770B\u4E0E\u7F16\u8F91", "View & edit"],
+    changeMethod: ["\u66F4\u6362", "Change"],
+    pinPrompt: ["\u56FA\u5B9A\u5C55\u5F00\u63D0\u793A\u8BCD", "Pin full prompt"],
+    unpinPrompt: ["\u6536\u8D77\u63D0\u793A\u8BCD", "Unpin prompt"],
+    methodScenario: ["\u9002\u5408\u4EC0\u4E48\u573A\u666F", "When to use it"],
+    methodUsage: ["\u600E\u4E48\u7528", "How to use it"],
+    methodReferences: ["\u672C\u6B21\u53C2\u8003\u5185\u5BB9", "References for this turn"],
+    effectivePrompt: ["\u67E5\u770B\u672C\u6B21\u5B9E\u9645\u6307\u4EE4", "View effective instructions"],
+    skipMethodIntro: [
+      "\u4EE5\u540E\u4F7F\u7528\u8FD9\u4E2A\u65B9\u6CD5\u65F6\uFF0C\u4E0D\u518D\u81EA\u52A8\u5F39\u51FA",
+      "Do not open automatically for this method again"
+    ],
+    useThisMethod: ["\u672C\u6B21\u4F7F\u7528\u6B64\u65B9\u6CD5", "Use this method for this turn"],
+    saveToMethod: ["\u4FDD\u5B58\u5230\u6B64\u65B9\u6CD5", "Save to this method"],
+    savePersonalVersion: ["\u4FDD\u5B58\u4E3A\u4E2A\u4EBA\u7248\u672C", "Save personal version"],
+    saveNewMethod: ["\u53E6\u5B58\u4E3A\u65B0\u65B9\u6CD5", "Save as new method"],
+    newMethod: ["\u65B0\u5EFA\u8BFB\u4E66\u65B9\u6CD5\u8BBA", "New methodology"],
+    editMethodology: ["\u7F16\u8F91\u8BFB\u4E66\u65B9\u6CD5\u8BBA", "Edit methodology"],
+    restoreBuiltin: ["\u6062\u590D\u5185\u7F6E\u9ED8\u8BA4", "Restore built-in default"],
+    methodVersionHistory: ["\u63D0\u793A\u8BCD\u4FEE\u8BA2\u5386\u53F2", "Prompt revision history"],
+    editFromVersion: ["\u6309\u6B64\u7248\u672C\u7F16\u8F91", "Edit from this version"],
+    personalVersion: ["\u4E2A\u4EBA\u7248\u672C", "Personal version"],
+    methodUpdated: [
+      "\u6B64\u65B9\u6CD5\u5DF2\u66F4\u65B0\uFF0C\u53EF\u67E5\u770B\u65B0\u7248\u672C",
+      "Method updated; review it anytime"
+    ],
+    methodSelectHint: [
+      "\u9009\u62E9\u65B9\u6CD5\u4E0D\u4F1A\u53D1\u9001\u6D88\u606F\uFF0C\u4E5F\u4E0D\u4F1A\u6E05\u7A7A\u95EE\u9898\u3002",
+      "Selecting a method sends nothing and keeps your draft."
+    ],
+    methodDialogHint: [
+      "\u5148\u4E86\u89E3\u7528\u9014\uFF0C\u518D\u6309\u9700\u8981\u8C03\u6574\u63D0\u793A\u8BCD\u3002\u70B9\u51FB\u4F7F\u7528\u540E\u56DE\u5230\u804A\u5929\uFF0C\u7531\u4F60\u53D1\u9001\u6D88\u606F\u3002",
+      "Review its purpose and adjust the prompt. Applying returns to chat; you decide when to send."
+    ],
+    genericUsage: [
+      "\u8BFB\u4E00\u6BB5\u5185\u5BB9\u6216\u9009\u4E2D\u539F\u6587\uFF0C\u8F93\u5165\u81EA\u5DF1\u7684\u95EE\u9898\uFF0C\u518D\u6839\u636E\u8BA8\u8BBA\u7EE7\u7EED\u9605\u8BFB\u3002\u6CA1\u6709\u660E\u786E\u95EE\u9898\u4E5F\u53EF\u4EE5\u5F00\u59CB\u3002",
+      "Read or select a passage, type a question, and continue reading as the discussion develops. You can start without a defined question."
+    ],
+    annotationStyle: ["\u6807\u6CE8\u6837\u5F0F", "Annotation style"],
+    annotationActions: ["\u6807\u6CE8\u64CD\u4F5C", "Annotation actions"],
+    ann_yellow: ["\u9EC4\u8272\u9AD8\u4EAE", "Yellow highlight"],
+    ann_green: ["\u7EFF\u8272\u9AD8\u4EAE", "Green highlight"],
+    ann_blue: ["\u84DD\u8272\u9AD8\u4EAE", "Blue highlight"],
+    ann_pink: ["\u7C89\u8272\u9AD8\u4EAE", "Pink highlight"],
+    ann_purple: ["\u7D2B\u8272\u9AD8\u4EAE", "Purple highlight"],
+    underline: ["\u4E0B\u5212\u7EBF", "Underline"],
+    addNote: ["\u6DFB\u52A0\u7B14\u8BB0", "Add note"],
+    editNote: ["\u7F16\u8F91\u7B14\u8BB0", "Edit note"],
+    removeAnnotation: ["\u79FB\u9664\u6807\u6CE8", "Remove annotation"],
+    removeMarkKeepNote: ["\u79FB\u9664\u6807\u6CE8\uFF0C\u4FDD\u7559\u7B14\u8BB0", "Remove mark, keep note"],
+    translateSelection: ["\u7FFB\u8BD1\u9009\u6BB5\uFF08\u4E66\u866B\uFF09", "Translate selection with Bookworm"],
+    copySelection: ["\u62F7\u8D1D\u9009\u6BB5", "Copy selection"]
+  };
+
+  // src/client/upgrade.css
+  var upgrade_default = '.arr .arr-check {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n.arr .arr-check input {\n  width: auto;\n  flex: none;\n}\n.arr .arr-import-results {\n  max-height: 300px;\n  overflow: auto;\n}\n.arr .arr-path {\n  display: block;\n  overflow-wrap: anywhere;\n  padding: 10px;\n  background: var(--dsw-alias-bg-layer-2);\n}\n.arr .arr-book-heading {\n  max-width: min(560px, 36vw);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.arr .nav .pill {\n  max-width: 45%;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.arr .arr-prompt-dock {\n  padding: 0 14px;\n  flex: 0 1 auto;\n  max-height: 36%;\n  overflow: auto;\n}\n.arr .arr-prompt-dock:empty {\n  display: none;\n}\n.arr .arr-prompt-card {\n  border: 1px solid var(--dsw-alias-border-l1);\n  border-radius: 9px;\n  padding: 12px;\n  margin-bottom: 14px;\n  background: var(--dsw-alias-bg-layer-1);\n  font-size: 12px;\n}\n.arr .arr-prompt-card select {\n  font-size: 11px;\n  padding: 4px;\n}\n.arr .arr-prompt-card button {\n  font-size: 11px;\n  padding: 4px 6px;\n}\n.arr .arr-prompt-text {\n  white-space: pre-wrap;\n  overflow-wrap: anywhere;\n  max-height: 210px;\n  overflow: auto;\n  font: 12px/1.8 system-ui;\n  padding: 10px;\n  background: var(--dsw-alias-bg-base);\n  border-radius: 6px;\n}\n.arr .arr-text-button {\n  border: 0;\n  background: transparent;\n  color: var(--dsw-alias-brand-primary);\n}\n.arr .arr-side-method-library {\n  max-height: 60%;\n  overflow: auto;\n  padding: 12px;\n  border-bottom: 1px solid var(--dsw-alias-border-l1);\n}\n.arr .arr-side-method-library .row {\n  gap: 5px;\n}\n.arr .arr-side-method-library input[type="file"] {\n  max-width: 230px;\n}\n.arr .modal:has(.arr-help-layout) {\n  max-width: 1250px;\n  width: 95%;\n  height: 85%;\n  display: flex;\n  flex-direction: column;\n}\n.arr .arr-help-layout {\n  display: flex;\n  min-height: 0;\n  flex: 1;\n  height: 100%;\n  gap: 24px;\n}\n.arr .arr-help-nav {\n  width: 210px;\n  flex: none;\n  overflow: auto;\n  display: flex;\n  flex-direction: column;\n  gap: 7px;\n}\n.arr .arr-help-nav input {\n  width: 100%;\n}\n.arr .arr-help-nav button {\n  text-align: left;\n  border: 0;\n  background: transparent;\n}\n.arr .arr-help-nav button[aria-selected="true"] {\n  background: var(--dsw-alias-bg-layer-2);\n  color: var(--dsw-alias-label-primary);\n}\n.arr .arr-help-article {\n  flex: 1;\n  min-width: 260px;\n  overflow: auto;\n  padding: 8px 8px 30px;\n  line-height: 1.9;\n}\n.arr .arr-help-article table {\n  width: 100%;\n  border-collapse: collapse;\n}\n.arr .arr-help-article td,\n.arr .arr-help-article th {\n  padding: 6px;\n  border-bottom: 1px solid var(--dsw-alias-border-l1);\n  text-align: left;\n}\n.arr .arr-help-article button {\n  font-size: 12px;\n}\n.arr .arr-help-chat {\n  display: flex;\n  flex-direction: column;\n  width: 370px;\n  min-width: 300px;\n  border-left: 1px solid var(--dsw-alias-border-l1);\n  padding-left: 8px;\n  min-height: 0;\n}\n.arr .arr-guide-body {\n  max-width: 650px;\n}\n.arr .arr-onboarding {\n  position: absolute;\n  right: 30px;\n  bottom: 30px;\n  padding: 18px;\n  max-width: 600px;\n  background: var(--dsw-alias-bg-overlay);\n  border: 1px solid var(--dsw-alias-border-l2);\n  border-radius: 10px;\n  box-shadow: 0 6px 20px var(--dsw-alias-border-l1);\n  z-index: 3;\n}\n.arr .arr-onboarding .row {\n  margin-top: 12px;\n}\n.arr .body:focus-visible {\n  outline: 2px solid var(--dsw-alias-brand-primary);\n  outline-offset: -2px;\n}\n.arr .toc button[aria-selected="true"] {\n  color: var(--dsw-alias-label-primary);\n  background: var(--dsw-alias-bg-layer-2);\n  font-weight: 600;\n}\n.arr .arr-chat-tools select {\n  font-size: 12px;\n  max-width: 180px;\n}\n';
+
+  // src/client/annotations.css
+  var annotations_default = '.arr .arr-reading-shell {\n  position: relative;\n}\n.arr [data-annotation-color="yellow"] {\n  --arr-ink: #efd03b;\n}\n.arr [data-annotation-color="green"] {\n  --arr-ink: #99dc82;\n}\n.arr [data-annotation-color="blue"] {\n  --arr-ink: #97b9ff;\n}\n.arr [data-annotation-color="pink"] {\n  --arr-ink: #fe9bb3;\n}\n.arr [data-annotation-color="purple"] {\n  --arr-ink: #c5b0fb;\n}\n.arr .prose mark.arr-text-annotation {\n  color: inherit;\n  padding: 0;\n  background: transparent;\n  text-decoration: none;\n  border: 0;\n  font: inherit;\n  cursor: context-menu;\n  box-decoration-break: clone;\n  -webkit-box-decoration-break: clone;\n}\n.arr .prose mark.arr-text-annotation[data-annotation-style="highlight"] {\n  background: color-mix(in srgb, var(--arr-ink) 42%, transparent);\n  border-radius: 2px;\n}\n.arr .prose mark.arr-text-annotation[data-annotation-style="underline"] {\n  text-decoration-line: underline;\n  text-decoration-color: #cf6666;\n  text-decoration-thickness: 1.5px;\n  text-underline-offset: 0.15em;\n}\n.arr .pdfmark.arr-pdf-annotation {\n  background: color-mix(in srgb, var(--arr-ink) 36%, transparent);\n  border: 0;\n  pointer-events: none;\n}\n.arr .pdfmark.arr-pdf-annotation[data-annotation-style="underline"] {\n  background: transparent;\n  border-bottom: 1.5px solid #cf6666;\n}\n.arr .arr-history-buttons {\n  display: flex;\n  gap: 3px;\n  align-items: center;\n}\n.arr .arr-history-buttons > button {\n  padding: 4px 7px;\n  font-size: 18px;\n  background: transparent;\n  border: 1px solid var(--dsw-alias-border-l1);\n}\n.arr .arr-annotation-menu {\n  position: absolute;\n  z-index: 25;\n  background: var(--dsw-alias-bg-overlay);\n  color: var(--dsw-alias-label-primary);\n  border: 1px solid var(--dsw-alias-border-l2);\n  box-shadow: 0 8px 32px var(--dsw-alias-border-l2);\n  border-radius: 13px;\n  padding: 8px;\n  max-width: calc(100% - 16px);\n  min-width: 250px;\n}\n.arr .arr-annotation-menu.is-toolbar {\n  display: flex;\n  align-items: center;\n  flex-wrap: wrap;\n  gap: 6px;\n}\n.arr .arr-annotation-colors {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  padding: 4px;\n  flex-wrap: wrap;\n}\n.arr .arr-annotation-colors .arr-color-dot {\n  width: 28px;\n  height: 28px;\n  min-width: 28px;\n  padding: 3px;\n  border: 1px solid transparent;\n  background: transparent;\n  border-radius: 50%;\n}\n.arr .arr-color-dot > span {\n  display: block;\n  width: 20px;\n  height: 20px;\n  background: var(--arr-dot);\n  border-radius: 50%;\n}\n.arr .arr-color-dot[aria-pressed="true"],\n.arr .arr-color-dot[aria-checked="true"] {\n  border-color: var(--dsw-alias-label-secondary);\n  box-shadow: 0 0 0 2px var(--dsw-alias-bg-overlay) inset;\n}\n.arr .arr-underline-choice {\n  font:\n    21px Georgia,\n    serif;\n  text-decoration: underline;\n  text-decoration-color: #cf6666;\n  text-underline-offset: 4px;\n  border: 1px solid transparent;\n  background: transparent;\n  padding: 2px 8px;\n  border-radius: 5px;\n}\n.arr .arr-underline-choice[aria-pressed="true"],\n.arr .arr-underline-choice[aria-checked="true"] {\n  background: var(--dsw-alias-bg-layer-2);\n  border-color: var(--dsw-alias-border-l2);\n}\n.arr .arr-annotation-items {\n  padding-top: 6px;\n  margin-top: 5px;\n  border-top: 1px solid var(--dsw-alias-border-l1);\n}\n.arr .arr-annotation-items > button {\n  display: flex;\n  gap: 10px;\n  align-items: center;\n  width: 100%;\n  text-align: left;\n  border: 0;\n  background: transparent;\n  padding: 9px 12px;\n  border-radius: 6px;\n  font-size: 13px;\n}\n.arr .arr-annotation-items > button:hover,\n.arr .arr-annotation-items > button:focus-visible {\n  background: var(--dsw-alias-bg-layer-2);\n}\n.arr .arr-annotation-items hr {\n  border: 0;\n  border-top: 1px solid var(--dsw-alias-border-l1);\n  margin: 5px 0;\n}\n.arr .arr-annotation-inline {\n  display: flex;\n  gap: 4px;\n  border-left: 1px solid var(--dsw-alias-border-l1);\n  padding-left: 6px;\n}\n.arr .arr-annotation-inline > button {\n  font-size: 12px;\n  padding: 5px 7px;\n  border: 0;\n  background: transparent;\n}\n.arr .arr-annotation-badge {\n  display: inline-block;\n  width: 13px;\n  height: 13px;\n  border-radius: 50%;\n  background: var(--arr-dot);\n  margin-left: 7px;\n  vertical-align: middle;\n}\n.arr .arr-annotation-badge.underline {\n  background: transparent;\n  text-decoration: underline;\n  text-decoration-color: #cf6666;\n  font:\n    13px Georgia,\n    serif;\n}\n.arr .arr-method-picker {\n  border: 1px solid var(--dsw-alias-border-l1);\n  border-radius: 9px;\n  padding: 10px;\n  margin-top: 10px;\n  max-height: 280px;\n  overflow: auto;\n}\n.arr .arr-method-picker > input {\n  width: 100%;\n  margin-bottom: 8px;\n}\n.arr .arr-method-picker > button {\n  display: flex;\n  flex-direction: column;\n  gap: 3px;\n  text-align: left;\n  width: 100%;\n  background: transparent;\n  border: 0;\n  padding: 9px;\n  border-radius: 6px;\n}\n.arr .arr-method-picker > button:hover {\n  background: var(--dsw-alias-bg-layer-2);\n}\n.arr .arr-method-current {\n  display: flex;\n  align-items: center;\n  gap: 7px;\n  flex-wrap: wrap;\n  padding: 7px 0;\n  font-size: 12px;\n}\n.arr .arr-method-current button {\n  font-size: 11px;\n  padding: 3px 5px;\n  background: transparent;\n  border: 0;\n}\n.arr .arr-methodology-dialog {\n  max-height: 68vh;\n  overflow: auto;\n  padding-right: 8px;\n}\n.arr .arr-methodology-dialog textarea {\n  font:\n    13px/1.7 ui-monospace,\n    monospace;\n  min-height: 200px;\n  resize: vertical;\n}\n.arr .arr-methodology-footer {\n  position: sticky;\n  bottom: 0;\n  background: var(--dsw-alias-bg-overlay);\n  padding: 14px 0 0;\n  border-top: 1px solid var(--dsw-alias-border-l1);\n  margin-top: 18px;\n}\n.arr .arr-method-instructions {\n  white-space: pre-wrap;\n  line-height: 1.8;\n}\n.arr .arr-methodology-actions {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 8px;\n  margin-top: 10px;\n}\n';
+
+  // src/client/reading-assets.css
+  var reading_assets_default = ".arr .arr-save-toast {\n  position: absolute;\n  bottom: 22px;\n  left: 24px;\n  z-index: 35;\n  max-width: 420px;\n  padding: 10px 16px;\n  border-radius: 9px;\n  border: 1px solid var(--dsw-alias-border-l2);\n  background: var(--dsw-alias-bg-overlay);\n  box-shadow: 0 4px 16px var(--dsw-alias-border-l1);\n  color: var(--dsw-alias-label-primary);\n  font-size: 12px;\n  pointer-events: none;\n}\n.arr .is-focused .arr-chapterbar {\n  display: none;\n}\n.arr\n  .is-focused\n  .arr-bookbar\n  > .row:last-child\n  > button:not(.arr-spirit-toggle):not(.arr-focus-toggle) {\n  display: none;\n}\n.arr .is-focused .arr-bookbar > .row:first-child > .pill {\n  display: none;\n}\n.arr .is-focused .arr-bookbar {\n  padding: 9px 12px;\n  gap: 8px;\n}\n.arr .arr-focus-chapters {\n  display: flex;\n  align-items: center;\n  gap: 7px;\n  font-size: 12px;\n}\n.arr .arr-focus-chapters button {\n  padding: 5px 8px;\n}\n.arr .arr-reader-more {\n  position: relative;\n  font-size: 12px;\n}\n.arr .arr-reader-more > summary {\n  cursor: pointer;\n  padding: 8px 10px;\n  list-style: none;\n  border: 1px solid var(--dsw-alias-border-l1);\n  border-radius: 6px;\n}\n.arr .arr-reader-more > div {\n  position: absolute;\n  right: 0;\n  top: calc(100% + 5px);\n  z-index: 20;\n  min-width: 180px;\n  max-height: 60vh;\n  overflow: auto;\n  padding: 8px;\n  display: flex;\n  flex-direction: column;\n  gap: 4px;\n  border: 1px solid var(--dsw-alias-border-l2);\n  border-radius: 8px;\n  background: var(--dsw-alias-bg-overlay);\n  box-shadow: 0 6px 20px var(--dsw-alias-border-l1);\n}\n.arr .arr-reader-more > div > button {\n  border: 0;\n  background: transparent;\n  text-align: left;\n  font-size: 12px;\n}\n.arr .arr-reader-more > div > button:hover {\n  background: var(--dsw-alias-bg-layer-2);\n}\n.arr .prose::highlight(arr-reading-jump),\n.arr .pdftext::highlight(arr-reading-jump) {\n  background: var(--dsw-alias-bg-layer-2);\n  color: var(--dsw-alias-label-primary);\n  text-decoration: underline;\n  text-decoration-color: var(--dsw-alias-brand-primary);\n  text-decoration-thickness: 2px;\n}\n.arr .arr-learning-traces {\n  padding-top: 18px;\n}\n.arr .arr-trace-filters {\n  display: grid;\n  grid-template-columns: repeat(3, minmax(140px, 1fr));\n  gap: 10px;\n  max-width: 1100px;\n}\n.arr .arr-trace-filters > input {\n  grid-column: span 2;\n}\n.arr .arr-trace-filters label {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  font-size: 12px;\n}\n.arr .arr-trace-filters input,\n.arr .arr-trace-filters select {\n  width: 100%;\n  min-width: 0;\n}\n.arr .arr-trace-flags {\n  margin: 14px 0;\n  gap: 14px;\n}\n.arr .arr-trace-batch {\n  padding: 10px 0;\n  margin-bottom: 15px;\n  border-bottom: 1px solid var(--dsw-alias-border-l1);\n  font-size: 12px;\n}\n.arr .arr-trace-entry {\n  max-width: 900px;\n  margin: 0 auto 18px;\n}\n.arr .arr-trace-entry > .row {\n  padding: 6px 0;\n  font-size: 12px;\n}\n.arr .arr-trace-entry .link {\n  max-width: 80%;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n}\n.arr .arr-followups {\n  display: flex;\n  gap: 7px;\n  flex-wrap: wrap;\n  margin-top: 9px;\n}\n.arr .arr-followups button {\n  background: transparent;\n  border: 1px solid var(--dsw-alias-border-l1);\n  font-size: 11px;\n  padding: 4px 8px;\n  color: var(--dsw-alias-label-secondary);\n}\n.arr .arr-reply-length {\n  font-size: 11px;\n  padding-bottom: 6px;\n  color: var(--dsw-alias-label-secondary);\n}\n.arr .arr-reply-length select {\n  padding: 3px 5px;\n  font-size: 11px;\n  border: 0;\n  background: transparent;\n}\n.arr .arr-reading-review {\n  max-height: 72vh;\n  overflow: auto;\n  padding-right: 8px;\n}\n.arr .arr-reading-review > label > textarea {\n  width: 100%;\n  font: 13px/1.8 system-ui;\n  resize: vertical;\n  min-height: 260px;\n}\n.arr .modal:has(.arr-reading-review) {\n  max-width: 950px;\n  width: 92%;\n}\n.arr .arr-reading-review .arr-chat-markdown {\n  max-height: 300px;\n  overflow: auto;\n}\n.arr .arr-reading-review details > p {\n  font-size: 12px;\n  line-height: 1.8;\n}\n\n.arr .is-focused .reading > .footer {\n  display: none;\n}\n";
+
+  // src/client/reading-assets-copy.js
+  var readingAssetsCopy = {
+    reviewMaterials: ["\u67E5\u770B\u5B9E\u9645\u53D6\u6750", "Inspect source material"],
+    reviewAiReferences: [
+      "AI \u5386\u53F2\u56DE\u7B54\uFF08\u4EC5\u4F9B\u53C2\u8003\uFF09",
+      "Past AI replies (reference only)"
+    ],
+    focusReading: ["\u4E13\u6CE8\u9605\u8BFB", "Focus"],
+    exitFocus: ["\u9000\u51FA\u4E13\u6CE8", "Exit focus"],
+    more: ["\u66F4\u591A", "More"],
+    returnToReading: ["\u8FD4\u56DE\u521A\u624D\u4F4D\u7F6E", "Return to reading"],
+    readingReview: ["\u672C\u6B21\u9605\u8BFB\u56DE\u987E", "Reading review"],
+    review: ["\u9605\u8BFB\u56DE\u987E", "Reading review"],
+    filterBook: ["\u6309\u4E66\u7C4D\u7B5B\u9009", "Filter by book"],
+    filterKind: ["\u6309\u8BB0\u5F55\u7C7B\u578B\u7B5B\u9009", "Filter by type"],
+    filterColor: ["\u6309\u6807\u6CE8\u989C\u8272\u7B5B\u9009", "Filter by color"],
+    allBooks: ["\u5168\u90E8\u4E66\u7C4D", "All books"],
+    allKinds: ["\u5168\u90E8\u7C7B\u578B", "All types"],
+    allColors: ["\u5168\u90E8\u989C\u8272", "All colors"],
+    dateFrom: ["\u4ECE", "From"],
+    dateTo: ["\u81F3", "To"],
+    onlyUnwritten: ["\u53EA\u5212\u7EBF\u3001\u8FD8\u6CA1\u5199\u611F\u60F3", "Marked without a reflection"],
+    onlyOpenQuestions: ["\u5C1A\u672A\u89E3\u51B3\u7684\u7591\u95EE", "Open questions"],
+    clearFilters: ["\u6E05\u9664\u7B5B\u9009", "Clear filters"],
+    selectedCount: ["\u5DF2\u9009", "Selected"],
+    selectFiltered: ["\u9009\u62E9\u7B5B\u9009\u7ED3\u679C", "Select filtered records"],
+    exportSelected: ["\u5BFC\u51FA\u9009\u4E2D\u8BB0\u5F55", "Export selected"],
+    selectRecord: ["\u9009\u62E9\u8FD9\u6761", "Select record"],
+    noFilteredRecords: ["\u6CA1\u6709\u7B26\u5408\u6761\u4EF6\u7684\u8BB0\u5F55\u3002", "No matching records."],
+    narrowSelection: [
+      "\u8BB0\u5F55\u8F83\u591A\uFF0C\u8BF7\u5148\u7F29\u5C0F\u7B5B\u9009\u8303\u56F4\u3002",
+      "Narrow the filters before selecting all."
+    ],
+    dateRangeInvalid: [
+      "\u8D77\u59CB\u65E5\u671F\u4E0D\u80FD\u665A\u4E8E\u7ED3\u675F\u65E5\u671F\u3002",
+      "The start date cannot follow the end date."
+    ],
+    previousPage: ["\u4E0A\u4E00\u9875", "Previous"],
+    nextPage: ["\u4E0B\u4E00\u9875", "Next"],
+    questionOpen: ["\u5F85\u89E3", "Open"],
+    questionUnderstood: ["\u5DF2\u6709\u7406\u89E3", "Understood"],
+    markUnderstood: ["\u6807\u8BB0\u4E3A\u5DF2\u6709\u7406\u89E3", "Mark understood"],
+    reopenQuestion: ["\u91CD\u65B0\u6253\u5F00\u7591\u95EE", "Reopen question"],
+    colorNames: ["\u6807\u6CE8\u989C\u8272\u540D\u79F0", "Annotation color names"],
+    colorNamesHint: [
+      "\u53EF\u4EE5\u6309\u81EA\u5DF1\u7684\u4E60\u60EF\u547D\u540D\uFF1B\u9ED8\u8BA4\u53EA\u8868\u793A\u989C\u8272\uFF0C\u4E0D\u5F3A\u5236\u8D4B\u4E88\u5B66\u4E60\u542B\u4E49\u3002",
+      "Name colors for your own use. No learning meaning is imposed by default."
+    ],
+    optionalColorName: ["\u81EA\u5B9A\u4E49\u540D\u79F0\uFF08\u53EF\u9009\uFF09", "Custom name (optional)"],
+    replyDepth: ["\u56DE\u590D\u6DF1\u5EA6", "Reply depth"],
+    reply_short: ["\u7B80\u77ED", "Brief"],
+    reply_balanced: ["\u9002\u4E2D", "Balanced"],
+    reply_deep: ["\u6DF1\u5165", "In depth"],
+    followupExample: ["\u4E3E\u4E2A\u4F8B\u5B50", "An example"],
+    followupSimple: ["\u7B80\u5355\u4E00\u70B9", "Simpler"],
+    followupDeep: ["\u5C55\u5F00\u8BBA\u8BC1", "Explore reasoning"],
+    exampleRequest: [
+      "\u9488\u5BF9\u521A\u624D\u90A3\u6761\u56DE\u7B54\uFF0C\u518D\u7ED9\u6211\u4E00\u4E2A\u5177\u4F53\u4F8B\u5B50\u3002",
+      "Give me a concrete example for your previous answer."
+    ],
+    simpleRequest: [
+      "\u9488\u5BF9\u521A\u624D\u90A3\u6761\u56DE\u7B54\uFF0C\u7528\u66F4\u7B80\u5355\u3001\u7B80\u77ED\u7684\u8BDD\u89E3\u91CA\u3002",
+      "Explain your previous answer more simply and briefly."
+    ],
+    deepRequest: [
+      "\u9488\u5BF9\u521A\u624D\u90A3\u6761\u56DE\u7B54\uFF0C\u5C55\u5F00\u4E3B\u8981\u4F9D\u636E\u548C\u9002\u7528\u8FB9\u754C\uFF0C\u533A\u5206\u4F5C\u8005\u539F\u610F\u4E0E\u8865\u5145\u63A8\u65AD\u3002",
+      "Expand the evidence and limits of your previous answer, distinguishing the author from your inference."
+    ],
+    reviewHint: [
+      "\u5148\u6838\u5BF9\u8FD9\u6B21\u7684\u7D20\u6750\uFF0C\u518D\u7F16\u8F91\u81EA\u5DF1\u7684\u56DE\u987E\u3002\u4E5F\u53EF\u4EE5\u4E3B\u52A8\u8BF7\u4E66\u866B\u6574\u7406\uFF0CAI \u5EFA\u8BAE\u4F1A\u5355\u72EC\u663E\u793A\uFF0C\u7531\u4F60\u51B3\u5B9A\u662F\u5426\u63D2\u5165\u3002",
+      "Review the source scope and edit your own reflection. You can ask Bookworm to draft suggestions, shown separately for optional insertion."
+    ],
+    reviewScope: ["\u53D6\u6750\u8303\u56F4", "Source scope"],
+    readerWords: ["\u6761\u6211\u7684\u53D1\u8A00", "reader messages"],
+    reviewTruncated: [
+      "\u7D20\u6750\u8F83\u591A\uFF0C\u672C\u6B21\u53EA\u7EB3\u5165\u9875\u9762\u5C55\u793A\u6570\u91CF\u7684\u8FD1\u671F\u5185\u5BB9\uFF0C\u4E0D\u4EE3\u8868\u5B8C\u6574\u8986\u76D6\u3002",
+      "Only the displayed recent material is included; coverage is not complete."
+    ],
+    reviewScopeHint: [
+      "\u5F53\u524D\u7AE0\u8282\u6458\u5F55\u4EC5\u4F9B\u6838\u5BF9\uFF0C\u4E0D\u4EE3\u8868\u5DF2\u7ECF\u8BFB\u5B8C\u6216\u638C\u63E1\u3002\u65E7\u8BA8\u8BBA\u3001AI \u56DE\u7B54\u548C\u6211\u7684\u7406\u89E3\u5206\u522B\u5904\u7406\u3002",
+      "The chapter excerpt is reference material, not proof of reading or mastery. Past discussion, AI replies and reader understanding are kept distinct."
+    ],
+    reviewSince: ["\u56DE\u987E\u8D77\u59CB\u65F6\u95F4", "Review since"],
+    rebuildReview: [
+      "\u6309\u6B64\u8303\u56F4\u91CD\u65B0\u5F00\u59CB\uFF08\u66FF\u6362\u5F53\u524D\u8349\u7A3F\uFF09",
+      "Restart with this scope (replace draft)"
+    ],
+    restorePreviousDraft: ["\u6062\u590D\u4E0A\u4E00\u4E2A\u8349\u7A3F", "Restore previous draft"],
+    reviewDraft: ["\u6211\u7684\u56DE\u987E\u8349\u7A3F", "My review draft"],
+    generateReview: ["\u8BF7\u4E66\u866B\u6574\u7406\u8349\u7A3F", "Ask Bookworm to organize"],
+    reviewModelPrompt: ["\u67E5\u770B\u6574\u7406\u6307\u4EE4", "View review instructions"],
+    reviewAiDraft: [
+      "\u4E66\u866B\u6574\u7406\u5EFA\u8BAE\uFF08AI \u751F\u6210\uFF0C\u9700\u5BA1\u9605\uFF09",
+      "Bookworm suggestions (AI draft, review required)"
+    ],
+    insertReviewSuggestion: ["\u63D2\u5165\u5230\u6211\u7684\u8349\u7A3F", "Insert into my draft"],
+    reviewNoTask: [
+      "\u8FD9\u91CC\u53EA\u4FDD\u5B58\u9605\u8BFB\u56DE\u987E\u548C\u53EF\u9009\u7684\u5C0F\u884C\u52A8\u8349\u7A3F\uFF0C\u4E0D\u4F1A\u521B\u5EFA\u5F85\u529E\u3001\u65E5\u7A0B\u6216\u63D0\u9192\u3002\u5173\u95ED\u7A97\u53E3\u4E0D\u4F1A\u6E05\u7A7A\u672C\u6B21\u672A\u4FDD\u5B58\u7684\u7F16\u8F91\uFF1B\u5DF2\u5F00\u59CB\u7684 AI \u56DE\u590D\u53EF\u5728\u8BA8\u8BBA\u5386\u53F2\u67E5\u770B\u3002",
+      "Only a review and optional experiment draft are saved; no task, schedule or reminder is created. Unsaved edits remain for this reading session; a started AI reply is available in discussion history."
+    ],
+    saveReview: ["\u4FDD\u5B58\u5230\u6211\u7684\u75D5\u8FF9", "Save to my records"],
+    close: ["\u5173\u95ED", "Close"]
+  };
 
   // src/client/main.jsx
   var pairs = {
@@ -27982,12 +33952,12 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     continue: ["\u7EE7\u7EED\u9605\u8BFB", "Continue reading"],
     notes: ["\u7B14\u8BB0", "Notes"],
     history: ["\u5386\u7A0B", "History"],
-    spirit: ["\u4E66\u7075", "Book Spirit"],
+    spirit: ["\u4E66\u866B", "Bookworm"],
     contents: ["\u76EE\u5F55", "Contents"],
     prev: ["\u4E0A\u4E00\u7AE0 / \u9875", "Previous"],
     next: ["\u4E0B\u4E00\u7AE0 / \u9875", "Next"],
     selectHint: [
-      "\u9009\u62E9\u6B63\u6587\uFF0C\u53EF\u5212\u7EBF\u3001\u5199\u611F\u609F\u3001\u8BB0\u7591\u95EE\u6216\u95EE\u4E66\u7075\u3002",
+      "\u9009\u62E9\u6B63\u6587\uFF0C\u53EF\u5212\u7EBF\u3001\u5199\u611F\u609F\u3001\u8BB0\u7591\u95EE\u6216\u95EE\u4E66\u866B\u3002",
       "Select text to highlight, reflect, ask a question or discuss."
     ],
     highlight: ["\u5212\u7EBF", "Highlight"],
@@ -27995,7 +33965,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     question: ["\u7591\u95EE", "Question"],
     note: ["\u957F\u7B14\u8BB0", "Note"],
     ai: ["AI \u5185\u5BB9", "AI content"],
-    ask: ["\u95EE\u4E66\u7075", "Ask Book Spirit"],
+    ask: ["\u95EE\u4E66\u866B", "Ask Bookworm"],
     newNote: ["\u8BB0\u4E00\u6761\u7B14\u8BB0", "Write a note"],
     bodyHint: [
       "\u5199\u4E0B\u81EA\u5DF1\u7684\u7406\u89E3\u3001\u611F\u53D7\u6216\u4ECD\u672A\u60F3\u6E05\u695A\u7684\u5730\u65B9\u2026",
@@ -28014,7 +33984,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     export: ["\u5BFC\u51FA Markdown", "Export Markdown"],
     free: ["\u81EA\u7531\u8BA8\u8BBA", "Open discussion"],
     hunt: ["\u72E9\u730E\u6CD5 \xB7 \u5E26\u95EE\u9898\u8BFB", "Question-led reading"],
-    feynman: ["\u8D39\u66FC\u6CD5 \xB7 \u8BB2\u7ED9\u4E66\u7075\u542C", "Teach-back"],
+    feynman: ["\u8D39\u66FC\u6CD5 \xB7 \u8BB2\u7ED9\u4E66\u866B\u542C", "Teach-back"],
     debate: ["\u8FA9\u8BBA\u6CD5 \xB7 \u68C0\u9A8C\u89C2\u70B9", "Perspective debate"],
     goal: ["\u8FD9\u6B21\u5E0C\u671B\u60F3\u6E05\u695A\u4EC0\u4E48\uFF1F", "What would you like to understand?"],
     newExercise: ["\u5F00\u59CB\u65B0\u8BA8\u8BBA / \u7EC3\u4E60", "Start a discussion / exercise"],
@@ -28024,7 +33994,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     pause: ["\u6682\u505C\u7EC3\u4E60", "Pause"],
     resume: ["\u7EE7\u7EED\u7EC3\u4E60", "Resume"],
     finish: ["\u6807\u8BB0\u5DF2\u56DE\u987E", "Mark reviewed"],
-    summarize: ["\u8BF7\u4E66\u7075\u6574\u7406\u56DE\u987E", "Ask for a recap"],
+    summarize: ["\u8BF7\u4E66\u866B\u6574\u7406\u56DE\u987E", "Ask for a recap"],
     recapRequest: [
       "\u8BF7\u6839\u636E\u672C\u6B21\u8BA8\u8BBA\u6574\u7406\u56DE\u987E\uFF1A\u6211\u5DF2\u5C55\u793A\u7684\u7406\u89E3\u3001\u53D1\u751F\u7684\u4FEE\u6B63\u3001\u4ECD\u672A\u89E3\u51B3\u7684\u95EE\u9898\u548C\u5BF9\u5E94\u539F\u6587\u3002\u8BF7\u533A\u5206\u6211\u7684\u89C2\u70B9\u4E0E\u4F60\u7684\u5EFA\u8BAE\uFF0C\u4E0D\u66FF\u6211\u5BA3\u5E03\u5B8C\u5168\u638C\u63E1\u3002",
       "Please recap this discussion: understanding I have demonstrated, revisions, unresolved questions, and source references. Distinguish my views from your suggestions; do not declare complete mastery."
@@ -28032,19 +34002,19 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     stage: ["\u5F53\u524D\u9636\u6BB5", "Current stage"],
     send: ["\u53D1\u9001", "Send"],
     stop: ["\u505C\u6B62\u56DE\u590D", "Stop"],
-    message: ["\u548C\u4E66\u7075\u8BF4\u8BF4\u4F60\u7684\u60F3\u6CD5\u2026", "Share your thoughts with Book Spirit\u2026"],
+    message: ["\u548C\u4E66\u866B\u8BF4\u8BF4\u4F60\u7684\u60F3\u6CD5\u2026", "Share your thoughts with Bookworm\u2026"],
     contextHint: [
-      "\u4F1A\u53D1\u9001\u4F60\u7684\u6D88\u606F\u3001\u5F53\u524D\u7247\u6BB5\u6216\u7AE0\u8282\u6458\u5F55\u3002\u4E66\u7075\u53EF\u4EE5\u68C0\u7D22\u672C\u4E66\uFF1B\u4E0D\u8BFB\u53D6\u5176\u4ED6\u4E66\u7C4D\u3002",
-      "Your message and a current passage or chapter excerpt are sent to your DSH model. Book Spirit can search this book only."
+      "\u4F1A\u53D1\u9001\u4F60\u7684\u6D88\u606F\u3001\u5F53\u524D\u7247\u6BB5\u6216\u7AE0\u8282\u6458\u5F55\u3002\u4E66\u866B\u53EF\u4EE5\u68C0\u7D22\u672C\u4E66\uFF1B\u4E0D\u8BFB\u53D6\u5176\u4ED6\u4E66\u7C4D\u3002",
+      "Your message and a current passage or chapter excerpt are sent to your DSH model. Bookworm can search this book only."
     ],
     pausedHint: [
       "\u7EC3\u4E60\u5DF2\u6682\u505C\u6216\u7ED3\u675F\uFF0C\u7EE7\u7EED\u540E\u53EF\u53D1\u9001\u6D88\u606F\u3002",
       "Resume the exercise to send messages."
     ],
     saveReply: ["\u6536\u8FDB\u7B14\u8BB0", "Save to notes"],
-    model: ["\u4E66\u7075\u4F7F\u7528\u7684\u6A21\u578B", "Book Spirit model"],
+    model: ["\u4E66\u866B\u4F7F\u7528\u7684\u6A21\u578B", "Bookworm model"],
     defaultModel: ["\u8DDF\u968F DSH \u9ED8\u8BA4\u6A21\u578B", "Use DSH default"],
-    replyLanguage: ["\u4E66\u7075\u56DE\u590D\u8BED\u8A00", "Reply language"],
+    replyLanguage: ["\u4E66\u866B\u56DE\u590D\u8BED\u8A00", "Reply language"],
     auto: ["\u8DDF\u968F\u63D0\u95EE\u8BED\u8A00", "Follow the question"],
     fontSize: ["\u6B63\u6587\u5B57\u53F7", "Text size"],
     lineHeight: ["\u884C\u8DDD", "Line spacing"],
@@ -28154,14 +34124,21 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     ],
     help: ["\u4F7F\u7528\u8BF4\u660E", "Help"],
     helpText: [
-      "\u5148\u5BFC\u5165\u4E66\u7C4D\uFF0C\u70B9\u5F00\u5C01\u9762\u5F00\u59CB\u9605\u8BFB\u3002\u9009\u4E2D\u6587\u5B57\u53EF\u4FDD\u5B58\u5B66\u4E60\u8BB0\u5F55\uFF1B\u53F3\u4FA7\u8FDB\u5165\u4E66\u7075\u5E76\u9009\u62E9\u4E00\u79CD\u65B9\u6CD5\u3002\u8BB0\u5F55\u4E0E\u8BA8\u8BBA\u90FD\u6309\u65E5\u671F\u4FDD\u7559\uFF0C\u8BBE\u7F6E\u4E2D\u53EF\u4EE5\u5BFC\u51FA\u5907\u4EFD\u3002\u9996\u7248\u6682\u4E0D\u5305\u542B OCR\u3001MOBI/AZW3\u3001\u8DE8\u4E66\u4E3B\u9898\u548C\u81EA\u52A8\u63D0\u9192\u3002",
-      "Import a book and open its cover to read. Select text to save a record. Use Book Spirit on the right and choose a method. Notes and discussions retain their dates. Export backups from Settings. OCR, MOBI/AZW3, cross-book topics and reminders are not included in this version."
+      "\u5148\u5BFC\u5165\u4E66\u7C4D\uFF0C\u70B9\u5F00\u5C01\u9762\u5F00\u59CB\u9605\u8BFB\u3002\u9009\u4E2D\u6587\u5B57\u53EF\u4FDD\u5B58\u5B66\u4E60\u8BB0\u5F55\uFF1B\u53F3\u4FA7\u8FDB\u5165\u4E66\u866B\u5E76\u9009\u62E9\u4E00\u79CD\u65B9\u6CD5\u3002\u8BB0\u5F55\u4E0E\u8BA8\u8BBA\u90FD\u6309\u65E5\u671F\u4FDD\u7559\uFF0C\u8BBE\u7F6E\u4E2D\u53EF\u4EE5\u5BFC\u51FA\u5907\u4EFD\u3002\u9996\u7248\u6682\u4E0D\u5305\u542B OCR\u3001MOBI/AZW3\u3001\u8DE8\u4E66\u4E3B\u9898\u548C\u81EA\u52A8\u63D0\u9192\u3002",
+      "Import a book and open its cover to read. Select text to save a record. Use Bookworm on the right and choose a method. Notes and discussions retain their dates. Export backups from Settings. OCR, MOBI/AZW3, cross-book topics and reminders are not included in this version."
     ]
   };
+  Object.assign(
+    pairs,
+    spiritCopy,
+    upgradeCopy,
+    interactionCopy,
+    readingAssetsCopy
+  );
   for (const [key, value] of Object.entries(errors))
     pairs["error." + key] = value;
-  var zh = Object.fromEntries(Object.entries(pairs).map(([k, v]) => [k, v[0]]));
-  var en = Object.fromEntries(Object.entries(pairs).map(([k, v]) => [k, v[1]]));
+  var zh = Object.fromEntries(Object.entries(pairs).map(([k2, v2]) => [k2, v2[0]]));
+  var en = Object.fromEntries(Object.entries(pairs).map(([k2, v2]) => [k2, v2[1]]));
   var API2 = "/api/ai-reading-room";
   async function rpc2(action, signal) {
     const r = await fetch(API2, {
@@ -28170,13 +34147,13 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       body: JSON.stringify(action),
       signal
     });
-    const v = await r.json();
-    if (!v.ok) throw new Error(v.error);
-    return v.value;
+    const v2 = await r.json();
+    if (!v2.ok) throw new Error(v2.error);
+    return v2.value;
   }
   var request2 = () => crypto.randomUUID();
   function Icon({ size = 22 }) {
-    return /* @__PURE__ */ import_react4.default.createElement(
+    return /* @__PURE__ */ import_react21.default.createElement(
       "svg",
       {
         width: size,
@@ -28189,7 +34166,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         strokeLinejoin: "round",
         "aria-hidden": "true"
       },
-      /* @__PURE__ */ import_react4.default.createElement("path", { d: "M18 11c-3.6-2-7.3-2.5-11-1v17c3.5-1.2 7.5-.7 11 1.5 3.5-2.2 7.5-2.7 11-1.5V14M18 11v17.5M10.5 16l4 1m-4 3 4 1m7-4 4-1m-4 5 4-1m1-15 1 3 3 1-3 1-1 3-1-3-3-1 3-1Z" })
+      /* @__PURE__ */ import_react21.default.createElement("path", { d: "M18 11c-3.6-2-7.3-2.5-11-1v17c3.5-1.2 7.5-.7 11 1.5 3.5-2.2 7.5-2.7 11-1.5V14M18 11v17.5M10.5 16l4 1m-4 3 4 1m7-4 4-1m-4 5 4-1m1-15 1 3 3 1-3 1-1 3-1-3-3-1 3-1Z" })
     );
   }
   var css = `.arr{height:100%;min-height:0;display:flex;flex-direction:column;color:var(--dsw-alias-label-primary);background:var(--dsw-alias-bg-base);font:14px/1.55 system-ui,-apple-system,sans-serif}.arr *{box-sizing:border-box}.arr button,.arr input,.arr textarea,.arr select{font:inherit;color:inherit}.arr button{cursor:pointer;border:1px solid var(--dsw-alias-border-l1);background:var(--dsw-alias-bg-layer-1);border-radius:8px;padding:7px 12px}.arr button:hover{background:var(--dsw-alias-bg-layer-2)}.arr button:disabled{opacity:.5;cursor:default}.arr button.primary,.arr button[aria-selected=true]{background:var(--dsw-alias-brand-primary);color:var(--dsw-alias-bg-base);border-color:var(--dsw-alias-brand-primary)}.arr button:focus-visible,.arr input:focus-visible,.arr textarea:focus-visible,.arr select:focus-visible{outline:2px solid var(--dsw-alias-brand-primary);outline-offset:2px}.arr input,.arr textarea,.arr select{background:var(--dsw-alias-bg-base);border:1px solid var(--dsw-alias-border-l2);border-radius:7px;padding:8px;min-width:0}.arr textarea{width:100%;resize:vertical;min-height:90px}.arr h1{font-size:23px;margin:0;letter-spacing:.02em}.arr h2{font-size:18px;margin:0 0 12px}.arr h3{font-size:15px;margin:0 0 8px}.arr p{margin:8px 0}.arr .muted{color:var(--dsw-alias-label-secondary)}.arr .head{padding:18px 26px 12px;border-bottom:1px solid var(--dsw-alias-border-l1);flex-shrink:0}.arr .row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.arr .spread{justify-content:space-between}.arr .nav{margin-top:14px;gap:6px}.arr .nav button{border-color:transparent;background:none}.arr .nav button[aria-selected=true]{color:var(--dsw-alias-brand-primary);background:var(--dsw-alias-bg-layer-2)}.arr .grow{flex:1;min-width:0}.arr .scroll{overflow:auto;min-height:0;flex:1}.arr .page{padding:24px 30px}.arr .toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:24px}.arr .toolbar input{min-width:240px;flex:1}.arr .shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(162px,1fr));gap:22px}.arr .book{border:0;text-align:left;padding:0;background:none;display:flex;flex-direction:column;align-items:stretch;gap:9px;overflow:hidden}.arr .cover{height:208px;border:1px solid var(--dsw-alias-border-l2);border-radius:3px 10px 10px 3px;background:var(--dsw-alias-bg-layer-1);display:flex;align-items:center;justify-content:center;padding:20px;text-align:center;font-family:Georgia,'Songti SC',serif;font-size:21px;line-height:1.5;box-shadow:inset 5px 0 0 var(--dsw-alias-border-l1);overflow:hidden}.arr .cover img{width:100%;height:100%;object-fit:contain}.arr .bookTitle{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.arr .small{font-size:12px}.arr .pill{padding:2px 7px;border-radius:4px;background:var(--dsw-alias-bg-layer-2);font-size:12px}.arr .empty{padding:80px 20px;text-align:center}.arr .banner{padding:10px 24px;border-bottom:1px solid var(--dsw-alias-border-l1);background:var(--dsw-alias-bg-layer-1);display:flex;justify-content:space-between;align-items:center}.arr .error{color:var(--dsw-alias-state-error-primary)}.arr .reader{flex:1;min-height:0;display:flex;overflow:hidden}.arr .toc{width:200px;min-width:150px;border-right:1px solid var(--dsw-alias-border-l1);padding:14px;overflow:auto}.arr .toc button{display:block;width:100%;text-align:left;background:none;border:0;margin:3px 0;font-size:13px}.arr .reading{flex:1;min-width:340px;display:flex;flex-direction:column;min-height:0}.arr .readbar{padding:10px 16px;border-bottom:1px solid var(--dsw-alias-border-l1)}.arr .body{padding:32px 34px;overflow:auto;flex:1;min-height:0;scroll-behavior:auto}.arr .prose{margin:0 auto;font-family:Georgia,'Songti SC','Noto Serif CJK SC',serif;overflow-wrap:break-word}.arr .prose p{margin:0 0 1em}.arr .prose img{max-width:100%;height:auto}.arr .prose table{border-collapse:collapse;max-width:100%;display:block;overflow:auto}.arr .prose td,.arr .prose th{border:1px solid var(--dsw-alias-border-l1);padding:8px}.arr .prose pre{white-space:pre-wrap;background:var(--dsw-alias-bg-layer-2);padding:14px}.arr .prose a{color:var(--dsw-alias-brand-primary)}.arr mark{background:var(--dsw-alias-bg-layer-2);color:inherit;text-decoration:underline;text-decoration-color:var(--dsw-alias-brand-primary);text-decoration-thickness:2px}.arr .side{width:365px;min-width:320px;max-width:48%;resize:horizontal;border-left:1px solid var(--dsw-alias-border-l1);display:flex;flex-direction:column;min-height:0;overflow:hidden}.arr .sidetabs{padding:10px;border-bottom:1px solid var(--dsw-alias-border-l1)}.arr .sidebody{padding:14px;overflow:auto;min-height:0;flex:1}.arr .card{padding:14px;border:1px solid var(--dsw-alias-border-l1);border-radius:9px;background:var(--dsw-alias-bg-layer-1);margin-bottom:12px;overflow-wrap:anywhere}.arr blockquote{margin:8px 0;padding:5px 10px;border-left:3px solid var(--dsw-alias-brand-primary);color:var(--dsw-alias-label-secondary);white-space:pre-wrap}.arr .recordBody,.arr .messageBody{white-space:pre-wrap;overflow-wrap:anywhere}.arr .message{margin:12px 0;padding:12px;border-radius:8px;background:var(--dsw-alias-bg-layer-1)}.arr .message.user{background:var(--dsw-alias-bg-layer-2)}.arr .compose{padding:12px;border-top:1px solid var(--dsw-alias-border-l1)}.arr .methodlist{display:grid;gap:10px}.arr .methodlist button{text-align:left;padding:16px}.arr .methodlist .muted{display:block;margin-top:6px}.arr .form{display:grid;gap:14px}.arr label{display:grid;gap:5px}.arr .modalShade{position:absolute;inset:0;z-index:30;background:var(--dsw-alias-bg-overlay);display:flex;align-items:center;justify-content:center;padding:30px}.arr .modal{background:var(--dsw-alias-bg-base);border:1px solid var(--dsw-alias-border-l2);border-radius:12px;max-width:760px;width:100%;max-height:90%;overflow:auto;padding:24px;box-shadow:0 12px 42px var(--dsw-alias-border-l2)}.arr .columns{display:grid;grid-template-columns:1fr 1fr;gap:24px}.arr .settings{max-width:920px;margin:auto}.arr .selection{padding:10px 14px;border-bottom:1px solid var(--dsw-alias-border-l1);background:var(--dsw-alias-bg-layer-1)}.arr .selection blockquote{font-size:13px;max-height:90px;overflow:auto}.arr .pdfbox{position:relative;margin:0 auto;width:fit-content;background:var(--dsw-alias-bg-layer-1)}.arr .pdfbox canvas{display:block}.arr .pdftext{position:absolute;inset:0;overflow:hidden;opacity:1;line-height:1;text-align:initial;transform-origin:0 0}.arr .pdftext{--min-font-size:1;--text-scale-factor:calc(var(--total-scale-factor)*var(--min-font-size));--min-font-size-inv:calc(1/var(--min-font-size));text-size-adjust:none}.arr .pdftext span,.arr .pdftext br{color:transparent;position:absolute;white-space:pre;cursor:text;transform-origin:0 0}.arr .pdftext > :not(.markedContent),.arr .pdftext .markedContent span:not(.markedContent){z-index:1;--font-height:0;font-size:calc(var(--text-scale-factor)*var(--font-height));--scale-x:1;--rotate:0deg;transform:rotate(var(--rotate)) scaleX(var(--scale-x)) scale(var(--min-font-size-inv))}.arr .pdftext .markedContent{display:contents}.arr .pdftext ::selection{background:var(--dsw-alias-brand-primary);color:var(--dsw-alias-bg-base)}.arr .pdfmark{position:absolute;pointer-events:none;border:1px solid var(--dsw-alias-brand-primary);background:color-mix(in srgb,var(--dsw-alias-brand-primary) 12%,transparent)}.arr .searchResults{max-height:240px;overflow:auto}.arr .link{color:var(--dsw-alias-brand-primary)}.arr .settings .card{padding:20px}.arr .footer{padding:8px 15px;border-top:1px solid var(--dsw-alias-border-l1);font-size:12px;color:var(--dsw-alias-label-secondary)}.arr .nowrap{white-space:nowrap}@media(max-width:1100px){.arr .toc{width:160px}.arr .side{width:330px}.arr .body{padding:24px}}
@@ -28199,18 +34176,46 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
     ctx.effect(() => ctx.locale.register("aiReadingRoom", { zh, en }));
     const t = ctx.locale.bind("aiReadingRoom");
     function App() {
-      const locale = (0, import_react4.useSyncExternalStore)(
+      const locale = (0, import_react21.useSyncExternalStore)(
         (cb) => ctx.locale.subscribe(cb),
         () => ctx.locale.getSnapshot()
       );
       const lang = locale.active.startsWith("zh") ? "zh" : "en";
-      const [data, setData] = (0, import_react4.useState)(null), [error, setError] = (0, import_react4.useState)(""), [busy, setBusy] = (0, import_react4.useState)(false), [notice, setNotice] = (0, import_react4.useState)(""), [tab, setTab] = (0, import_react4.useState)("library"), [opened, setOpened] = (0, import_react4.useState)(null), [modal, setModal] = (0, import_react4.useState)(null), [query, setQuery] = (0, import_react4.useState)(""), [filter, setFilter] = (0, import_react4.useState)("all"), [allRecords, setAllRecords] = (0, import_react4.useState)([]);
-      const busyRef = (0, import_react4.useRef)(false);
+      const [data, setData] = (0, import_react21.useState)(null), [error, setError] = (0, import_react21.useState)(""), [busy, setBusy] = (0, import_react21.useState)(false), [notice, setNotice] = (0, import_react21.useState)(""), [tab, setTab] = (0, import_react21.useState)("library"), [opened, setOpened] = (0, import_react21.useState)(null), [modal, setModal] = (0, import_react21.useState)(null), [query, setQuery] = (0, import_react21.useState)(""), [filter, setFilter] = (0, import_react21.useState)("all"), [allRecords, setAllRecords] = (0, import_react21.useState)([]);
+      const busyRef = (0, import_react21.useRef)(false), retryRef = (0, import_react21.useRef)(null);
+      (0, import_react21.useEffect)(() => {
+        if (!notice) return;
+        const timer = setTimeout(() => setNotice(""), 2400);
+        return () => clearTimeout(timer);
+      }, [notice]);
       async function refresh() {
-        setData(await rpc2({ action: "read" }));
+        const current = await rpc2({ action: "read" });
+        setData(current);
+        try {
+          localStorage.setItem(
+            "arr-prompt-default",
+            current.preferences?.promptDisplay || "full"
+          );
+        } catch {
+        }
+        return current;
       }
-      (0, import_react4.useEffect)(() => {
-        refresh().catch((e) => setError(e.message));
+      (0, import_react21.useEffect)(() => {
+        refresh().then(async (d) => {
+          const dirs = (d.directories || []).filter((x2) => x2.checkOnOpen);
+          for (const dir of dirs) {
+            setNotice(t("working"));
+            await rpc2({
+              action: "refreshDirectory",
+              id: dir.id,
+              requestId: request2()
+            });
+          }
+          if (dirs.length) {
+            await refresh();
+            setNotice(t("saved"));
+          }
+        }).catch((e) => setError(e.message));
       }, []);
       async function run(fn) {
         if (busyRef.current) return;
@@ -28218,9 +34223,14 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         setBusy(true);
         setError("");
         try {
-          return await fn();
+          const result = await fn();
+          retryRef.current = null;
+          return result;
         } catch (e) {
-          if (e.name !== "AbortError") setError(localizeError(e.message, t));
+          if (e.name !== "AbortError") {
+            retryRef.current = e.retry || fn;
+            setError(localizeError(e.message, t));
+          }
         } finally {
           busyRef.current = false;
           setBusy(false);
@@ -28231,13 +34241,18 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           setOpened(await rpc2({ action: "open", id }));
         });
       }
+      async function openAt(id, anchor) {
+        if (anchor)
+          sessionStorage.setItem("arr-jump:" + id, JSON.stringify(anchor));
+        await open(id);
+      }
       const navigate = (key) => {
         setTab(key);
         setOpened(null);
         setQuery("");
         refresh().catch((e) => setError(e.message));
         if (key === "traces")
-          rpc2({ action: "records" }).then((v) => setAllRecords(v.items)).catch((e) => setError(e.message));
+          rpc2({ action: "records" }).then((v2) => setAllRecords(v2.items)).catch((e) => setError(e.message));
       };
       const date = (at) => at ? new Date(at).toLocaleString(lang === "zh" ? "zh-CN" : "en-US") : t("unknownDate");
       async function saveNote(payload) {
@@ -28264,23 +34279,24 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         });
       }
       const list = (data?.books || []).filter(
-        (b) => filter === "trash" ? b.deletedAt : !b.deletedAt && (filter === "all" || b.status === filter)
+        (b2) => filter === "trash" ? b2.deletedAt : !b2.deletedAt && (filter === "all" || b2.status === filter)
       ).filter(
-        (b) => (b.title + " " + b.author + " " + b.tags.join(" ")).toLowerCase().includes(query.toLowerCase())
+        (b2) => (b2.title + " " + b2.author + " " + b2.tags.join(" ")).toLowerCase().includes(query.toLowerCase())
       ).sort(
-        (a, b) => (b.lastOpenedAt || b.createdAt).localeCompare(
+        (a, b2) => (b2.lastOpenedAt || b2.createdAt).localeCompare(
           a.lastOpenedAt || a.createdAt
         )
       );
-      return /* @__PURE__ */ import_react4.default.createElement("div", { className: "arr", style: { position: "relative" } }, /* @__PURE__ */ import_react4.default.createElement("style", null, css), /* @__PURE__ */ import_react4.default.createElement("header", { className: "head" }, /* @__PURE__ */ import_react4.default.createElement("div", { className: "row spread" }, /* @__PURE__ */ import_react4.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react4.default.createElement(Icon, { size: 29 }), /* @__PURE__ */ import_react4.default.createElement("div", null, /* @__PURE__ */ import_react4.default.createElement("h1", null, t("title")), /* @__PURE__ */ import_react4.default.createElement("div", { className: "muted small" }, t("tagline")))), /* @__PURE__ */ import_react4.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react4.default.createElement("button", { onClick: () => setModal({ kind: "help" }) }, t("help")), /* @__PURE__ */ import_react4.default.createElement("button", { onClick: () => setModal({ kind: "import" }) }, t("import")))), /* @__PURE__ */ import_react4.default.createElement("nav", { className: "row nav" }, ["library", "traces", "settings"].map((key) => /* @__PURE__ */ import_react4.default.createElement(
+      const readerHeader = /* @__PURE__ */ import_react21.default.createElement("header", { className: "head" }, /* @__PURE__ */ import_react21.default.createElement("div", { className: "row spread" }, /* @__PURE__ */ import_react21.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react21.default.createElement(Icon, { size: 29 }), /* @__PURE__ */ import_react21.default.createElement("div", null, /* @__PURE__ */ import_react21.default.createElement("h1", null, t("title")), /* @__PURE__ */ import_react21.default.createElement("div", { className: "muted small" }, t("tagline")))), /* @__PURE__ */ import_react21.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react21.default.createElement("button", { onClick: () => setModal({ kind: "help" }) }, t("help")), /* @__PURE__ */ import_react21.default.createElement("button", { onClick: () => setModal({ kind: "import" }) }, t("import")))), /* @__PURE__ */ import_react21.default.createElement("nav", { className: "row nav" }, ["library", "traces", "methodLibrary", "settings"].map((key) => /* @__PURE__ */ import_react21.default.createElement(
         "button",
         {
           key,
-          "aria-selected": tab === key && !opened,
+          "aria-selected": opened ? key === "library" : tab === key,
           onClick: () => navigate(key)
         },
         t(key)
-      )), opened && /* @__PURE__ */ import_react4.default.createElement("span", { className: "pill" }, opened.book.title))), (error || notice || busy) && /* @__PURE__ */ import_react4.default.createElement("div", { className: "banner " + (error ? "error" : ""), role: "status" }, /* @__PURE__ */ import_react4.default.createElement("span", null, error || (busy ? t("working") : notice)), /* @__PURE__ */ import_react4.default.createElement(
+      ))));
+      const readerNotice = error && /* @__PURE__ */ import_react21.default.createElement("div", { className: "banner " + (error ? "error" : ""), role: "status" }, /* @__PURE__ */ import_react21.default.createElement("span", null, error || (busy ? t("working") : notice)), error && retryRef.current && /* @__PURE__ */ import_react21.default.createElement("button", { disabled: busy, onClick: () => run(retryRef.current) }, t("retry")), /* @__PURE__ */ import_react21.default.createElement(
         "button",
         {
           onClick: () => {
@@ -28289,13 +34305,18 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           }
         },
         "\xD7"
-      )), !data ? /* @__PURE__ */ import_react4.default.createElement("div", { className: "empty" }, t("loading"), " ", /* @__PURE__ */ import_react4.default.createElement("button", { onClick: () => run(refresh) }, t("retry"))) : opened ? /* @__PURE__ */ import_react4.default.createElement(
+      ));
+      return /* @__PURE__ */ import_react21.default.createElement("div", { className: "arr", style: { position: "relative" } }, /* @__PURE__ */ import_react21.default.createElement("style", null, css + spirit_default + upgrade_default + annotations_default + reading_assets_default), !opened && /* @__PURE__ */ import_react21.default.createElement(import_react21.default.Fragment, null, readerHeader, readerNotice), !data ? /* @__PURE__ */ import_react21.default.createElement("div", { className: "empty" }, t("loading"), " ", /* @__PURE__ */ import_react21.default.createElement("button", { onClick: () => run(refresh) }, t("retry"))) : opened ? /* @__PURE__ */ import_react21.default.createElement(
         Reader,
         {
           key: opened.book.id,
           info: opened,
+          chrome: readerHeader,
+          notices: readerNotice,
           setInfo: setOpened,
           settings: data.settings,
+          preferences: data.preferences,
+          onNavigate: navigate,
           t,
           lang,
           date,
@@ -28303,12 +34324,13 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           showNote,
           busy,
           back: () => {
+            setTab("library");
             setOpened(null);
             refresh().catch((e) => setError(e.message));
           },
           setModal
         }
-      ) : tab === "library" ? /* @__PURE__ */ import_react4.default.createElement("div", { className: "scroll page" }, /* @__PURE__ */ import_react4.default.createElement("div", { className: "toolbar" }, /* @__PURE__ */ import_react4.default.createElement(
+      ) : tab === "library" ? /* @__PURE__ */ import_react21.default.createElement("div", { className: "scroll page" }, /* @__PURE__ */ import_react21.default.createElement("div", { className: "toolbar" }, /* @__PURE__ */ import_react21.default.createElement(
         "input",
         {
           "aria-label": t("search"),
@@ -28316,7 +34338,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           value: query,
           onChange: (e) => setQuery(e.target.value)
         }
-      ), /* @__PURE__ */ import_react4.default.createElement(
+      ), /* @__PURE__ */ import_react21.default.createElement(
         "select",
         {
           value: filter,
@@ -28324,44 +34346,44 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           "aria-label": t("status")
         },
         ["all", "want", "reading", "paused", "finished", "trash"].map(
-          (k) => /* @__PURE__ */ import_react4.default.createElement("option", { key: k, value: k }, t(k))
+          (k2) => /* @__PURE__ */ import_react21.default.createElement("option", { key: k2, value: k2 }, t(k2))
         )
-      ), /* @__PURE__ */ import_react4.default.createElement("button", { onClick: () => setModal({ kind: "search", bookId: "" }) }, t("searchAll")), /* @__PURE__ */ import_react4.default.createElement("button", { onClick: () => run(refresh) }, t("update"))), !list.length ? /* @__PURE__ */ import_react4.default.createElement("div", { className: "empty" }, /* @__PURE__ */ import_react4.default.createElement(Icon, { size: 50 }), /* @__PURE__ */ import_react4.default.createElement("h2", null, t("empty")), /* @__PURE__ */ import_react4.default.createElement("p", { className: "muted" }, t("hint")), /* @__PURE__ */ import_react4.default.createElement(
+      ), /* @__PURE__ */ import_react21.default.createElement("button", { onClick: () => setModal({ kind: "search", bookId: "" }) }, t("searchAll")), /* @__PURE__ */ import_react21.default.createElement("button", { onClick: () => run(refresh) }, t("update"))), !list.length ? /* @__PURE__ */ import_react21.default.createElement("div", { className: "empty" }, /* @__PURE__ */ import_react21.default.createElement(Icon, { size: 50 }), /* @__PURE__ */ import_react21.default.createElement("h2", null, t("empty")), /* @__PURE__ */ import_react21.default.createElement("p", { className: "muted" }, t("hint")), /* @__PURE__ */ import_react21.default.createElement(
         "button",
         {
           className: "primary",
           onClick: () => setModal({ kind: "import" })
         },
         t("import")
-      )) : /* @__PURE__ */ import_react4.default.createElement("div", { className: "shelf" }, list.map((b) => /* @__PURE__ */ import_react4.default.createElement("div", { key: b.id }, /* @__PURE__ */ import_react4.default.createElement(
+      )) : /* @__PURE__ */ import_react21.default.createElement("div", { className: "shelf" }, list.map((b2) => /* @__PURE__ */ import_react21.default.createElement("div", { key: b2.id }, /* @__PURE__ */ import_react21.default.createElement(
         "button",
         {
           className: "book",
           style: { width: "100%" },
-          onClick: () => b.deletedAt ? run(async () => {
+          onClick: () => b2.deletedAt ? run(async () => {
             await rpc2({
               action: "trashBook",
-              id: b.id,
-              revision: b.revision,
+              id: b2.id,
+              revision: b2.revision,
               restore: true,
               requestId: request2()
             });
             await refresh();
-          }) : open(b.id)
+          }) : open(b2.id)
         },
-        /* @__PURE__ */ import_react4.default.createElement("div", { className: "cover" }, b.hasCover ? /* @__PURE__ */ import_react4.default.createElement(
+        /* @__PURE__ */ import_react21.default.createElement("div", { className: "cover" }, b2.hasCover ? /* @__PURE__ */ import_react21.default.createElement(
           "img",
           {
             loading: "lazy",
-            src: API2 + "/cover?id=" + b.id,
-            alt: b.title
+            src: API2 + "/cover?id=" + b2.id,
+            alt: b2.title
           }
-        ) : /* @__PURE__ */ import_react4.default.createElement("span", null, b.title)),
-        /* @__PURE__ */ import_react4.default.createElement("span", { className: "bookTitle" }, b.title),
-        /* @__PURE__ */ import_react4.default.createElement("span", { className: "muted small" }, b.author || t("unknownAuthor")),
-        /* @__PURE__ */ import_react4.default.createElement("span", { className: "row small" }, /* @__PURE__ */ import_react4.default.createElement("span", { className: "pill" }, b.format.toUpperCase()), /* @__PURE__ */ import_react4.default.createElement("span", null, b.deletedAt ? t("restore") : t(b.status))),
-        b.lastOpenedAt && /* @__PURE__ */ import_react4.default.createElement("span", { className: "muted small" }, date(b.lastOpenedAt))
-      ))))) : tab === "traces" ? /* @__PURE__ */ import_react4.default.createElement(
+        ) : /* @__PURE__ */ import_react21.default.createElement("span", null, b2.title)),
+        /* @__PURE__ */ import_react21.default.createElement("span", { className: "bookTitle" }, b2.title),
+        /* @__PURE__ */ import_react21.default.createElement("span", { className: "muted small" }, b2.author || t("unknownAuthor")),
+        /* @__PURE__ */ import_react21.default.createElement("span", { className: "row small" }, /* @__PURE__ */ import_react21.default.createElement("span", { className: "pill" }, b2.format.toUpperCase()), /* @__PURE__ */ import_react21.default.createElement("span", null, b2.deletedAt ? t("restore") : t(b2.status))),
+        b2.lastOpenedAt && /* @__PURE__ */ import_react21.default.createElement("span", { className: "muted small" }, date(b2.lastOpenedAt))
+      ))))) : tab === "traces" ? /* @__PURE__ */ import_react21.default.createElement(
         Traces,
         {
           items: allRecords,
@@ -28371,11 +34393,24 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           t,
           date,
           open,
+          openAt,
+          lang,
           run,
           refresh: async () => setAllRecords((await rpc2({ action: "records" })).items),
           setModal
         }
-      ) : /* @__PURE__ */ import_react4.default.createElement(
+      ) : tab === "methodLibrary" ? /* @__PURE__ */ import_react21.default.createElement("div", { className: "scroll page" }, /* @__PURE__ */ import_react21.default.createElement(
+        MethodLibrary,
+        {
+          t,
+          lang,
+          run,
+          onSuggest: (prompt) => setModal({
+            kind: "help",
+            question: (lang === "zh" ? "\u8BF7\u4E3A\u4EE5\u4E0B\u8BFB\u4E66\u65B9\u6CD5\u8BBA\u5EFA\u8BAE\u540D\u79F0\u3001\u7B80\u4ECB\u3001\u9002\u7528\u573A\u666F\u548C\u4F7F\u7528\u6B65\u9AA4\uFF0C\u53EA\u63D0\u4F9B\u8349\u7A3F\uFF0C\u4E0D\u6539\u5199\u539F\u63D0\u793A\u8BCD\uFF1A\n" : "Suggest a name, description, scenarios and usage steps for this reading methodology without rewriting its prompt:\n") + prompt
+          })
+        }
+      )) : /* @__PURE__ */ import_react21.default.createElement(
         Settings,
         {
           data,
@@ -28384,15 +34419,46 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           run,
           setModal
         }
-      ), modal && /* @__PURE__ */ import_react4.default.createElement(
+      ), data && data.books.length === 0 && !data.preferences?.onboarded && data.preferences?.tips === "all" && !opened && /* @__PURE__ */ import_react21.default.createElement("div", { className: "arr-onboarding" }, /* @__PURE__ */ import_react21.default.createElement("strong", null, t("quickStart")), /* @__PURE__ */ import_react21.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react21.default.createElement("button", { onClick: () => setModal({ kind: "import" }) }, t("importFiles")), /* @__PURE__ */ import_react21.default.createElement(
+        "button",
+        {
+          onClick: () => run(async () => {
+            const x2 = await rpc2({
+              action: "sample",
+              requestId: request2()
+            });
+            await rpc2({
+              action: "preferences",
+              item: { onboarded: true },
+              requestId: request2()
+            });
+            await refresh();
+            setTimeout(() => open(x2.book.id), 0);
+          })
+        },
+        t("trySample")
+      ), /* @__PURE__ */ import_react21.default.createElement("button", { onClick: () => setModal({ kind: "help" }) }, t("help")), /* @__PURE__ */ import_react21.default.createElement(
+        "button",
+        {
+          onClick: () => run(async () => {
+            await rpc2({
+              action: "preferences",
+              item: { onboarded: true },
+              requestId: request2()
+            });
+            await refresh();
+          })
+        },
+        t("skipGuide")
+      ))), !error && (notice || busy) && /* @__PURE__ */ import_react21.default.createElement("div", { className: "arr-save-toast", role: "status" }, busy ? t("working") : notice), modal && /* @__PURE__ */ import_react21.default.createElement(
         Modal,
         {
           onClose: () => setModal(null),
           title: t(
-            modal.kind === "note" ? "newNote" : modal.kind === "import" ? "import" : modal.kind === "search" ? "searchText" : modal.kind === "meta" ? "metadata" : modal.kind === "restore" ? "restoreBackup" : "help"
+            modal.kind === "readingReview" ? "readingReview" : modal.kind === "methodology" ? "methodologies" : modal.kind === "note" ? "newNote" : modal.kind === "import" ? "import" : modal.kind === "search" ? "searchText" : modal.kind === "meta" ? "metadata" : modal.kind === "restore" ? "restoreBackup" : "help"
           )
         },
-        /* @__PURE__ */ import_react4.default.createElement(
+        /* @__PURE__ */ import_react21.default.createElement(
           ModalContent,
           {
             modal,
@@ -28400,7 +34466,14 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
             lang,
             run,
             busy,
-            close: () => setModal(null),
+            close: () => {
+              if (modal.kind === "import") {
+                setTab("library");
+                setFilter("all");
+                setQuery("");
+              }
+              setModal(null);
+            },
             refresh,
             showNote,
             saveNote,
@@ -28413,10 +34486,10 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
       ));
     }
     function Modal({ children, onClose, title }) {
-      const ref = (0, import_react4.useRef)(null), previous = (0, import_react4.useRef)(document.activeElement);
-      (0, import_react4.useEffect)(() => {
+      const ref = (0, import_react21.useRef)(null), previous = (0, import_react21.useRef)(document.activeElement);
+      (0, import_react21.useEffect)(() => {
         const el = ref.current;
-        el.querySelector("button,input,textarea,select")?.focus();
+        (el.querySelector("[data-autofocus]") || el.querySelector("button"))?.focus({ preventScroll: true });
         function key(e) {
           if (e.key === "Escape") {
             e.preventDefault();
@@ -28443,7 +34516,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           previous.current?.focus();
         };
       }, []);
-      return /* @__PURE__ */ import_react4.default.createElement("div", { className: "modalShade" }, /* @__PURE__ */ import_react4.default.createElement(
+      return /* @__PURE__ */ import_react21.default.createElement("div", { className: "modalShade" }, /* @__PURE__ */ import_react21.default.createElement(
         "section",
         {
           className: "modal",
@@ -28452,11 +34525,11 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
           "aria-modal": "true",
           "aria-label": title
         },
-        /* @__PURE__ */ import_react4.default.createElement("div", { className: "row spread", style: { marginBottom: 18 } }, /* @__PURE__ */ import_react4.default.createElement("h2", null, title), /* @__PURE__ */ import_react4.default.createElement("button", { onClick: onClose, "aria-label": t("close") }, "\xD7")),
+        /* @__PURE__ */ import_react21.default.createElement("div", { className: "row spread", style: { marginBottom: 18 } }, /* @__PURE__ */ import_react21.default.createElement("h2", null, title), /* @__PURE__ */ import_react21.default.createElement("button", { onClick: onClose, "aria-label": t("close") }, "\xD7")),
         children
       ));
     }
-    class Boundary extends import_react4.default.Component {
+    class Boundary extends import_react21.default.Component {
       constructor(p) {
         super(p);
         this.state = { error: null };
@@ -28465,7 +34538,7 @@ fn fs_main(in : VertexOutput) -> @location(0) vec4<f32> {
         return { error };
       }
       render() {
-        return this.state.error ? /* @__PURE__ */ import_react4.default.createElement("div", { style: { padding: 30 } }, /* @__PURE__ */ import_react4.default.createElement("h2", null, t("error")), /* @__PURE__ */ import_react4.default.createElement("p", null, String(this.state.error.message)), /* @__PURE__ */ import_react4.default.createElement("button", { onClick: () => this.setState({ error: null }) }, t("retry"))) : /* @__PURE__ */ import_react4.default.createElement(App, null);
+        return this.state.error ? /* @__PURE__ */ import_react21.default.createElement("div", { style: { padding: 30 } }, /* @__PURE__ */ import_react21.default.createElement("h2", null, t("error")), /* @__PURE__ */ import_react21.default.createElement("p", null, String(this.state.error.message)), /* @__PURE__ */ import_react21.default.createElement("button", { onClick: () => this.setState({ error: null }) }, t("retry"))) : /* @__PURE__ */ import_react21.default.createElement(App, null);
       }
     }
     ctx.slots.inject(

@@ -7,6 +7,15 @@ import React, {
 import { Reader } from "./reader.jsx";
 import { errors, localizeError } from "./api.js";
 import { Traces, Settings, ModalContent } from "./forms.jsx";
+import { spiritCopy } from "./spirit-copy.js";
+import spiritStyles from "./spirit.css";
+import { upgradeCopy } from "./upgrade-copy.js";
+import { interactionCopy } from "./interaction-copy.js";
+import upgradeStyles from "./upgrade.css";
+import annotationStyles from "./annotations.css";
+import readingAssetsStyles from "./reading-assets.css";
+import { readingAssetsCopy } from "./reading-assets-copy.js";
+import { MethodLibrary } from "./method-library.jsx";
 const pairs = {
   title: ["AI 书房", "AI reading room"],
   tagline: [
@@ -44,12 +53,12 @@ const pairs = {
   continue: ["继续阅读", "Continue reading"],
   notes: ["笔记", "Notes"],
   history: ["历程", "History"],
-  spirit: ["书灵", "Book Spirit"],
+  spirit: ["书虫", "Bookworm"],
   contents: ["目录", "Contents"],
   prev: ["上一章 / 页", "Previous"],
   next: ["下一章 / 页", "Next"],
   selectHint: [
-    "选择正文，可划线、写感悟、记疑问或问书灵。",
+    "选择正文，可划线、写感悟、记疑问或问书虫。",
     "Select text to highlight, reflect, ask a question or discuss.",
   ],
   highlight: ["划线", "Highlight"],
@@ -57,7 +66,7 @@ const pairs = {
   question: ["疑问", "Question"],
   note: ["长笔记", "Note"],
   ai: ["AI 内容", "AI content"],
-  ask: ["问书灵", "Ask Book Spirit"],
+  ask: ["问书虫", "Ask Bookworm"],
   newNote: ["记一条笔记", "Write a note"],
   bodyHint: [
     "写下自己的理解、感受或仍未想清楚的地方…",
@@ -76,7 +85,7 @@ const pairs = {
   export: ["导出 Markdown", "Export Markdown"],
   free: ["自由讨论", "Open discussion"],
   hunt: ["狩猎法 · 带问题读", "Question-led reading"],
-  feynman: ["费曼法 · 讲给书灵听", "Teach-back"],
+  feynman: ["费曼法 · 讲给书虫听", "Teach-back"],
   debate: ["辩论法 · 检验观点", "Perspective debate"],
   goal: ["这次希望想清楚什么？", "What would you like to understand?"],
   newExercise: ["开始新讨论 / 练习", "Start a discussion / exercise"],
@@ -86,7 +95,7 @@ const pairs = {
   pause: ["暂停练习", "Pause"],
   resume: ["继续练习", "Resume"],
   finish: ["标记已回顾", "Mark reviewed"],
-  summarize: ["请书灵整理回顾", "Ask for a recap"],
+  summarize: ["请书虫整理回顾", "Ask for a recap"],
   recapRequest: [
     "请根据本次讨论整理回顾：我已展示的理解、发生的修正、仍未解决的问题和对应原文。请区分我的观点与你的建议，不替我宣布完全掌握。",
     "Please recap this discussion: understanding I have demonstrated, revisions, unresolved questions, and source references. Distinguish my views from your suggestions; do not declare complete mastery.",
@@ -94,19 +103,19 @@ const pairs = {
   stage: ["当前阶段", "Current stage"],
   send: ["发送", "Send"],
   stop: ["停止回复", "Stop"],
-  message: ["和书灵说说你的想法…", "Share your thoughts with Book Spirit…"],
+  message: ["和书虫说说你的想法…", "Share your thoughts with Bookworm…"],
   contextHint: [
-    "会发送你的消息、当前片段或章节摘录。书灵可以检索本书；不读取其他书籍。",
-    "Your message and a current passage or chapter excerpt are sent to your DSH model. Book Spirit can search this book only.",
+    "会发送你的消息、当前片段或章节摘录。书虫可以检索本书；不读取其他书籍。",
+    "Your message and a current passage or chapter excerpt are sent to your DSH model. Bookworm can search this book only.",
   ],
   pausedHint: [
     "练习已暂停或结束，继续后可发送消息。",
     "Resume the exercise to send messages.",
   ],
   saveReply: ["收进笔记", "Save to notes"],
-  model: ["书灵使用的模型", "Book Spirit model"],
+  model: ["书虫使用的模型", "Bookworm model"],
   defaultModel: ["跟随 DSH 默认模型", "Use DSH default"],
-  replyLanguage: ["书灵回复语言", "Reply language"],
+  replyLanguage: ["书虫回复语言", "Reply language"],
   auto: ["跟随提问语言", "Follow the question"],
   fontSize: ["正文字号", "Text size"],
   lineHeight: ["行距", "Line spacing"],
@@ -216,10 +225,17 @@ const pairs = {
   ],
   help: ["使用说明", "Help"],
   helpText: [
-    "先导入书籍，点开封面开始阅读。选中文字可保存学习记录；右侧进入书灵并选择一种方法。记录与讨论都按日期保留，设置中可以导出备份。首版暂不包含 OCR、MOBI/AZW3、跨书主题和自动提醒。",
-    "Import a book and open its cover to read. Select text to save a record. Use Book Spirit on the right and choose a method. Notes and discussions retain their dates. Export backups from Settings. OCR, MOBI/AZW3, cross-book topics and reminders are not included in this version.",
+    "先导入书籍，点开封面开始阅读。选中文字可保存学习记录；右侧进入书虫并选择一种方法。记录与讨论都按日期保留，设置中可以导出备份。首版暂不包含 OCR、MOBI/AZW3、跨书主题和自动提醒。",
+    "Import a book and open its cover to read. Select text to save a record. Use Bookworm on the right and choose a method. Notes and discussions retain their dates. Export backups from Settings. OCR, MOBI/AZW3, cross-book topics and reminders are not included in this version.",
   ],
 };
+Object.assign(
+  pairs,
+  spiritCopy,
+  upgradeCopy,
+  interactionCopy,
+  readingAssetsCopy,
+);
 for (const [key, value] of Object.entries(errors))
   pairs["error." + key] = value;
 const zh = Object.fromEntries(Object.entries(pairs).map(([k, v]) => [k, v[0]])),
@@ -308,12 +324,42 @@ export function apply(ctx) {
       [query, setQuery] = useState(""),
       [filter, setFilter] = useState("all"),
       [allRecords, setAllRecords] = useState([]);
-    const busyRef = useRef(false);
+    const busyRef = useRef(false),
+      retryRef = useRef(null);
+    useEffect(() => {
+      if (!notice) return;
+      const timer = setTimeout(() => setNotice(""), 2400);
+      return () => clearTimeout(timer);
+    }, [notice]);
     async function refresh() {
-      setData(await rpc({ action: "read" }));
+      const current = await rpc({ action: "read" });
+      setData(current);
+      try {
+        localStorage.setItem(
+          "arr-prompt-default",
+          current.preferences?.promptDisplay || "full",
+        );
+      } catch {}
+      return current;
     }
     useEffect(() => {
-      refresh().catch((e) => setError(e.message));
+      refresh()
+        .then(async (d) => {
+          const dirs = (d.directories || []).filter((x) => x.checkOnOpen);
+          for (const dir of dirs) {
+            setNotice(t("working"));
+            await rpc({
+              action: "refreshDirectory",
+              id: dir.id,
+              requestId: request(),
+            });
+          }
+          if (dirs.length) {
+            await refresh();
+            setNotice(t("saved"));
+          }
+        })
+        .catch((e) => setError(e.message));
     }, []);
     async function run(fn) {
       if (busyRef.current) return;
@@ -321,9 +367,14 @@ export function apply(ctx) {
       setBusy(true);
       setError("");
       try {
-        return await fn();
+        const result = await fn();
+        retryRef.current = null;
+        return result;
       } catch (e) {
-        if (e.name !== "AbortError") setError(localizeError(e.message, t));
+        if (e.name !== "AbortError") {
+          retryRef.current = e.retry || fn;
+          setError(localizeError(e.message, t));
+        }
       } finally {
         busyRef.current = false;
         setBusy(false);
@@ -333,6 +384,11 @@ export function apply(ctx) {
       await run(async () => {
         setOpened(await rpc({ action: "open", id }));
       });
+    }
+    async function openAt(id, anchor) {
+      if (anchor)
+        sessionStorage.setItem("arr-jump:" + id, JSON.stringify(anchor));
+      await open(id);
     }
     const navigate = (key) => {
       setTab(key);
@@ -394,52 +450,70 @@ export function apply(ctx) {
           a.lastOpenedAt || a.createdAt,
         ),
       );
-    return (
-      <div className="arr" style={{ position: "relative" }}>
-        <style>{css}</style>
-        <header className="head">
-          <div className="row spread">
-            <div className="row">
-              <Icon size={29} />
-              <div>
-                <h1>{t("title")}</h1>
-                <div className="muted small">{t("tagline")}</div>
-              </div>
-            </div>
-            <div className="row">
-              <button onClick={() => setModal({ kind: "help" })}>
-                {t("help")}
-              </button>
-              <button onClick={() => setModal({ kind: "import" })}>
-                {t("import")}
-              </button>
+    const readerHeader = (
+      <header className="head">
+        <div className="row spread">
+          <div className="row">
+            <Icon size={29} />
+            <div>
+              <h1>{t("title")}</h1>
+              <div className="muted small">{t("tagline")}</div>
             </div>
           </div>
-          <nav className="row nav">
-            {["library", "traces", "settings"].map((key) => (
-              <button
-                key={key}
-                aria-selected={tab === key && !opened}
-                onClick={() => navigate(key)}
-              >
-                {t(key)}
-              </button>
-            ))}
-            {opened && <span className="pill">{opened.book.title}</span>}
-          </nav>
-        </header>
-        {(error || notice || busy) && (
-          <div className={"banner " + (error ? "error" : "")} role="status">
-            <span>{error || (busy ? t("working") : notice)}</span>
-            <button
-              onClick={() => {
-                setError("");
-                setNotice("");
-              }}
-            >
-              ×
+          <div className="row">
+            <button onClick={() => setModal({ kind: "help" })}>
+              {t("help")}
+            </button>
+            <button onClick={() => setModal({ kind: "import" })}>
+              {t("import")}
             </button>
           </div>
+        </div>
+        <nav className="row nav">
+          {["library", "traces", "methodLibrary", "settings"].map((key) => (
+            <button
+              key={key}
+              aria-selected={opened ? key === "library" : tab === key}
+              onClick={() => navigate(key)}
+            >
+              {t(key)}
+            </button>
+          ))}
+        </nav>
+      </header>
+    );
+    const readerNotice = error && (
+      <div className={"banner " + (error ? "error" : "")} role="status">
+        <span>{error || (busy ? t("working") : notice)}</span>
+        {error && retryRef.current && (
+          <button disabled={busy} onClick={() => run(retryRef.current)}>
+            {t("retry")}
+          </button>
+        )}
+        <button
+          onClick={() => {
+            setError("");
+            setNotice("");
+          }}
+        >
+          ×
+        </button>
+      </div>
+    );
+    return (
+      <div className="arr" style={{ position: "relative" }}>
+        <style>
+          {css +
+            spiritStyles +
+            upgradeStyles +
+            annotationStyles +
+            readingAssetsStyles}
+        </style>
+        {!opened && (
+          <>
+            {readerHeader}
+            {readerNotice}
+          </>
         )}
         {!data ? (
           <div className="empty">
@@ -450,8 +524,12 @@ export function apply(ctx) {
           <Reader
             key={opened.book.id}
             info={opened}
+            chrome={readerHeader}
+            notices={readerNotice}
             setInfo={setOpened}
             settings={data.settings}
+            preferences={data.preferences}
+            onNavigate={navigate}
             t={t}
             lang={lang}
             date={date}
@@ -459,6 +537,7 @@ export function apply(ctx) {
             showNote={showNote}
             busy={busy}
             back={() => {
+              setTab("library");
               setOpened(null);
               refresh().catch((e) => setError(e.message));
             }}
@@ -564,12 +643,32 @@ export function apply(ctx) {
             t={t}
             date={date}
             open={open}
+            openAt={openAt}
+            lang={lang}
             run={run}
             refresh={async () =>
               setAllRecords((await rpc({ action: "records" })).items)
             }
             setModal={setModal}
           />
+        ) : tab === "methodLibrary" ? (
+          <div className="scroll page">
+            <MethodLibrary
+              t={t}
+              lang={lang}
+              run={run}
+              onSuggest={(prompt) =>
+                setModal({
+                  kind: "help",
+                  question:
+                    (lang === "zh"
+                      ? "请为以下读书方法论建议名称、简介、适用场景和使用步骤，只提供草稿，不改写原提示词：\n"
+                      : "Suggest a name, description, scenarios and usage steps for this reading methodology without rewriting its prompt:\n") +
+                    prompt,
+                })
+              }
+            />
+          </div>
         ) : (
           <Settings
             data={data}
@@ -579,21 +678,80 @@ export function apply(ctx) {
             setModal={setModal}
           />
         )}
+        {data &&
+          data.books.length === 0 &&
+          !data.preferences?.onboarded &&
+          data.preferences?.tips === "all" &&
+          !opened && (
+            <div className="arr-onboarding">
+              <strong>{t("quickStart")}</strong>
+              <div className="row">
+                <button onClick={() => setModal({ kind: "import" })}>
+                  {t("importFiles")}
+                </button>
+                <button
+                  onClick={() =>
+                    run(async () => {
+                      const x = await rpc({
+                        action: "sample",
+                        requestId: request(),
+                      });
+                      await rpc({
+                        action: "preferences",
+                        item: { onboarded: true },
+                        requestId: request(),
+                      });
+                      await refresh();
+                      setTimeout(() => open(x.book.id), 0);
+                    })
+                  }
+                >
+                  {t("trySample")}
+                </button>
+                <button onClick={() => setModal({ kind: "help" })}>
+                  {t("help")}
+                </button>
+                <button
+                  onClick={() =>
+                    run(async () => {
+                      await rpc({
+                        action: "preferences",
+                        item: { onboarded: true },
+                        requestId: request(),
+                      });
+                      await refresh();
+                    })
+                  }
+                >
+                  {t("skipGuide")}
+                </button>
+              </div>
+            </div>
+          )}
+        {!error && (notice || busy) && (
+          <div className="arr-save-toast" role="status">
+            {busy ? t("working") : notice}
+          </div>
+        )}
         {modal && (
           <Modal
             onClose={() => setModal(null)}
             title={t(
-              modal.kind === "note"
-                ? "newNote"
-                : modal.kind === "import"
-                  ? "import"
-                  : modal.kind === "search"
-                    ? "searchText"
-                    : modal.kind === "meta"
-                      ? "metadata"
-                      : modal.kind === "restore"
-                        ? "restoreBackup"
-                        : "help",
+              modal.kind === "readingReview"
+                ? "readingReview"
+                : modal.kind === "methodology"
+                  ? "methodologies"
+                  : modal.kind === "note"
+                    ? "newNote"
+                    : modal.kind === "import"
+                      ? "import"
+                      : modal.kind === "search"
+                        ? "searchText"
+                        : modal.kind === "meta"
+                          ? "metadata"
+                          : modal.kind === "restore"
+                            ? "restoreBackup"
+                            : "help",
             )}
           >
             <ModalContent
@@ -602,7 +760,14 @@ export function apply(ctx) {
               lang={lang}
               run={run}
               busy={busy}
-              close={() => setModal(null)}
+              close={() => {
+                if (modal.kind === "import") {
+                  setTab("library");
+                  setFilter("all");
+                  setQuery("");
+                }
+                setModal(null);
+              }}
               refresh={refresh}
               showNote={showNote}
               saveNote={saveNote}
@@ -621,7 +786,9 @@ export function apply(ctx) {
       previous = useRef(document.activeElement);
     useEffect(() => {
       const el = ref.current;
-      el.querySelector("button,input,textarea,select")?.focus();
+      (
+        el.querySelector("[data-autofocus]") || el.querySelector("button")
+      )?.focus({ preventScroll: true });
       function key(e) {
         if (e.key === "Escape") {
           e.preventDefault();

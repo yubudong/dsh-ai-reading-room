@@ -1,0 +1,184 @@
+.arr .arr-save-toast {
+  position: absolute;
+  bottom: 22px;
+  left: 24px;
+  z-index: 35;
+  max-width: 420px;
+  padding: 10px 16px;
+  border-radius: 9px;
+  border: 1px solid var(--dsw-alias-border-l2);
+  background: var(--dsw-alias-bg-overlay);
+  box-shadow: 0 4px 16px var(--dsw-alias-border-l1);
+  color: var(--dsw-alias-label-primary);
+  font-size: 12px;
+  pointer-events: none;
+}
+.arr .is-focused .arr-chapterbar {
+  display: none;
+}
+.arr
+  .is-focused
+  .arr-bookbar
+  > .row:last-child
+  > button:not(.arr-spirit-toggle):not(.arr-focus-toggle) {
+  display: none;
+}
+.arr .is-focused .arr-bookbar > .row:first-child > .pill {
+  display: none;
+}
+.arr .is-focused .arr-bookbar {
+  padding: 9px 12px;
+  gap: 8px;
+}
+.arr .arr-focus-chapters {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+}
+.arr .arr-focus-chapters button {
+  padding: 5px 8px;
+}
+.arr .arr-reader-more {
+  position: relative;
+  font-size: 12px;
+}
+.arr .arr-reader-more > summary {
+  cursor: pointer;
+  padding: 8px 10px;
+  list-style: none;
+  border: 1px solid var(--dsw-alias-border-l1);
+  border-radius: 6px;
+}
+.arr .arr-reader-more > div {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 5px);
+  z-index: 20;
+  min-width: 180px;
+  max-height: 60vh;
+  overflow: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid var(--dsw-alias-border-l2);
+  border-radius: 8px;
+  background: var(--dsw-alias-bg-overlay);
+  box-shadow: 0 6px 20px var(--dsw-alias-border-l1);
+}
+.arr .arr-reader-more > div > button {
+  border: 0;
+  background: transparent;
+  text-align: left;
+  font-size: 12px;
+}
+.arr .arr-reader-more > div > button:hover {
+  background: var(--dsw-alias-bg-layer-2);
+}
+.arr .prose::highlight(arr-reading-jump),
+.arr .pdftext::highlight(arr-reading-jump) {
+  background: var(--dsw-alias-bg-layer-2);
+  color: var(--dsw-alias-label-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--dsw-alias-brand-primary);
+  text-decoration-thickness: 2px;
+}
+.arr .arr-learning-traces {
+  padding-top: 18px;
+}
+.arr .arr-trace-filters {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(140px, 1fr));
+  gap: 10px;
+  max-width: 1100px;
+}
+.arr .arr-trace-filters > input {
+  grid-column: span 2;
+}
+.arr .arr-trace-filters label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+.arr .arr-trace-filters input,
+.arr .arr-trace-filters select {
+  width: 100%;
+  min-width: 0;
+}
+.arr .arr-trace-flags {
+  margin: 14px 0;
+  gap: 14px;
+}
+.arr .arr-trace-batch {
+  padding: 10px 0;
+  margin-bottom: 15px;
+  border-bottom: 1px solid var(--dsw-alias-border-l1);
+  font-size: 12px;
+}
+.arr .arr-trace-entry {
+  max-width: 900px;
+  margin: 0 auto 18px;
+}
+.arr .arr-trace-entry > .row {
+  padding: 6px 0;
+  font-size: 12px;
+}
+.arr .arr-trace-entry .link {
+  max-width: 80%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.arr .arr-followups {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-top: 9px;
+}
+.arr .arr-followups button {
+  background: transparent;
+  border: 1px solid var(--dsw-alias-border-l1);
+  font-size: 11px;
+  padding: 4px 8px;
+  color: var(--dsw-alias-label-secondary);
+}
+.arr .arr-reply-length {
+  font-size: 11px;
+  padding-bottom: 6px;
+  color: var(--dsw-alias-label-secondary);
+}
+.arr .arr-reply-length select {
+  padding: 3px 5px;
+  font-size: 11px;
+  border: 0;
+  background: transparent;
+}
+.arr .arr-reading-review {
+  max-height: 72vh;
+  overflow: auto;
+  padding-right: 8px;
+}
+.arr .arr-reading-review > label > textarea {
+  width: 100%;
+  font: 13px/1.8 system-ui;
+  resize: vertical;
+  min-height: 260px;
+}
+.arr .modal:has(.arr-reading-review) {
+  max-width: 950px;
+  width: 92%;
+}
+.arr .arr-reading-review .arr-chat-markdown {
+  max-height: 300px;
+  overflow: auto;
+}
+.arr .arr-reading-review details > p {
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.arr .is-focused .reading > .footer {
+  display: none;
+}

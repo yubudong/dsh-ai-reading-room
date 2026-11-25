@@ -6,6 +6,7 @@ import { marked } from "marked";
 import { createHash } from "node:crypto";
 import path from "node:path";
 import { createRequire } from "node:module";
+import { epubNavigation } from "./navigation.js";
 
 export const MAX_FILE = 64 * 1024 * 1024;
 const xml = new XMLParser({
@@ -245,6 +246,8 @@ function epub(bytes) {
     const body = raw.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] || raw;
     chapters.push({
       title,
+      id: "c" + chapters.length,
+      sourceHref: name,
       html: clean(body, (src) => {
         try {
           return (
@@ -269,6 +272,8 @@ function epub(bytes) {
     author: array(pkg.metadata?.creator).map(value).join(", "),
     language: value(pkg.metadata?.language),
     cover: coverItem ? images.get(resolve(coverItem["@href"])) || "" : "",
+    toc: epubNavigation(files, items, opfPath, chapters, plain),
+    navigationVersion: 2,
     chapters,
   };
 }

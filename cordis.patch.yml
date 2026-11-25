@@ -1,4 +1,4 @@
 - insert:
     - id: ai-reading-room
-      name: dsh-ai-reading-room/host
+      name: dsh-ai-reading-room/host-0.5.2
       config: {}
